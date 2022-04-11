@@ -4,10 +4,10 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
 const db = require('../db/models');
-const { csrfProtection, asyncHandler, handleValidationErrors, } = require('./utils');
+const { csrfProtection, asyncHandler } = require('./utils');
 const { loginUser } = require('../auth');
 
-// backend falidating the user input
+// backend validating the user input
 const loginValidators = [
   check('email')
     .exists({ checkFalsy: true })
@@ -30,7 +30,6 @@ router.get('/login', csrfProtection, (req, res, next) => {
 router.post('/login',
   csrfProtection,
   loginValidators,
-  // handleValidationErrors,
   asyncHandler(async (req, res) => {
 
     //destructuring the user input from request body
