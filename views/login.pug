@@ -1,0 +1,14 @@
+extends layout.pug
+include utils.pug
+block content
+  +validationErrorSummary(errors)
+  form.form-control(action='/users/login' method='post')
+    h2.login Login
+    input(type='hidden' name='_csrf' value=csrfToken)
+    +field('Email Address', 'email', email, true)
+    +field('Password', 'password', null, true, 'password')
+    div.div-submit
+      button(type='submit' class='btn') Login
+      a(href='/' class='btn btn-cancel ml-2') Cancel
+  div
+    p: a(href='/user/signup') Don't have an account?
