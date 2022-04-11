@@ -6,7 +6,7 @@ mixin validationErrorSummary(errors)
         each error in errors
           li= error
 
-mixin field(labelText, fieldName, fieldValue, fieldType='text', placeholder)
+mixin field(labelText, fieldName, fieldValue, required, fieldType='text', placeholder)
   div(class='form-group')
     label(for=fieldName)= labelText
     input(type=fieldType id=fieldName name=fieldName value=fieldValue class='form-control' placeholder=placeholder)
