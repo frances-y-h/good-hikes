@@ -116,6 +116,8 @@ Hike.belongsToMany(models.Collection, columnMapping4);
 
 npx dotenv sequelize db:migrate
 
+//create seed data files
+
 npx sequelize seed:generate --name tag-data &&
 npx sequelize seed:generate --name cityPark-data &&
 npx sequelize seed:generate --name state-data &&
@@ -128,17 +130,24 @@ npx sequelize seed:generate --name review-data &&
 npx sequelize seed:generate --name joinHikeCollection-data &&
 npx sequelize seed:generate --name joinHikeTag-data
 
+//update all the seed files with seed data
+
 npx dotenv sequelize db:seed:all
 
+
+
+//generate hashed password for the demo user
+
+    (async () => {
+      const bcrypt = require('bcryptjs');
+      let password = 'I<3ChasingCars!';
+      const hashedPassword = await bcrypt.hash(password, 10);
+      console.log(hashedPassword)
+    })();
+
+//add "clean" script to package.jon
+
+    "clean": "npx dotenv sequelize db:drop && npx dotenv sequelize db:create && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all"
+
+
 */
-
-
-// (async () => {
-//   const bcrypt = require('bcryptjs');
-//   let password = 'I<3ChasingCars!';
-//   const hashedPassword = await bcrypt.hash(password, 10);
-//   console.log(hashedPassword)
-// })();
-
-
-// npx dotenv sequelize db:drop
