@@ -1,27 +1,31 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('JoinHikeCollections', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      hikeId: {
-        type: Sequelize.INTEGER
-      },
-      collectionId: {
-        type: Sequelize.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+    return queryInterface.createTable("JoinHikeCollections", {
+		id: {
+			allowNull: false,
+			autoIncrement: true,
+			primaryKey: true,
+			type: Sequelize.INTEGER,
+		},
+		hikeId: {
+			allowNull: false,
+			type: Sequelize.INTEGER,
+      references: { model: "Hikes" },
+		},
+		collectionId: {
+			allowNull: false,
+			type: Sequelize.INTEGER,
+      references: { model: "Collections" },
+		},
+		createdAt: {
+			allowNull: false,
+			type: Sequelize.DATE,
+		},
+		updatedAt: {
+			allowNull: false,
+			type: Sequelize.DATE,
+		},
     });
   },
   down: (queryInterface, Sequelize) => {
