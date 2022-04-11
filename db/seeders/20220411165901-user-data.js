@@ -1,26 +1,14 @@
 'use strict';
 
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+    return queryInterface.bulkInsert('Users', [
+      {username: "IfIJustLayHere", email: "ilovesnowpatrol@alec.com", hashedPassword:"$2a$10$dVopF/HDuLDbM0ayJFzLD./Htol.2xvTnwwfqZ8q8/wjrke176vCe", createdAt: new Date(), updatedAt: new Date()},
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+    return queryInterface.bulkDelete('Users', null, {});
   }
 };

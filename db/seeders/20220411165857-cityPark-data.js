@@ -2,25 +2,65 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+    return queryInterface.bulkInsert('CityParks', [
+      {name: "Alpine Lakes Wilderness", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Arches National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Austin", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Badlands National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Bandelier National Monument", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Beacon Rock State Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Big Bend National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Big Sky", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Bloomville", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Bryce Canyon National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Channel Islands National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Chugach National Forest", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Chugach State Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Coconino National Forest", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Crater Lake National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Custer Gallatin National Forest", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Death Valley National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Delhi", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Denali National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Echo Canyon Recreation Area", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Fayetteville", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Garden Of Gods", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Glacier National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Great Smoky Mountains National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Joshua Tree National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Kenai Fjords National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Kings Canyon National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Lassen Volcanic National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Latta Nature Preserve", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Lost Dutchman State Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Margaretville", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "McDowell Nature Preserve", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "McDowell Sonoran Preserve", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Mount Timpanogos Wilderness", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Olympic National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Orilla Verde Recreation Area", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Percy Warner Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Phoenix Mountain Preserve", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Pinnacles National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Pisgah National Forest", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Red Rock-Secret Mountain Wilderness", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Redwood National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Robert V. Riddell State Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Rocky Mountain National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "San Juan National Forest", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Santa Fe", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Sequoia National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Short Springs State Natural Area", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Silver Falls State Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Twin Peaks Wilderness", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Uinta-Wasatch-Cache National Forest", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Willowemoc Wild Forest", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Yosemite National Park", createdAt: new Date(), updatedAt: new Date(),},
+      {name: "Zion National Park", createdAt: new Date(), updatedAt: new Date(),},
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+    return queryInterface.bulkDelete('CityParks', null, {});
   }
 };

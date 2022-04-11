@@ -131,3 +131,14 @@ npx sequelize seed:generate --name joinHikeTag-data
 npx dotenv sequelize db:seed:all
 
 */
+
+
+// (async () => {
+//   const bcrypt = require('bcryptjs');
+//   let password = 'I<3ChasingCars!';
+//   const hashedPassword = await bcrypt.hash(password, 10);
+//   console.log(hashedPassword)
+// })();
+
+
+// npx dotenv sequelize db:drop

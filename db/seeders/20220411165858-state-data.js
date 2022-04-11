@@ -2,25 +2,66 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+    return queryInterface.bulkInsert('States', [
+      { abbreviation: "AL", state: "Alabama", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "AK", state: "Alaska", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "AZ", state: "Arizona", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "AR", state: "Arkansas", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "CA", state: "California", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "CZ", state: "Canal Zone", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "CO", state: "Colorado", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "CT", state: "Connecticut", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "DE", state: "Delaware", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "DC", state: "District of Columbia", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "FL", state: "Florida", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "GA", state: "Georgia", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "GU", state: "Guam", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "HI", state: "Hawaii", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "ID", state: "Idaho", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "IL", state: "Illinois", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "IN", state: "Indiana", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "IA", state: "Iowa", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "KS", state: "Kansas", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "KY", state: "Kentucky", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "LA", state: "Louisiana", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "ME", state: "Maine", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "MD", state: "Maryland", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "MA", state: "Massachusetts", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "MI", state: "Michigan", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "MN", state: "Minnesota", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "MS", state: "Mississippi", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "MO", state: "Missouri", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "MT", state: "Montana", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "NE", state: "Nebraska", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "NV", state: "Nevada", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "NH", state: "New Hampshire", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "NJ", state: "New Jersey", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "NM", state: "New Mexico", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "NY", state: "New York", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "NC", state: "North Carolina", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "ND", state: "North Dakota", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "OH", state: "Ohio", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "OK", state: "Oklahoma", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "OR", state: "Oregon", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "PA", state: "Pennsylvania", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "PR", state: "Puerto Rico", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "RI", state: "Rhode Island", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "SC", state: "South Carolina", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "SD", state: "South Dakota", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "TN", state: "Tennessee", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "TX", state: "Texas", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "UT", state: "Utah", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "VT", state: "Vermont", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "VI", state: "Virgin Islands", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "VA", state: "Virginia", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "WA", state: "Washington", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "WV", state: "West Virginia", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "WI", state: "Wisconsin", createdAt: new Date(), updatedAt: new Date() },
+      { abbreviation: "WY", state: "Wyoming", createdAt: new Date(), updatedAt: new Date() },
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+    return queryInterface.bulkDelete('States', null, {});
   }
 };
