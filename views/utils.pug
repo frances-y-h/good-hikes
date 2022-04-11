@@ -1,0 +1,14 @@
+mixin validationErrorSummary(errors)
+  if errors
+    div.div-errors
+      ul
+        each error in errors
+          li= error
+
+mixin field(labelText, fieldName, fieldValue, requiredField = false, fieldType = 'text', placeholder = null)
+  div
+    label.label(for=fieldName)= labelText
+    if fieldType === 'textarea'
+      textarea(id=fieldName name=fieldName)= fieldValue
+    else
+      input.input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder required=requiredField)

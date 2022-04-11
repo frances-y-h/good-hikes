@@ -1,0 +1,20 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+  link(rel='stylesheet' href='/stylesheets/user-form.css')
+  form.form-control(action='/users/signup' method='post')
+    h2.signup Sign Up
+    +validationErrorSummary(errors)
+    input(type='hidden' name='_csrf' value=csrfToken)
+    +field('Username', 'username', user.username, false)
+    +field('Email', 'email', user.email, false)
+    +field('Password', 'password', null, false, 'password')
+    div.label-description Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")
+    +field('Confirm Password', 'confirmPassword',null, false, 'password')
+    div.div-submit
+      button.btn(type='submit') Sign Up
+      a.btn.btn-cancel(href='/') Cancel
+    div.description
+      a(href='/users/login') Already have an account? Login here.
