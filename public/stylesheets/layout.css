@@ -18,6 +18,7 @@
 
 #div-center-search{
     display: flex;
+    align-items: center;
     border: 1px solid #98927e;
     box-shadow: 0.5px 0.5px 2px #98927e;
     background-color: #ebeae2;
@@ -25,12 +26,13 @@
 
 #search-input{
     border:none;
-    margin: 3px;
+    padding: 8px;
     background-color: transparent;
 }
 
 .fa-search{
-    color:#635d48
+    color:#635d48;
+    padding: 2px;
 }
 
 input:focus{
