@@ -1,0 +1,14 @@
+extends layout
+
+block content
+
+
+  table
+    thead
+    tbody
+      each review in reviews
+        tr
+          td #{review.userId}
+          td #{review.rating}
+          td #{review.comment}
+          td #{review.dateHike}
