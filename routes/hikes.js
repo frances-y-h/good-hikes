@@ -22,8 +22,12 @@ router.get(
                 db.RouteType,
             ],
         });
-
-        const reviews = await db.Review.findAll({ where: { hikeId } });
+        const reviews = await db.Review.findAll({
+          where: { hikeId },
+          include: [db.User],
+          limit: 10,
+          order: [["createdAt", "DESC"]]
+        });
 
         let avgReview = 0;
         for (let review of reviews) {
@@ -58,9 +62,15 @@ const reviewValidators = [
 
 router.post('/:hikeId(\\d+)/reviews', reviewValidators, asyncHandler(async (req, res) => {
   console.log("hello from reviews post route")
-  const { hikeId, rating, comment, dateHike } = req.body;
+  let { hikeId, rating, comment, dateHike } = req.body;
   const userId = req.session.auth.userId;
 
+  if (!comment) {
+    comment = null;
+  }
+  if (!dateHike) {
+    dateHike = null;
+  }
 
   const review = db.Review.build({
     userId,
@@ -69,19 +79,20 @@ router.post('/:hikeId(\\d+)/reviews', reviewValidators, asyncHandler(async (req,
     comment,
     dateHike
   });
-  console.log('review built')
+
 
   const validationErrors = validationResult(req);
 
 
-  if (validationErrors.isEmpty()) {
-    const username = await db.User.findOne({ where: { id: userId } });
+  const user = await db.User.findOne({ where: { id: userId } });
 
+  if (validationErrors.isEmpty()) {
     await review.save();
+
     res.json({
       message: "Success",
       review,
-      username
+      user
     });
   } else {
     const errors = validationErrors.array().map(err => err.msg);
@@ -89,7 +100,8 @@ router.post('/:hikeId(\\d+)/reviews', reviewValidators, asyncHandler(async (req,
     res.json({
       message: "Error",
       errors,
-      review
+      review,
+      user
     });
   }
 }));

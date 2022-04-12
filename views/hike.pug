@@ -3,6 +3,8 @@ extends layout
 include utils.pug
 block content
   link(rel='stylesheet' href='/stylesheets/hike.css')
+  link(rel="stylesheet" href="/stylesheets/review-form.css")
+  script(src='/javascripts/reviews.js')
   div.hike-page
     div.hike-title(style=`background-image: linear-gradient(to bottom, rgba(0,0,0, 0), rgba(0,0,0,0.5)),url('${hike.imgUrl}'`)
       div.hike-name #{hike.name}
@@ -27,15 +29,21 @@ block content
             div.hike-key-title Route type
             div.hike-key-detail #{hike.RouteType.name}
         div.reviews
-          table
-            thead
-            tbody
-              each review in reviews
-                tr
-                  td #{review.userId}
-                  td #{review.rating}
-                  td #{review.comment}
-                  td #{review.dateHike}
+          button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
+          //- +validationErrorSummary(errors)
+          form(id='review-form' class="hidden form-control")
+              +field("Rating", "rating", null, true, "number")
+              +field("Comment", "comment", null, false, "textarea")
+              +field("Date Hike", "dateHike", null, false, "date")
+              div.review-buttons
+                button#review-cancel.btn Cancel
+                button#review-submit.btn  Submit
+          each review in reviews
+            div.rating-username
+              .review #{review.rating}
+              .username #{review.User.username}
+            .comment #{review.comment}
+            .dateHike #{review.dateHike}
       div.hike-side
         div.hike-tags-wrap
           div.hike-tags-title Features
@@ -44,24 +52,3 @@ block content
               div.hike-tag #{tag.name}
         div.hike-add-collection
           div Add to collection dropdown
-  link(rel="stylesheet" href="/stylesheets/review-form.css")
-  script(src='/javascripts/reviews.js')
-  button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
-  +validationErrorSummary(errors)
-  form(id='review-form' class="hidden form-control")
-    input(type="hidden" name="_csrf" value=csrfToken)
-    +field("Rating", "rating", null, true, "number")
-    +field("Comment", "comment", null, false, "textarea")
-    +field("Date Hike", "dateHike", null, false, "date")
-    div.review-buttons
-      button#review-cancel.btn Cancel
-      button#review-submit.btn  Submit
-  table
-    thead
-    tbody(id='review-table')
-      each review in reviews
-        tr(id='review')
-          td(id='reiew-username') #{review.userId}
-          td(id='review-rating') #{review.rating}
-          td(id='review-comment') #{review.comment}
-          td(id='review-dateHike') #{review.dateHike}

@@ -1,12 +1,12 @@
 #review-form {
     width: 520px;
-    height: 530px;
+    height: 430px;
     /* position: absolute; */
 }
 
-/* #review-form.hidden {
+#review-form.hidden {
     display: none;
-} */
+}
 
 textarea {
     width: 100%;

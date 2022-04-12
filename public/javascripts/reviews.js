@@ -37,25 +37,24 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
             const data = await res.json();
             if (data.message === 'Success') {
+                console.log("*********", data.user.username);
+                // const reviewUsername = document.getElementById('review-username'); // change to name
+                // const reviewRating = document.getElementById('review-rating');
+                // const reviewComment = document.getElementById('review-comment');
+                // const reviewDateHike = document.getElementById('review-dateHike');
 
-                // const review = document.getElementById('review');
-                const reviewId = document.getElementById('review-id'); // change to name
-                const reviewRating = document.getElementById('review-rating');
-                const reviewComment = document.getElementById('review-comment');
-                const reviewDateHike = document.getElementById('review-dateHike');
+                // reviewUsername.innerHTML = data.user.username;
+                // reviewRating.innerHTML = data.review.rating;
 
-                reviewId.innerHTML = data.review.username;
-                reviewRating.innerHTML = data.review.rating;
-
-                if (data.review.comment) {
-                    reviewComment.innerHTML = data.review.comment;
-                }
-                if (data.review.dateHike) {
-                    reviewDateHike.innerHTML = data.review.dateHike;
-                }
-                reviewForm.classList.add("hidden");
+                // if (data.review.comment) {
+                //     reviewComment.innerHTML = data.review.comment;
+                // }
+                // if (data.review.dateHike) {
+                //     reviewDateHike.innerHTML = data.review.dateHike;
+                // }
+                // reviewForm.classList.add("hidden");
             } else {
-                //errors
+                //errors  add elements with errors
                 console.log(data.errors);
             }
         });
