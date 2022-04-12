@@ -69,7 +69,7 @@ router.post('/signup', signupValidator, csrfProtection, asyncHandler(async (req,
     user.hashedPassword = hashedPassword;
     await user.save();
     loginUser(req, res , user);
-    res.redirect('/');
+    req.session.save(() => res.redirect('/'));
   } else {
     const errors = validationErrors.array().map(err => err.msg);
     res.render('signup', {
@@ -79,8 +79,6 @@ router.post('/signup', signupValidator, csrfProtection, asyncHandler(async (req,
       user
     });
   }
-
-
 
 }));
 
@@ -135,7 +133,7 @@ router.post('/login',
         if (passwordMatch) {
           // login the user and redirect to the home page
           loginUser(req, res, user);
-          return res.redirect('/');
+          return req.session.save(() => res.redirect('/'));
         }
       }
 
@@ -156,7 +154,7 @@ router.post('/login',
 
 router.post("/logout", (req, res) => {
 	logoutUser(req, res);
-	res.redirect("/");
+	req.session.save(() => res.redirect("/"));
 });
 
 module.exports = router;

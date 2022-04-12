@@ -1,7 +1,19 @@
 extends layout
 
-block content
+include utils.pug
 
+block content
+  link(rel='stylesheet' href='/stylesheets/hike.css')
+  div.hike-page
+    div.hike-title(style=`background-image: linear-gradient(to bottom, rgba(0,0,0, 0), rgba(0,0,0,0.5)),url('${hike.imgUrl}'`)
+      div.hike-name #{hike.name}
+      div.hike-level-review
+        div.hike-level #{hike.Difficulty.level}
+        div.hike-review ★★★★★ #{avgReview}
+      div.hike-location #{hike.CityPark.name}, #{hike.State.state}
+    div.hike-content
+      div.hike-details
+      div.hike-side
 
   table
     thead

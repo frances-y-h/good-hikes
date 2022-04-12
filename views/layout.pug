@@ -9,11 +9,13 @@ html
         link(rel="icon" href="https://raw.githubusercontent.com/twitter/twemoji/cf0abdf32502c789bdb138b6cec0ff9eff8451d7/assets/svg/1f3de.svg")
         script(src='https://use.fontawesome.com/36b0eae01e.js')
         script(src="/javascripts/layout.js")
+        script(src="/javascripts/logout.js")
 
   body
     nav(id='nav-top')
       div(id="div-left-links")
-        a(href='/') Good Hikes 
+        a(href='/')
+          img#header-image(src='/images/logo2.png')
       div(id="div-center-search")
         form(action='/search' method='post' id='search-form')
           input(type="text" id="search-input" name="search-query" placeholder="Search Hikes")
@@ -21,9 +23,10 @@ html
             i(class='fa fa-search')
       div(id="div-right-buttons")
         if locals.authenticated
-          span(id="welcome-text") Welcome #{locals.user.username}!
-          form(action='/users/logout' method='post')
-            button.btn.btn-nav(type='submit') Logout
+          div(id="welcome-text")
+            p Welcome #{locals.user.username}!
+            form(action='/users/logout' method='post')
+              button.btn.btn-nav(id="user-logout" type='submit') Logout
         else
           span
             button.btn.btn-nav(type="submit" id="user-demo" href='/') Demo Login
