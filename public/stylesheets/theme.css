@@ -3,6 +3,8 @@
   --light2: #eddcd2;
   --light3: #faedcd;
   --light4: #ffd8b0;
+  --light5: #eae6d9;
+  --light6: #ebeae2;
 
   --highlight1: #fefae0;
 
@@ -21,4 +23,5 @@
   --dark2: #74532e;
   --dark3: #774112;
   --dark4: #47280d;
+  --dark5: rgb(53, 72, 53);
 }
