@@ -1,6 +1,19 @@
 #collection-grid{
     display: grid;
-    grid-template-columns: 1fr 1fr 3fr 1fr;
+    grid-template-columns: 1fr 2fr 3fr 1fr;
+    grid-template-areas:
+        "a b c d";
+}
 
-
+#left-whitespace{
+grid-area: a;
+}
+#collection-list{
+grid-area: b;
+} 
+#hikes-display{
+grid-area: c;
+}
+#right-whitespace{
+    grid-area: d;
 }

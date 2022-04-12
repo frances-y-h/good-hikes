@@ -7,7 +7,19 @@ const db = require("../db/models");
 
 //redirect /collections to default collection, with id 1
 router.get("/", asyncHandler(async (req, res) => {
-    res.redirect('/collections/1')
+    console.log(req.session);
+	
+	//check if user is logged in
+
+
+	//if not, redirect to sign in page
+
+	//if user is logged in, need to pull the collections
+	// associated with that user
+	// find the completed hikes collection for that user
+	// redirect the page to that collections url
+	
+	res.redirect('/collections/1')
 }));
 
 // Get specific collections
