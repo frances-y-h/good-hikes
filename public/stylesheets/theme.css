@@ -1,27 +1,29 @@
 :root {
-  --light1: #e9edc9;
-  --light2: #eddcd2;
-  --light3: #faedcd;
-  --light4: #ffd8b0;
-  --light5: #eae6d9;
-  --light6: #ebeae2;
+    --light1: #e9edc9;
+    --light2: #eddcd2;
+    --light3: #faedcd;
+    --light4: #ffd8b0;
+    --light5: #eae6d9;
+    --light6: #ebeae2;
 
-  --highlight1: #fefae0;
+    --highlight1: #fefae0;
 
-  --table1: #dedede;
+    --bg1: #f4f4f4;
 
-  --error1: rgb(252, 218, 224);
-  --error2: rgb(229, 108, 108);
-  --error3: rgb(109, 33, 33);
+    --table1: #dedede;
 
-  --mid1: #606c38;
-  --mid2: #dda15e;
-  --mid3: #bc6c25;
-  --mid4: #8b7c40;
+    --error1: rgb(252, 218, 224);
+    --error2: rgb(229, 108, 108);
+    --error3: rgb(109, 33, 33);
 
-  --dark1: #283618;
-  --dark2: #74532e;
-  --dark3: #774112;
-  --dark4: #47280d;
-  --dark5: rgb(53, 72, 53);
+    --mid1: #606c38;
+    --mid2: #dda15e;
+    --mid3: #bc6c25;
+    --mid4: #8b7c40;
+
+    --dark1: #283618;
+    --dark2: #74532e;
+    --dark3: #774112;
+    --dark4: #47280d;
+    --dark5: rgb(53, 72, 53);
 }

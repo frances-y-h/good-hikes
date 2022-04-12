@@ -1,12 +1,18 @@
+body {
+    background-color: var(--bg1);
+}
+
 .hike-page {
     margin: 0 auto;
     max-width: 1000px;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    height: 100%;
 }
 
 .hike-title {
     background-size: cover;
-    height: 250px;
+    height: 300px;
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -57,6 +63,10 @@
 .hike-key {
     display: flex;
     justify-content: space-between;
+    border-top: 2px solid var(--light1);
+    border-bottom: 2px solid var(--light1);
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .hike-key-title {
@@ -110,4 +120,41 @@
 
 .hike-tag:nth-child(4n) {
     background-color: var(--mid4);
+}
+
+.hike-add-collection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .hike-title {
+        height: 250px;
+    }
+
+    .hike-content {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .hike-details {
+        padding-right: 0px;
+        border-right: none;
+    }
+
+    .hike-side {
+        padding: 0px 0px 20px 0px;
+        top: 0px;
+        background-color: white;
+    }
+
+    .hike-tags-wrap {
+        display: flex;
+        justify-content: center;
+    }
+
+    .hike-tags-title {
+        padding-right: 20px;
+    }
 }
