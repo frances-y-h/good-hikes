@@ -26,6 +26,7 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 						}
 					});
 		
+		//extract collection id to feed into redirect
 		const defaultCollection = collection.dataValues.id;
 		
 		// redirect the page to that collections url
@@ -48,12 +49,16 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			},
 		});
 
-
+		//extract the current collectionId from the url
 		const collectionId = await parseInt(req.params.collectionId, 10);
 		
+		//extract the name of the current collection for
+		// the header over the list of hikes in collection page
 		const currentCollection = await db.Collection.findByPk(collectionId);
 		const collectionName = currentCollection.name;
 
+		//pull all hikes to display, filter by collection ID
+		// include referenced tables
 		const displayHikes = await db.Hike.findAll({
 			include: [
 				db.CityPark,
@@ -67,9 +72,6 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			],
 		});
 		
-		// console.log('-*-*/-*/-*/-*/-*/-*/hike collection')
-		console.log(displayHikes[0]);
-
 		res.render("collection", {
 			collectionName,
 			userCollections,
