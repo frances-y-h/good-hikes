@@ -95,3 +95,7 @@
   font-size: smaller;
   color: rgb(109, 33, 33);
 }
+
+span + a {
+  padding-left: 10px;
+}
