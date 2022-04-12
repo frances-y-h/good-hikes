@@ -48,8 +48,6 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			},
 		});
 
-		// console.log("-----------------=-=-=-=-=-=-=-");
-		// console.log(userCollections);
 
 		const collectionId = await parseInt(req.params.collectionId, 10);
 		
