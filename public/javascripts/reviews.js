@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     reviewButton.addEventListener("click", (event) => {
         reviewForm.classList.remove("hidden");
-        hikeId = event.target.id.split("-")[2];
+        const hikeId = event.target.id.split("-")[2];
 
         cancelReviewButton.addEventListener("click", (event) => {
             reviewForm.classList.add("hidden");
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    hikeId,
                     rating,
                     comment,
                     dateHike
@@ -36,13 +37,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
             const data = await res.json();
             if (data.message === 'Success') {
-                const review = document.getElementById('review');
+
+                // const review = document.getElementById('review');
                 const reviewId = document.getElementById('review-id'); // change to name
                 const reviewRating = document.getElementById('review-rating');
                 const reviewComment = document.getElementById('review-comment');
                 const reviewDateHike = document.getElementById('review-dateHike');
 
-                reviewId.innerHTML = data.review.id; // change to name
+                reviewId.innerHTML = data.review.username;
                 reviewRating.innerHTML = data.review.rating;
 
                 if (data.review.comment) {
@@ -51,8 +53,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 if (data.review.dateHike) {
                     reviewDateHike.innerHTML = data.review.dateHike;
                 }
+                reviewForm.classList.add("hidden");
             } else {
                 //errors
+                console.log(data.errors);
             }
         });
     });

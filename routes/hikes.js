@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { asyncHandler } = require("./utils");
 const db = require("../db/models");
+const { check, validationResult } = require('express-validator');
+const { requireAuth } = require('../auth');
+
 
 // Hikes page
 
@@ -36,7 +39,59 @@ router.get(
             avgReview,
             avgReviewPtg,
         });
+}));
+
+const reviewValidators = [
+  check('rating')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Rating'),
+  check('dateHike')
+    .custom(dateHike => {
+      let today = new Date();
+      let enteredDate = new Date(dateHike);
+      if (enteredDate > today) {
+        throw Error ('Date of hike must be in the past');
+      }
+      return true;
     })
-);
+]
+
+router.post('/:hikeId(\\d+)/reviews', reviewValidators, asyncHandler(async (req, res) => {
+  console.log("hello from reviews post route")
+  const { hikeId, rating, comment, dateHike } = req.body;
+  const userId = req.session.auth.userId;
+
+
+  const review = db.Review.build({
+    userId,
+    hikeId,
+    rating,
+    comment,
+    dateHike
+  });
+  console.log('review built')
+
+  const validationErrors = validationResult(req);
+
+
+  if (validationErrors.isEmpty()) {
+    const username = await db.User.findOne({ where: { id: userId } });
+
+    await review.save();
+    res.json({
+      message: "Success",
+      review,
+      username
+    });
+  } else {
+    const errors = validationErrors.array().map(err => err.msg);
+
+    res.json({
+      message: "Error",
+      errors,
+      review
+    });
+  }
+}));
 
 module.exports = router;
