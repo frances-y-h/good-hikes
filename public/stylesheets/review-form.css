@@ -1,6 +1,7 @@
 #review-form {
     width: 520px;
     height: 530px;
+    /* position: absolute; */
 }
 
 /* #review-form.hidden {

@@ -46,7 +46,7 @@ block content
           div Add to collection dropdown
   link(rel="stylesheet" href="/stylesheets/review-form.css")
   script(src='/javascripts/reviews.js')
-  button(id="review-btn").btn Write a Review
+  button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
   form(id='review-form' class="hidden form-control")
     input(type="hidden" name="_csrf" value=csrfToken)
     +field("Rating", "rating", null, true, "number")
@@ -57,10 +57,10 @@ block content
       button#review-submit.btn  Submit
   table
     thead
-    tbody
+    tbody(id='review-table')
       each review in reviews
-        tr
-          td #{review.userId}
-          td #{review.rating}
-          td #{review.comment}
-          td #{review.dateHike}
+        tr(id='review')
+          td(id='reiew-id') #{review.userId}
+          td(id='review-rating') #{review.rating}
+          td(id='review-comment') #{review.comment}
+          td(id='review-dateHike') #{review.dateHike}
