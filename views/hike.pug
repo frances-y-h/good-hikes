@@ -1,14 +1,45 @@
 extends layout
 
 block content
-
-
-  table
-    thead
-    tbody
-      each review in reviews
-        tr
-          td #{review.userId}
-          td #{review.rating}
-          td #{review.comment}
-          td #{review.dateHike}
+  link(rel='stylesheet' href='/stylesheets/hike.css')
+  div.hike-page
+    div.hike-title(style=`background-image: linear-gradient(to bottom, rgba(0,0,0, 0), rgba(0,0,0,0.5)),url('${hike.imgUrl}'`)
+      div.hike-name #{hike.name}
+      div.hike-level-review
+        div.hike-level #{hike.Difficulty.level}
+        div.hike-review
+          div.hike-stars
+            span.star-sprite(style=`width:${avgReviewPtg}%`)
+          div.hike-avg-review  #{avgReview}
+      div.hike-location #{hike.CityPark.name}, #{hike.State.state}
+    div.hike-content
+      div.hike-details
+        div.hike-description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        div.hike-key
+          div.hike-key-wrap
+            div.hike-key-title Length
+            div.hike-key-detail #{hike.length} miles
+          div.hike-key-wrap
+            div.hike-key-title Elevation gain
+            div.hike-key-detail #{hike.elevationChange} ft
+          div.hike-key-wrap
+            div.hike-key-title Route type
+            div.hike-key-detail #{hike.RouteType.name}
+        div.reviews
+          table
+            thead
+            tbody
+              each review in reviews
+                tr
+                  td #{review.userId}
+                  td #{review.rating}
+                  td #{review.comment}
+                  td #{review.dateHike}
+      div.hike-side
+        div.hike-tags-wrap
+          div.hike-tags-title Features
+          div.hike-tags
+            each tag in hike.Tags
+              div.hike-tag #{tag.name}
+        div.hike-add-collection
+          div Add to collection dropdown
