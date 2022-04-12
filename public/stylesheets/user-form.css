@@ -3,7 +3,7 @@
 .signup,
 .login {
   text-align: center;
-  font-size:30px;
+  font-size: 30px;
 }
 
 .form-control {
@@ -16,7 +16,7 @@
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
 }
 
-.form-control > div {
+.form-control>div {
   padding: 10px 0px;
 }
 
@@ -28,7 +28,8 @@
 .input {
   display: block;
   line-height: 2rem;
-  width: 100%;;
+  width: 100%;
+  ;
   border: 1px solid var(--table1);
   border-radius: 3px;
 }
@@ -40,12 +41,12 @@
 
 .description {
   font-size: small;
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
 .div-submit {
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
@@ -66,13 +67,13 @@
 .btn-cancel {
   border: 1px solid var(--mid1);
   background-color: white;
-  color: rgb(53, 72, 53);
+  color: var(--dark5);
 }
 
 .btn:hover {
   border: 1px solid var(--mid1);
   background-color: white;
-  color: rgb(53, 72, 53);
+  color: var(--dark5);
 }
 
 .btn-cancel:hover {
@@ -83,7 +84,7 @@
 
 .div-errors {
   border: 1px solid var(--error2);
-  border-radius:10px;
+  border-radius: 10px;
   background-color: var(--error1);
   margin: 10px 10px;
 
@@ -98,6 +99,6 @@
   color: var(--error3);
 }
 
-span + a {
+span+a {
   padding-left: 10px;
 }
