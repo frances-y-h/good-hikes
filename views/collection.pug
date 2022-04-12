@@ -8,16 +8,41 @@ block content
         #collection-list 
             h3 Hike Collections 
                 a(href='/collections/edit') (Edit)
-            if collections
+            if userCollections
                 ul 
-                    each coll in collections 
+                    each coll in userCollections 
                         li: a(href=`/collections/${coll.id}`) #{coll.name}
             button.btn(id="collection-add") Add a Collection
-
-            p This is the list of collections for the user
         #hikes-display
-            h2 #{collection.name}
-            
-            p This is the display of the hikes in said collection
+            h2 #{collectionName}
+            if displayHikes
+                table
+                    thead
+                        tr 
+                            th View 
+                            th Name 
+                            th Review
+                            th City/Park
+                            th State
+                            th Length
+                            th Elevation Change
+                            th Difficulty 
+                            th Route Type
+                    tbody
+                        each hike in displayHikes 
+                            tr 
+                                td url
+                                td= hike.name 
+                                td Stars
+                                td= hike.CityPark.dataValues.name
+                                td= hike.State.dataValues.abbreviation
+                                td= hike.length 
+                                td= hike.elevationChange
+                                td= hike.Difficulty.dataValues.level 
+                                td= hike.RouteType.dataValues.name
+
+            else 
+                p No hikes in the collection! 
+                p Find some hikes and add them, get to exploring!
         #right-whitespace
     

@@ -42,26 +42,40 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 		const userId = parseInt(req.session.auth.userId, 10);
 
 		//grab collections to display list on left column
-		const collections = await db.Collection.findAll({
+		const userCollections = await db.Collection.findAll({
 			where: {
 				userId: userId,
 			},
 		});
 
 		console.log("-----------------=-=-=-=-=-=-=-");
-		console.log(collections);
+		// console.log(userCollections);
 
 		const collectionId = await parseInt(req.params.collectionId, 10);
-		const collection = await db.Collection.findByPk(collectionId);
 		
-		const hikes = 0;
+		const currentCollection = await db.Collection.findByPk(collectionId);
+		const collectionName = currentCollection.name;
 
-		// console.log(collection);
+		const displayHikes = await db.Hike.findAll({
+			include: [
+				db.CityPark,
+				db.Difficulty,
+				db.RouteType,
+				db.State,
+				{
+					model: db.Collection,
+					where: collectionId,
+				}
+			],
+		});
+		
+		console.log('-*-*/-*/-*/-*/-*/-*/hike collection')
+		console.log(displayHikes[0].Collections[0].dataValues.id);
 
 		res.render("collection", {
-			collection,
-			collections,
-			hikes
+			collectionName,
+			userCollections,
+			displayHikes
 		});
 
 }));
