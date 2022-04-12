@@ -49,7 +49,7 @@ function logoutUser(req, res) {
 // if no, log in, if yes, then keep going along the route
 function requireAuth(req, res, next) {
     if (!res.locals.authenticated) {
-        res.redirect("/user/login");
+        res.redirect("/users/login");
     }
     return next();
 }

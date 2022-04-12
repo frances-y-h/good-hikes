@@ -1,0 +1,84 @@
+#collection-grid{
+    display: grid;
+    grid-template-columns: 2fr 3fr 9fr 3fr;
+    grid-template-areas:
+        "a b c d";
+        margin-top: 38px;
+}
+
+#left-whitespace{
+grid-area: a;
+}
+#collection-list{
+grid-area: b;
+margin-top: 150px;
+} 
+#hikes-display{
+grid-area: c;
+margin-top: 38px;
+}
+#right-whitespace{
+    grid-area: d;
+}
+
+#collection-list > h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.coll-link:hover{
+    color: var(--mid1);
+}
+
+#collection-list li,a {
+    text-decoration: none;
+    color: var(--dark1);
+    list-style-type: none;
+    font-size: 12px;
+}
+
+
+.table-img {
+    width: 35px;
+    height: 40px;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.hike-row {
+    border-bottom: 1px solid var(--light5);
+}
+
+.hike-text{
+    font-size: 13px;
+    inline-size: min-content;
+}
+.center{
+    text-align: center;
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 2px;
+    width:100%;
+}
+th {
+    font-size: 12px;
+}
+thead > tr.hike-row{
+    border-bottom: 2px solid var(--mid1);
+}
+
+h2{
+ font-size: 34px;
+ margin-bottom: 38px;
+ color: var(--dark1);
+}
+
+#collection-add{
+    font-size: 12px;
+    margin-top: 15px;
+    padding: 5px;
+
+}
