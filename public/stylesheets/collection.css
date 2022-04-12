@@ -61,6 +61,7 @@ margin-top: 38px;
 table{
     border-collapse: collapse;
     border-spacing: 2px;
+    width:100%;
 }
 th {
     font-size: 12px;
@@ -73,7 +74,6 @@ h2{
  font-size: 34px;
  margin-bottom: 38px;
  color: var(--dark1);
-
 }
 
 #collection-add{
