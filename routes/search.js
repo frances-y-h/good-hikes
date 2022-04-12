@@ -14,7 +14,33 @@ router.get(
         // console.log(searchQuery);
 
         // fetch hikes based on query
-        const hikes = await db.Hike.findAll({});
+        const hikes = await db.Hike.findAll({
+            include: [
+                db.Tag,
+                db.CityPark,
+                db.State,
+                db.Difficulty,
+                db.RouteType,
+            ],
+        });
+
+        console.log(hikes[0].id);
+
+        //grab average rating from each hike
+        for (let hike of hikes) {
+            const reviews = await db.Review.findAll({
+                where: { hikeId: `${hike.id}` },
+            });
+            let avgReview = 0;
+            for (let review of reviews) {
+                avgReview += review.rating;
+            }
+
+            avgReview = (avgReview / reviews.length).toFixed(1);
+            let avgReviewPtg = (avgReview / 5) * 100;
+            hike.avgReview = avgReview;
+            hike.avgReviewPtg = avgReviewPtg;
+        }
 
         res.render("search", {
             searchQuery,
