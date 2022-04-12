@@ -1,4 +1,8 @@
-@import url('./theme.css');
+@import url("./theme.css");
+
+body {
+    background-color: var(--bg1);
+}
 
 #nav-top {
     display: flex;
@@ -52,7 +56,7 @@
     background-color: white;
     color: var(--dark5);
 }
-#header-image{
+#header-image {
     width: 200px;
 }
 
@@ -60,13 +64,13 @@ input:focus {
     outline: none;
 }
 
-#div-left-links>a {
+#div-left-links > a {
     text-decoration: none;
     font-weight: 100;
     font-size: 1.7em;
 }
 
-#welcome-text{
+#welcome-text {
     display: flex;
     align-items: center;
 }
@@ -82,4 +86,47 @@ layout.css imported after user-form in layout.pug
 .btn.btn-nav {
     margin: 0px 7px;
     padding: 8px 8px;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.footer-techs {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    padding: 20px 0px;
+}
+
+.footer-tech {
+    font-size: 12px;
+    color: var(--mid4);
+}
+
+.footer-copyright {
+    padding: 20px 0px;
+}
+
+.footer-copyright,
+.footer-copyright > a {
+    font-size: 12px;
+    color: var(--dark1);
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.footer-copyright > a {
+    padding-left: 10px;
+    transition: all 0.5s;
+}
+
+.footer-copyright > a:hover {
+    color: var(--mid2);
 }
