@@ -1,5 +1,6 @@
 extends layout
 
+include utils.pug
 block content
   link(rel='stylesheet' href='/stylesheets/hike.css')
   div.hike-page
@@ -43,3 +44,23 @@ block content
               div.hike-tag #{tag.name}
         div.hike-add-collection
           div Add to collection dropdown
+  link(rel="stylesheet" href="/stylesheets/review-form.css")
+  script(src='/javascripts/reviews.js')
+  button(id="review-btn").btn Write a Review
+  form(id='review-form' class="hidden form-control")
+    input(type="hidden" name="_csrf" value=csrfToken)
+    +field("Rating", "rating", null, true, "number")
+    +field("Comment", "comment", null, false, "textarea")
+    +field("Date Hike", "dateHike", null, false, "date")
+    div.review-buttons
+      button#review-cancel.btn Cancel
+      button#review-submit.btn  Submit
+  table
+    thead
+    tbody
+      each review in reviews
+        tr
+          td #{review.userId}
+          td #{review.rating}
+          td #{review.comment}
+          td #{review.dateHike}
