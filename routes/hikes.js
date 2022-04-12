@@ -19,19 +19,22 @@ router.get(
                 db.RouteType,
             ],
         });
+
         const reviews = await db.Review.findAll({ where: { hikeId } });
 
         let avgReview = 0;
         for (let review of reviews) {
             avgReview += review.rating;
         }
-        avgReview = avgReview / reviews.length;
+        avgReview = (avgReview / reviews.length).toFixed(1);
+        let avgReviewPtg = (avgReview / 5) * 100;
 
         res.render("hike", {
             title: hike.name,
             hike,
             reviews,
             avgReview,
+            avgReviewPtg,
         });
     })
 );
