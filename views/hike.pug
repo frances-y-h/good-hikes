@@ -7,7 +7,10 @@ block content
       div.hike-name #{hike.name}
       div.hike-level-review
         div.hike-level #{hike.Difficulty.level}
-        div.hike-review ★★★★★ #{avgReview}
+        div.hike-review
+          div.hike-stars
+            span.star-sprite(style=`width:${avgReviewPtg}%`)
+          div.hike-avg-review  #{avgReview}
       div.hike-location #{hike.CityPark.name}, #{hike.State.state}
     div.hike-content
       div.hike-details
