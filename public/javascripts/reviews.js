@@ -38,21 +38,22 @@ document.addEventListener('DOMContentLoaded', (e) => {
             const data = await res.json();
             if (data.message === 'Success') {
                 console.log("*********", data.user.username);
-                // const reviewUsername = document.getElementById('review-username'); // change to name
-                // const reviewRating = document.getElementById('review-rating');
-                // const reviewComment = document.getElementById('review-comment');
-                // const reviewDateHike = document.getElementById('review-dateHike');
+                const reviewRating = document.querySelector('.rating-username .rating');
+                const reviewUsername = document.querySelector('.rating-username .username');
+                console.log(reviewUsername);
+                const reviewComment = document.querySelector('#review .comment');
+                const reviewDateHike = document.querySelector('#review .dateHike');
 
-                // reviewUsername.innerHTML = data.user.username;
-                // reviewRating.innerHTML = data.review.rating;
+                reviewUsername.innerHTML = data.user.username;
+                reviewRating.innerHTML = data.review.rating;
 
-                // if (data.review.comment) {
-                //     reviewComment.innerHTML = data.review.comment;
-                // }
-                // if (data.review.dateHike) {
-                //     reviewDateHike.innerHTML = data.review.dateHike;
-                // }
-                // reviewForm.classList.add("hidden");
+                if (data.review.comment) {
+                    reviewComment.innerHTML = data.review.comment;
+                }
+                if (data.review.dateHike) {
+                    reviewDateHike.innerHTML = data.review.dateHike;
+                }
+                reviewForm.classList.add("hidden");
             } else {
                 //errors  add elements with errors
                 console.log(data.errors);
