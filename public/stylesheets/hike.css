@@ -1,0 +1,160 @@
+body {
+    background-color: var(--bg1);
+}
+
+.hike-page {
+    margin: 0 auto;
+    max-width: 1000px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    height: 100%;
+}
+
+.hike-title {
+    background-size: cover;
+    height: 300px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 5px;
+    color: white;
+}
+
+.hike-name {
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+.hike-level-review {
+    display: flex;
+    gap: 10px;
+}
+
+.hike-level {
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: var(--mid1);
+    font-size: 10px;
+}
+
+.hike-review,
+.hike-location {
+    font-size: smaller;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+.hike-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px;
+}
+
+.hike-details {
+    grid-column: 1/4;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 20px;
+    border-right: 1px solid lightgray;
+}
+
+.hike-key {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid var(--light1);
+    border-bottom: 2px solid var(--light1);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.hike-key-title {
+    padding-bottom: 5px;
+    font-size: 10px;
+    font-weight: light;
+    color: gray;
+}
+
+.hike-key-detail {
+    font-weight: bold;
+}
+
+.hike-side {
+    grid-column: 4/5;
+    padding-left: 20px;
+    position: sticky;
+    top: 40px;
+}
+
+.hike-tags-wrap {
+    padding-bottom: 20px;
+    border-bottom: 1px solid lightgray;
+}
+
+.hike-tags-title {
+    padding-bottom: 5px;
+}
+
+.hike-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.hike-tag {
+    background-color: var(--mid1);
+    border-radius: 10px;
+    color: white;
+    font-size: 10px;
+    padding: 5px 10px;
+}
+
+.hike-tag:nth-child(2n) {
+    background-color: var(--mid2);
+}
+
+.hike-tag:nth-child(3n) {
+    background-color: var(--mid3);
+}
+
+.hike-tag:nth-child(4n) {
+    background-color: var(--mid4);
+}
+
+.hike-add-collection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .hike-title {
+        height: 250px;
+    }
+
+    .hike-content {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .hike-details {
+        padding-right: 0px;
+        border-right: none;
+    }
+
+    .hike-side {
+        padding: 0px 0px 20px 0px;
+        top: 0px;
+        background-color: white;
+    }
+
+    .hike-tags-wrap {
+        display: flex;
+        justify-content: center;
+    }
+
+    .hike-tags-title {
+        padding-right: 20px;
+    }
+}
