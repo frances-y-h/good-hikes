@@ -29,6 +29,7 @@ router.get(
           order: [["createdAt", "DESC"]]
         });
 
+
         let avgReview = 0;
         for (let review of reviews) {
             avgReview += review.rating;
@@ -60,7 +61,7 @@ const reviewValidators = [
     })
 ]
 
-router.post('/:hikeId(\\d+)/reviews', reviewValidators, asyncHandler(async (req, res) => {
+router.post('/:hikeId(\\d+)/reviews', requireAuth, reviewValidators, asyncHandler(async (req, res) => {
   console.log("hello from reviews post route")
   let { hikeId, rating, comment, dateHike } = req.body;
   const userId = req.session.auth.userId;

@@ -39,12 +39,16 @@ block content
                 button#review-cancel.btn Cancel
                 button#review-submit.btn  Submit
           each review in reviews
-            div#review.form-control
+            #review.form-control
               div.rating-username
-                .rating #{review.rating}
-                .username #{review.User.username}
+                  .username #{review.User.username}
+                  .stars-and-rating
+                    div.stars
+                      span.star-sprite(style=`width:${review.rating/5*100}%`)
+                    #rating #{review.rating}
               .comment #{review.comment}
-              .dateHike #{review.dateHike}
+              if (review.dateHike)
+                .dateHike Date hiked #{review.dateHike}
       div.hike-side
         div.hike-tags-wrap
           div.hike-tags-title Features
