@@ -17,3 +17,7 @@ grid-area: c;
 #right-whitespace{
     grid-area: d;
 }
+
+.table-img {
+    width: 20px;
+}

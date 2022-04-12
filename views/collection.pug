@@ -31,7 +31,7 @@ block content
                     tbody
                         each hike in displayHikes 
                             tr 
-                                td url
+                                td.table-img: img(src=`${hike.imgUrl}`)
                                 td= hike.name 
                                 td Stars
                                 td= hike.CityPark.dataValues.name

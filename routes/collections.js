@@ -48,7 +48,7 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			},
 		});
 
-		console.log("-----------------=-=-=-=-=-=-=-");
+		// console.log("-----------------=-=-=-=-=-=-=-");
 		// console.log(userCollections);
 
 		const collectionId = await parseInt(req.params.collectionId, 10);
@@ -69,8 +69,8 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			],
 		});
 		
-		console.log('-*-*/-*/-*/-*/-*/-*/hike collection')
-		console.log(displayHikes[0].Collections[0].dataValues.id);
+		// console.log('-*-*/-*/-*/-*/-*/-*/hike collection')
+		console.log(displayHikes[0]);
 
 		res.render("collection", {
 			collectionName,
