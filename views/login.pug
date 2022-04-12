@@ -1,6 +1,7 @@
 extends layout.pug
 include utils.pug
 block content
+  link(rel='stylesheet' href='/stylesheets/user-form.css')
   form.form-control(action='/users/login' method='post')
     h2.login Login
     +validationErrorSummary(errors)
@@ -10,6 +11,6 @@ block content
     div.div-submit
       button(type='submit' class='btn') Login
       a(href='/' class='btn btn-cancel') Cancel
-  div
-    span Don't have an account?
-    a(href='/users/signup') Sign Up
+    div.description
+      span Don't have an account?
+      a(href='/users/signup') Sign Up

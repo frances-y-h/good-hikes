@@ -24,6 +24,11 @@ const signupValidator = [
           }
         })
     }),
+  check('email')
+    .exists({ checkFalsy: true })
+    .withMessage('Please enter email')
+    .isEmail()
+    .withMessage('Please enter a valid email address'),
   check('password')
     .exists({ checkFalsy: true })
     .withMessage('Please enter password')
