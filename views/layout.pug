@@ -8,24 +8,26 @@ html
         link(rel='stylesheet' href='/stylesheets/user-form.css')
         link(rel="icon" href="https://raw.githubusercontent.com/twitter/twemoji/cf0abdf32502c789bdb138b6cec0ff9eff8451d7/assets/svg/1f3de.svg")
         script(src='https://use.fontawesome.com/36b0eae01e.js')
+        script(src="../public/javascripts/index.js")
 
   body
     nav(id='nav-top')
-      div(id="div-right-links")
+      div(id="div-left-links")
         a(href='/') Good Hikes 
       div(id="div-center-search")
-        input(type="text" id="search-input" name="search-query" placeholder="Search Hikes")
-        a(href='/')
-          i(class='fa fa-search' aria-hidden='true')
-      div(id="div-left-buttons")
+        form(action='/search' method='post' id='search-form')
+          input(type="text" id="search-input" name="search-query" placeholder="Search Hikes")
+          button#search-button(type='submit')
+            i(class='fa fa-search')
+      div(id="div-right-buttons")
         if locals.authenticated
-          span(id="welcome-text") Welcome #{user.username}!
+          span(id="welcome-text") Welcome #{locals.user.username}!
           form(action='/user/logout' method='post')
             button(class="button-link" type='submit') Logout
         else
           span
-            button(class="button-link" type="submit" id="user-demo" href='/') Demo Login
-            button(class="button-link" id="user-login" href='/user/login') Login 
-            button(class="button-link" id="user-signup" href='/user/signup') Sign Up 
+            button.btn(type="submit" id="user-demo" href='/') Demo Login
+            a.btn(id="user-login" href='/user/login') Login 
+            a.btn(id="user-signup" href='/user/signup') Sign Up 
       
     block content
