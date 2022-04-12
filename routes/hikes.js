@@ -12,7 +12,6 @@ router.get('/:hikeId(\\d+)', asyncHandler(async (req, res) => {
   const hike = await db.Hike.findByPk(hikeId, {include: db.Tag});
   const reviews = await db.Review.findAll({ where: { hikeId } });
 
-
   res.render('hike', {
     title: hike.name,
     hike,
