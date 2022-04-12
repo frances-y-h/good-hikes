@@ -47,6 +47,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/collections", collectionsRouter);
 app.use("/hikes", hikesRouter);
+
 app.use("/search", searchRouter);
 
 // catch 404 and forward to error handler
