@@ -6,8 +6,18 @@ block content
     #collection-grid
         #left-whitespace
         #collection-list 
+            h3 Hike Collections 
+                a(href='/collections/edit') (Edit)
+            if collections
+                ul 
+                    each coll in collections 
+                        li: a(href=`/collections/${coll.id}`) #{coll.name}
+            button.btn(id="collection-add") Add a Collection
+
             p This is the list of collections for the user
         #hikes-display
+            h2 #{collection.name}
+            
             p This is the display of the hikes in said collection
         #right-whitespace
     

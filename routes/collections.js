@@ -12,16 +12,10 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 	//requireAuth middleware handles the log in check
 		//check if user is logged in
 		// if not logged in, redirect to sign in page
-		
-		//if logged in
-	
-		const userId = parseInt(req.session.auth.userId, 10);
-			
-		console.log('-----------------=-=-=-=-=-=-=-userId', userId);
-		console.log(req.session.auth);
-		
+				
 		//if user is logged in, need to pull the collections
 		// associated with that user
+		const userId = parseInt(req.session.auth.userId, 10);
 		
 		//find default collection
 		//per user stories, default display will be 'Completed' collection
@@ -45,8 +39,17 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 		//user is authorized with requireAuth
 		
 		//grab userId
+		const userId = parseInt(req.session.auth.userId, 10);
 
+		//grab collections to display list on left column
+		const collections = await db.Collection.findAll({
+			where: {
+				userId: userId,
+			},
+		});
 
+		console.log("-----------------=-=-=-=-=-=-=-");
+		console.log(collections);
 
 		const collectionId = await parseInt(req.params.collectionId, 10);
 		const collection = await db.Collection.findByPk(collectionId);
@@ -56,8 +59,8 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 		// console.log(collection);
 
 		res.render("collection", {
-			title: collection.name,
 			collection,
+			collections,
 			hikes
 		});
 
