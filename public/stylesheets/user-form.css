@@ -1,7 +1,9 @@
+@import url('./theme.css');
+
 .signup,
 .login {
   text-align: center;
-  font-size:30px;
+  font-size: 30px;
 }
 
 .form-control {
@@ -9,12 +11,12 @@
   margin: 50px auto;
   box-sizing: border-box;
   padding: 30px;
-  border: 1px solid lightgrey;
+  border: 1px solid var(--table1);
   border-radius: 10px;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
 }
 
-.form-control > div {
+.form-control>div {
   padding: 10px 0px;
 }
 
@@ -26,63 +28,64 @@
 .input {
   display: block;
   line-height: 2rem;
-  width: 100%;;
-  border: 1px solid lightgrey;
+  width: 100%;
+  ;
+  border: 1px solid var(--table1);
   border-radius: 3px;
 }
 
 .label-description {
   font-size: 10px;
-  color: rgb(48, 77, 48);
+  color: var(--dark1)
 }
 
 .description {
   font-size: small;
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
 .div-submit {
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
 .btn {
   margin: 0px 20px;
   padding: 10px 15px;
-  border: 1px solid rgba(0, 0, 0, 0);
+  border: 1px solid var(--mid1);
   text-decoration: none;
   font-size: 14px;
   font-weight: bold;
   color: white;
-  background-color: rgb(124, 171, 124);
+  background-color: var(--mid1);
   border-radius: 50px;
   cursor: pointer;
   transition: border 0.5s, background-color 0.5s, color 0.5s;
 }
 
 .btn-cancel {
-  border: 1px solid rgb(124, 171, 124);
+  border: 1px solid var(--mid1);
   background-color: white;
-  color: rgb(53, 72, 53);
+  color: var(--dark5);
 }
 
 .btn:hover {
-  border: 1px solid rgb(124, 171, 124);
+  border: 1px solid var(--mid1);
   background-color: white;
-  color: rgb(53, 72, 53);
+  color: var(--dark5);
 }
 
 .btn-cancel:hover {
   border: 1px solid rgba(0, 0, 0, 0);
   color: white;
-  background-color: rgb(124, 171, 124);
+  background-color: var(--mid1);
 }
 
 .div-errors {
-  border: 1px solid rgb(229, 108, 108);
-  border-radius:10px;
-  background-color: rgb(252, 218, 224);
+  border: 1px solid var(--error2);
+  border-radius: 10px;
+  background-color: var(--error1);
   margin: 10px 10px;
 
 }
@@ -93,9 +96,9 @@
 
 .div-errors li {
   font-size: smaller;
-  color: rgb(109, 33, 33);
+  color: var(--error3);
 }
 
-span + a {
+span+a {
   padding-left: 10px;
 }

@@ -1,0 +1,74 @@
+@import url('./theme.css');
+
+#nav-top {
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--light5);
+    padding: 0 150px;
+}
+
+#div-center-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--mid1);
+    border-radius: 86px;
+    box-shadow: 0.5px 0.5px 2px var(--mid1);
+    background-color: var(--light6);
+    width: 550px;
+}
+
+#search-input {
+    border: none;
+    padding: 3px;
+    margin-left: 10px;
+    width: 95%;
+
+    background-color: transparent;
+}
+
+#search-button {
+    margin: 5px;
+    padding: 5px 8px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: border 0.5s, background-color 0.5s, color 0.5s;
+}
+
+#search-button:hover {
+    border: 1px solid var(--mid1);
+    background-color: white;
+    color: var(--dark5);
+}
+
+input:focus {
+    outline: none;
+}
+
+#div-left-links>a {
+    text-decoration: none;
+    font-weight: 100;
+    font-size: 1.7em;
+}
+
+/*
+spacing for nav bar buttons
+bringing them in a little bit closer
+layout.css imported after user-form in layout.pug
+*/
+.btn.btn-nav {
+    margin: 0px 7px;
+    padding: 8px 8px;
+}
