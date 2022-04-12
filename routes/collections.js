@@ -7,7 +7,9 @@ const db = require("../db/models");
 
 //redirect /collections to default collection, with id 1
 router.get("/", asyncHandler(async (req, res) => {
-    console.log(req.session);
+    const userId = req.session.auth.userId;
+
+	console.log('userId', userId);
 	
 	//check if user is logged in
 
@@ -29,7 +31,7 @@ router.get('/:collectionId(\\d+)', asyncHandler( async (req, res) => {
     
     const hikes = 0;
 
-    console.log(collection);
+    // console.log(collection);
 
     res.render("collection", {
         title: collection.name,
