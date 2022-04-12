@@ -1,7 +1,7 @@
 'use strict';
 
 // import array of object records
-const { hikeTagSeed } = require('../../public/javascripts/tables-seed-data');
+const { hikeTagSeed } = require('../tables-seed-data');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
