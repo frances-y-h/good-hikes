@@ -1,0 +1,12 @@
+mixin validationErrorSummary(errors)
+  if errors
+    //- role is for accessibility
+    div(role='alert')
+      p The following error(s) occurred:
+      ul
+        each error in errors
+          li= error
+
+mixin field(labelText, fieldName, fieldValue, required = false, fieldType='text', placeholder)
+    label(for=fieldName)= labelText
+    input(type=fieldType id=fieldName name=fieldName value=fieldValue class='form-control' placeholder=placeholder)
