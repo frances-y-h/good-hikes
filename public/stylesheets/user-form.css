@@ -1,0 +1,101 @@
+.signup,
+.login {
+  text-align: center;
+  font-size:30px;
+}
+
+.form-control {
+  max-width: 600px;
+  margin: 50px auto;
+  box-sizing: border-box;
+  padding: 30px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.form-control > div {
+  padding: 10px 0px;
+}
+
+.label {
+  display: block;
+  font-size: smaller;
+}
+
+.input {
+  display: block;
+  line-height: 2rem;
+  width: 100%;;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+.label-description {
+  font-size: 10px;
+  color: rgb(48, 77, 48);
+}
+
+.description {
+  font-size: small;
+  display:flex;
+  justify-content: center;
+}
+
+.div-submit {
+  display:flex;
+  justify-content: center;
+}
+
+.btn {
+  margin: 0px 20px;
+  padding: 10px 15px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(124, 171, 124);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: border 0.5s, background-color 0.5s, color 0.5s;
+}
+
+.btn-cancel {
+  border: 1px solid rgb(124, 171, 124);
+  background-color: white;
+  color: rgb(53, 72, 53);
+}
+
+.btn:hover {
+  border: 1px solid rgb(124, 171, 124);
+  background-color: white;
+  color: rgb(53, 72, 53);
+}
+
+.btn-cancel:hover {
+  border: 1px solid rgba(0, 0, 0, 0);
+  color: white;
+  background-color: rgb(124, 171, 124);
+}
+
+.div-errors {
+  border: 1px solid rgb(229, 108, 108);
+  border-radius:10px;
+  background-color: rgb(252, 218, 224);
+  margin: 10px 10px;
+
+}
+
+.div-errors ul {
+  padding: 0px 20px;
+}
+
+.div-errors li {
+  font-size: smaller;
+  color: rgb(109, 33, 33);
+}
+
+span + a {
+  padding-left: 10px;
+}
