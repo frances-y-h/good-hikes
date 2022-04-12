@@ -1,9 +1,9 @@
 extends layout.pug
 include utils.pug
 block content
-  +validationErrorSummary(errors)
   form.form-control(action='/users/login' method='post')
     h2.login Login
+    +validationErrorSummary(errors)
     input(type='hidden' name='_csrf' value=csrfToken)
     +field('Email Address', 'email', email, true)
     +field('Password', 'password', null, true, 'password')
@@ -11,5 +11,5 @@ block content
       button(type='submit' class='btn') Login
       a(href='/' class='btn btn-cancel') Cancel
   div
-    p Don't have an account?
-    a(href='/user/signup') Sign Up
+    span Don't have an account?
+    a(href='/users/signup') Sign Up
