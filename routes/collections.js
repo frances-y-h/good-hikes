@@ -72,6 +72,9 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			],
 		});
 		
+		console.log(userCollections[0]);
+
+
 		res.render("collection", {
 			collectionName,
 			userCollections,
