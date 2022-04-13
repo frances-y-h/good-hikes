@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { asyncHandler } = require("./utils");
+const { asyncHandler, csrfProtection } = require("./utils");
 const db = require("../db/models");
 const { requireAuth } = require("../auth");
+const { check, validationResult } = require("express-validator");
 
 // Collections page
 
@@ -73,7 +74,8 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			],
 		});
 		
-		console.log(userCollections);
+		// console.log(userCollections);
+		console.log('/////****/////*****/// */ */');
 
 
 		res.render("collection", {
@@ -102,6 +104,99 @@ router.get('/edit', requireAuth, asyncHandler( async(req, res) => {
 		collections,
 	});
 
+}));
+
+const collectionValidator = [
+	check('collectionname')
+		.exists({ checkFalsy: true })
+		.withMessage("Please enter a name for the collection")
+		.isLength({ max: 255 })
+		.withMessage("Collection name must not be longer than 255 characters")
+		.custom((value) => {
+			return db.Collection.findOne({ where: { name: value }})
+				.then( (collection) => {
+					if (collection) {
+						return Promise.reject("Collection name already exists");
+					}
+				});
+		})
+];
+
+//route from the /collections/edit page to create a new collection
+// get to route when submitting form on the edit page to add a new collection
+
+//NEEDS CSRF PROTECTION
+router.post('/edit/new',
+		// csrfProtection,
+		collectionValidator,
+		requireAuth,
+		asyncHandler( async (req, res) => {
+	
+	const { collectionname } = req.body;
+	const userId = req.session.auth.userId;
+
+	//pull all collections for the logged in user
+	const collections = await db.Collection.findAll({
+		where: {
+			userId: userId,
+		},
+	});
+	
+	const validationErrors = validationResult(req);
+	let errors = [];
+
+	// console.log('-=*-=*-=*-=*-/=-*-/=-*-/=-*-/=-*/-=-*/-=-*/-=-*/-=-*/-=-*/-=-*/');
+	// console.log('after the validationErrors');
+	// console.log("-=*-=*-=*-=*-/=-*-/=-*-/=-*-/=-*/-=-*/-=-*/-=-*/-=-*/-=-*/-=-*/");
+	if (validationErrors.isEmpty()) {
+		//need to create the new collection line in database
+		await db.Collection.create({
+			userId,
+			name: collectionname
+		});
+		res.redirect('/collections/edit');
+	} else {
+		// console.log('-=*-=*-=*-=*-/=-*-/=-*-/=-*-/=-*/-=-*/-=-*/-=-*/-=-*/-=-*/-=-*/');
+		// console.log('inside the else');
+		// console.log("-=*-=*-=*-=*-/=-*-/=-*-/=-*-/=-*/-=-*/-=-*/-=-*/-=-*/-=-*/-=-*/");
+
+		const errors = validationErrors.array().map((err) => err.msg);
+
+		res.render('collection-edit', {
+			errors,
+			// csrfToken: req.csrfToken(),
+			collectionname,
+			collections
+		})
+	}
+
+}));
+
+//route from /collections/edit page to rename a collection
+router.post('/:id(\\d+)/edit', requireAuth, asyncHandler( async (req, res) =>{
+	const collectionId = await parseInt(req.params.id, 10);
+
+	console.log('hello from the name edit page for ', collectionId);
+
+	res.redirect('/collections/edit');
+}));
+
+//route from the collections/edit to delete a collection
+router.post('/:id(\\d+)/delete',
+		// csrfProtection,
+		requireAuth,
+		asyncHandler( async (req, res) =>{
+	const collectionId = await parseInt(req.params.id, 10);
+
+	await db.Collection.destroy({where: {id: collectionId} });
+	
+	
+	// res.render('collection-edit', {
+	// 	csrfToken: req.csrfToken()
+	// });
+
+	res.redirect('/collections/edit');
+	
 }));
 
 module.exports = router;
