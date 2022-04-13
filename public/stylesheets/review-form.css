@@ -23,6 +23,21 @@
     display: none;
 }
 
+.form-star-rating {
+    user-select: none;
+}
+
+.star {
+    font-size: 2rem;
+    color: var(--bar);
+    background-color: unset;
+    border: none;
+}
+
+.star:hover {
+    cursor: pointer;
+}
+
 textarea {
     width: 100%;
     height: 100px;

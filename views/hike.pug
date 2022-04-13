@@ -60,7 +60,12 @@ block content
             button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
           div.bg-modal.hidden
             form(id='review-form' class="hidden form-control")
-                +field("Rating", "rating", null, true, "number")
+                div.form-star-rating
+                  button.star &#9734
+                  button.star &#9734
+                  button.star &#9734
+                  button.star &#9734
+                  button.star &#9734
                 +field("Comment", "comment", null, false, "textarea")
                 +field("Date Hike", "dateHike", null, false, "date")
                 div.errors

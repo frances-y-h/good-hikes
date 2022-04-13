@@ -14,15 +14,32 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
         cancelReviewButton.addEventListener("click", (event) => {
+            event.preventDefault();
             reviewForm.classList.add("hidden");
             bgModal.classList.add("hidden");
         });
 
+        let rating;
+        const stars = document.querySelectorAll('.star');
+        stars.forEach((star, i) => {
+            star.onclick = function(e) {
+                e.preventDefault();
+                rating = i + 1;
+                let current_star = i + 1;
+                stars.forEach((star, j) => {
+                    if (current_star >= j + 1) {
+                        star.innerHTML = '&#9733';
+                    } else {
+                        star.innerHTML = '&#9734';
+                    }
+                });
+            }
+        });
+
         submitReviewButton.addEventListener("click", async (event) => {
             event.preventDefault();
-            let rating = document.querySelector('input[name=rating]').value;
-            let comment = document.querySelector('textarea[name=comment]').value;
-            let dateHike = document.querySelector('input[name=dateHike]').value;
+            let comment = document.querySelector('textarea[name=comment]');
+            let dateHike = document.querySelector('input[name=dateHike]');
 
 
             const res = await fetch(`/hikes/${hikeId}/reviews`, {
@@ -31,8 +48,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 body: JSON.stringify({
                     hikeId,
                     rating,
-                    comment,
-                    dateHike
+                    comment: comment.value,
+                    dateHike: dateHike.value
                 })
             })
 
@@ -56,6 +73,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
                     reviewDateHike.innerHTML = data.review.dateHike;
                 }
 
+                stars.forEach(star => {
+                    star.innerHTML = '&#9734';
+                });
+                comment.value = "";
+                dateHike.value = "";
                 reviewForm.classList.add("hidden");
                 bgModal.classList.add("hidden");
             } else {
