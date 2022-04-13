@@ -1,0 +1,27 @@
+.delete-edit-block {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.delete-edit-block span {
+    font-size: 0.75em;
+    color: var(--mid1);
+}
+.delete-edit-block div,
+.delete-edit-block div {
+    width: 35px;
+}
+
+.delete-edit-block span:first-child:hover,
+.delete-edit-block span:last-child:hover {
+    cursor: pointer;
+    color: var(--dark5);
+    font-weight: bold;
+}
+
+#review .delete-edit-block {
+    padding-right: 35px;
+}
