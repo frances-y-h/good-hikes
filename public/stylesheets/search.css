@@ -1,8 +1,4 @@
-html {
-    display: flex;
-    justify-content: center;
-}
-body {
+main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,13 +7,38 @@ body {
     /* width: 80vw; */
 }
 
-.search-header {
+#search-header {
     text-align: center;
     margin: 20px;
 }
 
-.search-container {
-    border: 1px solid black;
+#adv-search-container {
+    /* border: 1px solid black; */
+}
+
+#adv-search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#adv-search-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--mid1);
+    border-radius: 86px;
+    box-shadow: 0.5px 0.5px 2px var(--mid1);
+    background-color: var(--light6);
+    width: 800px;
+    padding: 10px 15px;
+}
+
+/* #adv-search-input {
+    width: auto;
+    box-sizing: border-box;
+} */
+
+#adv-search-button {
 }
 
 .search-toggles {
@@ -80,9 +101,8 @@ body {
 /* HIKE CARDS */
 a.hike-card {
     width: 400px;
-    border: 1px solid black;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px;
+    box-shadow: 3px 6px 5px 2px rgba(0, 0, 0, 0.2);
     /* background-color: var(--bg1); */
     /* margin-bottom: 20px; */
     text-decoration: none;
@@ -116,7 +136,7 @@ div.hike-location {
 .hike-length-time {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 5px;
     margin: 5px 20px;
     box-sizing: border-box;
 }
@@ -135,6 +155,11 @@ div.hike-location {
     text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 }
 
+.hike-avg-review {
+    display: flex;
+    align-items: center;
+}
+
 .hike-stars {
     background: url("/images/star-rating-sprite.png") repeat-x;
     font-size: 0;
@@ -143,7 +168,8 @@ div.hike-location {
     overflow: hidden;
     text-indent: -999em;
     width: 100px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    box-sizing: border-box;
 }
 
 .star-sprite {
