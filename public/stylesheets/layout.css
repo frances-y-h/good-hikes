@@ -64,12 +64,11 @@ input:focus {
     outline: none;
 }
 
-#my-hikes-link{
+#my-hikes-link {
     width: 200px;
     justify-content: center;
 }
 #my-hikes-link > a {
-    
     /* margin-left: 40px; */
     padding: 10px 15px;
     text-decoration: none;
@@ -80,17 +79,17 @@ input:focus {
     transition: all 0.5s;
 }
 #my-hikes-link > a:hover {
-  /* margin: 0px 20px; */
-  padding: 10px 15px;
-  border: 1px solid var(--mid1);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-  background-color: var(--mid1);
-  border-radius: 50px;
-  cursor: pointer;
-  transition: border 0.5s, background-color 0.5s, color 0.5s;
+    /* margin: 0px 20px; */
+    padding: 10px 15px;
+    border: 1px solid var(--mid1);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--mid1);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: border 0.5s, background-color 0.5s, color 0.5s;
 }
 
 #div-left-links {
@@ -120,7 +119,8 @@ footer {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    max-width: 1000px;
+    width: 100%;
+    padding-top: 50px;
 }
 
 .footer-techs {
@@ -129,7 +129,7 @@ footer {
     justify-content: space-between;
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
-    padding: 20px 0px;
+    padding: 20px 20px;
 }
 
 .footer-tech {
