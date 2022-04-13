@@ -96,7 +96,7 @@ router.get('/edit', requireAuth, asyncHandler( async(req, res) => {
 		},
 	});
 
-	console.log(collections[0]);
+	// console.log(collections[0]);
 
 	res.render("collection-edit", {
 		collections,

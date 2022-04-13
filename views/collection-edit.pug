@@ -6,8 +6,8 @@ block content
     #edit-content-div
         h2.center Edit Collections
         form#form-add-collection(method="post" action="/collection/new")
-            input#new-collection-input(name="new-collection-input" required)
-            button.btn#add-collection-button(type="submit") Add Shelf
+            input#new-collection-input(name="new-collection-input" required placeholder="Add Collection name")
+            button.btn#add-collection-button(type="submit") Add Collection
         table 
             colgroup
                 col#delete-col
