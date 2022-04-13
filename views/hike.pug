@@ -1,7 +1,10 @@
 extends layout
 
+include utils.pug
 block content
   link(rel='stylesheet' href='/stylesheets/hike.css')
+  link(rel="stylesheet" href="/stylesheets/review-form.css")
+  script(src='/javascripts/reviews.js')
   div.hike-page
     div.hike-title(style=`background-image: linear-gradient(to bottom, rgba(0,0,0, 0), rgba(0,0,0,0.5)),url('${hike.imgUrl}'`)
       div.hike-name #{hike.name}
@@ -26,15 +29,60 @@ block content
             div.hike-key-title Route type
             div.hike-key-detail #{hike.RouteType.name}
         div.reviews
-          table
-            thead
-            tbody
-              each review in reviews
+          div.rating-table-add-review
+            table.rating-bar-table
+              tbody
                 tr
-                  td #{review.userId}
-                  td #{review.rating}
-                  td #{review.comment}
-                  td #{review.dateHike}
+                  td 5
+                  td.one-star-sprite
+                  td
+                    div.bar(style=`width:${avgRatingPercentage[4]}%`)
+                tr
+                  td 4
+                  td.one-star-sprite
+                  td
+                    div.bar(style=`width:${avgRatingPercentage[3]}%`)
+                tr
+                  td 3
+                  td.one-star-sprite
+                  td
+                    div.bar(style=`width:${avgRatingPercentage[2]}%`)
+                tr
+                  td 2
+                  td.one-star-sprite
+                  td
+                    div.bar(style=`width:${avgRatingPercentage[1]}%`)
+                tr
+                  td 1
+                  td.one-star-sprite
+                  td
+                    div.bar(style=`width:${avgRatingPercentage[0]}%`)
+            button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
+          div.bg-modal.hidden
+            form(id='review-form' class="hidden form-control")
+                div.form-star-rating
+                  button.star &#9734
+                  button.star &#9734
+                  button.star &#9734
+                  button.star &#9734
+                  button.star &#9734
+                +field("Comment", "comment", null, false, "textarea")
+                +field("Date Hike", "dateHike", null, false, "date")
+                div.errors
+                div.review-buttons
+                  button#review-cancel.btn Cancel
+                  button#review-submit.btn  Submit
+          each review in reviews
+            #review.form-control
+              div.rating-username
+                  .username #{review.User.username}
+                  .stars-and-rating
+                    div.stars
+                      span.star-sprite(style=`width:${review.rating/5*100}%`)
+                    #rating #{review.rating}
+              .comment #{review.comment}
+              if (review.dateHike)
+                .dateHike Date hiked #{review.dateHike}
       div.hike-side
         div.hike-tags-wrap
           div.hike-tags-title Features
