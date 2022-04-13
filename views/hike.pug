@@ -59,19 +59,19 @@ block content
                     div.bar(style=`width:${avgRatingPercentage[0]}%`)
             button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
           div.bg-modal.hidden
-          form(id='review-form' class="hidden form-control")
-              div.form-star-rating
-                button.star &#9734
-                button.star &#9734
-                button.star &#9734
-                button.star &#9734
-                button.star &#9734
-              +field("Comment", "comment", null, false, "textarea")
-              +field("Date Hike", "dateHike", null, false, "date")
-              div.errors
-              div.review-buttons
-                button#review-cancel.btn Cancel
-                button#review-submit.btn  Submit
+            form(id='review-form' class="hidden form-control")
+                div.form-star-rating
+                  button.star &#9734
+                  button.star &#9734
+                  button.star &#9734
+                  button.star &#9734
+                  button.star &#9734
+                +field("Comment", "comment", null, false, "textarea")
+                +field("Date Hike", "dateHike", null, false, "date")
+                div.errors
+                div.review-buttons
+                  button#review-cancel.btn Cancel
+                  button#review-submit.btn  Submit
           each review in reviews
             #review.form-control
               div.rating-username

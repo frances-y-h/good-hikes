@@ -12,10 +12,7 @@
 }
 
 #review-form {
-    top: 39%;
-    left: 35%;
     z-index: 3;
-    position: fixed;
     width: 520px;
     height: fit-content;
     opacity: 1;
@@ -61,7 +58,7 @@ textarea {
     width: 40%;
     box-sizing: border-box;
     outline: 0;
-    padding: .25rem;
+    padding: 0.25rem;
     position: relative;
     background: url(/images/calendar.png);
     background-size: 30px;
