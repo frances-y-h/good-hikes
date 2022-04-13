@@ -82,3 +82,41 @@ h2{
     padding: 5px;
 
 }
+
+
+
+
+#edit-content-div {
+    width: 50%;
+    margin: 0px auto;
+    margin-top: 38px;
+}
+#delete-col{
+    width: 15%;
+    
+}
+#name-col{
+    width: 75%;
+}
+#rename-col{
+    width: 20%;
+}
+
+#form-add-collection{
+    background-color: var(--light5);
+    height: 46px;
+    margin: 30px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 3px var(--light6);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#new-collection-input{
+    width: 70%;
+    height: 24px;
+}
+#add-collection-button, .btn-rename{
+    padding: 5px;
+    font-size: smaller;
+}
