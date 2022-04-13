@@ -23,6 +23,11 @@ router.get(
       ],
     });
 
+    let loggedInUser;
+    if (req.session.auth) {
+      loggedInUser = req.session.auth.id;
+    }
+
     //query for populating reviews section on /hikes/:hikeId page
     const reviews = await db.Review.findAll({
       where: { hikeId },
@@ -59,7 +64,8 @@ router.get(
       reviews,
       avgReview,
       avgReviewPtg,
-      avgRatingPercentage
+      avgRatingPercentage,
+      loggedInUser
     });
   }));
 

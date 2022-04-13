@@ -77,7 +77,7 @@ block content
           each review in reviews
             #review.form-control
               div.rating-username
-                  .username #{review.User.username}
+                  div(id=`${review.User.id}`).username #{review.User.username}
                   .stars-and-rating
                     div.stars
                       span.star-sprite(style=`width:${review.rating/5*100}%`)
@@ -91,6 +91,20 @@ block content
                 span |
                 div(id=`edit-${review.id}`).edit-review
                   span Edit
+              div.bg-modal2.hidden
+                form(id='edit-review-form' class="hidden form-control")
+                  div.edit-form-star-rating
+                    button.star &#9734
+                    button.star &#9734
+                    button.star &#9734
+                    button.star &#9734
+                    button.star &#9734
+                  +field("Comment", "comment", null, false, "textarea")
+                  +field("Date Hike", "dateHike", null, false, "date")
+                  div.errors
+                  div.edit-review-buttons
+                    button#edit-review-cancel.btn Cancel
+                    button#edit-review-submit.btn  Submit
       div.hike-side
         div.hike-tags-wrap
           div.hike-tags-title Features

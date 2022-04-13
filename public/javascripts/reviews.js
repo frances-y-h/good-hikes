@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
     //event listener to the Write review button
     reviewButton.addEventListener("click", (event) => {
+
         //showing form
         reviewForm.classList.remove("hidden");
         bgModal.classList.remove("hidden");
