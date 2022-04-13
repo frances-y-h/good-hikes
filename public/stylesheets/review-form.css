@@ -1,10 +1,25 @@
+.bg-modal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #review-form {
     width: 520px;
     height: 430px;
-    /* position: absolute; */
+    opacity: 1;
+    background-color: white;
 }
 
-#review-form.hidden {
+#review-form.hidden,
+.bg-modal.hidden {
     display: none;
 }
 

@@ -36,7 +36,7 @@ block content
                   td 5
                   td.one-star-sprite
                   td
-                   div.bar(style=`width:${avgRatingPercentage[4]}%`)
+                    div.bar(style=`width:${avgRatingPercentage[4]}%`)
                 tr
                   td 4
                   td.one-star-sprite
@@ -59,13 +59,14 @@ block content
                     div.bar(style=`width:${avgRatingPercentage[0]}%`)
             button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
           //- +validationErrorSummary(errors)
-          form(id='review-form' class="hidden form-control")
-              +field("Rating", "rating", null, true, "number")
-              +field("Comment", "comment", null, false, "textarea")
-              +field("Date Hike", "dateHike", null, false, "date")
-              div.review-buttons
-                button#review-cancel.btn Cancel
-                button#review-submit.btn  Submit
+          div.bg-modal.hidden
+            form(id='review-form' class="hidden form-control")
+                +field("Rating", "rating", null, true, "number")
+                +field("Comment", "comment", null, false, "textarea")
+                +field("Date Hike", "dateHike", null, false, "date")
+                div.review-buttons
+                  button#review-cancel.btn Cancel
+                  button#review-submit.btn  Submit
           each review in reviews
             #review.form-control
               div.rating-username
