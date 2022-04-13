@@ -7,6 +7,7 @@ block content
 
 block content
     link(rel='stylesheet' href='/stylesheets/collection.css')
+    script(src='/javascripts/editCollection.js')
     
     #edit-content-div
         h2.center Edit Collections
@@ -24,7 +25,7 @@ block content
                 tr.hike-row
                     th Delete 
                     th.left Collection Name
-                    th 
+                    th
                 tbody 
                     each collection in collections 
                         tr.hike-row 
@@ -37,7 +38,17 @@ block content
                             td.center
                                 form(method='post' action=`/collections/${collection.id}/edit`)
                                     input(type='hidden' name='_csrf' value=csrfToken)
-                                    button.btn.btn-rename(id=`${collection.id}-rename-button`) Rename 
+                                    button.btn.btn-rename(id=`${collection.id}-rename-button`) Rename
+        //- .bg-modal.hidden
+        //-     form(id='rename-form' class="hidden form-control")
+        //-         h2#rename-title
+        //-         input(type='hidden' name='_csrf' value=csrfToken)
+        //-         input#rename-collection-input(name="collectionname" required placeholder=`Enter new collection name` value=collectionname)
+        //-         #rename-button-div
+        //-             button.btn#rename-collection-button Rename Collection
+        //-             button.btn.btn-cancel#cancel-collection-button Cancel
+
+
 
 
 
