@@ -1,7 +1,4 @@
 document.addEventListener('DOMContentLoaded', (e) => {
-    console.log("hi from reviews.js")
-
-
 
     const reviewForm = document.getElementById("review-form");
     const reviewButton = document.querySelector('.review-btn');
@@ -42,7 +39,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             const data = await res.json();
             if (data.message === 'Success') {
 
-                const reviewRating = document.querySelector('.rating-username .rating');
+                const reviewRating = document.querySelector('.rating-username #rating');
                 const reviewUsername = document.querySelector('.rating-username .username');
 
                 const reviewComment = document.querySelector('#review .comment');
@@ -57,7 +54,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 if (data.review.dateHike) {
                     reviewDateHike.innerHTML = data.review.dateHike;
                 }
+
                 reviewForm.classList.add("hidden");
+                console.log("hi after classHidden")
+                bgModal.classList.add("hidden");
             } else {
                 //errors  add elements with errors
                 console.log(data.errors);
