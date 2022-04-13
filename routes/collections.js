@@ -47,6 +47,7 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			where: {
 				userId: userId,
 			},
+			include: db.Hike,
 		});
 
 		//extract the current collectionId from the url
@@ -72,6 +73,8 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			],
 		});
 		
+
+
 		res.render("collection", {
 			collectionName,
 			userCollections,
@@ -81,5 +84,22 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 }));
 
 
+router.get('/edit', requireAuth, asyncHandler( async(req, res) => {
+
+	const userId = parseInt(req.session.auth.userId, 10);
+
+	//grab collections to display list on left column
+	const collections = await db.Collection.findAll({
+		where: {
+			userId: userId,
+		},
+	});
+
+
+	res.render("collection-edit", {
+		collections,
+	});
+
+}));
 
 module.exports = router;

@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    link(rel='stylesheet' href='/stylesheets/collection.css')
+    
+    #edit-content-div
+        h2.center Edit Collections
+        form#form-add-collection(method="post" action="/collection/new")
+            input#new-collection-input(name="new-collection-input" required placeholder="Add Collection name")
+            button.btn#add-collection-button(type="submit") Add Collection
+        table 
+            colgroup
+                col#delete-col
+                col#name-col
+                col#rename-col
+            thead
+                tr.hike-row
+                    th Delete 
+                    th Collection Name
+                    th 
+                tbody 
+                    each collection in collections 
+                        tr.hike-row 
+                            td.center: i.fa.fa-times
+                            td= collection.name 
+                            td.center: button.btn.btn-rename(id=`${collection.id}-rename-button`) Rename 
+    script(src='')
+
+
+
+    
