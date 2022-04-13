@@ -29,3 +29,14 @@ document.addEventListener("DOMContentloaded", (event) => {
 
     //PLaceholder for other code
 });
+
+window.onload = () => {
+    const cards = document.querySelectorAll(".top-rated-card");
+    for (let i = 0; i < cards.length; i++) {
+        const card = cards[i];
+        card.addEventListener("click", (event) => {
+            const hikeId = event.currentTarget.id.split("-")[1];
+            window.location.href = `/hikes/${hikeId}`;
+        });
+    }
+};
