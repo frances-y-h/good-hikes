@@ -11,7 +11,7 @@ block content
             if userCollections
                 ul 
                     each coll in userCollections 
-                        li: a(href=`/collections/${coll.id}`) #{coll.name}
+                        li: a(href=`/collections/${coll.id}`) #{coll.name}   (#{coll.Hikes.length})
             button.btn(id="collection-add") Add a Collection
         #hikes-display
             h2.center Hike Collection: #{collectionName}

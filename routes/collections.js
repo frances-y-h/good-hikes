@@ -47,6 +47,7 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			where: {
 				userId: userId,
 			},
+			include: db.Hike,
 		});
 
 		//extract the current collectionId from the url
@@ -72,7 +73,7 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			],
 		});
 		
-		console.log(userCollections[0]);
+		console.log(userCollections);
 
 
 		res.render("collection", {
