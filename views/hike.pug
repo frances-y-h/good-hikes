@@ -58,12 +58,12 @@ block content
                   td
                     div.bar(style=`width:${avgRatingPercentage[0]}%`)
             button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
-          //- +validationErrorSummary(errors)
           div.bg-modal.hidden
             form(id='review-form' class="hidden form-control")
                 +field("Rating", "rating", null, true, "number")
                 +field("Comment", "comment", null, false, "textarea")
                 +field("Date Hike", "dateHike", null, false, "date")
+                div.errors
                 div.review-buttons
                   button#review-cancel.btn Cancel
                   button#review-submit.btn  Submit

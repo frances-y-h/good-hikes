@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
         submitReviewButton.addEventListener("click", async (event) => {
             event.preventDefault();
-            const rating = document.querySelector('input[name=rating]').value;
-            const comment = document.querySelector('textarea[name=comment]').value;
-            const dateHike = document.querySelector('input[name=dateHike]').value;
+            let rating = document.querySelector('input[name=rating]').value;
+            let comment = document.querySelector('textarea[name=comment]').value;
+            let dateHike = document.querySelector('input[name=dateHike]').value;
 
 
             const res = await fetch(`/hikes/${hikeId}/reviews`, {
@@ -41,10 +41,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
                 const reviewRating = document.querySelector('.rating-username #rating');
                 const reviewUsername = document.querySelector('.rating-username .username');
-
                 const reviewComment = document.querySelector('#review .comment');
                 const reviewDateHike = document.querySelector('#review .dateHike');
+                const starRating = document.querySelector('#review .star-sprite');
 
+                starRating.style = `width:${data.review.rating / 5 * 100}%`;
                 reviewUsername.innerHTML = data.user.username;
                 reviewRating.innerHTML = data.review.rating;
 
@@ -56,11 +57,18 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 }
 
                 reviewForm.classList.add("hidden");
-                console.log("hi after classHidden")
                 bgModal.classList.add("hidden");
             } else {
-                //errors  add elements with errors
-                console.log(data.errors);
+                const errorMessage = document.querySelector('.errors');
+
+                rating = data.review.rating;
+                if (data.review.comment) {
+                    comment = data.review.comment;
+                }
+                if (data.review.dateHike) {
+                    dateHike = data.review.dateHike;
+                }
+                errorMessage.innerHTML = data.errors;
             }
         });
     });

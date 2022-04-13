@@ -13,7 +13,7 @@
 
 #review-form {
     width: 520px;
-    height: 430px;
+    height: fit-content;
     opacity: 1;
     background-color: white;
 }
