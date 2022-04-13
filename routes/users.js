@@ -70,6 +70,18 @@ router.post(
             const hashedPassword = await bcrypt.hash(password, 10);
             user.hashedPassword = hashedPassword;
             await user.save();
+            await db.Collection.create({
+                userId: user.id,
+                name: "Want To Hike",
+            });
+            await db.Collection.create({
+                userId: user.id,
+                name: "Planned",
+            });
+            await db.Collection.create({
+                userId: user.id,
+                name: "Completed",
+            });
             loginUser(req, res, user);
             req.session.save(() => res.redirect("/"));
         } else {
