@@ -29,6 +29,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
             bgModal.classList.add("hidden");
         });
 
+        //closing the form when the user clicks outside of the form
+        bgModal.addEventListener("click", (event) => {
+            if (event.target != reviewForm && event.target.parentNode != reviewForm) {
+                reviewForm.classList.add("hidden");
+                bgModal.classList.add("hidden");
+            }
+        });
+
 
         //building rating starts functionality in the review form
         let rating;
