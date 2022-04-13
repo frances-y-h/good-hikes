@@ -10,41 +10,56 @@ const { requireAuth } = require('../auth');
 
 // Get 1 specific hikes
 router.get(
-    "/:hikeId(\\d+)",
-    asyncHandler(async (req, res) => {
-        const hikeId = parseInt(req.params.hikeId, 10);
-        const hike = await db.Hike.findByPk(hikeId, {
-            include: [
-                db.Tag,
-                db.CityPark,
-                db.State,
-                db.Difficulty,
-                db.RouteType,
-            ],
-        });
-        const reviews = await db.Review.findAll({
-          where: { hikeId },
-          include: [db.User],
-          limit: 10,
-          order: [["createdAt", "DESC"]]
-        });
+  "/:hikeId(\\d+)",
+  asyncHandler(async (req, res) => {
+    const hikeId = parseInt(req.params.hikeId, 10);
+    const hike = await db.Hike.findByPk(hikeId, {
+      include: [
+        db.Tag,
+        db.CityPark,
+        db.State,
+        db.Difficulty,
+        db.RouteType,
+      ],
+    });
+    const reviews = await db.Review.findAll({
+      where: { hikeId },
+      include: [db.User],
+      limit: 10,
+      order: [["createdAt", "DESC"]]
+    });
 
+    const reviewsAll = await db.Review.findAll();
 
-        let avgReview = 0;
-        for (let review of reviews) {
-            avgReview += review.rating;
-        }
-        avgReview = (avgReview / reviews.length).toFixed(1);
-        let avgReviewPtg = (avgReview / 5) * 100;
+    const avgRatingPercentage = [];
 
-        res.render("hike", {
-            title: hike.name,
-            hike,
-            reviews,
-            avgReview,
-            avgReviewPtg,
-        });
-}));
+    for (let i = 1; i < 6; i++) {
+      const ratingAmount = await db.Review.findAll({
+        where: { rating: i }
+      });
+
+      let avg = ((ratingAmount.length / reviewsAll.length) * 100).toFixed(1) ;
+      avgRatingPercentage.push(avg);
+    }
+
+    console.log(avgRatingPercentage);
+
+    let avgReview = 0;
+    for (let review of reviews) {
+      avgReview += review.rating;
+    }
+    avgReview = (avgReview / reviews.length).toFixed(1);
+    let avgReviewPtg = (avgReview / 5) * 100;
+
+    res.render("hike", {
+      title: hike.name,
+      hike,
+      reviews,
+      avgReview,
+      avgReviewPtg,
+      avgRatingPercentage
+    });
+  }));
 
 const reviewValidators = [
   check('rating')
@@ -55,7 +70,7 @@ const reviewValidators = [
       let today = new Date();
       let enteredDate = new Date(dateHike);
       if (enteredDate > today) {
-        throw Error ('Date of hike must be in the past');
+        throw Error('Date of hike must be in the past');
       }
       return true;
     })

@@ -29,7 +29,35 @@ block content
             div.hike-key-title Route type
             div.hike-key-detail #{hike.RouteType.name}
         div.reviews
-          button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
+          div.rating-table-add-review
+            table.rating-bar-table
+              tbody
+                tr
+                  td 5
+                  td.one-star-sprite
+                  td
+                   div.bar(style=`width:${avgRatingPercentage[4]}%`)
+                tr
+                  td 4
+                  td.one-star-sprite
+                  td
+                    div.bar(style=`width:${avgRatingPercentage[3]}%`)
+                tr
+                  td 3
+                  td.one-star-sprite
+                  td
+                    div.bar(style=`width:${avgRatingPercentage[2]}%`)
+                tr
+                  td 2
+                  td.one-star-sprite
+                  td
+                    div.bar(style=`width:${avgRatingPercentage[1]}%`)
+                tr
+                  td 1
+                  td.one-star-sprite
+                  td
+                    div.bar(style=`width:${avgRatingPercentage[0]}%`)
+            button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
           //- +validationErrorSummary(errors)
           form(id='review-form' class="hidden form-control")
               +field("Rating", "rating", null, true, "number")

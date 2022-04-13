@@ -157,12 +157,40 @@ body {
     align-items: center;
 }
 
+.rating-table-add-review {
+    display: flex;
+    justify-content: space-around;
+}
+
+.rating-bar-table {
+    border-spacing: 10px 5px;
+}
+
+.rating-bar-table td:nth-child(3) {
+    width: 135px;
+}
+
+.one-star-sprite {
+    background: url("/images/star-rating-sprite.png") no-repeat;
+    width: 20px;
+}
+
+.bar {
+    width: 100%;
+    background-color: var(--bar);
+    height: 8px;
+    border-radius: 4px;
+}
+
+.review-btn {
+    align-self: center;
+}
+
 .rating-username {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
-
 
 #rating {
     padding-top: 4px;
