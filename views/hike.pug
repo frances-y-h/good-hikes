@@ -6,6 +6,7 @@ block content
   link(rel="stylesheet" href="/stylesheets/review-form.css")
   link(rel="stylesheet" href="/stylesheets/review-edit-delete.css")
   script(src='/javascripts/reviews.js')
+  script(src='/javascripts/reviews-edit.js')
   div.hike-page
     div.hike-title(style=`background-image: linear-gradient(to bottom, rgba(0,0,0, 0), rgba(0,0,0,0.5)),url('${hike.imgUrl}'`)
       div.hike-name #{hike.name}
@@ -88,7 +89,7 @@ block content
                 .delete-review
                   span Delete
                 span |
-                .edit-review
+                div(id=`edit-${review.id}`).edit-review
                   span Edit
       div.hike-side
         div.hike-tags-wrap
