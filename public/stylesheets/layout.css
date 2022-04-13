@@ -64,10 +64,38 @@ input:focus {
     outline: none;
 }
 
-#div-left-links > a {
+#my-hikes-link{
+    width: 200px;
+    justify-content: center;
+}
+#my-hikes-link > a {
+    
+    /* margin-left: 40px; */
+    padding: 10px 15px;
     text-decoration: none;
     font-weight: 100;
-    font-size: 1.7em;
+
+    font-size: 1em;
+    color: var(--dark1);
+    transition: all 0.5s;
+}
+#my-hikes-link > a:hover {
+  /* margin: 0px 20px; */
+  padding: 10px 15px;
+  border: 1px solid var(--mid1);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--mid1);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: border 0.5s, background-color 0.5s, color 0.5s;
+}
+
+#div-left-links {
+    display: flex;
+    align-items: center;
 }
 
 #welcome-text {
