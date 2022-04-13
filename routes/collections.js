@@ -87,7 +87,7 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 }));
 
 
-router.get('/edit', requireAuth, asyncHandler( async(req, res) => {
+router.get('/edit', csrfProtection, requireAuth, asyncHandler( async(req, res) => {
 
 	const userId = parseInt(req.session.auth.userId, 10);
 
@@ -102,6 +102,7 @@ router.get('/edit', requireAuth, asyncHandler( async(req, res) => {
 
 	res.render("collection-edit", {
 		collections,
+		csrfToken: req.csrfToken(),
 	});
 
 }));
@@ -127,7 +128,7 @@ const collectionValidator = [
 
 //NEEDS CSRF PROTECTION
 router.post('/edit/new',
-		// csrfProtection,
+		csrfProtection,
 		collectionValidator,
 		requireAuth,
 		asyncHandler( async (req, res) => {
@@ -164,7 +165,7 @@ router.post('/edit/new',
 
 		res.render('collection-edit', {
 			errors,
-			// csrfToken: req.csrfToken(),
+			csrfToken: req.csrfToken(),
 			collectionname,
 			collections
 		})
@@ -183,7 +184,7 @@ router.post('/:id(\\d+)/edit', requireAuth, asyncHandler( async (req, res) =>{
 
 //route from the collections/edit to delete a collection
 router.post('/:id(\\d+)/delete',
-		// csrfProtection,
+		csrfProtection,
 		requireAuth,
 		asyncHandler( async (req, res) =>{
 	const collectionId = await parseInt(req.params.id, 10);
