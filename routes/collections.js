@@ -146,9 +146,6 @@ router.post('/edit/new',
 	const validationErrors = validationResult(req);
 	let errors = [];
 
-	// console.log('-=*-=*-=*-=*-/=-*-/=-*-/=-*-/=-*/-=-*/-=-*/-=-*/-=-*/-=-*/-=-*/');
-	// console.log('after the validationErrors');
-	// console.log("-=*-=*-=*-=*-/=-*-/=-*-/=-*-/=-*/-=-*/-=-*/-=-*/-=-*/-=-*/-=-*/");
 	if (validationErrors.isEmpty()) {
 		//need to create the new collection line in database
 		await db.Collection.create({
@@ -157,9 +154,6 @@ router.post('/edit/new',
 		});
 		res.redirect('/collections/edit');
 	} else {
-		// console.log('-=*-=*-=*-=*-/=-*-/=-*-/=-*-/=-*/-=-*/-=-*/-=-*/-=-*/-=-*/-=-*/');
-		// console.log('inside the else');
-		// console.log("-=*-=*-=*-=*-/=-*-/=-*-/=-*-/=-*/-=-*/-=-*/-=-*/-=-*/-=-*/-=-*/");
 
 		const errors = validationErrors.array().map((err) => err.msg);
 
@@ -174,10 +168,16 @@ router.post('/edit/new',
 }));
 
 //route from /collections/edit page to rename a collection
-router.post('/:id(\\d+)/edit', requireAuth, asyncHandler( async (req, res) =>{
+router.post('/:id(\\d+)/edit',
+	requireAuth,
+	asyncHandler( async (req, res) =>{
 	const collectionId = await parseInt(req.params.id, 10);
 
 	console.log('hello from the name edit page for ', collectionId);
+
+	//take in user input
+	
+
 
 	res.redirect('/collections/edit');
 }));

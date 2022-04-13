@@ -87,16 +87,15 @@ h2{
 
 
 #edit-content-div {
-    width: 50%;
+    width: 60%;
     margin: 0px auto;
     margin-top: 38px;
 }
 #delete-col{
     width: 15%;
-    
 }
 #name-col{
-    width: 75%;
+    width: 65%;
 }
 #rename-col{
     width: 20%;
@@ -113,11 +112,12 @@ h2{
     align-items: center;
 }
 #new-collection-input{
+    margin-left: 15px;
     width: 70%;
     height: 24px;
 }
 #add-collection-button, .btn-rename{
-    padding: 5px;
+    padding: 3px;
     font-size: smaller;
 }
 
@@ -134,4 +134,31 @@ h2{
 .btn-delete:hover{
     background-color: var(--delete1);
     color: white;
+}
+
+.div-errors {
+  border: 1px solid var(--error2);
+  border-radius: 10px;
+  background-color: var(--error1);
+  margin: 0 auto;
+  margin-bottom: 38px;
+  width: 60%;
+}
+.div-errors p {
+    font-size: smaller;
+    margin-left: 30px;
+}
+/* .div-errors ul {
+  padding: 0px 20px;
+} */
+
+.div-errors li {
+    margin-left: 30px;
+    margin-bottom: 7px;
+    font-size: smaller;
+    color: var(--error3);
+}
+
+.left{
+    text-align: left;
 }

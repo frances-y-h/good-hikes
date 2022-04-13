@@ -10,11 +10,11 @@ block content
     
     #edit-content-div
         h2.center Edit Collections
-        +validationErrorSummary(errors)
         form#form-add-collection(method="post" action="/collections/edit/new")
             input(type='hidden' name='_csrf' value=csrfToken)
             input#new-collection-input(name="collectionname" required placeholder="Add Collection name" value=collectionname)
             button.btn#add-collection-button(type="submit") Add Collection
+        +validationErrorSummary(errors)
         table 
             colgroup
                 col#delete-col
@@ -23,7 +23,7 @@ block content
             thead
                 tr.hike-row
                     th Delete 
-                    th Collection Name
+                    th.left Collection Name
                     th 
                 tbody 
                     each collection in collections 
