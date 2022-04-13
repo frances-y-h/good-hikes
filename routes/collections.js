@@ -85,5 +85,49 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 }));
 
 
+router.get('/edit', requireAuth, asyncHandler( async(req, res) => {
+
+	const userId = parseInt(req.session.auth.userId, 10);
+
+	//grab collections to display list on left column
+	const userCollections = await db.Collection.findAll({
+		where: {
+			userId: userId,
+		},
+		include: db.Hike,
+	});
+
+	//extract the current collectionId from the url
+	const collectionId = await parseInt(req.params.collectionId, 10);
+
+	//extract the name of the current collection for
+	// the header over the list of hikes in collection page
+	const currentCollection = await db.Collection.findByPk(collectionId);
+	const collectionName = currentCollection.name;
+
+	//pull all hikes to display, filter by collection ID
+	// include referenced tables
+	const displayHikes = await db.Hike.findAll({
+		include: [
+			db.CityPark,
+			db.Difficulty,
+			db.RouteType,
+			db.State,
+			{
+				model: db.Collection,
+				where: collectionId,
+			},
+		],
+	});
+
+	console.log(userCollections);
+
+	res.render("collection-edit", {
+		collectionName,
+		userCollections,
+		displayHikes,
+	});
+
+}));
 
 module.exports = router;
