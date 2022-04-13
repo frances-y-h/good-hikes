@@ -5,7 +5,33 @@ append head
   link(rel="stylesheet" href="/stylesheets/index.css")
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
-
 block content
-  h1= title
-  p Welcome to your Project Skeleton
+  div.home-banner
+    h1 #{title}
+  div.home-page
+    h2 Top Rated Hikes in USA
+    div.top-rated-wrap
+      each hike, index in topRatedHikes
+        div.top-rated-card(id=`hikeId-${hike.id}`)
+          div.top-rated-card-img(style=`background-image: url('${hike.imgUrl}'); border-top-right-radius: 10px;border-top-left-radius: 10px;`)
+            div.top-rating Top #{index + 1}
+            div.top-rated-card-title #{hike.name}
+          div.top-rated-description
+            div.top-rated-description-wrap
+              div.top-rated-level-length
+                div.top-rated-location #{hike.cpname}, #{hike.state}
+                div.hike-level #{hike.level}
+                div.top-rated-length Length #{hike.length} mi
+              div.top-rated-stars
+                div.rating #{hike.avgrating.toFixed(1)}
+                div.stars
+                  span.star-sprite(style=`width:${hike.avgrating/5*100}%`)
+  div.directories Directories
+    div.directory-list
+      each directory in directories
+          div.directory-trails
+            if directory.Hikes.length > 0
+              div: a(href=`/search?query=${directory.state}`) #{directory.state}
+              div.directory-trail #{directory.Hikes.length} Trails
+            else
+              div #{directory.state}

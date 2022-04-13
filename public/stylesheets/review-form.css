@@ -1,5 +1,5 @@
 .bg-modal {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
@@ -12,6 +12,7 @@
 }
 
 #review-form {
+    z-index: 3;
     width: 520px;
     height: fit-content;
     opacity: 1;
@@ -21,6 +22,10 @@
 #review-form.hidden,
 .bg-modal.hidden {
     display: none;
+}
+
+#review-form label {
+    margin-bottom: 7px;
 }
 
 .form-star-rating {
@@ -47,4 +52,29 @@ textarea {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+}
+
+#dateHike {
+    width: 40%;
+    box-sizing: border-box;
+    outline: 0;
+    padding: 0.25rem;
+    position: relative;
+    background: url(/images/calendar.png);
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: 95%;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
 }

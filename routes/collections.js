@@ -75,7 +75,7 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 		});
 		
 		// console.log(userCollections);
-		console.log('/////****/////*****/// */ */');
+		// console.log('/////****/////*****/// */ */');
 
 
 		res.render("collection", {
@@ -98,7 +98,6 @@ router.get('/edit', csrfProtection, requireAuth, asyncHandler( async(req, res) =
 		},
 	});
 
-	// console.log(collections[0]);
 
 	res.render("collection-edit", {
 		collections,

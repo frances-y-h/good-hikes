@@ -1,0 +1,53 @@
+extends layout
+
+
+block content
+  link(rel='stylesheet' href='/stylesheets/search.css')
+  script(src="/javascripts/search.js")
+  main
+    h1#search-header Advanced Search
+    div#adv-search-container
+      form(action='/search' method='get' id='adv-search-form')
+        div#adv-search-input-container
+          input#adv-search-input(type="text" name="query" placeholder="Search Hikes" value=searchQuery)
+        button#adv-search-button.btn(type='submit') Search
+            //-   i(class='fa fa-search')
+      ul.search-toggles
+        li.toggle#sort Sort
+            label(for="easy")
+                input.checkbox(type="checkbox" id="easy" name="difficulty" value="test")
+            //- label(for="")
+            //-     input(type="checkbox") Easy
+        li.toggle#difficulty Difficulty
+        li.toggle#length Length
+        li.toggle#elevation  Elevation Gain
+        li.toggle#routeType Route Type
+        li.toggle#rating Rating
+        li.toggle#suitabilityTags Suitability Tags
+        li.toggle#attractionTags Attraction Tags
+    h1.hike-header Hike Search Results
+    if hikes.length > 0
+      div.hike-list
+        each hike in hikes
+          a.hike-card(href=`hikes/${hike.id}`)
+            div.hike-img(style=`background-image: url('${hike.imgUrl}'); border-top-left-radius: 10px; border-top-right-radius: 10px; background-position: center; background-size: cover;`)
+            div.card-text
+              div.hike-name-location
+                div.hike-name #{hike.name}
+                div.hike-location #{hike.CityPark.name}, #{hike.State.state}
+              div.hike-level-review
+                div.hike-level #{hike.Difficulty.level}
+                div.hike-stars
+                  span.star-sprite(style=`width:${hike.avgReviewPtg}%`)
+                div.hike-avg-review #{hike.avgReview} (#{hike.reviewCount})
+              div.hike-length-time
+                div.hike-length #{hike.length} mi •
+                div.hike-time Est. Time #{hike.length}
+                //- div
+                //-   div.hike-key-title Elevation gain:
+                //-   div.hike-elevation #{hike.elevationChange} ft
+                //- div
+                //-   div.hike-key-title Route type
+                //-  div.hike-key-detail #{hike.RouteType.name}
+    else
+      p No results found
