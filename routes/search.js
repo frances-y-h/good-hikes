@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { asyncHandler } = require("./utils");
 const db = require("../db/models");
+// const { sequelize } = require("../db/models");
 
 //Get the Search Page
 router.get(
@@ -24,22 +25,31 @@ router.get(
             ],
         });
 
-        console.log(hikes[0].id);
+        //grab average rating from each hike given a list of hikeIds
+        const sql = `SELECT "hikeId", round(avg(rating),1) as avg
+        FROM "Reviews"
+        WHERE "hikeId" IN (:ids)
+        GROUP BY "hikeId"`;
 
-        //grab average rating from each hike
+        const hikeIds = hikes.map((hike) => {
+            return hike.id;
+        });
+
+        //returns array of objects
+        //https://sequelize.org/docs/v6/core-concepts/raw-queries/
+        const avgReviews = await db.sequelize.query(sql, {
+            replacements: { ids: hikeIds },
+            type: db.sequelize.QueryTypes.SELECT, //tells sequel to only return the result, no metadata
+        });
+
+        const avgReviewsMap = avgReviews.reduce((prev, curr) => {
+            prev[curr.hikeId] = curr.avg;
+            return prev;
+        }, {});
+
         for (let hike of hikes) {
-            const reviews = await db.Review.findAll({
-                where: { hikeId: `${hike.id}` },
-            });
-            let avgReview = 0;
-            for (let review of reviews) {
-                avgReview += review.rating;
-            }
-
-            avgReview = (avgReview / reviews.length).toFixed(1);
-            let avgReviewPtg = (avgReview / 5) * 100;
-            hike.avgReview = avgReview;
-            hike.avgReviewPtg = avgReviewPtg;
+            hike.avgReview = avgReviewsMap[hike.id];
+            hike.avgReviewPtg = avgReviewsMap[hike.id] * 20;
         }
 
         res.render("search", {
