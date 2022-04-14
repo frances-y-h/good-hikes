@@ -1,45 +1,93 @@
 extends layout
-
-
+include utils.pug
 block content
   link(rel='stylesheet' href='/stylesheets/search.css')
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
   script(src="/javascripts/search.js")
   main
+
     h1#search-header Advanced Search
     div#adv-search-container
-      form(action='/search' method='get' id='adv-search-form')
-        div#adv-search-input-container
-          input#adv-search-input(type="text" name="query" placeholder="Search Hikes" value=searchQuery)
-        button#adv-search-button.btn(type='submit') Search
+      div#adv-search-bar
+        form(action='/search' method='get' id='adv-search-form')
+          div#adv-search-input-container
+            input#adv-search-input(type="text" name="query" placeholder=searchQuery)
+          button#adv-search-button.btn(type='submit') Search
             //-   i(class='fa fa-search')
-      ul.search-toggles
-        li.toggle#sort Sort
-            label(for="easy")
-                input.checkbox(type="checkbox" id="easy" name="difficulty" value="test")
-            //- label(for="")
-            //-     input(type="checkbox") Easy
-        li.toggle#difficulty Difficulty
-        li.toggle#length Length
-        li.toggle#elevation  Elevation Gain
-        li.toggle#routeType Route Type
-        li.toggle#rating Rating
-        li.toggle#suitabilityTags Suitability Tags
-        li.toggle#attractionTags Attraction Tags
+
+      div#search-toggles
+        +dropDown("sort", "Sort")
+          +radio("alphabetical","sort","alphabetical","Alphabetical")
+          +radio("popular","sort","popular","Most popular")
+          +radio("shortest","sort","length","Shortest Length")
+          +radio("difficulty","sort","difficulty","Difficulty")
+        +dropDown("difficulty", "Difficulty")
+          +checkbox("easy","difficulty","easy","Easy")
+          +checkbox("moderate","difficulty","moderate","Moderate")
+          +checkbox("hard","difficulty","hard","Hard")
+        +dropDown("length", "Length")
+          //- slider 0 --> 50+ mi
+          +range("length","0","50","50", "length", "0 mi", "50+ mi")
+        +dropDown("elevation", "Elevation Gain")
+          //- slider 0 --> 5000+ ft
+          +range("elevation","0","5000","5000", "elevationChange", "0 ft", "5000+ ft")
+        +dropDown("routeType", "Route Type")
+          +checkbox("loop","routeType","1","Loop")
+          +checkbox("out-back","routeType","2","Out & back")
+          +checkbox("Point-point","routeType","3","Point to point")
+        +dropDown("rating", "Rating")
+          div
+            label(for=`rating-range`)
+              div.range-container
+                div#rating-label Any
+                div.input-range-container#input-range-container-rating
+                  input.range(type="range" min=1 max=4 step=1 value=4 id=`rating-range` name="rating")
+                div.range-labels#rating-range-labels
+                  span 0+
+                  span 3
+                    span.rating-dd-star &#9733
+                    //- span.rating-dd-star &#9734 => unfilled star
+                  span 4
+                    span.rating-dd-star &#9733
+                  span 4.5
+                    span.rating-dd-star &#9733
+        +dropDown("suitability", "Suitability")
+          //- 2	Fee, 11	Parking, 13	Paved, 12	Restrooms, 14	No dogs, 15	Dogs Allowed
+          +checkbox("fees","suitability","2","Fees")
+          +checkbox("parking","suitability","11","Parking")
+          +checkbox("paved","suitability","13","Paved")
+          +checkbox("restrooms","suitability","12","Restrooms")
+          +checkbox("no-dogs","suitability","14","No dogs")
+          +checkbox("dogs-allowed","suitability","15","Dogs allowed")
+        +dropDown("attractions", "Attractions")
+          //- 1	Backpacking, 3	Forest, 4	Lake, 5	No shade, 6	River,
+          //- 7	Views, 8	Waterfall, 10	Wildlife, 9	Wildflowers
+          +checkbox("backpacking","attractions","1","Backpacking")
+          +checkbox("forest","attractions","3","Forest")
+          +checkbox("lake","attractions","4","Lake")
+          +checkbox("no-shade","attractions","5","No shade")
+          +checkbox("river","attractions","6","River")
+          +checkbox("views","attractions","7","Views")
+          +checkbox("waterfall","attractions","8","Waterfall")
+          +checkbox("wildlife","attractions","10","Wildlife")
+          +checkbox("wildflowers","attractions","9","Wildflowers")
+
     h1.hike-header Hike Search Results
     if hikes.length > 0
       div.hike-list
         each hike in hikes
           a.hike-card(href=`hikes/${hike.id}`)
             div.hike-img(style=`background-image: url('${hike.imgUrl}'); border-top-left-radius: 10px; border-top-right-radius: 10px; background-position: center; background-size: cover;`)
+              div.hike-name #{hike.name}
             div.card-text
               div.hike-name-location
-                div.hike-name #{hike.name}
                 div.hike-location #{hike.CityPark.name}, #{hike.State.state}
               div.hike-level-review
                 div.hike-level #{hike.Difficulty.level}
                 div.hike-stars
                   span.star-sprite(style=`width:${hike.avgReviewPtg}%`)
-                div.hike-avg-review #{hike.avgReview} (#{hike.reviewCount})
+                div.hike-avg-review (#{hike.reviewCount})
+                  //- #{hike.avgReview}
               div.hike-length-time
                 div.hike-length #{hike.length} mi •
                 div.hike-time Est. Time #{hike.length}
