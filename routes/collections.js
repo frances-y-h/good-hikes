@@ -4,7 +4,6 @@ const { asyncHandler, csrfProtection } = require("./utils");
 const db = require("../db/models");
 const { requireAuth } = require("../auth");
 const { check, validationResult } = require("express-validator");
-const { NONAME } = require("dns");
 
 // Collections page
 
