@@ -373,7 +373,23 @@ router.post(
 // /collections/ API
 router.post(
     "/",
-    asyncHandler(async (req, res) => {})
+    collectionValidator,
+    asyncHandler(async (req, res) => {
+        const userId = req.session.auth.userId;
+        const { collectionname } = req.body;
+
+        const validationErrors = validationResult(req);
+        if (validationErrors.isEmpty()) {
+            res.json({
+                message: "Success",
+            });
+        } else {
+            const errors = validationErrors.array().map((err) => err.msg);
+            res.json({
+                message: errors,
+            });
+        }
+    })
 );
 
 module.exports = router;

@@ -70,13 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const res = await fetch(`/collections`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(newCollectionName),
+                body: JSON.stringify({ collectionname: newCollectionName }),
             });
             const data = await res.json();
             if (data.message === "Success") {
-            } else if (data.message === "Duplicate") {
-                addNewCollectionTitle.innerText =
-                    "Collection Name already exists";
+                // Append new collection to dropdown menu
             } else {
                 addNewCollectionTitle.innerText =
                     "Something went wrong, try again.";
