@@ -271,76 +271,30 @@ router.post(
 
 //API route to delete a collection with hikes in it
 router.delete('/:collectionId(\\d+)', asyncHandler(async (req, res) => {
-
-	//inside here we find all hike colelctions tied to the collection id
-
-	// if the length is none, party on wayne, delete the collection only
-
-	// if there is something in that table, delete that first
-	// then delete the line from collection
-
-	//then party on garth
-
-
-
+	
+	//pull the collectionId out of the URL
 	const collectionId = parseInt(req.params.collectionId, 10);
+
+	//find all hike collections tied to the collection id
+	const hikeCollections = await db.JoinHikeCollection.findAll({
+			where: {
+				collectionId: collectionId,
+			},
+		});
+
+	//if the array has any length, the dependencies will need to be destroyed first
+	if (hikeCollections.length > 0) {
+		//need to delete all of the many to many relationship rows
+			//inside JoinHikeCollection
+		await db.JoinHikeCollection.destroy({ where: {collectionId} });
+	}
+	// once all dependencies are destroyed, delete the collection from the database
 
 	await db.Collection.destroy({ where: { id: collectionId } });
 
-	res.json({message: 'Success' });
+	res.json({message: 'Success' });	
 
-	// res.redirect("/collections/edit");
-	
-
-}))
-
-/*
-// API for adding hike to specific user's collections
-router.post(
-    "/:hikeId(\\d+)/collections",
-    asyncHandler(async (req, res) => {
-        const hikeId = parseInt(req.params.hikeId, 10);
-        // get the array with collectionId and whether checked or not
-        const collectionsToUpdate = req.body;
-
-        // Itterate through the array and update the JoinHikeCollection table according to value
-        for (let i = 0; i < collectionsToUpdate.length; i++) {
-            let data = collectionsToUpdate[i];
-            let collectionId = parseInt(data[0], 10);
-            let value = data[1];
-
-            const hikeCollection = await db.JoinHikeCollection.findOne({
-                where: {
-                    hikeId,
-                    collectionId,
-                },
-            });
-
-            // if value === true, make sure there is the record in table, else otherwize
-            if (value) {
-                if (!hikeCollection) {
-                    await db.JoinHikeCollection.create({
-                        hikeId,
-                        collectionId,
-                    });
-                }
-            } else {
-                if (hikeCollection) {
-                    await hikeCollection.destroy();
-                }
-            }
-        }
-
-        res.json({
-            message: "Success",
-        });
-    })
-);
-
-*/
-
-
-
+}));
 
 
 // /collections/ API
