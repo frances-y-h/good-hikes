@@ -185,25 +185,34 @@ router.patch("/:id(\\d+)",
 	collectionValidator,
 	asyncHandler(async (req, res) => {
 
-		const { name } = req.body;
+		const { collectionname } = req.body;
 		const collectionId = await parseInt(req.params.id, 10);
 
 		console.log("-------hello from the name edit page for ", collectionId);
 
 		const collection = await db.Collection.findByPk(collectionId);
 
-		collection.name = name;
-		await collection.save();
+		//patch the name
+		collection.name = collectionname;
 
-		res.json({
-			message: 'Success',
-			collection
-		});
+		const validationErrors = validationResult(req);
 
-		//take in user input
+		if (validationErrors.isEmpty()) {
+			await collection.save();
+	
+			res.json({
+				message: 'Success',
+				collection
+			});
+		} else {
+			const errors = validationErrors.array().map(err => err.msg);
 
-		// res.redirect("/collections/edit");
-
+			res.json({
+				message: "Error",
+				errors,
+				collection
+			})
+		}
 
 	})
 );

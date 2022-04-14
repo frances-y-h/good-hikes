@@ -16,6 +16,7 @@ block content
             input#new-collection-input(name="collectionname" required placeholder="Add Collection name" value=collectionname)
             button.btn#add-collection-button(type="submit") Add Collection
         +validationErrorSummary(errors)
+        div.update-name-errors
         table 
             colgroup
                 col#delete-col
@@ -40,8 +41,8 @@ block content
                                     input(type='hidden' name='_csrf' value=csrfToken)
                                     #rename-button-div
                                         button.btn.btn-table.btn-rename(id=`${collection.id}-rename-button`) Rename
-                                        button.btn.btn-table.btn-update.hidden(id=`${collection.id}-update-button`) Update
-                                        button.btn.btn-table.btn-cancel.hidden(id=`${collection.id}-cancel-button`) Cancel
+                                        button.btn.btn-table.btn-update.hidden(id=`${collection.id}-update-button` style="margin-right:0px;") Update
+                                        button.btn.btn-table.btn-cancel.hidden(id=`${collection.id}-cancel-button` style="margin-left:8px;") Cancel
         
         //- .bg-modal.hidden
         //-     form(id='rename-form' class="hidden form-control")
