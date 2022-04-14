@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const renameInputs = document.querySelectorAll(".input-rename");
     const pNames = document.querySelectorAll(".p-table");
 
+    //grab update error div to reset inner HTML upon button clicks
+    const updateError = document.querySelector(".update-name-errors");
+
     //create button listener events for each of the rows in the table
     for (let i = 0; i < renameBtns.length; i++) {
 
@@ -15,6 +18,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             //prevent form submission
             renameEvent.preventDefault();
 			
+
             //on rename button click show
                 //input form
                 //update and cancel buttons
@@ -32,17 +36,24 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
             //cancel buttons will return the form to original state
             cancelBtns[i].addEventListener("click", (cancelEvent) => {
-                cancelEvent.preventDefault();
-                updateBtns[i].classList.add("hidden");
-                cancelBtns[i].classList.add("hidden");
-                renameInputs[i].classList.add("hidden");
-                renameBtns[i].classList.remove("hidden");
-                pNames[i].classList.remove("hidden");
-            });
+				cancelEvent.preventDefault();
+
+				//clears edit name error message
+				updateError.innerHTML = ``;
+
+				updateBtns[i].classList.add("hidden");
+				cancelBtns[i].classList.add("hidden");
+				renameInputs[i].classList.add("hidden");
+				renameBtns[i].classList.remove("hidden");
+				pNames[i].classList.remove("hidden");
+			});
             
 
             updateBtns[i].addEventListener("click", async (upEvent) => {
                 upEvent.preventDefault();
+
+                //clears edit name error message
+                updateError.innerHTML = ``;
                 
                 //pull the user inputted name
                 const newName = renameInputs[i].value;
@@ -75,13 +86,18 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                 } else {
                     //if response was unsuccessful
                     
-                    const updateError = document.querySelector(".update-name-errors");
+                    // const updateError = document.querySelector(".update-name-errors");
 
                     //fill form back in
                     renameInputs[i].value = currentName;
-                    updateError.innerHTML = data.errors;
+                    updateError.innerHTML = `<div class="div-errors">
+                    <p> The following error(s) occurred:</p>
+                    <ul>
+                        <li> ${data.errors}</li>
+                    </ul>
+                    </div>
+                    `;
                 }
-
 
             });
 		})
