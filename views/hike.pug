@@ -137,4 +137,7 @@ block content
                 div.dropdown-bottom#update-collect Update Collection
               div.update-status
           else
-            div Signup to use our collections
+            div.no-dropdown-login
+              div
+                a.btn.btn-nav(id="user-login" href='/users/login') Login
+              div.update-status Login to use our collections

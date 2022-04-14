@@ -302,10 +302,12 @@ input[type="checkbox"]:checked::before {
     padding-left: 10px;
 }
 
-.dropdown-divider {
+.dropdown-divider,
+.no-dropdown-login {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 5px;
 }
 
