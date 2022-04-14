@@ -37,12 +37,15 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 	// Get specific collections
 	router.get('/:collectionId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
 		
+
+		
+		
 		//once redirected, or sent to a collection page
 		//user is authorized with requireAuth
 		
 		//grab userId
 		const userId = parseInt(req.session.auth.userId, 10);
-
+		
 		//grab collections to display list on left column
 		const userCollections = await db.Collection.findAll({
 			where: {
@@ -50,7 +53,7 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			},
 			include: db.Hike,
 		});
-
+		
 		//extract the current collectionId from the url
 		const collectionId = await parseInt(req.params.collectionId, 10);
 		
@@ -58,7 +61,7 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 		// the header over the list of hikes in collection page
 		const currentCollection = await db.Collection.findByPk(collectionId);
 		const collectionName = currentCollection.name;
-
+		
 		//pull all hikes to display, filter by collection ID
 		// include referenced tables
 		const displayHikes = await db.Hike.findAll({
@@ -74,8 +77,31 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 			],
 		});
 		
-		// console.log(userCollections);
-		// console.log('/////****/////*****/// */ */');
+		//iterate through all the hikes in the array
+		//add the average rating to them for display in collections page
+
+		for (let i = 0; i < displayHikes.length; i++) {
+
+			hikeId = displayHikes[i].id;
+			//query for gathering all reviews from selected hikeId
+			const reviews = await db.Review.findAll({
+			  where: { hikeId },
+			  include: [db.User],
+			  limit: 10,
+			  order: [["createdAt", "DESC"]]
+			});
+		
+			//review calculation
+			let avgReview = 0;
+			for (let review of reviews) {
+			  avgReview += review.rating;
+			}
+			avgReview = (avgReview / reviews.length).toFixed(1);
+			let avgReviewPtg = (avgReview / 5) * 100;
+
+			//apply a new property to each hike object in the array
+			displayHikes[i].avgReviewPtg = avgReviewPtg;
+		};
 
 
 		res.render("collection", {

@@ -1,6 +1,6 @@
 #collection-grid{
     display: grid;
-    grid-template-columns: 2fr 3fr 9fr 3fr;
+    grid-template-columns: 1fr 2fr 9fr 1fr;
     grid-template-areas:
         "a b c d";
         margin-top: 38px;
@@ -43,7 +43,8 @@ margin-top: 38px;
     width: 35px;
     height: 40px;
     border-radius: 5px;
-    margin: 3px;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .hike-row {
@@ -200,41 +201,21 @@ h2{
 }
 
 
-
-/* modal attempt */
-
-/* #rename-collection-input{
-    width: 100%;
+.hike-stars {
+    background: url("/images/star-rating-sprite.png") repeat-x;
+    font-size: 0;
+    height: 20px;
+    line-height: 0;
+    overflow: hidden;
+    text-indent: -999em;
+    width: 100px;
     margin: 0 auto;
-    height: 34px;
-    border: 1px solid var(--dark1);
-    border-radius:16px;
-    padding: 15px;
-} */
-
-.bg-modal {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    top: 0;
-    left: 0;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-#rename-form {
-    z-index: 3;
-    width: 380px;
-    height: fit-content;
-    opacity: 1;
-    background-color: white;
+.star-sprite {
+    background: url("/images/star-rating-sprite.png") repeat-x;
+    background-position: 0 100%;
+    float: left;
+    height: 20px;
+    display: block;
 }
-
-#rename-form.hidden,
-.bg-modal.hidden {
-    display: none;
-}
-
