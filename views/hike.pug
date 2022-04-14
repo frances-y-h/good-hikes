@@ -123,10 +123,11 @@ block content
               button.hike-coll-arrow
                 i.fa-solid.fa-angle-down
               div.dropdown-menu.hidden
-                each collection in collections
-                  div.dropdown-item
-                    input.coll-ckbx(type="checkbox" checked=collection.inCollection id=`collectionId-${collection.id}`)
-                    label.coll-label(for=`collectionId-${collection.id}`) #{collection.name}
+                div appaned
+                  each collection in collections
+                    div.dropdown-item
+                      input.coll-ckbx(type="checkbox" checked=collection.inCollection id=`collectionId-${collection.id}`)
+                      label.coll-label(for=`collectionId-${collection.id}`) #{collection.name}
                 div.dropdown-divider
                   div.add-collection-title Add New Collection
                   div.add-collection-frm

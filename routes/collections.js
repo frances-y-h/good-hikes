@@ -380,8 +380,13 @@ router.post(
 
         const validationErrors = validationResult(req);
         if (validationErrors.isEmpty()) {
+            const newCollection = await db.Collection.create({
+                userId,
+                name: collectionname,
+            });
             res.json({
                 message: "Success",
+                newCollection,
             });
         } else {
             const errors = validationErrors.array().map((err) => err.msg);

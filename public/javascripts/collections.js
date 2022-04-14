@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // };
 
         // Click on div and will update checkbox, instead of having to click exactly on the box
-        const checkBoxDivs = document.querySelectorAll(".dropdown-item");
+        const checkBoxDivs = document.getElementsByClassName("dropdown-item");
         for (let j = 0; j < checkBoxDivs.length; j++) {
             let checkBoxDiv = checkBoxDivs[j];
             checkBoxDiv.addEventListener("click", (event) => {
@@ -74,6 +74,23 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             const data = await res.json();
             if (data.message === "Success") {
+                const collectionId = data.newCollection.id;
+                const collectionName = data.newCollection.name;
+
+                // get the dropdown divs
+                const newDropdownDiv = checkBoxDivs[0].cloneNode(true);
+
+                // Set correct ID and value for input and label
+                newDropdownDiv.children[0].id = `collectionId-${collectionId}`;
+                newDropdownDiv.children[1].id = `collectionId-${collectionId}`;
+                newDropdownDiv.children[1].setAttribute(
+                    "for",
+                    `collectionId-${collectionId}`
+                );
+                newDropdownDiv.children[1].innerText = collectionName;
+                console.log(newDropdownDiv);
+                checkBoxDivs.append(newDropdownDiv);
+
                 // Append new collection to dropdown menu
             } else {
                 addNewCollectionTitle.innerText =
