@@ -51,7 +51,7 @@
 }
 
 .hike-stars,
-.stars  {
+.stars {
     background: url("/images/star-rating-sprite.png") repeat-x;
     font-size: 0;
     height: 20px;
@@ -108,8 +108,8 @@
 .hike-side {
     grid-column: 4/5;
     padding-left: 20px;
-    position: sticky;
-    top: 40px;
+    background-color: white;
+    z-index: 0;
 }
 
 .hike-tags-wrap {
@@ -131,7 +131,7 @@
     background-color: var(--mid1);
     border-radius: 10px;
     color: white;
-    font-size: 10px;
+    font-size: 12px;
     padding: 5px 10px;
 }
 
@@ -145,12 +145,6 @@
 
 .hike-tag:nth-child(4n) {
     background-color: var(--mid4);
-}
-
-.hike-add-collection {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .rating-table-add-review {
@@ -193,7 +187,7 @@
 }
 
 .stars {
-  margin: 0;
+    margin: 0;
 }
 
 .username {
@@ -206,6 +200,188 @@
 .dateHike {
     font-size: smaller;
     color: var(--dark5);
+}
+
+.hike-add-collection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+}
+
+.hike-collection-wrap {
+    position: relative;
+}
+
+.hike-coll-want,
+.hike-coll-arrow {
+    background-color: var(--bar);
+    font-size: 14px;
+    color: var(--dark4);
+    border: 1px solid #ecd944;
+    padding: 7px 15px;
+    transition: all 0.5s;
+}
+.hike-coll-want {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 130px;
+}
+
+.hike-coll-arrow {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.hike-coll-want:hover,
+.hike-coll-arrow:hover {
+    background-color: var(--bar);
+    filter: brightness(90%);
+}
+
+.checkMk {
+    color: var(--mid1);
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    transition: all 0.2s;
+    z-index: 3;
+    width: 172px;
+}
+.dropdown-item,
+.dropdown-bottom,
+.dropdown-divider {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 5px 5px;
+    background-color: var(--light3);
+    border-bottom: 1px dashed var(--bar);
+    transition: all 0.5s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-divider:hover {
+    background-color: var(--light3);
+    filter: brightness(110%);
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 1px;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 1em;
+    height: 1em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--mid1);
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+.coll-label {
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.dropdown-divider,
+.no-dropdown-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.add-collection-title {
+    font-size: 10px;
+}
+
+.add-collection-frm {
+    display: flex;
+}
+
+.add-collection-input {
+    width: 125px;
+    border-radius: 10px;
+    border: 1px solid var(--mid1);
+    background-color: var(--light6);
+    padding: 3px 5px;
+}
+
+.btn-sm {
+    margin: 0px 5px;
+    padding: 3px 3px;
+    font-size: 12px;
+    font-weight: regular;
+}
+
+.dropdown-bottom {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bar);
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.dropdown-bottom:hover {
+    filter: brightness(110%);
+}
+
+.dropdown-divider {
+    border-top: 1px solid var(--bar);
+    border-bottom: 1px solid var(--bar);
+    height: 50px;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.bg-modal3 {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 2;
+}
+
+.update-status {
+    padding: 5px;
+    font-size: 12px;
+    text-align: center;
+    height: 20px;
+}
+
+@media screen and (max-width: 850px) {
+    .hike-side {
+        top: 140px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -225,8 +401,8 @@
 
     .hike-side {
         padding: 0px 0px 20px 0px;
-        top: 0px;
-        background-color: white;
+        position: unset;
+        width: 100%;
     }
 
     .hike-tags-wrap {
