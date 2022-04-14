@@ -5,15 +5,15 @@ block content
   link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
   script(src="/javascripts/search.js")
   main
-
-    h1#search-header Advanced Search
-    div#adv-search-container
-      div#adv-search-bar
-        form(action='/search' method='get' id='adv-search-form')
-          div#adv-search-input-container
-            input#adv-search-input(type="text" name="query" placeholder=searchQuery)
-          button#adv-search-button.btn(type='submit') Search
-            //-   i(class='fa fa-search')
+    div#search-header-container
+      h1#search-header Advanced Search
+      div#adv-search-container
+        div#adv-search-bar
+          form(action='/search' method='get' id='adv-search-form')
+            div#adv-search-input-container
+              input#adv-search-input(type="text" name="query" placeholder=searchQuery)
+            button#adv-search-button.btn(type='submit') Search
+              //-   i(class='fa fa-search')
 
       div#search-toggles
         +dropDown("sort", "Sort")
@@ -72,30 +72,31 @@ block content
           +checkbox("wildlife","attractions","10","Wildlife")
           +checkbox("wildflowers","attractions","9","Wildflowers")
 
-    h1.hike-header Hike Search Results
+      h1.hike-header Hike Search Results
     if hikes.length > 0
-      div.hike-list
-        each hike in hikes
-          a.hike-card(href=`hikes/${hike.id}`)
-            div.hike-img(style=`background-image: url('${hike.imgUrl}'); border-top-left-radius: 10px; border-top-right-radius: 10px; background-position: center; background-size: cover;`)
-              div.hike-name #{hike.name}
-            div.card-text
-              div.hike-name-location
+      div#hike-list-container
+        div#hike-list-inner-container
+          each hike in hikes
+            a.hike-card(href=`hikes/${hike.id}`)
+              div.hike-card-img(style=`background-image: url('${hike.imgUrl}'); border-top-left-radius: 10px; border-top-right-radius: 10px; background-position: center; background-size: cover;`)
+                div.hike-name #{hike.name}
+              div.hike-card-text
                 div.hike-location #{hike.CityPark.name}, #{hike.State.state}
-              div.hike-level-review
-                div.hike-level #{hike.Difficulty.level}
-                div.hike-stars
-                  span.star-sprite(style=`width:${hike.avgReviewPtg}%`)
-                div.hike-avg-review (#{hike.reviewCount})
-                  //- #{hike.avgReview}
-              div.hike-length-time
-                div.hike-length #{hike.length} mi •
-                div.hike-time Est. Time #{hike.length}
-                //- div
-                //-   div.hike-key-title Elevation gain:
-                //-   div.hike-elevation #{hike.elevationChange} ft
-                //- div
-                //-   div.hike-key-title Route type
-                //-  div.hike-key-detail #{hike.RouteType.name}
+                div.hike-level-rating
+                  div.hike-level #{hike.Difficulty.level}
+                  div.hike-rating-stars-container
+                    div.hike-rating-stars-gray
+                      span.hike-rating-stars-yellow(style=`width:${hike.avgReviewPtg}%`)
+                  div.hike-rating-count (#{hike.reviewCount})
+                    //- #{hike.avgReview}
+                div.hike-length-time
+                  div.hike-length #{hike.length} mi •
+                  div.hike-time Est. Time #{hike.length}
+                  //- div
+                  //-   div.hike-key-title Elevation gain:
+                  //-   div.hike-elevation #{hike.elevationChange} ft
+                  //- div
+                  //-   div.hike-key-title Route type
+                  //-  div.hike-key-detail #{hike.RouteType.name}
     else
       p No results found
