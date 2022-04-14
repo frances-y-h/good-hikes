@@ -224,6 +224,32 @@ router.post(
     })
 );
 
+// API route for deleting specific hike from collections
+router.delete(
+    "/:hikeId(\\d+)/collections",
+    asyncHandler(async (req, res) => {
+        const hikeId = parseInt(req.params.hikeId, 10);
+        const collectionId = req.body.collectionId;
+        console.log(req.body);
+        const hikeCollection = await db.JoinHikeCollection.findOne({
+            where: {
+                hikeId,
+                collectionId,
+            },
+        });
+        if (hikeCollection) {
+            await hikeCollection.destroy();
+            res.json({
+                message: "Success",
+            });
+        } else {
+            res.json({
+                message: "Something went wrong. Please try again",
+            });
+        }
+    })
+);
+
 router.post(
     "/:hikeId(\\d+)/reviews",
     requireAuth,

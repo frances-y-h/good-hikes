@@ -16,7 +16,7 @@ block content
           each hike, index in topRatedHikes
             div.top-rated-card(id=`hikeId-${hike.id}`)
               div.top-rated-card-img(style=`background-image: url('${hike.imgUrl}'); border-top-right-radius: 10px;border-top-left-radius: 10px;`)
-                div.top-rating Top #{index + 1}
+                div.top-rating # #{index + 1}
                 div.top-rated-card-title #{hike.name}
               div.top-rated-description
                 div.top-rated-description-wrap

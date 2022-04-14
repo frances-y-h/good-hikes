@@ -206,11 +206,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     padding: 20px 0px;
 }
 
-.hike-collection-wrap {
-    position: relative;
+.hike-add-collection-title {
+    width: 100%;
+    text-align: left;
+    padding-bottom: 20px;
 }
 
 .hike-coll-want,
@@ -219,7 +222,7 @@
     font-size: 14px;
     color: var(--dark4);
     border: 1px solid #ecd944;
-    padding: 7px 15px;
+    padding: 5px 10px;
     transition: all 0.5s;
 }
 .hike-coll-want {
@@ -372,7 +375,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .update-status {
-    padding: 5px;
+    padding: 20px 0px;
     font-size: 12px;
     text-align: center;
     height: 20px;
@@ -381,6 +384,9 @@ input[type="checkbox"]:checked::before {
 @media screen and (max-width: 850px) {
     .hike-side {
         top: 140px;
+    }
+    .hike-add-collection-title {
+        padding-bottom: 5px;
     }
 }
 
@@ -400,8 +406,7 @@ input[type="checkbox"]:checked::before {
     }
 
     .hike-side {
-        padding: 0px 0px 20px 0px;
-        position: unset;
+        padding: 0;
         width: 100%;
     }
 
@@ -412,5 +417,24 @@ input[type="checkbox"]:checked::before {
 
     .hike-tags-title {
         padding-right: 20px;
+    }
+
+    .hike-add-collection {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .hike-add-collection-title {
+        width: fit-content;
+        padding-right: 20px;
+        padding-bottom: 20px;
+    }
+    .hike-collection-wrap {
+        width: fit-content;
+        flex-wrap: nowrap;
+    }
+    .update-status {
+        padding: 0;
     }
 }
