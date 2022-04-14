@@ -1,14 +1,10 @@
 const addDeleteReviewEventHandler = (deleteReviewButton) => {
 
-    //event listeners on delete buttons
-
-    //if yes, then delete it
-    //fetch DELETE request to the database with reviewId
     //on the backend:
-        // find by pk review,
-        //   destroy it
-        // find 10 latest reviews
-        // send the response sucsessful + array of latest reviews
+    // find by pk review,
+    //   destroy it
+    // find 10 latest reviews
+    // send the response sucsessful + array of latest reviews
 
     // on the frontend, when the response is back:
     //grab reviews-container if do childNodes -- live collection
@@ -22,7 +18,7 @@ const addDeleteReviewEventHandler = (deleteReviewButton) => {
 
 
     //if no close the popup
-
+    const hikeId = document.querySelector('.hike-name').id.split("-")[1];
 
     deleteReviewButton.addEventListener('click', (event) => {
         event.preventDefault();
@@ -53,12 +49,19 @@ const addDeleteReviewEventHandler = (deleteReviewButton) => {
             }
         };
 
+        submitDeleteReviewButton.addEventListener("click", async (event) => {
 
+            event.preventDefault();
 
+            const res = await fetch(`/reviews/${reviewId}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ hikeId })
+            })
 
-
-
-
+            const data = await res.json();
+            console.log(data);
+        });
     });
 };
 
@@ -71,4 +74,5 @@ window.addEventListener('DOMContentLoaded', (e) => {
         let deleteReviewBtn = deleteReviewBtns[i];
         addDeleteReviewEventHandler(deleteReviewBtn);
     };
+
 });

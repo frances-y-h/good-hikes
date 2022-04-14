@@ -76,7 +76,6 @@ router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) =
     } else {
         //if review is not valid, send the errors to the frontend
         const errors = validationErrors.array().map(err => err.msg);
-        console.log(errors);
 
 
         //response to the frontend page,
@@ -88,7 +87,28 @@ router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) =
             reviewToUpdate
         });
     }
-}))
+}));
+
+router.delete('/:reviewId', asyncHandler(async (req, res) => {
+    const { hikeId } = req.body;
+
+    const reviewId = parseInt(req.params.reviewId, 10);
+    const reviewToDelete = await db.Review.findByPk(reviewId);
+
+    await reviewToDelete.destroy();
+
+    const reviewsUpdated = await db.Review.findAll({
+        where: { hikeId },
+        include: [db.User],
+        limit: 10,
+        order: [["createdAt", "DESC"]]
+    });
+
+    res.json({ message: 'Success',
+        reviewsUpdated
+    });
+
+}));
 
 
 module.exports = router;
