@@ -93,17 +93,25 @@ block content
         div.hike-add-collection
           if collections
             div.hike-collection-wrap
-              button.hike-coll-want Want To Hike
+              if collections[0].inCollection
+                button.hike-coll-want Want To Hike
+                  span.checkMk ✓
+              else
+                button.hike-coll-want Want To Hike
+                  span.checkMk
               button.hike-coll-arrow
                 i.fa-solid.fa-angle-down
-              div.dropdown-menu.hide
-                if collections
-                  each collection in collections
-                   div.dropdown-item
+              div.dropdown-menu.hidden
+                each collection in collections
+                  div.dropdown-item
                     input.coll-ckbx(type="checkbox" checked=collection.inCollection id=`collectionId-${collection.id}`)
                     label.coll-label(for=`collectionId-${collection.id}`) #{collection.name}
-                div.dropdown-divider Add New Collection
-                div.dropdown-bottom#add-collect Update Collection
+                div.dropdown-divider
+                  div.add-collection-title Add New Collection
+                  div.add-collection-frm
+                    input.add-collection-input(type="text" name="add-new-coll" id="add-new-coll")
+                    button.btn.btn-sm#add-collection Add
+                div.dropdown-bottom#update-collect Update Collection
               div.update-status
           else
             div Signup to use our collections

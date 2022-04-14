@@ -209,7 +209,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 20px 0px;
 }
 
 .hike-collection-wrap {
@@ -228,6 +228,7 @@
 .hike-coll-want {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    width: 130px;
 }
 
 .hike-coll-arrow {
@@ -241,10 +242,17 @@
     filter: brightness(90%);
 }
 
+.checkMk {
+    color: var(--mid1);
+    font-size: 12px;
+    padding-left: 5px;
+}
+
 .dropdown-menu {
     position: absolute;
     transition: all 0.2s;
     z-index: 1;
+    width: 172px;
 }
 .dropdown-item,
 .dropdown-bottom,
@@ -297,6 +305,34 @@ input[type="checkbox"]:checked::before {
     padding-left: 10px;
 }
 
+.dropdown-divider {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-collection-title {
+    font-size: 10px;
+}
+
+.add-collection-frm {
+    display: flex;
+}
+
+.add-collection-input {
+    width: 125px;
+    border-radius: 10px;
+    border: 1px solid var(--mid1);
+    background-color: var(--light6);
+    padding: 3px 5px;
+}
+
+.btn-sm {
+    margin: 0px 5px;
+    padding: 3px 3px;
+    font-size: 12px;
+    font-weight: regular;
+}
+
 .dropdown-bottom {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -316,9 +352,10 @@ input[type="checkbox"]:checked::before {
 .dropdown-divider {
     border-top: 1px solid var(--bar);
     border-bottom: 1px solid var(--bar);
+    height: 50px;
 }
 
-.hide {
+.hidden {
     opacity: 0;
     visibility: hidden;
 }
