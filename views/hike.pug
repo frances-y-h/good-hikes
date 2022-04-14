@@ -112,6 +112,7 @@ block content
             each tag in hike.Tags
               div.hike-tag #{tag.name}
         div.hike-add-collection
+          div.hike-add-collection-title Collections
           if collections
             div.hike-collection-wrap
               if collections[0].inCollection
@@ -134,7 +135,7 @@ block content
                   div.add-collection-frm
                     input.add-collection-input(type="text" name="add-new-coll" id="add-new-coll")
                     button.btn.btn-sm#add-collection Add
-                div.dropdown-bottom#update-collect Update Collection
+                div.dropdown-bottom#update-collect Update Collection(s)
               div.update-status
           else
             div.no-dropdown-login

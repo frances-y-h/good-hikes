@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const hikeId = document.querySelector(".hike-page").id.split("-")[1];
         const updateStatusDiv = document.querySelector(".update-status");
         const wantToHikeSpan = document.querySelector(".checkMk");
+        const checkBoxDivs = document.querySelectorAll(".dropdown-item");
+        const wantToHikeCkBx = checkBoxDivs[0].children[0];
 
         //Quick add "Want To Hike"
         const wantToBtn = document.querySelector(".hike-coll-want");
@@ -14,18 +16,37 @@ document.addEventListener("DOMContentLoaded", () => {
                 .querySelector(".coll-ckbx")
                 .id.split("-")[1];
             try {
-                const res = await fetch(`/hikes/${hikeId}/collections`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify([[collectionId, true]]),
-                });
-                const data = await res.json();
-                if (data.message === "Success") {
-                    updateStatusDiv.innerText = "Added to Want To Hike";
-                    wantToHikeSpan.innerText = "✓";
+                // if want to hike was not checked
+                if (!wantToHikeCkBx.checked) {
+                    const res = await fetch(`/hikes/${hikeId}/collections`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify([[collectionId, true]]),
+                    });
+                    const data = await res.json();
+                    if (data.message === "Success") {
+                        updateStatusDiv.innerText = "Added to Want To Hike";
+                        wantToHikeSpan.innerText = "✓";
+                        wantToHikeCkBx.checked = true;
+                    } else {
+                        updateStatusDiv.innerText =
+                            "Something went wrong. Please try again";
+                    }
                 } else {
-                    updateStatusDiv.innerText =
-                        "Something went wrong. Please try again";
+                    const res = await fetch(`/hikes/${hikeId}/collections`, {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ collectionId }),
+                    });
+                    const data = await res.json();
+                    if (data.message === "Success") {
+                        updateStatusDiv.innerText = "Removed Want To Hike";
+                        wantToHikeSpan.innerText = "";
+                        wantToHikeCkBx.checked = false;
+                    } else {
+                        updateStatusDiv.innerText =
+                            "Something went wrong. Please try again";
+                    }
                 }
             } catch (err) {
                 console.error(err);
@@ -42,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Click on div and will update checkbox, instead of having to click exactly on the box
-        const checkBoxDivs = document.querySelectorAll(".dropdown-item");
+
         for (let j = 0; j < checkBoxDivs.length; j++) {
             let checkBoxDiv = checkBoxDivs[j];
             let label = checkBoxDiv.children[1];
