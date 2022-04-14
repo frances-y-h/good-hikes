@@ -83,6 +83,11 @@ router.get(
             }
         }
 
+        //reset to default value if no query was entered
+        if (!searchQuery) {
+            searchQuery = "Search Hikes";
+        }
+
         //render search page
         res.render("search", {
             searchQuery,
