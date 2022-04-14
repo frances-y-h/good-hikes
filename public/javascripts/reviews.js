@@ -115,9 +115,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
                     //find the edit button on the new review card
                     const editButton = newReviewCard.querySelector(".edit-review");
+                    const deleteButton = newReviewCard.querySelector(".delete-review");
 
                     //adding id attribute to the edit button on the new review card
                     editButton.setAttribute("id", `edit-${data.review.id}`);
+                    deleteButton.setAttribute("id", `delete-${data.review.id}`);
 
                     //finding edit form for the new review card
                     const hiddenForm = newReviewCard.querySelector(".edit-review-form");
@@ -127,6 +129,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
                     //adding event listener to the edit button on the new review card
                     addEditReviewEventHanlder(editButton);
+                    addDeleteReviewEventHandler(deleteButton);
 
                     //adding new review card to the very top of the list on /hikes/:hikeId page
                     const allReviews = document.querySelector(".reviews-container");
@@ -169,7 +172,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 
                     if (data.review.dateHike) {
-
                         reviewDateHike.innerText = `Date hiked ${data.review.dateHike}`;
                     } else {
                         reviewDateHike.innerText = "";

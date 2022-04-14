@@ -27,8 +27,18 @@
 
 }
 
-
 .edit-review-buttons {
     display: flex;
     justify-content: flex-end;
+}
+
+.delete-review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.delete-review-buttons {
+    display: flex;
+    justify-content: space-evenly;
 }

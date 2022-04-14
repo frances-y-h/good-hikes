@@ -89,7 +89,7 @@ block content
                   .dateHike Date hiked #{review.dateHike}
                 if loggedInUserId === review.User.id
                   .delete-edit-block
-                    button.delete-review Delete
+                    button(id=`delete-${review.id}`).delete-review Delete
                     button(id=`edit-${review.id}`).edit-review Edit
                   div.bg-modal2.hidden
                     form(id=`edit-review-form-${review.id}` class="hidden edit-review-form form-control")
@@ -105,6 +105,13 @@ block content
                       div.edit-review-buttons
                         button#edit-review-cancel.btn Cancel
                         button#edit-review-submit.btn  Submit
+                  .bg-modal3.hidden
+                    form(id=`delete-review-form-${review.id}` class="hidden delete-review-form form-control")
+                      .text
+                        p Are you sure you want to delete this review?
+                      div.delete-review-buttons
+                        button#delete-review-cancel.btn Cancel
+                        button#delete-review-submit.btn  Delete
       div.hike-side
         div.hike-tags-wrap
           div.hike-tags-title Features
