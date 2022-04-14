@@ -81,13 +81,104 @@ main {
 
 .toggle-popup {
     position: absolute;
-    top: 45px;
+    top: 48px;
     left: 20px;
-    border: 1px solid black;
+    border: 0.5px solid rgba(211, 211, 211, 0.2);
     /* transform: translate(412px, 105px); */
-    /* max-height: 255px; */
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 5px 5px 15px 0px rgba(211, 211, 211, 0.2);
 }
 
+.inner-popup {
+    background-color: white;
+    width: 300px;
+    max-height: 200px;
+    box-sizing: border-box;
+}
+
+.options-container {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.radio-container,
+.check-container {
+    display: flex;
+    box-sizing: border-box;
+    margin: 10px 10px;
+    gap: 4px;
+    width: auto;
+}
+
+.range-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 10px 10px;
+    gap: 4px;
+    width: auto;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+}
+
+.range {
+    width: 100%;
+}
+
+.input-range-container {
+    /* width: 100%; */
+    padding: 10px;
+    /* box-sizing: border-box; */
+}
+
+/* update slider */
+#elevation-range {
+    /* background: url("); */
+}
+
+#elevation-range:hover,
+#length-range:hover,
+#rating-range:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+#rating-range-labels {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#rating-label {
+    text-align: center;
+    padding-right: 10px;
+}
+
+#input-range-container-rating {
+    padding-right: 20px;
+}
+
+.menu-bottom {
+    display: flex;
+    box-sizing: border-box;
+    border-top: 1px solid lightgray;
+    padding: 12px 16px;
+    justify-content: end;
+    align-items: space-between;
+    height: 60px;
+    width: auto;
+    background-color: white;
+}
+
+.menu-btn {
+    font-size: 12px;
+    /* position: absolute; */
+    /* bottom: 10px;
+    right: 0px; */
+}
+
+/* HIKES CARDS */
 .hike-header {
     text-align: center;
     margin: 20px;

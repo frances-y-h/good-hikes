@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-    //toggle modal
+    //TOGGLE MODAL EVENT LISTENERS
     const toggles = document.querySelectorAll(".search-toggle");
 
     toggles.forEach((toggle) => {
@@ -15,16 +15,105 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 currentIcon.innerText = "expand_more";
             }
 
-            //update the modal class from hidden to false
-            const menuModal = document.querySelector(
+            //update the target modal class from hidden to visible
+            const menuModalTarget = document.querySelector(
                 `button#${event.currentTarget.id} + .toggle-popup`
             );
 
-            menuModal.classList.toggle("hidden");
+            menuModalTarget.classList.toggle("hidden");
+
+            //update all other modals to hidden
+            const menuModals = document.querySelectorAll(`.toggle-popup`);
+            menuModals.forEach((menuModal) => {
+                if (menuModal.id !== menuModalTarget.id)
+                    menuModal.classList.add("hidden");
+            });
         });
     });
 
-    //Advanced Search Event Listener
+    //ELEVATION RANGE MODAL
+    const elevationSlider = document.getElementById("elevation-range");
+    const elevationMaxLabel = document.getElementById("elevation-max");
+    const elevationSliderClear = document.querySelector(
+        "#elevation-button + .toggle-popup .clear-filters"
+    );
+
+    // Display the default slider value
+    elevationMaxLabel.innerHTML = `${elevationSlider.value}+ ft`;
+
+    // Update the slider value (each time you drag the slider handle)
+    elevationSlider.oninput = function () {
+        //'this' will is the object that onclick was bound to aka event.currentTarget
+        if (this.value === "5000") {
+            elevationMaxLabel.innerHTML = `${this.value}+ ft`;
+        } else {
+            elevationMaxLabel.innerHTML = `${this.value} ft`;
+        }
+    };
+
+    //Update Clear button functionality to reset to default value
+    elevationSliderClear.addEventListener("click", (event) => {
+        elevationMaxLabel.innerHTML = `5000+ ft`;
+    });
+
+    //LENGTH RANGE MODAL
+    const lengthSlider = document.getElementById("length-range");
+    const lengthMaxLabel = document.getElementById("length-max");
+    const lengthSliderClear = document.querySelector(
+        "#length-button + .toggle-popup .clear-filters"
+    );
+
+    // Display the default slider value
+    lengthMaxLabel.innerHTML = `${lengthSlider.value}+ mi`;
+
+    // Update the slider value (each time you drag the slider handle)
+    lengthSlider.oninput = function () {
+        //'this' will is the object that onclick was bound to aka event.currentTarget
+        if (this.value === "50") {
+            lengthMaxLabel.innerHTML = `${this.value}+ mi`;
+        } else {
+            lengthMaxLabel.innerHTML = `${this.value} mi`;
+        }
+    };
+
+    // Update Clear button functionality to reset to default value
+    lengthSliderClear.addEventListener("click", (event) => {
+        lengthMaxLabel.innerHTML = `50+ mi`;
+    });
+
+    //RATING RANGE MODAL
+    const ratingSlider = document.getElementById("rating-range");
+    const ratingMaxLabel = document.getElementById("rating-label");
+    const ratingSliderClear = document.querySelector(
+        "#rating-button + .toggle-popup .clear-filters"
+    );
+
+    // Display the default slider value
+    ratingMaxLabel.innerHTML = `Any`;
+
+    // Update the slider value (each time you drag the slider handle)
+    ratingSlider.oninput = function () {
+        //'this' will is the object that onclick was bound to aka event.currentTarget
+        if (this.value === "1") {
+            ratingMaxLabel.innerHTML = `Any`;
+        }
+        if (this.value === "2") {
+            ratingMaxLabel.innerHTML = `Over 3`;
+        }
+        if (this.value === "3") {
+            ratingMaxLabel.innerHTML = `Over 4`;
+        }
+        if (this.value === "4") {
+            ratingMaxLabel.innerHTML = `Over 4.5`;
+        }
+    };
+
+    // Update Clear button functionality to reset to default value
+    ratingSliderClear.addEventListener("click", (event) => {
+        ratingMaxLabel.innerHTML = `Any`;
+    });
+
+    //ADVANCED SEARCH BUTTON
     const advSearch = document.querySelector("#adv-search-button");
 
     advSearch.addEventListener("click", async (event) => {
@@ -32,9 +121,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         const advSearchInput = document.querySelector("#adv-search-input");
 
-        const searchQuery = advSearchInput.value;
+        let searchQuery = advSearchInput.value;
 
-        //refreshes the page, sending a Route with user's query to the backend
+        //Refreshes the page, sending a Route with user's query to the backend
         window.location.href = `/search?query=${searchQuery}`;
 
         ///API ROUTE, boilerplate

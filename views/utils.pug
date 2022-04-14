@@ -14,19 +14,39 @@ mixin field(labelText, fieldName, fieldValue, requiredField = false, fieldType =
     else
       input.input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder required=requiredField)
 
+//- SEARCH PAGE MIXINS
 mixin dropDown(keyword, buttonText)
   div.search-button-container
     button(id=`${keyword}-button`).btn.search-toggle #{buttonText}
       span(class="material-icons-outlined") expand_more
     div(id=`${keyword}-menu`).toggle-popup.hidden
-      p Menu
-      //- label(for="easy")
-          //-   input.checkbox(type="checkbox" id="easy" name="difficulty" value="test")
-          //-   //- label(for="")
-          //-   //-     input(type="checkbox") Easy
+      form.inner-popup(action="/search" method="get")
+        div.options-container
+          block
+        div.menu-bottom
+          button.btn.menu-btn.clear-filters(type="reset" name="clear" value="clear") Clear
+          button.btn.menu-btn.search-filters(type="submit") See Results
 
-mixin radio(keyword, buttonText)
+mixin radio(idName, groupName, value, radioText)
   div
-    label
-      input(type="radio")
-      span
+    label(for=`${idName}-radio`)
+      div.radio-container
+        input(type="radio" id=`${idName}-radio` name=groupName value=value)
+        div #{radioText}
+
+mixin checkbox(idName, groupName, value, checkText)
+  div
+    label(for=`${idName}-check`)
+      div.check-container
+        input(type="checkbox" id=`${idName}-check` name=groupName value=value)
+        div #{checkText}
+
+mixin range(idName, min, max, value, name, minText, maxText)
+  div
+    label(for=`${idName}-range`)
+      div.range-container
+        div.range-labels
+          span(id=`${idName}-min`) #{minText}
+          span(id=`${idName}-max`) #{maxText}
+        div.input-range-container
+          input.range(type="range" min=min max=max value=value id=`${idName}-range` name=name)
