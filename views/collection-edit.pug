@@ -8,6 +8,7 @@ block content
 block content
     link(rel='stylesheet' href='/stylesheets/collection.css')
     script(src='/javascripts/editCollection.js')
+    script(src='/javascripts/deleteCollection.js')
     
     #edit-content-div
         h2.center Edit Collections
@@ -29,15 +30,16 @@ block content
                     th.left Collection Name
                 tbody 
                     each collection in collections 
-                        tr.hike-row
+                        tr.hike-row(class=`row-${collection.id}`)
                             td.center                            
                                 form(method='post' action=`/collections/${collection.id}/delete`)
                                     input(type='hidden' name='_csrf' value=csrfToken)
-                                    button.btn-delete
-                                        i.fa.fa-times(id=`${collection.id}-delete-button`)
+                                    button.btn-delete(id=`${collection.id}-id-delete-button-count-${collection.Hikes.length}`)
+                                        i.fa.fa-times(id=`${collection.id}-id-delete-button-count-${collection.Hikes.length}`)
                             td
                                 form#name-form(method='post' action=`/collections/${collection.id}/edit`)
                                     p.p-table #{collection.name}
+                                        span.hike-count (#{collection.Hikes.length} Hikes)
                                     input.hidden.input-rename(id=`${collection.id}-rename-input` name="collectionname" placeholder=`Enter new collection name` value=`${collection.name}` style='margin: 15px 0; height: 50%; border: 1px solid var(--dark1); border-radius:16px; padding: 5px;width:100%; max-width:400px;')
                                     input(type='hidden' name='_csrf' value=csrfToken)
                                     #rename-button-div

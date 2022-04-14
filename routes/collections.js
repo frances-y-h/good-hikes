@@ -121,10 +121,11 @@ router.get(
 
         //grab collections to display list on left column
         const collections = await db.Collection.findAll({
-            where: {
-                userId: userId,
-            },
-        });
+			where: {
+				userId: userId,
+			},
+			include: db.Hike,
+		});
 
         res.render("collection-edit", {
             collections,
@@ -166,10 +167,11 @@ router.post(
 
         //pull all collections for the logged in user
         const collections = await db.Collection.findAll({
-            where: {
-                userId: userId,
-            },
-        });
+			where: {
+				userId: userId,
+			},
+			include: db.Hike,
+		});
 
         //create validation obj and error array
         const validationErrors = validationResult(req);
@@ -264,6 +266,35 @@ router.post(
         res.redirect("/collections/edit");
     })
 );
+
+
+//API route to delete a collection with hikes in it
+router.delete('/:collectionId(\\d+)', asyncHandler(async (req, res) => {
+	
+	//pull the collectionId out of the URL
+	const collectionId = parseInt(req.params.collectionId, 10);
+
+	//find all hike collections tied to the collection id
+	const hikeCollections = await db.JoinHikeCollection.findAll({
+			where: {
+				collectionId: collectionId,
+			},
+		});
+
+	//if the array has any length, the dependencies will need to be destroyed first
+	if (hikeCollections.length > 0) {
+		//need to delete all of the many to many relationship rows
+			//inside JoinHikeCollection
+		await db.JoinHikeCollection.destroy({ where: {collectionId} });
+	}
+	// once all dependencies are destroyed, delete the collection from the database
+
+	await db.Collection.destroy({ where: { id: collectionId } });
+
+	res.json({message: 'Success' });	
+
+}));
+
 
 // /collections/ API
 router.post(
