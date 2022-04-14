@@ -184,6 +184,7 @@ h2{
     height: 60px;
 }
 
+/* in delete fetch call as well */
 .hidden{
     display: none;
 }

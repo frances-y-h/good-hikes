@@ -8,6 +8,7 @@ block content
 block content
     link(rel='stylesheet' href='/stylesheets/collection.css')
     script(src='/javascripts/editCollection.js')
+    script(src='/javascripts/deleteCollection.js')
     
     #edit-content-div
         h2.center Edit Collections
@@ -29,11 +30,11 @@ block content
                     th.left Collection Name
                 tbody 
                     each collection in collections 
-                        tr.hike-row
+                        tr.hike-row(class=`row-${collection.id}`)
                             td.center                            
                                 form(method='post' action=`/collections/${collection.id}/delete`)
                                     input(type='hidden' name='_csrf' value=csrfToken)
-                                    button.btn-delete
+                                    button.btn-delete(id=`${collection.id}-id-delete-button-count-${collection.Hikes.length}`)
                                         i.fa.fa-times(id=`${collection.id}-id-delete-button-count-${collection.Hikes.length}`)
                             td
                                 form#name-form(method='post' action=`/collections/${collection.id}/edit`)
