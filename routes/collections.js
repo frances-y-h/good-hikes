@@ -298,22 +298,16 @@ router.post(
     })
 );
 
-//route from /collections/edit page to rename a collection
-//need to triple check to see if this is needed
-//all events should be prevented, need to test later to DRY up code
-router.post(
-    "/:id(\\d+)/edit",
-    requireAuth,
-    asyncHandler(async (req, res) => {
-        const collectionId = await parseInt(req.params.id, 10);
-
-        console.log("-------hello from the name edit page for ", collectionId);
-
-        //take in user input
-
-        res.redirect("/collections/edit");
-    })
-);
+//default route from /collections/edit page to rename a collection
+//all events are prevented
+// router.post('/:id(\\d+)/edit',
+// 	requireAuth,
+// 	asyncHandler( async (req, res) =>{
+// 	const collectionId = await parseInt(req.params.id, 10);
+// 	console.log('-------hello from the name edit page for ', collectionId);
+// 	//take in user input
+// 	res.redirect('/collections/edit');
+// }));
 
 // route to patch the collection name
 router.patch(
