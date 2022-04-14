@@ -4,10 +4,12 @@ include utils.pug
 block content
   link(rel='stylesheet' href='/stylesheets/hike.css')
   link(rel="stylesheet" href="/stylesheets/review-form.css")
+  link(rel="stylesheet" href="/stylesheets/review-edit-delete.css")
   script(src='/javascripts/reviews.js')
+  script(src='/javascripts/reviews-edit.js')
   div.hike-page
     div.hike-title(style=`background-image: linear-gradient(to bottom, rgba(0,0,0, 0), rgba(0,0,0,0.5)),url('${hike.imgUrl}'`)
-      div.hike-name #{hike.name}
+      div(id=`hikeId-${hike.id}`).hike-name #{hike.name}
       div.hike-level-review
         div.hike-level #{hike.Difficulty.level}
         div.hike-review
@@ -57,7 +59,7 @@ block content
                   td.one-star-sprite
                   td
                     div.bar(style=`width:${avgRatingPercentage[0]}%`)
-            button(id=`review-for-${hike.id}`).btn.review-btn Write a Review
+            button(id=`review-for-${hike.id}` data-user=`${loggedInUserId}`).btn.review-btn Write a Review
           div.bg-modal.hidden
             form(id='review-form' class="hidden form-control")
                 div.form-star-rating
@@ -72,17 +74,36 @@ block content
                 div.review-buttons
                   button#review-cancel.btn Cancel
                   button#review-submit.btn  Submit
-          each review in reviews
-            #review.form-control
-              div.rating-username
-                  .username #{review.User.username}
-                  .stars-and-rating
-                    div.stars
-                      span.star-sprite(style=`width:${review.rating/5*100}%`)
-                    #rating #{review.rating}
-              .comment #{review.comment}
-              if (review.dateHike)
-                .dateHike Date hiked #{review.dateHike}
+          .reviews-container
+            each review in reviews
+              div(id=`reviewId-${review.id}`).review.form-control
+                div.rating-username
+                    div(id=`${review.User.id}`).username #{review.User.username}
+                    .stars-and-rating
+                      div.stars
+                        span.star-sprite(style=`width:${review.rating/5*100}%`)
+                      #rating #{review.rating}
+                .comment #{review.comment}
+                if (review.dateHike)
+                  .dateHike Date hiked #{review.dateHike}
+                if loggedInUserId === review.User.id
+                  .delete-edit-block
+                    button.delete-review Delete
+                    button(id=`edit-${review.id}`).edit-review Edit
+                  div.bg-modal2.hidden
+                    form(id=`edit-review-form-${review.id}` class="hidden edit-review-form form-control")
+                      div.edit-form-star-rating
+                        button.star &#9734
+                        button.star &#9734
+                        button.star &#9734
+                        button.star &#9734
+                        button.star &#9734
+                      +field("Comment", "comment", null, false, "textarea")
+                      +field("Date Hike", "dateHike", null, false, "date")
+                      div.errors
+                      div.edit-review-buttons
+                        button#edit-review-cancel.btn Cancel
+                        button#edit-review-submit.btn  Submit
       div.hike-side
         div.hike-tags-wrap
           div.hike-tags-title Features

@@ -23,6 +23,11 @@ router.get(
       ],
     });
 
+    let loggedInUserId;
+    if (req.session.auth) {
+      loggedInUserId = req.session.auth.userId;
+    }
+
     //query for populating reviews section on /hikes/:hikeId page
     const reviews = await db.Review.findAll({
       where: { hikeId },
@@ -59,7 +64,8 @@ router.get(
       reviews,
       avgReview,
       avgReviewPtg,
-      avgRatingPercentage
+      avgRatingPercentage,
+      loggedInUserId
     });
   }));
 
@@ -113,13 +119,15 @@ router.post('/:hikeId(\\d+)/reviews', requireAuth, reviewValidators, asyncHandle
 
   //if the review is valid, save it to the database
   if (validationErrors.isEmpty()) {
-    await review.save();
+    const newReview = await review.save();
+
 
     //response to the frontend page
     res.json({
       message: "Success",
       review,
-      user
+      user,
+      newReviewId: newReview.id
     });
   } else {
     //if review is not valid, send the errors to the frontend
@@ -137,4 +145,10 @@ router.post('/:hikeId(\\d+)/reviews', requireAuth, reviewValidators, asyncHandle
   }
 }));
 
+
 module.exports = router;
+
+
+
+
+//Executing (default): INSERT INTO "Reviews" ("id","userId","hikeId","rating","comment","dateHike","createdAt","updatedAt") VALUES (DEFAULT,$1,$2,$3,$4,$5,$6,$7) RETURNING *;
