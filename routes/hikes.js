@@ -23,9 +23,9 @@ router.get(
       ],
     });
 
-    let loggedInUser;
+    let loggedInUserId;
     if (req.session.auth) {
-      loggedInUser = req.session.auth.id;
+      loggedInUserId = req.session.auth.id;
     }
 
     //query for populating reviews section on /hikes/:hikeId page
@@ -65,7 +65,7 @@ router.get(
       avgReview,
       avgReviewPtg,
       avgRatingPercentage,
-      loggedInUser
+      loggedInUserId
     });
   }));
 
@@ -142,5 +142,6 @@ router.post('/:hikeId(\\d+)/reviews', requireAuth, reviewValidators, asyncHandle
     });
   }
 }));
+
 
 module.exports = router;

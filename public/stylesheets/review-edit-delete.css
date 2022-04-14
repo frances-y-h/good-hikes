@@ -6,22 +6,29 @@
     justify-content: flex-end;
 }
 
-.delete-edit-block span {
-    font-size: 0.75em;
-    color: var(--mid1);
-}
-.delete-edit-block div,
-.delete-edit-block div {
-    width: 35px;
-}
-
-.delete-edit-block span:first-child:hover,
-.delete-edit-block span:last-child:hover {
+.delete-edit-block button:hover,
+.delete-edit-block button:hover {
     cursor: pointer;
     color: var(--dark5);
     font-weight: bold;
+    text-decoration: underline;
 }
 
 #review .delete-edit-block {
     padding-right: 35px;
+}
+
+.delete-edit-block button {
+    width: 35px;
+    border: none;
+    background-color: white;
+    font-size: 0.75em;
+    color: var(--mid1);
+
+}
+
+
+.edit-review-buttons {
+    display: flex;
+    justify-content: flex-end;
 }
