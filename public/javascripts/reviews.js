@@ -112,10 +112,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     //adding id attribute to the new review card
                     newReviewCard.setAttribute("id", `reviewId-${data.review.id}`);
 
-
                     //find the edit button on the new review card
                     const editButton = newReviewCard.querySelector(".edit-review");
-                    console.log(editButton);
                     const deleteButton = newReviewCard.querySelector(".delete-review");
 
                     //adding id attribute to the edit button on the new review card

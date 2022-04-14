@@ -90,13 +90,27 @@ router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) =
 }));
 
 router.delete('/:reviewId', asyncHandler(async (req, res) => {
+
+    //getting hikeId from the request
     const { hikeId } = req.body;
 
+
+    // If user is logged in
+    let loggedInUserId;
+    if (req.session.auth) {
+        loggedInUserId = req.session.auth.userId;
+    }
+
+    //finding reviewId
     const reviewId = parseInt(req.params.reviewId, 10);
+
+    //getting the review from the database
     const reviewToDelete = await db.Review.findByPk(reviewId);
 
+    //delete the review from the database
     await reviewToDelete.destroy();
 
+    //getting updated reviews from the database
     const reviewsUpdated = await db.Review.findAll({
         where: { hikeId },
         include: [db.User],
@@ -104,8 +118,10 @@ router.delete('/:reviewId', asyncHandler(async (req, res) => {
         order: [["createdAt", "DESC"]]
     });
 
+    //response to the frontend page
     res.json({ message: 'Success',
-        reviewsUpdated
+        reviewsUpdated,
+        loggedInUserId
     });
 
 }));

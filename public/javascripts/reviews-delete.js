@@ -1,33 +1,30 @@
+// function to add event handler to delete review button
 const addDeleteReviewEventHandler = (deleteReviewButton) => {
 
-    // on the frontend, when the response is back:
-    //grab reviews-container if do childNodes -- live collection
-    //querySelectorAll -- static collection
-
-    // iterate over the reviews
-    //grab review card
-    //clone it, fill with info from reviews array
-    //add to the container -- perpend
-    //delete last review card
-
-
-    //if no close the popup
+    //getting hikeId from the page
     const hikeId = document.querySelector('.hike-name').id.split("-")[1];
 
+    // adding event handler to delete review button
     deleteReviewButton.addEventListener('click', (event) => {
         event.preventDefault();
 
+        //getting reviewId from the page
         const reviewId = event.target.id.split("-")[1];
 
+        //getting delete form from the page
         const deleteForm = document.getElementById(`delete-review-form-${reviewId}`);
+        //getting background modal from the page
         const bgModal = deleteForm.parentNode;
 
+        //showing the form for deleting
         deleteForm.classList.remove("hidden");
         bgModal.classList.remove("hidden");
 
+        //grabbing cancel and delete buttons from the form
         const cancelDeleteReviewButton = deleteForm.querySelector("#delete-review-cancel");
         const submitDeleteReviewButton = deleteForm.querySelector("#delete-review-submit");
 
+        // adding event handler to cancel button
         cancelDeleteReviewButton.addEventListener("click", (event) => {
             event.preventDefault();
 
@@ -43,74 +40,97 @@ const addDeleteReviewEventHandler = (deleteReviewButton) => {
             }
         };
 
+        //adding event handler to submit(delete) button
         submitDeleteReviewButton.addEventListener("click", async (event) => {
-
             event.preventDefault();
 
+            //request for delete selected post
             const res = await fetch(`/reviews/${reviewId}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ hikeId })
             })
 
+            //response from server
             const data = await res.json();
-            console.log(data.reviewsUpdated[0]);
-            let reviewsToUpdate = data.reviewsUpdated;
 
-            const reviewsContainer = document.querySelector('.reviews-container');
-            reviewsContainer.innerHTML = "";
+            if (data.message === "Success") {
 
-            reviewsToUpdate.forEach((reviewToUpdate) => {
+                //grabbing array of new reviews from response
+                let reviewsToUpdate = data.reviewsUpdated;
 
+                //grabbing reviews container from the page
+                const reviewsContainer = document.querySelector('.reviews-container');
 
+                //deleting all the previous reviews on the page
+                reviewsContainer.innerHTML = "";
 
-                const reviewTemplate = document.querySelector(".review-template");
-                const newReview = reviewTemplate.cloneNode(true);
-                const username = newReview.querySelector(".username");
-                const starsSprite = newReview.querySelector(".star-sprite");
-                const rating = newReview.querySelector("#rating");
-                const comment = newReview.querySelector(".comment");
-                const dateHike = newReview.querySelector(".dateHike");
-                const deleteReviewButton = newReview.querySelector(".delete-review");
-                const editReviewButton = newReview.querySelector(".edit-review");
-                const editReviewForm = newReview.querySelector(".edit-review-form");
-                const deleteReviewForm = newReview.querySelector(".delete-review-form");
+                //looping through the array of new reviews
+                reviewsToUpdate.forEach((reviewToUpdate) => {
 
-                newReview.id = `reviewId-${reviewToUpdate.id}`;
-                newReview.classList.remove("hidden");
-                newReview.classList.remove("review-template");
-                newReview.classList.add("review");
+                    //grabbing template for reviews from the template
+                    const reviewTemplate = document.querySelector(".review-template");
 
-                username.setAttribute("id", `${reviewToUpdate.userId}`);
-                username.innerHTML = reviewToUpdate.User.username;
+                    //clonong the template
+                    const newReview = reviewTemplate.cloneNode(true);
 
-                starsSprite.style = `width:${reviewToUpdate.rating / 5 * 100}%`
+                    //grabbing the review fields from the cloned template
+                    const username = newReview.querySelector(".username");
+                    const starsSprite = newReview.querySelector(".star-sprite");
+                    const rating = newReview.querySelector("#rating");
+                    const comment = newReview.querySelector(".comment");
+                    const dateHike = newReview.querySelector(".dateHike");
+                    const deleteReviewButton = newReview.querySelector(".delete-review");
+                    const editReviewButton = newReview.querySelector(".edit-review");
+                    const editReviewForm = newReview.querySelector(".edit-review-form");
+                    const deleteReviewForm = newReview.querySelector(".delete-review-form");
 
-                rating.innerHTML = reviewToUpdate.rating;
+                    // adding necessary attributes and data to the review fields
+                    newReview.id = `reviewId-${reviewToUpdate.id}`;
+                    newReview.classList.remove("hidden");
+                    newReview.classList.remove("review-template");
+                    newReview.classList.add("review");
 
-                if (reviewToUpdate.comment) {
-                    comment.innerText = reviewToUpdate.comment;
-                } else {
-                    comment.value = "";
-                }
+                    username.setAttribute("id", `${reviewToUpdate.userId}`);
+                    username.innerHTML = reviewToUpdate.User.username;
 
-                if (reviewToUpdate.dateHike) {
-                    dateHike.innerHTML = `Date hiked ${reviewToUpdate.dateHike}`;
-                } else {
-                    dateHike.innerHTML = "";
-                }
+                    starsSprite.style = `width:${reviewToUpdate.rating / 5 * 100}%`
 
-                deleteReviewButton.id = `delete-${reviewToUpdate.id}`;
-                editReviewButton.id = `edit-${reviewToUpdate.id}`;
+                    rating.innerHTML = reviewToUpdate.rating;
 
-                addEditReviewEventHanlder(editReviewButton);
-                addDeleteReviewEventHandler(deleteReviewButton);
+                    if (reviewToUpdate.comment) {
+                        comment.innerText = reviewToUpdate.comment;
+                    } else {
+                        comment.value = "";
+                    }
 
-                editReviewForm.id = `edit-review-form-${reviewToUpdate.id}`;
-                deleteReviewForm.id = `delete-review-form-${reviewToUpdate.id}`;
+                    if (reviewToUpdate.dateHike) {
+                        dateHike.innerHTML = `Date hiked ${reviewToUpdate.dateHike}`;
+                    } else {
+                        dateHike.innerHTML = "";
+                    }
 
-                reviewsContainer.append(newReview);
-            });
+                    deleteReviewButton.id = `delete-${reviewToUpdate.id}`;
+                    editReviewButton.id = `edit-${reviewToUpdate.id}`;
+
+                    // if user is logged in and is the owner of the review
+                    // then show the delete and edit buttons
+                    if (data.loggedInUserId !== reviewToUpdate.userId) {
+                        editReviewButton.innerHTML = "";
+                        deleteReviewButton.innerHTML = "";
+                    } else {
+                        addEditReviewEventHanlder(editReviewButton);
+                        addDeleteReviewEventHandler(deleteReviewButton);
+                    }
+
+                    editReviewForm.id = `edit-review-form-${reviewToUpdate.id}`;
+                    deleteReviewForm.id = `delete-review-form-${reviewToUpdate.id}`;
+
+                    //adding the new review to the reviews container
+                    reviewsContainer.append(newReview);
+                });
+
+            }
         });
     });
 };
