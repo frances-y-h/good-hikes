@@ -116,7 +116,7 @@ h2{
     width: 70%;
     height: 24px;
 }
-#add-collection-button, .btn-rename{
+#add-collection-button, .btn-table {
     padding: 3px;
     font-size: smaller;
 }
@@ -165,17 +165,52 @@ h2{
 
 
 
+#name-form{
+    display: flex;
+    position: relative;
+    height: 60px;
+}
 
+.hidden{
+    display: none;
+}
 
+#rename-button-div{
+    position: absolute;
+    right: -35%;
+    top: 22%;
+}
+#rename-collection-input{
+    position: absolute;
+    top: 15%;
+    left: -2%;
+}
 
 #rename-collection-input{
+    width: 100%;
+    margin: 0 auto;
+    height: 50%;
+    border: 1px solid var(--dark1);
+    border-radius:16px;
+    padding: 15px;
+}
+
+.hike-row{
+    line-height: 2em;
+}
+
+
+
+/* modal attempt */
+
+/* #rename-collection-input{
     width: 100%;
     margin: 0 auto;
     height: 34px;
     border: 1px solid var(--dark1);
     border-radius:16px;
     padding: 15px;
-}
+} */
 
 .bg-modal {
     position: fixed;

@@ -25,20 +25,24 @@ block content
                 tr.hike-row
                     th Delete 
                     th.left Collection Name
-                    th
                 tbody 
                     each collection in collections 
-                        tr.hike-row 
+                        tr.hike-row
                             td.center                            
                                 form(method='post' action=`/collections/${collection.id}/delete`)
                                     input(type='hidden' name='_csrf' value=csrfToken)
                                     button.btn-delete
                                         i.fa.fa-times(id=`${collection.id}-delete-button`)
-                            td= collection.name 
-                            td.center
-                                form(method='post' action=`/collections/${collection.id}/edit`)
+                            td
+                                form#name-form(method='post' action=`/collections/${collection.id}/edit`)
+                                    p.p-table #{collection.name}
+                                    input.hidden.input-rename(id=`${collection.id}-rename-input` name="collectionname" placeholder=`Enter new collection name` value=collectionname style='margin: 15px 0; height: 50%; border: 1px solid var(--dark1); border-radius:16px; padding: 5px;width:100%')
                                     input(type='hidden' name='_csrf' value=csrfToken)
-                                    button.btn.btn-rename(id=`${collection.id}-rename-button`) Rename
+                                    #rename-button-div
+                                        button.btn.btn-table.btn-rename(id=`${collection.id}-rename-button`) Rename
+                                        button.btn.btn-table.btn-update.hidden(id=`${collection.id}-update-button`) Update
+                                        button.btn.btn-table.btn-cancel.hidden(id=`${collection.id}-cancel-button`) Cancel
+        
         //- .bg-modal.hidden
         //-     form(id='rename-form' class="hidden form-control")
         //-         h2#rename-title
@@ -47,9 +51,4 @@ block content
         //-         #rename-button-div
         //-             button.btn#rename-collection-button Rename Collection
         //-             button.btn.btn-cancel#cancel-collection-button Cancel
-
-
-
-
-
     
