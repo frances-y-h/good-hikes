@@ -121,10 +121,11 @@ router.get(
 
         //grab collections to display list on left column
         const collections = await db.Collection.findAll({
-            where: {
-                userId: userId,
-            },
-        });
+			where: {
+				userId: userId,
+			},
+			include: db.Hike,
+		});
 
         res.render("collection-edit", {
             collections,
@@ -166,10 +167,11 @@ router.post(
 
         //pull all collections for the logged in user
         const collections = await db.Collection.findAll({
-            where: {
-                userId: userId,
-            },
-        });
+			where: {
+				userId: userId,
+			},
+			include: db.Hike,
+		});
 
         //create validation obj and error array
         const validationErrors = validationResult(req);
