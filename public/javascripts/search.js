@@ -20,14 +20,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 `button#${event.currentTarget.id} + .toggle-popup`
             );
 
+            //if class is present remove it, if not present add it
             menuModalTarget.classList.toggle("hidden");
 
             //update all other modals to hidden
             const menuModals = document.querySelectorAll(`.toggle-popup`);
             menuModals.forEach((menuModal) => {
                 if (menuModal.id !== menuModalTarget.id)
+                    //adds class to list if not already present
                     menuModal.classList.add("hidden");
             });
+        });
+    });
+
+    //TOGGLE MODAL SUBMIT EVENT LISTENERS
+    const filters = document.querySelectorAll(".search-filters");
+    filters.forEach((filter) => {
+        filter.addEventListener("click", (event) => {
+            event.preventDefault();
         });
     });
 
@@ -94,16 +104,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // Update the slider value (each time you drag the slider handle)
     ratingSlider.oninput = function () {
         //'this' will is the object that onclick was bound to aka event.currentTarget
-        if (this.value === "1") {
+        if (this.value === "4") {
             ratingMaxLabel.innerHTML = `Any`;
         }
-        if (this.value === "2") {
+        if (this.value === "3") {
             ratingMaxLabel.innerHTML = `Over 3`;
         }
-        if (this.value === "3") {
+        if (this.value === "2") {
             ratingMaxLabel.innerHTML = `Over 4`;
         }
-        if (this.value === "4") {
+        if (this.value === "1") {
             ratingMaxLabel.innerHTML = `Over 4.5`;
         }
     };

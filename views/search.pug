@@ -41,12 +41,16 @@ block content
               div.range-container
                 div#rating-label Any
                 div.input-range-container#input-range-container-rating
-                  input.range(type="range" min=1 max=4 step=1 value=1 id=`rating-range` name="rating")
+                  input.range(type="range" min=1 max=4 step=1 value=4 id=`rating-range` name="rating")
                 div.range-labels#rating-range-labels
                   span 0+
-                  span 3☆
-                  span 4☆
-                  span 4.5☆
+                  span 3
+                    span.rating-dd-star &#9733
+                    //- span.rating-dd-star &#9734 => unfilled star
+                  span 4
+                    span.rating-dd-star &#9733
+                  span 4.5
+                    span.rating-dd-star &#9733
         +dropDown("suitability", "Suitability")
           //- 2	Fee, 11	Parking, 13	Paved, 12	Restrooms, 14	No dogs, 15	Dogs Allowed
           +checkbox("fees","suitability","2","Fees")
@@ -74,15 +78,16 @@ block content
         each hike in hikes
           a.hike-card(href=`hikes/${hike.id}`)
             div.hike-img(style=`background-image: url('${hike.imgUrl}'); border-top-left-radius: 10px; border-top-right-radius: 10px; background-position: center; background-size: cover;`)
+              div.hike-name #{hike.name}
             div.card-text
               div.hike-name-location
-                div.hike-name #{hike.name}
                 div.hike-location #{hike.CityPark.name}, #{hike.State.state}
               div.hike-level-review
                 div.hike-level #{hike.Difficulty.level}
                 div.hike-stars
                   span.star-sprite(style=`width:${hike.avgReviewPtg}%`)
-                div.hike-avg-review #{hike.avgReview} (#{hike.reviewCount})
+                div.hike-avg-review (#{hike.reviewCount})
+                  //- #{hike.avgReview}
               div.hike-length-time
                 div.hike-length #{hike.length} mi •
                 div.hike-time Est. Time #{hike.length}
