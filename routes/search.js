@@ -82,8 +82,8 @@ router.get(
                 hike.reviewCount = reviewCountMap[hike.id];
 
                 const timeMin = parseFloat(hike.length) * 25;
-                hike.min = timeMin % 60;
-                hike.hr = (timeMin - hike.min) / 60;
+                hike.min = Math.round(timeMin % 60);
+                hike.hr = Math.round((timeMin - hike.min) / 60);
             }
         }
 

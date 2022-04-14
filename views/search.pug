@@ -90,8 +90,9 @@ block content
                   div.hike-rating-count (#{hike.reviewCount})
                     //- #{hike.avgReview}
                 div.hike-length-time
-                  div.hike-length #{hike.length} mi •
-                  div.hike-time Est. Time #{hike.hr} hr #{hike.min} min
+                  div.hike-length Length: #{hike.length} mi &nbsp; • &nbsp;
+                  //- &#8729  - type of smaller dot  or • or  ∙  &nbsp; = space
+                  div.hike-time Est. #{hike.hr} hr #{hike.min} min
                   //- div
                   //-   div.hike-key-title Elevation gain:
                   //-   div.hike-elevation #{hike.elevationChange} ft
