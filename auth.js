@@ -15,7 +15,7 @@ function loginUser(req, res, user) {
 //function to recover a user's info from the database if they are authenticated
 async function restoreUser(req, res, next) {
     // Log session object to the console to assist with debugging.
-    console.log(req.session);
+    // console.log(req.session);
 
     //check if .auth property exists, if so grab userID and fetch user
     if (req.session.auth) {
