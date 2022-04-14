@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", (e) => {
+
+document.addEventListener("DOMContentLoaded", async (e) => {
 
     //grab the buttons and input fields for the edit form
 
@@ -9,16 +10,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const renameInputs = document.querySelectorAll(".input-rename");
     const pNames = document.querySelectorAll(".p-table");
 
-    console.log(renameBtns);
-    console.log(updateBtns);
-    console.log(cancelBtns);
-    console.log(renameInputs);
-    console.log(pNames);
-
     for (let i = 0; i < renameBtns.length; i++) {
         renameBtns[i].addEventListener("click", (renameEvent) => {
 			renameEvent.preventDefault();
-			console.log(event.target);
+			
 			updateBtns[i].classList.remove("hidden");
 			cancelBtns[i].classList.remove("hidden");
 			renameInputs[i].classList.remove("hidden");
@@ -27,86 +22,61 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 				const collectionId = renameEvent.target.id.split("-")[0];
 
-				console.log('---------');
-				console.log(collectionId);
+                cancelBtns[i].addEventListener("click", (cancelEvent) => {
+                    cancelEvent.preventDefault();
+                    updateBtns[i].classList.add("hidden");
+                    cancelBtns[i].classList.add("hidden");
+                    renameInputs[i].classList.add("hidden");
+                    renameBtns[i].classList.remove("hidden");
+                    pNames[i].classList.remove("hidden");
+                });
+                
+                updateBtns[i].addEventListener("click", async (upEvent) => {
+                    upEvent.preventDefault();
+                    
+                    const newName = renameInputs[i].value;
 
-            updateBtns[i].addEventListener("click", (upEvent) => {
-			    // upEvent.preventDefault();
-            });
+                    console.log('new name', newName);
 
-            cancelBtns[i].addEventListener("click", (cancelEvent) => {
-                cancelEvent.preventDefault();
-                updateBtns[i].classList.add("hidden");
-                cancelBtns[i].classList.add("hidden");
-                renameInputs[i].classList.add("hidden");
-                renameBtns[i].classList.remove("hidden");
-                pNames[i].classList.remove("hidden");
-            });
+                    const res = await fetch(`/collections/${collectionId}`, {
+                        method: "PATCH",
+                        headers: {"Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            name: newName,
+                        }),
+                    });
 
+                    const data = await res.json();
+
+                    //if response was successful
+                    if (data.message === "Success") {
+                        //take the display text for the collection name
+                        //fill in with the new name
+                        pNames[i].innerText = `${data.collection.name}`;
+                        
+                        //hide and unhide to reset view
+                        updateBtns[i].classList.add("hidden");
+                        cancelBtns[i].classList.add("hidden");
+                        renameInputs[i].classList.add("hidden");
+                        renameBtns[i].classList.remove("hidden");
+                        pNames[i].classList.remove("hidden");
+
+
+                    } else {
+                        console.log('I am so mad, seriously');
+                    }
+
+
+                });
 		})
     }
 
 
 
-    // renameBtns.addEventListener("mouseover", (event) => {
-    //     event.preventDefault();
-        
-    //     console.log(event.target);
-
-	// 	updateBtn.classList.remove("hidden");
-	// 	cancelBtn.classList.remove("hidden");
-	// 	renameInput.classList.remove("hidden");
-	// 	renameBtn.classList.add("hidden");
-
-	// 	// const collectionId = event.target.id.split("-")[0];
-
-	// 	//     console.log('---------');
-	// 	//     console.log(collectionId);
-
-	// 	updateBtn.addEventListener("click", (upEvent) => {
-	// 		upEvent.preventDefault();
-    //         // console.log('*-=*-=*-=*-=*-=*-=*-=*',collectionId);
-	// 	});
-
-	// 	cancelBtn.addEventListener("click", (cancelEvent) => {
-	// 		cancelEvent.preventDefault();
-	// 		updateBtn.classList.add("hidden");
-	// 		cancelBtn.classList.add("hidden");
-	// 		renameInput.classList.add("hidden");
-	// 		renameBtn.classList.remove("hidden");
-	// 	});
-	// });
 
 
 
 });
 
 
-//grab the modal background and form
-// const bgModal = document.querySelector(".bg-modal");
-// const renameForm = document.querySelector("rename-form");
 
-// //grab the buttons related to edit name functionality
-// const openRenameBtn = document.getElementById("btn-rename");
-// const submitRenameBtn = document.getElementById("rename-collection-button");
-// const cancelRenameBtn = document.getElementById("cancel-collection-button");
-
-// const renameTitle = document.getElementById("rename-title");
-
-// //upon click of the rename, modal and form are revealed
-// openRenameBtn.addEventListener("click", (event) => {
-//     //capture the collection id and name
-//     const collectionId = event.target.id.split('-')[0];
-    
-//     console.log('---------');
-//     console.log(collectionId);
-
-//     // const collectionName = await 
-
-//     renameTitle.innerText = `Renaming collection ${collectionId}`;
-
-    
-//     //reveal the modal and form
-//     bgModal.classList.remove("hidden");
-//     renameForm.classList.remove("hidden");
-// })

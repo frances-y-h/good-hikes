@@ -179,6 +179,38 @@ router.post('/:id(\\d+)/edit',
 	res.redirect('/collections/edit');
 }));
 
+
+router.patch("/:id(\\d+)",
+	requireAuth, 
+	collectionValidator,
+	asyncHandler(async (req, res) => {
+
+		const { name } = req.body;
+		const collectionId = await parseInt(req.params.id, 10);
+
+		console.log("-------hello from the name edit page for ", collectionId);
+
+		const collection = await db.Collection.findByPk(collectionId);
+
+		collection.name = name;
+		await collection.save();
+
+		res.json({
+			message: 'Success',
+			collection
+		});
+
+		//take in user input
+
+		// res.redirect("/collections/edit");
+
+
+	})
+);
+
+
+
+
 //route from the collections/edit to delete a collection
 router.post('/:id(\\d+)/delete',
 		csrfProtection,
