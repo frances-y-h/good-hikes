@@ -75,6 +75,7 @@ block content
                 div.review-buttons
                   button#review-cancel.btn Cancel
                   button#review-submit.btn  Submit
+            include review-template.pug
           .reviews-container
             each review in reviews
               div(id=`reviewId-${review.id}`).review.form-control

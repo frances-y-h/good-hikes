@@ -42,3 +42,8 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+
+.review-template.hidden {
+    display: none;
+}

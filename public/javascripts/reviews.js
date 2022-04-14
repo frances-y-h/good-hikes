@@ -115,6 +115,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
                     //find the edit button on the new review card
                     const editButton = newReviewCard.querySelector(".edit-review");
+                    console.log(editButton);
                     const deleteButton = newReviewCard.querySelector(".delete-review");
 
                     //adding id attribute to the edit button on the new review card
@@ -122,10 +123,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     deleteButton.setAttribute("id", `delete-${data.review.id}`);
 
                     //finding edit form for the new review card
-                    const hiddenForm = newReviewCard.querySelector(".edit-review-form");
+                    const hiddenFormEdit = newReviewCard.querySelector(".edit-review-form");
+                    const hiddenFormDelete = newReviewCard.querySelector(".delete-review-form");
 
                     //adding id attribute to the edit form on the new review card
-                    hiddenForm.setAttribute("id", `edit-review-form-${data.review.id}`);
+                    hiddenFormEdit.setAttribute("id", `edit-review-form-${data.review.id}`);
+                    hiddenFormDelete.setAttribute("id", `delete-review-form-${data.review.id}`);
 
                     //adding event listener to the edit button on the new review card
                     addEditReviewEventHanlder(editButton);
@@ -185,6 +188,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     });
                     comment.value = "";
                     dateHike.value = "";
+
+                        errorMessage.innerHTML ="";
+
 
                     //hiding the form
                     reviewForm.classList.add("hidden");
