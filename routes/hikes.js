@@ -181,4 +181,46 @@ router.post(
     })
 );
 
+// API for adding hike to specific user's collections
+router.post(
+    "/:hikeId(\\d+)/collections",
+    asyncHandler(async (req, res) => {
+        const hikeId = parseInt(req.params.hikeId, 10);
+        // get the array with collectionId and whether checked or not
+        const collectionsToUpdate = req.body;
+
+        // Itterate through the array and update the JoinHikeCollection table according to value
+        for (let i = 0; i < collectionsToUpdate.length; i++) {
+            let data = collectionsToUpdate[i];
+            let collectionId = parseInt(data[0], 10);
+            let value = data[1];
+
+            const hikeCollection = await db.JoinHikeCollection.findOne({
+                where: {
+                    hikeId,
+                    collectionId,
+                },
+            });
+
+            // if value === true, make sure there is the record in table, else otherwize
+            if (value) {
+                if (!hikeCollection) {
+                    await db.JoinHikeCollection.create({
+                        hikeId,
+                        collectionId,
+                    });
+                }
+            } else {
+                if (hikeCollection) {
+                    await hikeCollection.destroy();
+                }
+            }
+        }
+
+        res.json({
+            message: "Success",
+        });
+    })
+);
+
 module.exports = router;
