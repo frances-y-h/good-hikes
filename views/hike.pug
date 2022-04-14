@@ -122,8 +122,9 @@ block content
                   span.checkMk
               button.hike-coll-arrow
                 i.fa-solid.fa-angle-down
+              div.bg-modal3.hidden
               div.dropdown-menu.hidden
-                div appaned
+                div.dropdown-collections
                   each collection in collections
                     div.dropdown-item
                       input.coll-ckbx(type="checkbox" checked=collection.inCollection id=`collectionId-${collection.id}`)

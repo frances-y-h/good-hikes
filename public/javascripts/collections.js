@@ -38,14 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         menuBtn.addEventListener("click", (ev) => {
             dropdownMenu.classList.toggle("hidden");
+            modal3.classList.toggle("hidden");
         });
-
-        // window.onclick = function (event) {
-        //     console.log(event.target);
-        //     if (event.target !== dropdownMenu && event.target !== menuBtn) {
-        //         dropdownMenu.classList.add("hide");
-        //     }
-        // };
 
         // Click on div and will update checkbox, instead of having to click exactly on the box
         const checkBoxDivs = document.getElementsByClassName("dropdown-item");
@@ -61,6 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const addNewCollectionBtn = document.getElementById("add-collection");
         const addNewCollectionTitle = document.querySelector(
             ".add-collection-title"
+        );
+        const collectionDropdown = document.querySelector(
+            ".dropdown-collections"
         );
         addNewCollectionBtn.addEventListener("click", async (event) => {
             event.preventDefault();
@@ -88,13 +85,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     `collectionId-${collectionId}`
                 );
                 newDropdownDiv.children[1].innerText = collectionName;
-                console.log(newDropdownDiv);
-                checkBoxDivs.append(newDropdownDiv);
-
-                // Append new collection to dropdown menu
+                collectionDropdown.append(newDropdownDiv);
             } else {
-                addNewCollectionTitle.innerText =
-                    "Something went wrong, try again.";
+                addNewCollectionTitle.innerText = data.message;
             }
         });
 
@@ -130,5 +123,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error(err);
             }
         });
+
+        // If we click outside the menu, will close the menu
+        const modal3 = document.querySelector(".bg-modal3");
+        window.onclick = function (event) {
+            if (event.target == modal3) {
+                dropdownMenu.classList.add("hidden");
+                modal3.classList.add("hidden");
+            }
+        };
     }
 });

@@ -108,9 +108,6 @@
 .hike-side {
     grid-column: 4/5;
     padding-left: 20px;
-    position: sticky;
-    top: 80px;
-    align-self: flex-start;
     background-color: white;
     z-index: 0;
 }
@@ -251,7 +248,7 @@
 .dropdown-menu {
     position: absolute;
     transition: all 0.2s;
-    z-index: 1;
+    z-index: 3;
     width: 172px;
 }
 .dropdown-item,
@@ -308,6 +305,8 @@ input[type="checkbox"]:checked::before {
 .dropdown-divider {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding: 5px;
 }
 
 .add-collection-title {
@@ -358,6 +357,16 @@ input[type="checkbox"]:checked::before {
 .hidden {
     opacity: 0;
     visibility: hidden;
+}
+
+.bg-modal3 {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 2;
 }
 
 .update-status {
