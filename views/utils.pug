@@ -13,3 +13,20 @@ mixin field(labelText, fieldName, fieldValue, requiredField = false, fieldType =
       textarea(id=fieldName name=fieldName)= fieldValue
     else
       input.input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder required=requiredField)
+
+mixin dropDown(keyword, buttonText)
+  div.search-button-container
+    button(id=`${keyword}-button`).btn.search-toggle #{buttonText}
+      span(class="material-icons-outlined") expand_more
+    div(id=`${keyword}-menu`).toggle-popup.hidden
+      p Menu
+      //- label(for="easy")
+          //-   input.checkbox(type="checkbox" id="easy" name="difficulty" value="test")
+          //-   //- label(for="")
+          //-   //-     input(type="checkbox") Easy
+
+mixin radio(keyword, buttonText)
+  div
+    label
+      input(type="radio")
+      span

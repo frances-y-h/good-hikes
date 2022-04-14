@@ -1,30 +1,27 @@
 extends layout
-
-
+include utils.pug
 block content
   link(rel='stylesheet' href='/stylesheets/search.css')
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
   script(src="/javascripts/search.js")
   main
     h1#search-header Advanced Search
     div#adv-search-container
-      form(action='/search' method='get' id='adv-search-form')
-        div#adv-search-input-container
-          input#adv-search-input(type="text" name="query" placeholder="Search Hikes" value=searchQuery)
-        button#adv-search-button.btn(type='submit') Search
+      div#adv-search-bar
+        form(action='/search' method='get' id='adv-search-form')
+          div#adv-search-input-container
+            input#adv-search-input(type="text" name="query" placeholder="Search Hikes" value=searchQuery)
+          button#adv-search-button.btn(type='submit') Search
             //-   i(class='fa fa-search')
-      ul.search-toggles
-        li.toggle#sort Sort
-            label(for="easy")
-                input.checkbox(type="checkbox" id="easy" name="difficulty" value="test")
-            //- label(for="")
-            //-     input(type="checkbox") Easy
-        li.toggle#difficulty Difficulty
-        li.toggle#length Length
-        li.toggle#elevation  Elevation Gain
-        li.toggle#routeType Route Type
-        li.toggle#rating Rating
-        li.toggle#suitabilityTags Suitability Tags
-        li.toggle#attractionTags Attraction Tags
+      div#search-toggles
+        +dropDown("sort", "Sort")
+        +dropDown("difficulty", "Difficulty")
+        +dropDown("length", "Length")
+        +dropDown("elevation", "Elevation Gain")
+        +dropDown("routeType", "Route Type")
+        +dropDown("rating", "Rating")
+        +dropDown("suitability", "Suitability")
+        +dropDown("attraction", "Attractions")
     h1.hike-header Hike Search Results
     if hikes.length > 0
       div.hike-list

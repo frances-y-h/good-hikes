@@ -1,4 +1,29 @@
 document.addEventListener("DOMContentLoaded", (event) => {
+    //toggle modal
+    const toggles = document.querySelectorAll(".search-toggle");
+
+    toggles.forEach((toggle) => {
+        toggle.addEventListener("click", (event) => {
+            //update the icon in the clicked button
+            const currentIcon = document.querySelector(
+                `button#${event.currentTarget.id} span`
+            );
+
+            if (currentIcon.innerText === "expand_more") {
+                currentIcon.innerText = "expand_less";
+            } else {
+                currentIcon.innerText = "expand_more";
+            }
+
+            //update the modal class from hidden to false
+            const menuModal = document.querySelector(
+                `button#${event.currentTarget.id} + .toggle-popup`
+            );
+
+            menuModal.classList.toggle("hidden");
+        });
+    });
+
     //Advanced Search Event Listener
     const advSearch = document.querySelector("#adv-search-button");
 
