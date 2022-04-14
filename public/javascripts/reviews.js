@@ -82,18 +82,32 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
                 //if response was successful
                 if (data.message === "Success") {
-                    console.log(data);
 
+                    //grabbing all review cards
                     const reviewCards = document.querySelectorAll(".reviews-container .review");
-                    // console.log(reviewCards);
+
+                    //creating new review card
                     const newReviewCard = reviewCards[0].cloneNode(true);
+
+                    //adding id attribute to the new review card
                     newReviewCard.setAttribute("id", `reviewId-${data.review.id}`);
+
+                    //find the edit button on the new review card
                     const editButton = newReviewCard.querySelector(".edit-review");
+
+                    //adding id attribute to the edit button on the new review card
                     editButton.setAttribute("id", `edit-${data.review.id}`);
+
+                    //finding edit form for the new review card
                     const hiddenForm = newReviewCard.querySelector(".edit-review-form");
+
+                    //adding id attribute to the edit form on the new review card
                     hiddenForm.setAttribute("id", `edit-review-form-${data.review.id}`);
+
+                    //adding event listener to the edit button on the new review card
                     addEditReviewEventHanlder(editButton);
-                    // console.log("cloned reviewcard", newReviewCard);
+
+                    //adding new review card to the very top of the list on /hikes/:hikeId page
                     const allReviews = document.querySelector(".reviews-container");
                     allReviews.prepend(newReviewCard);
 
