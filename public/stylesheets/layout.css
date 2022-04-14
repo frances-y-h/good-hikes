@@ -6,17 +6,22 @@ body {
 
 #nav-top {
     display: flex;
-    height: 60px;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    height: 60px;
     background-color: var(--light5);
-    padding: 0 150px;
+    padding: 0 50px;
+    gap: 20px;
+    position: sticky;
+    top: 0;
 }
 
 #div-center-search {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: 600px;
+    flex-grow: 1;
 }
 
 #search-form {
@@ -27,7 +32,7 @@ body {
     border-radius: 86px;
     box-shadow: 0.5px 0.5px 2px var(--mid1);
     background-color: var(--light6);
-    width: 550px;
+    width: 100%;
 }
 
 #search-input {
@@ -35,7 +40,6 @@ body {
     padding: 3px;
     margin-left: 10px;
     width: 95%;
-
     background-color: transparent;
 }
 
@@ -64,22 +68,18 @@ input:focus {
     outline: none;
 }
 
-#my-hikes-link {
-    width: 200px;
-    justify-content: center;
-}
 #my-hikes-link > a {
-    /* margin-left: 40px; */
     padding: 10px 15px;
     text-decoration: none;
     font-weight: 100;
-
     font-size: 1em;
     color: var(--dark1);
     transition: all 0.5s;
+    display: flex;
+    justify-content: center;
 }
+
 #my-hikes-link > a:hover {
-    /* margin: 0px 20px; */
     padding: 10px 15px;
     border: 1px solid var(--mid1);
     text-decoration: none;
@@ -95,6 +95,8 @@ input:focus {
 #div-left-links {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 5px;
 }
 
 #welcome-text {
@@ -103,6 +105,12 @@ input:focus {
 }
 #welcome-text > p {
     margin-right: 8px;
+}
+
+#div-right-buttons span {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
 /*
@@ -157,4 +165,41 @@ footer {
 
 .footer-copyright > a:hover {
     color: var(--mid2);
+}
+
+@media screen and (max-width: 950px) {
+    #nav-top {
+        padding: 0 10px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    #nav-top {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas:
+            "logo login"
+            "search search";
+        height: 100%;
+        padding: 10px;
+        gap: 5px;
+    }
+
+    #div-left-links {
+        grid-area: logo;
+    }
+
+    #div-center-search {
+        grid-area: login;
+    }
+
+    #div-center-search {
+        grid-area: search;
+        order: 2;
+        max-width: 100%;
+    }
+    #div-right-buttons .btn {
+        margin: 0px 3px;
+    }
 }
