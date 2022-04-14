@@ -104,9 +104,9 @@ h2{
 
 #form-add-collection{
     background-color: var(--light5);
-    height: 56px;
+    height: 66px;
     margin: 30px;
-    border-radius: 25px;
+    border-radius: 38px;
     box-shadow: 2px 2px 3px var(--light6);
     display: flex;
     justify-content: space-around;
@@ -115,13 +115,13 @@ h2{
 #new-collection-input{
     margin-left: 15px;
     width: 70%;
-    height: 24px;
+    height: 36px;
     border: 1px solid var(--mid1);
-    border-radius: 15px;
-    padding-left: 5px;
+    border-radius: 25px;
+    padding-left: 15px;
 }
 #add-collection-button, .btn-table {
-    padding: 6px;
+    padding: 10px;
     font-size: smaller;
 }
 
@@ -184,9 +184,10 @@ h2{
 
 #rename-button-div{
     position: absolute;
-    right: -35%;
+    right: -27%;
     top: 22%;
 }
+
 #rename-collection-input{
     position: absolute;
     top: 15%;

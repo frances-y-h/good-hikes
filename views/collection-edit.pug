@@ -17,7 +17,7 @@ block content
             button.btn#add-collection-button(type="submit") Add Collection
         +validationErrorSummary(errors)
         div.update-name-errors
-            
+
         table.table-coll-edit
             colgroup
                 col#delete-col
@@ -38,10 +38,10 @@ block content
                             td
                                 form#name-form(method='post' action=`/collections/${collection.id}/edit`)
                                     p.p-table #{collection.name}
-                                    input.hidden.input-rename(id=`${collection.id}-rename-input` name="collectionname" placeholder=`Enter new collection name` value=`${collection.name}` style='margin: 15px 0; height: 50%; border: 1px solid var(--dark1); border-radius:16px; padding: 5px;width:100%')
+                                    input.hidden.input-rename(id=`${collection.id}-rename-input` name="collectionname" placeholder=`Enter new collection name` value=`${collection.name}` style='margin: 15px 0; height: 50%; border: 1px solid var(--dark1); border-radius:16px; padding: 5px;width:100%; max-width:400px;')
                                     input(type='hidden' name='_csrf' value=csrfToken)
                                     #rename-button-div
                                         button.btn.btn-table.btn-rename(id=`${collection.id}-rename-button`) Rename
                                         button.btn.btn-table.btn-update.hidden(id=`${collection.id}-update-button` style="margin-right:0px;") Update
-                                        button.btn.btn-table.btn-cancel.hidden(id=`${collection.id}-cancel-button` style="margin-left:8px;") Cancel
+                                        button.btn.btn-table.btn-cancel.hidden(id=`${collection.id}-cancel-button` style="margin-left:30px;") Cancel
        
