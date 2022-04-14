@@ -1,6 +1,4 @@
 window.addEventListener('DOMContentLoaded', (e) => {
-    //get review cards from the page
-    const editReviews = document.querySelectorAll('#review');
 
     // edit buttons
     const editReviewBtns = document.querySelectorAll('.edit-review');
@@ -22,7 +20,6 @@ window.addEventListener('DOMContentLoaded', (e) => {
         let editReviewBtn = editReviewBtns[i];
 
         editReviewBtn.addEventListener('click', (event) => {
-            console.log("this is event target", event.target);
 
             //extracting values from the existing review
             const reviewData = (event.target.parentNode.parentNode).innerText;
@@ -167,8 +164,9 @@ window.addEventListener('DOMContentLoaded', (e) => {
                     reviewForm.classList.add("hidden");
                     bgModal.classList.add("hidden");
                 } else {
+
                     //if response was not successful
-                    const errorMessage = document.querySelector('.errors');
+                    const errorMessage = document.querySelector('#edit-review-form .errors');
 
                     //prepopulate the form and show error message
                     rating = data.reviewToUpdate.rating;

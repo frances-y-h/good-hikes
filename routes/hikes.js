@@ -25,7 +25,7 @@ router.get(
 
     let loggedInUserId;
     if (req.session.auth) {
-      loggedInUserId = req.session.auth.id;
+      loggedInUserId = req.session.auth.userId;
     }
 
     //query for populating reviews section on /hikes/:hikeId page

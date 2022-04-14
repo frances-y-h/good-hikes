@@ -39,7 +39,6 @@ router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) =
     const reviewId = parseInt(req.params.reviewId, 10);
 
     //finding userId
-    const userId = req.session.auth.userId;
 
     //getting the review from the database
     let reviewToUpdate = await db.Review.findByPk(reviewId);
