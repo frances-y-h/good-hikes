@@ -140,6 +140,11 @@ h2{
     background-color: var(--delete1);
     color: white;
 }
+.hike-count{
+    color: var(--mid1);
+    font-size: 12px;
+    padding-left:18px;
+}
 
 .div-errors {
   border: 1px solid var(--error2);
@@ -179,6 +184,7 @@ h2{
     height: 60px;
 }
 
+/* in delete fetch call as well */
 .hidden{
     display: none;
 }
