@@ -5,15 +5,6 @@ const db = require("../db/models");
 const { check, validationResult } = require('express-validator');
 
 
-// //checking permission to update review
-// function checkPermission (review, userId) {
-//     if (review.userId !== userId) {
-//         const err = new Error("illigal operation");
-//         err.status = 403;
-//         throw err;
-//     }
-// }
-
 //validation for the review form
 const reviewValidators = [
     check('rating')
@@ -39,6 +30,7 @@ router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) =
     const reviewId = parseInt(req.params.reviewId, 10);
 
     //finding userId
+    const userId = req.session.auth.userId;
 
     //getting the review from the database
     let reviewToUpdate = await db.Review.findByPk(reviewId);

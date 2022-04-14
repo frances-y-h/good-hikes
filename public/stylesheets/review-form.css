@@ -13,7 +13,7 @@
 }
 
 #review-form,
-#edit-review-form {
+.edit-review-form {
     z-index: 3;
     width: 520px;
     height: fit-content;
@@ -22,14 +22,14 @@
 }
 
 #review-form.hidden,
-#edit-review-form.hidden,
+.edit-review-form.hidden,
 .bg-modal.hidden,
 .bg-modal2.hidden {
     display: none;
 }
 
 #review-form label,
-#edit-review-form label {
+.edit-review-form label {
     margin-bottom: 7px;
 }
 

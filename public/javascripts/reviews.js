@@ -82,6 +82,21 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
                 //if response was successful
                 if (data.message === "Success") {
+                    console.log(data);
+
+                    const reviewCards = document.querySelectorAll(".reviews-container .review");
+                    // console.log(reviewCards);
+                    const newReviewCard = reviewCards[0].cloneNode(true);
+                    newReviewCard.setAttribute("id", `reviewId-${data.review.id}`);
+                    const editButton = newReviewCard.querySelector(".edit-review");
+                    editButton.setAttribute("id", `edit-${data.review.id}`);
+                    const hiddenForm = newReviewCard.querySelector(".edit-review-form");
+                    hiddenForm.setAttribute("id", `edit-review-form-${data.review.id}`);
+                    addEditReviewEventHanlder(editButton);
+                    // console.log("cloned reviewcard", newReviewCard);
+                    const allReviews = document.querySelector(".reviews-container");
+                    allReviews.prepend(newReviewCard);
+
                     // grab the review fields from review card
                     const reviewRating = document.querySelector(
                         ".rating-username #rating"
@@ -90,11 +105,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
                         ".rating-username .username"
                     );
                     const reviewComment =
-                        document.querySelector("#review .comment");
+                        document.querySelector(".review .comment");
                     const reviewDateHike =
-                        document.querySelector("#review .dateHike");
+                        document.querySelector(".review .dateHike");
+
                     const starRating = document.querySelector(
-                        "#review .star-sprite"
+                        ".review .star-sprite"
                     );
 
                     //populate them with the saved data from the database
@@ -104,9 +120,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
                     if (data.review.comment) {
                         reviewComment.innerHTML = data.review.comment;
+                    } else {
+                        reviewComment.innerHTML = "";
                     }
+
+
                     if (data.review.dateHike) {
-                        reviewDateHike.innerHTML = data.review.dateHike;
+                        console.log(data.review.dateHike);
+                        reviewDateHike.innerText = `Date hiked ${data.review.dateHike}`;
+                    } else {
+                        reviewDateHike.innerText = "";
                     }
 
                     //resetting review form fields

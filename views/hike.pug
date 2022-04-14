@@ -74,35 +74,36 @@ block content
                 div.review-buttons
                   button#review-cancel.btn Cancel
                   button#review-submit.btn  Submit
-          each review in reviews
-            #review.form-control
-              div.rating-username
-                  div(id=`${review.User.id}`).username #{review.User.username}
-                  .stars-and-rating
-                    div.stars
-                      span.star-sprite(style=`width:${review.rating/5*100}%`)
-                    #rating #{review.rating}
-              .comment #{review.comment}
-              if (review.dateHike)
-                .dateHike Date hiked #{review.dateHike}
-              if loggedInUserId === review.User.id
-                .delete-edit-block
-                  button.delete-review Delete
-                  button(id=`edit-${review.id}`).edit-review Edit
-                div.bg-modal2.hidden
-                  form(id='edit-review-form' class="hidden form-control")
-                    div.edit-form-star-rating
-                      button.star &#9734
-                      button.star &#9734
-                      button.star &#9734
-                      button.star &#9734
-                      button.star &#9734
-                    +field("Comment", "comment", null, false, "textarea")
-                    +field("Date Hike", "dateHike", null, false, "date")
-                    div.errors
-                    div.edit-review-buttons
-                      button#edit-review-cancel.btn Cancel
-                      button#edit-review-submit.btn  Submit
+          .reviews-container
+            each review in reviews
+              div(id=`reviewId-${review.id}`).review.form-control
+                div.rating-username
+                    div(id=`${review.User.id}`).username #{review.User.username}
+                    .stars-and-rating
+                      div.stars
+                        span.star-sprite(style=`width:${review.rating/5*100}%`)
+                      #rating #{review.rating}
+                .comment #{review.comment}
+                if (review.dateHike)
+                  .dateHike Date hiked #{review.dateHike}
+                if loggedInUserId === review.User.id
+                  .delete-edit-block
+                    button.delete-review Delete
+                    button(id=`edit-${review.id}`).edit-review Edit
+                  div.bg-modal2.hidden
+                    form(id=`edit-review-form-${review.id}` class="hidden edit-review-form form-control")
+                      div.edit-form-star-rating
+                        button.star &#9734
+                        button.star &#9734
+                        button.star &#9734
+                        button.star &#9734
+                        button.star &#9734
+                      +field("Comment", "comment", null, false, "textarea")
+                      +field("Date Hike", "dateHike", null, false, "date")
+                      div.errors
+                      div.edit-review-buttons
+                        button#edit-review-cancel.btn Cancel
+                        button#edit-review-submit.btn  Submit
       div.hike-side
         div.hike-tags-wrap
           div.hike-tags-title Features
