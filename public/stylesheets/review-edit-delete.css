@@ -1,0 +1,34 @@
+.delete-edit-block {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.delete-edit-block button:hover,
+.delete-edit-block button:hover {
+    cursor: pointer;
+    color: var(--dark5);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#review .delete-edit-block {
+    padding-right: 35px;
+}
+
+.delete-edit-block button {
+    width: 35px;
+    border: none;
+    background-color: white;
+    font-size: 0.75em;
+    color: var(--mid1);
+
+}
+
+
+.edit-review-buttons {
+    display: flex;
+    justify-content: flex-end;
+}

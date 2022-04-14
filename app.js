@@ -13,6 +13,7 @@ const collectionsRouter = require("./routes/collections");
 const { restoreUser } = require("./auth");
 const hikesRouter = require("./routes/hikes");
 const searchRouter = require("./routes/search");
+const reviewsRouter = require("./routes/reviews");
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/collections", collectionsRouter);
 app.use("/hikes", hikesRouter);
+app.use("/reviews", reviewsRouter);
 
 app.use("/search", searchRouter);
 
