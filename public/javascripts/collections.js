@@ -42,12 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Click on div and will update checkbox, instead of having to click exactly on the box
-        const checkBoxDivs = document.getElementsByClassName("dropdown-item");
+        const checkBoxDivs = document.querySelectorAll(".dropdown-item");
         for (let j = 0; j < checkBoxDivs.length; j++) {
             let checkBoxDiv = checkBoxDivs[j];
+            let label = checkBoxDiv.children[1];
+            let checkBox = checkBoxDiv.children[0];
             checkBoxDiv.addEventListener("click", (event) => {
-                checkBoxDiv.children[0].checked =
-                    !checkBoxDiv.children[0].checked;
+                checkBox.checked = !checkBox.checked;
+            });
+            checkBox.addEventListener("click", (event) => {
+                checkBox.checked = !checkBox.checked;
+            });
+            label.addEventListener("click", (event) => {
+                checkBox.checked = !checkBox.checked;
             });
         }
 
