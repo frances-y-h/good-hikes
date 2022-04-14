@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const reviewButton = document.querySelector(".review-btn");
     const cancelReviewButton = document.querySelector("#review-cancel");
     const submitReviewButton = document.querySelector("#review-submit");
+    //errors block
+    const errorMessage = document.querySelector(".errors");
 
     //getting bg-modal for changing the background color
     const bgModal = document.querySelector(".bg-modal");
@@ -26,6 +28,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
             cancelReviewButton.addEventListener("click", (event) => {
                 event.preventDefault();
 
+                //resetting review form fields
+                stars.forEach((star) => {
+                    star.innerHTML = "&#9734";
+                });
+                comment.value = "";
+                dateHike.value = "";
+                errorMessage.innerHTML = "";
+
+
                 //hiding the form
                 reviewForm.classList.add("hidden");
                 bgModal.classList.add("hidden");
@@ -34,6 +45,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
             //closing the form when the user clicks outside of the form
             window.onclick = function (event) {
                 if (event.target == bgModal) {
+
+                    //resetting review form fields
+                    stars.forEach((star) => {
+                        star.innerHTML = "&#9734";
+                    });
+                    comment.value = "";
+                    dateHike.value = "";
+                    errorMessage.innerHTML = "";
+
                     reviewForm.classList.add("hidden");
                     bgModal.classList.add("hidden");
                 }
@@ -92,6 +112,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     //adding id attribute to the new review card
                     newReviewCard.setAttribute("id", `reviewId-${data.review.id}`);
 
+
                     //find the edit button on the new review card
                     const editButton = newReviewCard.querySelector(".edit-review");
 
@@ -110,6 +131,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     //adding new review card to the very top of the list on /hikes/:hikeId page
                     const allReviews = document.querySelector(".reviews-container");
                     allReviews.prepend(newReviewCard);
+
+                    //grabbing updated review list
+                    const reviewCardsList = document.querySelectorAll(".reviews-container .review");
+
+                    // //removing last review if there are more than 10 reviews on the page
+                    if (reviewCardsList.length + 1 > 10) {
+                        reviewCardsList[0].parentNode.removeChild(reviewCardsList[10]);
+                    };
 
                     // grab the review fields from review card
                     const reviewRating = document.querySelector(
@@ -140,11 +169,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 
                     if (data.review.dateHike) {
-                        console.log(data.review.dateHike);
+
                         reviewDateHike.innerText = `Date hiked ${data.review.dateHike}`;
                     } else {
                         reviewDateHike.innerText = "";
                     }
+
+
 
                     //resetting review form fields
                     stars.forEach((star) => {
@@ -157,9 +188,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     reviewForm.classList.add("hidden");
                     bgModal.classList.add("hidden");
                 } else {
-                    //if response was not successful
-                    const errorMessage = document.querySelector(".errors");
-
+                    //if response was unsuccessful
                     //prepopulate the form and show error message
                     rating = data.review.rating;
                     if (data.review.comment) {
@@ -168,6 +197,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     if (data.review.dateHike) {
                         dateHike = data.review.dateHike;
                     }
+                    //show error message
                     errorMessage.innerHTML = data.errors;
                 }
             });

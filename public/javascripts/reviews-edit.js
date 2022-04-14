@@ -15,7 +15,8 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
         const dateHikeValue = partsOfReview[3].split(" ")[2];
         const reviewId = event.target.id.split("-")[1];
         const reviewForm = document.getElementById(`edit-review-form-${reviewId}`);
-        const bgModal = reviewForm.parentNode
+        const bgModal = reviewForm.parentNode;
+        const errorMessage = document.querySelector(`#edit-review-form-${reviewId} .errors`);
 
         // cancel and submit edit review buttons
         const cancelReviewButton = reviewForm.querySelector("#edit-review-cancel");
@@ -54,6 +55,8 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
 
             comment.value = "";
             dateHike.value = "";
+            errorMessage.innerHTML = "";
+
 
             //hiding the form
             reviewForm.classList.add("hidden");
@@ -68,6 +71,8 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
                 });
                 comment.value = "";
                 dateHike.value = "";
+                errorMessage.innerHTML = "";
+
 
                 reviewForm.classList.add("hidden");
                 bgModal.classList.add("hidden");
@@ -123,11 +128,7 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
             //if response was successful
             if (data.message === 'Success') {
 
-                //removing last review if there are more than 10 reviews on the page
-                const reviewCards = document.querySelectorAll(".reviews-container .review");
-                if (reviewCards.length > 10) {
-                    reviewCards[0].parentNode.removeChild(reviewCards[10]);
-                };
+
 
                 // grab the review fields from review card
                 const reviewCard = document.querySelector(`#reviewId-${reviewId}`);
@@ -171,8 +172,6 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
             } else {
 
                 //if response was not successful
-                const errorMessage = document.querySelector(`#edit-review-form-${reviewId} .errors`);
-
                 //prepopulate the form and show error message
                 rating = data.reviewToUpdate.rating;
                 if (data.reviewToUpdate.comment) {
