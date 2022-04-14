@@ -116,7 +116,7 @@ const collectionValidator = [
 			return db.Collection.findOne({ where: { name: value }})
 				.then( (collection) => {
 					if (collection) {
-						return Promise.reject("Collection name already exists");
+						return Promise.reject("Collection name already exists.");
 					}
 				});
 		})
@@ -172,11 +172,9 @@ router.post('/:id(\\d+)/edit',
 	asyncHandler( async (req, res) =>{
 	const collectionId = await parseInt(req.params.id, 10);
 
-	console.log('hello from the name edit page for ', collectionId);
+	console.log('-------hello from the name edit page for ', collectionId);
 
 	//take in user input
-	
-
 
 	res.redirect('/collections/edit');
 }));

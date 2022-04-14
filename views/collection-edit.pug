@@ -36,7 +36,7 @@ block content
                             td
                                 form#name-form(method='post' action=`/collections/${collection.id}/edit`)
                                     p.p-table #{collection.name}
-                                    input.hidden.input-rename(id=`${collection.id}-rename-input` name="collectionname" placeholder=`Enter new collection name` value=collectionname style='margin: 15px 0; height: 50%; border: 1px solid var(--dark1); border-radius:16px; padding: 5px;width:100%')
+                                    input.hidden.input-rename(id=`${collection.id}-rename-input` name="collectionname" placeholder=`Enter new collection name` value=`${collection.name}` style='margin: 15px 0; height: 50%; border: 1px solid var(--dark1); border-radius:16px; padding: 5px;width:100%')
                                     input(type='hidden' name='_csrf' value=csrfToken)
                                     #rename-button-div
                                         button.btn.btn-table.btn-rename(id=`${collection.id}-rename-button`) Rename

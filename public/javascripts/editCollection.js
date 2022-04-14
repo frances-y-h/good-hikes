@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 				console.log(collectionId);
 
             updateBtns[i].addEventListener("click", (upEvent) => {
-			    upEvent.preventDefault();
+			    // upEvent.preventDefault();
             });
 
             cancelBtns[i].addEventListener("click", (cancelEvent) => {
