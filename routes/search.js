@@ -80,6 +80,10 @@ router.get(
                 hike.avgReview = avgReviewsMap[hike.id];
                 hike.avgReviewPtg = avgReviewsMap[hike.id] * 20;
                 hike.reviewCount = reviewCountMap[hike.id];
+
+                const timeMin = parseFloat(hike.length) * 25;
+                hike.min = timeMin % 60;
+                hike.hr = (timeMin - hike.min) / 60;
             }
         }
 

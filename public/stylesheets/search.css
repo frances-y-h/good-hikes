@@ -172,6 +172,8 @@ main {
 
 .rating-dd-star {
     color: var(--bar);
+    padding-left: 2px;
+    box-sizing: border-box;
 }
 
 #input-range-container-rating {
@@ -327,6 +329,7 @@ a.hike-card {
     font-size: 12px;
     display: flex;
     align-items: center;
+    color: gray;
 }
 
 .hike-length-time {
