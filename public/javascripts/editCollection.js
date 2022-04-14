@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
             const collectionId = renameEvent.target.id.split("-")[0];
 
+            //cancel buttons will return the form to original state
             cancelBtns[i].addEventListener("click", (cancelEvent) => {
                 cancelEvent.preventDefault();
                 updateBtns[i].classList.add("hidden");
@@ -39,13 +40,14 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                 pNames[i].classList.remove("hidden");
             });
             
+
             updateBtns[i].addEventListener("click", async (upEvent) => {
                 upEvent.preventDefault();
                 
+                //pull the user inputted name
                 const newName = renameInputs[i].value;
 
-                console.log('new name', newName);
-
+                // call to patch route for updating collection name
                 const res = await fetch(`/collections/${collectionId}`, {
                     method: "PATCH",
                     headers: {"Content-Type": "application/json" },
@@ -84,11 +86,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             });
 		})
     }
-
-
-
-
-
 
 });
 

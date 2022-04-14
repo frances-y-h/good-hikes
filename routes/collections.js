@@ -7,7 +7,7 @@ const { check, validationResult } = require("express-validator");
 
 // Collections page
 
-//redirect /collections to default collection, with id 1
+//redirect /collections to default Completed collection
 router.get("/", requireAuth, asyncHandler(async (req, res) => {
 	
 	//requireAuth middleware handles the log in check
@@ -36,10 +36,6 @@ router.get("/", requireAuth, asyncHandler(async (req, res) => {
 	
 	// Get specific collections
 	router.get('/:collectionId(\\d+)', requireAuth, asyncHandler( async (req, res) => {
-		
-
-		
-		
 		//once redirected, or sent to a collection page
 		//user is authorized with requireAuth
 		
@@ -149,15 +145,14 @@ const collectionValidator = [
 ];
 
 //route from the /collections/edit page to create a new collection
-// get to route when submitting form on the edit page to add a new collection
-
-//NEEDS CSRF PROTECTION
+// get to route when submitting form on the /collections/edit page to add a new collection
 router.post('/edit/new',
 		csrfProtection,
 		collectionValidator,
 		requireAuth,
 		asyncHandler( async (req, res) => {
 	
+	//pull inputted name from the request body
 	const { collectionname } = req.body;
 	const userId = req.session.auth.userId;
 
@@ -168,20 +163,25 @@ router.post('/edit/new',
 		},
 	});
 	
+	//create validation obj and error array
 	const validationErrors = validationResult(req);
 	let errors = [];
 
+	//if no errors
 	if (validationErrors.isEmpty()) {
 		//need to create the new collection line in database
 		await db.Collection.create({
 			userId,
 			name: collectionname
 		});
+		//refresh the page with new collection added
 		res.redirect('/collections/edit');
 	} else {
 
+		//if there are errors, map the messages
 		const errors = validationErrors.array().map((err) => err.msg);
 
+		//re-render the page with error messages, and the input filled out with the user input
 		res.render('collection-edit', {
 			errors,
 			csrfToken: req.csrfToken(),
@@ -193,6 +193,8 @@ router.post('/edit/new',
 }));
 
 //route from /collections/edit page to rename a collection
+//need to triple check to see if this is needed
+	//all events should be prevented, need to test later to DRY up code
 router.post('/:id(\\d+)/edit',
 	requireAuth,
 	asyncHandler( async (req, res) =>{
@@ -205,27 +207,31 @@ router.post('/:id(\\d+)/edit',
 	res.redirect('/collections/edit');
 }));
 
-
+// route to patch the collection name
 router.patch("/:id(\\d+)",
 	requireAuth, 
 	collectionValidator,
 	asyncHandler(async (req, res) => {
 
+		//pull the requested name from the form
 		const { collectionname } = req.body;
 		const collectionId = await parseInt(req.params.id, 10);
 
-		console.log("-------hello from the name edit page for ", collectionId);
-
+		//find the collection in the database to update name
 		const collection = await db.Collection.findByPk(collectionId);
 
 		//patch the name
 		collection.name = collectionname;
 
+
 		const validationErrors = validationResult(req);
 
+		//if no errors
 		if (validationErrors.isEmpty()) {
+			//save the new name
 			await collection.save();
 	
+			//send json to front end
 			res.json({
 				message: 'Success',
 				collection
@@ -233,6 +239,7 @@ router.patch("/:id(\\d+)",
 		} else {
 			const errors = validationErrors.array().map(err => err.msg);
 
+			//if errors, send them to the front end to display
 			res.json({
 				message: "Error",
 				errors,
@@ -254,11 +261,6 @@ router.post('/:id(\\d+)/delete',
 	const collectionId = await parseInt(req.params.id, 10);
 
 	await db.Collection.destroy({where: {id: collectionId} });
-	
-	
-	// res.render('collection-edit', {
-	// 	csrfToken: req.csrfToken()
-	// });
 
 	res.redirect('/collections/edit');
 	
