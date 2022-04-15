@@ -112,21 +112,25 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     //adding id attribute to the new review card
                     newReviewCard.setAttribute("id", `reviewId-${data.review.id}`);
 
-
                     //find the edit button on the new review card
                     const editButton = newReviewCard.querySelector(".edit-review");
+                    const deleteButton = newReviewCard.querySelector(".delete-review");
 
                     //adding id attribute to the edit button on the new review card
                     editButton.setAttribute("id", `edit-${data.review.id}`);
+                    deleteButton.setAttribute("id", `delete-${data.review.id}`);
 
                     //finding edit form for the new review card
-                    const hiddenForm = newReviewCard.querySelector(".edit-review-form");
+                    const hiddenFormEdit = newReviewCard.querySelector(".edit-review-form");
+                    const hiddenFormDelete = newReviewCard.querySelector(".delete-review-form");
 
                     //adding id attribute to the edit form on the new review card
-                    hiddenForm.setAttribute("id", `edit-review-form-${data.review.id}`);
+                    hiddenFormEdit.setAttribute("id", `edit-review-form-${data.review.id}`);
+                    hiddenFormDelete.setAttribute("id", `delete-review-form-${data.review.id}`);
 
                     //adding event listener to the edit button on the new review card
                     addEditReviewEventHanlder(editButton);
+                    addDeleteReviewEventHandler(deleteButton);
 
                     //adding new review card to the very top of the list on /hikes/:hikeId page
                     const allReviews = document.querySelector(".reviews-container");
@@ -169,7 +173,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 
                     if (data.review.dateHike) {
-
                         reviewDateHike.innerText = `Date hiked ${data.review.dateHike}`;
                     } else {
                         reviewDateHike.innerText = "";
@@ -183,6 +186,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     });
                     comment.value = "";
                     dateHike.value = "";
+
+                        errorMessage.innerHTML ="";
+
 
                     //hiding the form
                     reviewForm.classList.add("hidden");
