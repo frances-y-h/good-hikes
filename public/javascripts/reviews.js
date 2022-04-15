@@ -39,8 +39,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 stars.forEach((star) => {
                     star.innerHTML = "&#9734";
                 });
-                comment.value = "";
-                dateHike.value = "";
+                addReviewForm.querySelector("textarea[name=comment]").value = "";
+                addReviewForm.querySelector("input[type=date]").value = "";
                 errorMessage.innerHTML = "";
 
                 //hiding the form
@@ -56,8 +56,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     stars.forEach((star) => {
                         star.innerHTML = "&#9734";
                     });
-                    comment.value = "";
-                    dateHike.value = "";
+
+                    addReviewForm.querySelector("textarea[name=comment]").value = "";
+                    addReviewForm.querySelector("input[type=date]").value = "";
                     errorMessage.innerHTML = "";
 
                     //hide the add-review form
