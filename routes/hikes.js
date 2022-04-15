@@ -120,68 +120,6 @@ const reviewValidators = [
     }),
 ];
 
-router.post(
-    "/:hikeId(\\d+)/reviews",
-    requireAuth,
-    reviewValidators,
-    asyncHandler(async (req, res) => {
-        let { hikeId, rating, comment, dateHike } = req.body;
-        const userId = req.session.auth.userId;
-
-        //if there is no comment (which is optional)
-        //set comment to null and send request to the database
-        if (!comment) {
-            comment = null;
-        }
-
-        //if there is no dateHike (which is optional)
-        //set date to null and send request to the database
-        if (!dateHike) {
-            dateHike = null;
-        }
-
-        //creating a review for the database
-        const review = db.Review.build({
-            userId,
-            hikeId,
-            rating,
-            comment,
-            dateHike,
-        });
-
-        //checking if the input for the review is valid
-        const validationErrors = validationResult(req);
-
-        //find the owner of the review(the user)
-        const user = await db.User.findOne({ where: { id: userId } });
-
-        //if the review is valid, save it to the database
-        if (validationErrors.isEmpty()) {
-            await review.save();
-
-            //response to the frontend page
-            res.json({
-                message: "Success",
-                review,
-                user,
-            });
-        } else {
-            //if review is not valid, send the errors to the frontend
-            const errors = validationErrors.array().map((err) => err.msg);
-
-            //response to the frontend page,
-            //including the errors, built reveiew(for prepopoulating the form),
-            //and the user
-            res.json({
-                message: "Error",
-                errors,
-                review,
-                user,
-            });
-        }
-    })
-);
-
 // API for adding hike to specific user's collections
 router.post(
     "/:hikeId(\\d+)/collections",
