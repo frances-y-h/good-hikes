@@ -8,36 +8,39 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
     editReviewBtn.addEventListener('click', (event) => {
 
         //extracting values from the existing review
-        const reviewData = (event.target.parentNode.parentNode).innerText;
-        const partsOfReview = reviewData.split("\n");
-        const ratingValue = partsOfReview[1];
-        const commentValue = partsOfReview[2];
-        const dateHikeValue = partsOfReview[3].split(" ")[2];
         const reviewId = event.target.id.split("-")[1];
-        const reviewForm = document.getElementById(`edit-review-form-${reviewId}`);
-        const bgModal = reviewForm.parentNode;
-        const errorMessage = document.querySelector(`#edit-review-form-${reviewId} .errors`);
+        const reviewCard = document.getElementById(`reviewId-${reviewId}`);
+        const ratingValue = reviewCard.querySelector(".review-rating").innerText;
+        const commentValue = reviewCard.querySelector(".comment").innerText;
+        const dateHikeValue = reviewCard.querySelector(".dateHike").innerText.split(" ")[2];
+        const editReviewForm = document.getElementById(`edit-review-form-${reviewId}`);
+        const bgModal = editReviewForm.parentNode;
+        const errorMessage = editReviewForm.querySelector(`#edit-review-form-${reviewId} .errors`);
 
         // cancel and submit edit review buttons
-        const cancelReviewButton = reviewForm.querySelector("#edit-review-cancel");
-        const submitReviewButton = reviewForm.querySelector("#edit-review-submit");
+        const cancelReviewButton = editReviewForm.querySelector("#edit-review-cancel");
+        const submitReviewButton = editReviewForm.querySelector("#edit-review-submit");
 
         //show edit form
-        reviewForm.classList.remove("hidden");
+        editReviewForm.classList.remove("hidden");
         bgModal.classList.remove("hidden");
 
         //grabbing comment and dateHike fields from them edit form
-        let commentField = document.querySelector(`#edit-review-form-${reviewId} textarea[name=comment]`);
-        let dateHikeField = document.querySelector(`#edit-review-form-${reviewId} input[name=dateHike]`);
-        let stars = document.querySelectorAll(`#edit-review-form-${reviewId} .star`);
+        let commentField = editReviewForm.querySelector("textarea[name=comment]");
+        let dateHikeField = editReviewForm.querySelector("input[name=dateHike]");
+        let stars = editReviewForm.querySelectorAll(".star");
 
         //populate form fields with existing values
-        if (commentValue === "Delete") {
+        if (commentValue.length === 0) {
             commentField.innerText = "";
         } else {
             commentField.innerText = commentValue;
         }
-        dateHikeField.value = dateHikeValue;
+        if (!dateHikeValue) {
+            dateHikeField.value = "";
+        } else {
+            dateHikeField.value = dateHikeValue;
+        }
 
         for (let i = 0; i < ratingValue; i++) {
             const star = stars[i];
@@ -53,13 +56,12 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
                 star.innerHTML = '&#9734';
             });
 
-            comment.value = "";
-            dateHike.value = "";
+            commentField.value = commentValue;
+            dateHikeField.value = dateHikeValue;
             errorMessage.innerHTML = "";
 
-
             //hiding the form
-            reviewForm.classList.add("hidden");
+            editReviewForm.classList.add("hidden");
             bgModal.classList.add("hidden");
         });
 
@@ -69,13 +71,13 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
                 stars.forEach(star => {
                     star.innerHTML = '&#9734';
                 });
-                comment.value = "";
-                dateHike.value = "";
-                errorMessage.innerHTML = "";
 
+                commentField.value = commentValue;
+                dateHikeField.value = dateHikeValue;
 
-                reviewForm.classList.add("hidden");
+                editReviewForm.classList.add("hidden");
                 bgModal.classList.add("hidden");
+                errorMessage.innerHTML = "";
             }
         };
 
@@ -105,9 +107,17 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
             event.preventDefault();
 
             //grabbing comment and dateHike fields from the form
-            let commentUpdated = document.querySelector(`#edit-review-form-${reviewId} textarea[name=comment]`);
-            let dateHikeUpdated = document.querySelector(`#edit-review-form-${reviewId} input[name=dateHike]`);
+            const editFormData = new FormData(editReviewForm);
+            let commentUpdated = editFormData.get("comment");
+            let dateHikeUpdated = editFormData.get("dateHike");
 
+            if (!commentUpdated.length) {
+                commentUpdated = null;
+            }
+
+            if (!dateHikeUpdated.length) {
+                dateHikeUpdated = null;
+            }
 
             //send request to the database
             const res = await fetch(`/reviews/${reviewId}`, {
@@ -116,30 +126,27 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
                 body: JSON.stringify({
                     hikeId,
                     rating,
-                    comment: commentUpdated.value,
-                    dateHike: dateHikeUpdated.value,
+                    comment: commentUpdated,
+                    dateHike: dateHikeUpdated,
                 }),
             });
 
             //response from the database
             const data = await res.json();
 
-
             //if response was successful
             if (data.message === 'Success') {
 
-
-
                 // grab the review fields from review card
                 const reviewCard = document.querySelector(`#reviewId-${reviewId}`);
-                const reviewRating = reviewCard.querySelector('.rating-username #rating');
-                const reviewComment = reviewCard.querySelector('.review .comment');
-                const reviewDateHike = reviewCard.querySelector('.review .dateHike');
-                const starRating = reviewCard.querySelector('.review .star-sprite');
+                const reviewRating = reviewCard.querySelector('.rating-username .review-rating');
+                const reviewComment = reviewCard.querySelector('.comment');
+                const reviewDateHike = reviewCard.querySelector('.dateHike');
+                const starRating = reviewCard.querySelector('.star-sprite');
 
                 //populate them with the saved data from the database
                 starRating.style = `width:${data.reviewToUpdate.rating / 5 * 100}%`;
-                reviewRating.innerHTML = data.reviewToUpdate.rating;
+                reviewRating.innerText = data.reviewToUpdate.rating;
 
                 if (data.reviewToUpdate.comment) {
                     reviewComment.innerHTML = data.reviewToUpdate.comment;
@@ -152,10 +159,10 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
                 }
 
                 if (data.reviewToUpdate.dateHike) {
-                    reviewDateHike.value = data.reviewToUpdate.dateHike;
+                    reviewDateHike.innerHTML = `<span> Date hiked ${data.reviewToUpdate.dateHike}</span>`;
                 } else {
                     if (dateHikeValue) {
-                        reviewDateHike.value = dateHikeValue;
+                        reviewDateHike.innerHTML = `<span>Date hiked ${dateHikeValue}</span>`;
                     }
                 }
 
@@ -167,7 +174,7 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
                 dateHike.value = "";
 
                 //hiding the form
-                reviewForm.classList.add("hidden");
+                editReviewForm.classList.add("hidden");
                 bgModal.classList.add("hidden");
             } else {
 
@@ -180,7 +187,13 @@ const addEditReviewEventHanlder = (editReviewBtn) => {
                 if (data.reviewToUpdate.dateHike) {
                     dateHike = data.reviewToUpdate.dateHike;
                 }
-                errorMessage.innerHTML = data.errors;
+                errorMessage.innerHTML = data.errors.map(
+                    message => `
+                                    <div style="margin-bottom: 5px">
+                                        ${message}
+                                    </div>
+                                `
+                ).join("");
 
             }
         });

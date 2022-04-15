@@ -87,8 +87,9 @@ block content
                         span.star-sprite(style=`width:${review.rating/5*100}%`)
                       .review-rating #{review.rating}
                 .comment #{review.comment}
-                if (review.dateHike)
-                  .dateHike Date hiked #{review.dateHike}
+                .dateHike
+                  if (review.dateHike)
+                    span Date hiked #{review.dateHike}
                 if loggedInUserId === review.User.id
                   .delete-edit-block
                     button(id=`delete-${review.id}`).delete-review Delete

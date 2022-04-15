@@ -105,7 +105,7 @@ const addDeleteReviewEventHandler = (deleteReviewButton) => {
                     }
 
                     if (reviewToUpdate.dateHike) {
-                        dateHike.innerHTML = `Date hiked ${reviewToUpdate.dateHike}`;
+                        dateHike.innerHTML = `<span>Date hiked ${reviewToUpdate.dateHike}</span>`;
                     } else {
                         dateHike.innerHTML = "";
                     }

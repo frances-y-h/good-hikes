@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
                         }
 
                         if (dateHikeNew) {
-                            dateHike.innerHTML = `Date hiked ${dateHikeNew}`;
+                            dateHike.innerHTML = `<span>Date hiked ${dateHikeNew}</span>`;
                         } else {
                             dateHike.innerHTML = "";
                         }
