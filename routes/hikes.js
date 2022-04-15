@@ -198,6 +198,7 @@ router.get(
 // API for adding hike to specific user's collections
 router.post(
     "/:hikeId(\\d+)/collections",
+    requireAuth,
     asyncHandler(async (req, res) => {
         const hikeId = parseInt(req.params.hikeId, 10);
         // get the array with collectionId and whether checked or not
@@ -240,6 +241,7 @@ router.post(
 // API route for deleting specific hike from collections
 router.delete(
     "/:hikeId(\\d+)/collections",
+    requireAuth,
     asyncHandler(async (req, res) => {
         const hikeId = parseInt(req.params.hikeId, 10);
         const collectionId = req.body.collectionId;
@@ -344,7 +346,7 @@ router.post(
             res.json({
                 message: "Error",
                 errors,
-                review
+                review,
             });
         }
     })
