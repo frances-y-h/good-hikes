@@ -33,9 +33,9 @@ block content
                         .delete-modal.hide-delete(id=`delete-confirm-page-${collection.id}`)
                             div.delete-confirm-page.form-control
                                 p Are you sure you want to delete this collection?
-                                p There are #{collection.Hikes.length} hikes associated with the collection.
+                                p There are #{collection.Hikes.length} hikes in this collection.
                                 div#delete-collection-button-div
-                                    button.btn(id=`delete-collection-submit-${collection.id}`) Submit
+                                    button.btn(id=`delete-collection-submit-${collection.id}`) Delete
                                     button.btn.btn-cancel(id=`delete-collection-cancel-${collection.id}`) Cancel
                         tr.hike-row(class=`row-${collection.id}`)
                             td.center                            
