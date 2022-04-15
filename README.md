@@ -1,6 +1,6 @@
 # Good Hikes
 
-Good Hike https://good-hikes.herokuapp.com/
+Good Hikes https://good-hikes.herokuapp.com/
 
 ![alt text](public/images/readme/homepage.png) **_Home Page_**
 
