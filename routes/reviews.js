@@ -3,6 +3,7 @@ const router = express.Router();
 const { asyncHandler } = require("./utils");
 const db = require("../db/models");
 const { check, validationResult } = require('express-validator');
+const { requireAuth } = require('../auth');
 
 
 //validation for the review form
@@ -21,7 +22,7 @@ const reviewValidators = [
         })
 ];
 
-router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) => {
+router.put('/:reviewId(\\d+)', requireAuth, reviewValidators, asyncHandler(async (req, res) => {
 
     // destructing the request body
     let { hikeId, rating, comment, dateHike } = req.body;
@@ -89,7 +90,7 @@ router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) =
     }
 }));
 
-router.delete('/:reviewId', asyncHandler(async (req, res) => {
+router.delete('/:reviewId', requireAuth, asyncHandler(async (req, res) => {
 
     //getting hikeId from the request
     const { hikeId } = req.body;
