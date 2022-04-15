@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     } else {
                         wantToHikeSpan.innerText = "";
                     }
-                    updateStatusDiv.innerText = "Collection Updated!";
+                    updateStatusDiv.innerText = "Collection(s) Updated!";
                 } else {
                     updateStatusDiv.innerText =
                         "Something went wrong. Please try again";

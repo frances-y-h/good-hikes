@@ -1,12 +1,16 @@
 # Good Hikes
 
-[link] https://good-hikes.herokuapp.com/
+[link] Good Hike https://good-hikes.herokuapp.com/
 
-![alt text](public/images/readme/homepage.png) **_Home page_**
+![alt text](public/images/readme/homepage.png) **_Home Page_**
 
-![alt text](public/images/readme/hikepage.png) **_Hike page_** - with review function and dropdown for adding hikes to user's collections
+![alt text](public/images/readme/search-page.png) **_Advanced Search Page_** - search by city name, trail name, sorting and multiple filters.
 
-![alt text](public/images/readme/collection-page.png) **_My Hikes page_** - organizing collections of hike
+![alt text](public/images/readme/hikepage.png) **_Hike Page_** - with review function and dropdown for adding hikes to user's collections
+
+![alt text](public/images/readme/collection-page.png) **_My Hikes Page_** - organizing collections of hike
+
+[link] Git Wiki https://github.com/frances-y-h/good-hikes/wiki
 
 ## Good Hikes at a Glance
 
