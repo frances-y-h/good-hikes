@@ -20,26 +20,40 @@ mixin dropDown(keyword, buttonText)
     button(id=`${keyword}-button`).btn.search-toggle #{buttonText}
       span(class="material-icons-outlined") expand_more
     div(id=`${keyword}-menu`).toggle-popup.hidden
-      form.inner-popup(action="/search" method="get")
+      form.inner-popup(action="/search" method="get" )
         div.options-container
           block
         div.menu-bottom
           button.btn.menu-btn.clear-filters(type="reset" name="clear" value="clear") Clear
-          button.btn.menu-btn.search-filters(type="submit") See Results
+          button.btn.menu-btn.search-filters(type="submit" id=`menu-submit-${keyword}`) See Results
 
-mixin radio(idName, groupName, value, radioText)
-  div
-    label(for=`${idName}-radio`)
-      div.radio-container
-        input(type="radio" id=`${idName}-radio` name=groupName value=value)
-        div #{radioText}
+mixin radio(idName, groupName, value, radioText, conditional)
+  if(conditional==="true")
+    div
+      label(for=`${idName}-radio`)
+        div.radio-container
+          input(type="radio" id=`${idName}-radio` name=groupName value=value checked="true")
+          div #{radioText}
+  else
+    div
+      label(for=`${idName}-radio`)
+        div.radio-container
+          input(type="radio" id=`${idName}-radio` name=groupName value=value)
+          div #{radioText}
 
-mixin checkbox(idName, groupName, value, checkText)
-  div
-    label(for=`${idName}-check`)
-      div.check-container
-        input(type="checkbox" id=`${idName}-check` name=groupName value=value)
-        div #{checkText}
+mixin checkbox(idName, groupName, value, checkText,conditional)
+  if(conditional==="true")
+    div
+      label(for=`${idName}-check`)
+        div.check-container
+          input(type="checkbox" id=`${idName}-check` name=groupName value=value checked="true")
+          div #{checkText}
+  else
+    div
+      label(for=`${idName}-check`)
+        div.check-container
+          input(type="checkbox" id=`${idName}-check` name=groupName value=value)
+          div #{checkText}
 
 mixin range(idName, min, max, value, name, minText, maxText)
   div

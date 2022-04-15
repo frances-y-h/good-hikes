@@ -145,6 +145,13 @@ npx dotenv sequelize db:seed:all
       console.log(hashedPassword)
     })();
 
+     (async () => {
+      const bcrypt = require('bcryptjs');
+      let password = 'I<3CrackTheShutters!';
+      const hashedPassword = await bcrypt.hash(password, 10);
+      console.log(hashedPassword)
+    })();
+
 //add "clean" script to package.jon
 
     "clean": "npx dotenv sequelize db:drop && npx dotenv sequelize db:create && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all"

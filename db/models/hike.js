@@ -59,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "hikeId",
         };
         Hike.belongsToMany(models.Collection, columnMapping4);
+        Hike.hasMany(models.Review, { foreignKey: "hikeId" });
     };
     return Hike;
 };

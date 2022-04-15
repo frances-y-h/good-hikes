@@ -5,36 +5,36 @@ block content
   link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
   script(src="/javascripts/search.js")
   main
-
-    h1#search-header Advanced Search
-    div#adv-search-container
-      div#adv-search-bar
-        form(action='/search' method='get' id='adv-search-form')
-          div#adv-search-input-container
-            input#adv-search-input(type="text" name="query" placeholder=searchQuery)
-          button#adv-search-button.btn(type='submit') Search
-            //-   i(class='fa fa-search')
+    div#search-header-container
+      h1#search-header Advanced Search
+      div#adv-search-container
+        div#adv-search-bar
+          form(action='/search' method='get' id='adv-search-form')
+            div#adv-search-input-container
+              input#adv-search-input(type="text" name="query" placeholder="Search Hikes" value=searchQuery)
+            button#adv-search-button.btn(type='submit') Search
+              //-   i(class='fa fa-search')
 
       div#search-toggles
         +dropDown("sort", "Sort")
-          +radio("alphabetical","sort","alphabetical","Alphabetical")
-          +radio("popular","sort","popular","Most popular")
-          +radio("shortest","sort","length","Shortest Length")
-          +radio("difficulty","sort","difficulty","Difficulty")
+          +radio("alphabetical","sort","alphabetical","Alphabetical",`${formData.sort.alphabetical}`)
+          +radio("popular","sort","popular","Most popular",`${formData.sort.popular}`)
+          +radio("shortest","sort","shortest","Shortest Length",`${formData.sort.shortest}`)
+          +radio("difficulty","sort","difficulty","Difficulty",`${formData.sort.difficulty}`)
         +dropDown("difficulty", "Difficulty")
-          +checkbox("easy","difficulty","easy","Easy")
-          +checkbox("moderate","difficulty","moderate","Moderate")
-          +checkbox("hard","difficulty","hard","Hard")
+          +checkbox("easy","difficulty","1","Easy",`${formData.difficulty.easy}`)
+          +checkbox("moderate","difficulty","2","Moderate",`${formData.difficulty.moderate}`)
+          +checkbox("hard","difficulty","3","Hard",`${formData.difficulty.hard}`)
         +dropDown("length", "Length")
           //- slider 0 --> 50+ mi
-          +range("length","0","50","50", "length", "0 mi", "50+ mi")
+          +range("length","0","50",`${formData.length}`, "length", "0 mi", "Max: 50+ mi")
         +dropDown("elevation", "Elevation Gain")
           //- slider 0 --> 5000+ ft
-          +range("elevation","0","5000","5000", "elevationChange", "0 ft", "5000+ ft")
+          +range("elevation","0","5000",`${formData.elevationChange}`, "elevationChange", "0 ft", ",Max: 5000+ ft")
         +dropDown("routeType", "Route Type")
-          +checkbox("loop","routeType","1","Loop")
-          +checkbox("out-back","routeType","2","Out & back")
-          +checkbox("Point-point","routeType","3","Point to point")
+          +checkbox("loop","routeType","1","Loop",`${formData.routeType.loop}`)
+          +checkbox("out-back","routeType","2","Out & back",`${formData.routeType.outBack}`)
+          +checkbox("Point-point","routeType","3","Point to point",`${formData.routeType.point}`)
         +dropDown("rating", "Rating")
           div
             label(for=`rating-range`)
@@ -53,49 +53,51 @@ block content
                     span.rating-dd-star &#9733
         +dropDown("suitability", "Suitability")
           //- 2	Fee, 11	Parking, 13	Paved, 12	Restrooms, 14	No dogs, 15	Dogs Allowed
-          +checkbox("fees","suitability","2","Fees")
-          +checkbox("parking","suitability","11","Parking")
-          +checkbox("paved","suitability","13","Paved")
-          +checkbox("restrooms","suitability","12","Restrooms")
-          +checkbox("no-dogs","suitability","14","No dogs")
-          +checkbox("dogs-allowed","suitability","15","Dogs allowed")
+          +checkbox("fees","suitability","2","Fees",`${formData.tagsSuit.fee}`)
+          +checkbox("parking","suitability","11","Parking",`${formData.tagsSuit.parking}`)
+          +checkbox("paved","suitability","13","Paved",`${formData.tagsSuit.paved}`)
+          +checkbox("restrooms","suitability","12","Restrooms",`${formData.tagsSuit.rest}`)
+          +checkbox("no-dogs","suitability","14","No dogs",`${formData.tagsSuit.noDogs}`)
+          +checkbox("dogs-allowed","suitability","15","Dogs allowed",`${formData.tagsSuit.yesDogs}`)
         +dropDown("attractions", "Attractions")
           //- 1	Backpacking, 3	Forest, 4	Lake, 5	No shade, 6	River,
           //- 7	Views, 8	Waterfall, 10	Wildlife, 9	Wildflowers
-          +checkbox("backpacking","attractions","1","Backpacking")
-          +checkbox("forest","attractions","3","Forest")
-          +checkbox("lake","attractions","4","Lake")
-          +checkbox("no-shade","attractions","5","No shade")
-          +checkbox("river","attractions","6","River")
-          +checkbox("views","attractions","7","Views")
-          +checkbox("waterfall","attractions","8","Waterfall")
-          +checkbox("wildlife","attractions","10","Wildlife")
-          +checkbox("wildflowers","attractions","9","Wildflowers")
+          +checkbox("backpacking","attractions","1","Backpacking",`${formData.tagsAtt.backpacking}`)
+          +checkbox("forest","attractions","3","Forest",`${formData.tagsAtt.forest}`)
+          +checkbox("lake","attractions","4","Lake",`${formData.tagsAtt.lake}`)
+          +checkbox("no-shade","attractions","5","No shade",`${formData.tagsAtt.noShade}`)
+          +checkbox("river","attractions","6","River",`${formData.tagsAtt.river}`)
+          +checkbox("views","attractions","7","Views",`${formData.tagsAtt.views}`)
+          +checkbox("waterfall","attractions","8","Waterfall",`${formData.tagsAtt.waterfall}`)
+          +checkbox("wildlife","attractions","10","Wildlife",`${formData.tagsAtt.wildlife}`)
+          +checkbox("wildflowers","attractions","9","Wildflowers",`${formData.tagsAtt.wildflowers}`)
 
-    h1.hike-header Hike Search Results
-    if hikes.length > 0
-      div.hike-list
-        each hike in hikes
-          a.hike-card(href=`hikes/${hike.id}`)
-            div.hike-img(style=`background-image: url('${hike.imgUrl}'); border-top-left-radius: 10px; border-top-right-radius: 10px; background-position: center; background-size: cover;`)
-              div.hike-name #{hike.name}
-            div.card-text
-              div.hike-name-location
+      h1.hike-header Hike Search Results
+    if finalHikes.length > 0
+      div#hike-list-container
+        div#hike-list-inner-container
+          each hike in finalHikes
+            a.hike-card(href=`hikes/${hike.id}`)
+              div.hike-card-img(style=`background-image: url('${hike.imgUrl}'); border-top-left-radius: 10px; border-top-right-radius: 10px; background-position: center; background-size: cover;`)
+                div.hike-name #{hike.name}
+              div.hike-card-text
                 div.hike-location #{hike.CityPark.name}, #{hike.State.state}
-              div.hike-level-review
-                div.hike-level #{hike.Difficulty.level}
-                div.hike-stars
-                  span.star-sprite(style=`width:${hike.avgReviewPtg}%`)
-                div.hike-avg-review (#{hike.reviewCount})
-                  //- #{hike.avgReview}
-              div.hike-length-time
-                div.hike-length #{hike.length} mi •
-                div.hike-time Est. Time #{hike.length}
-                //- div
-                //-   div.hike-key-title Elevation gain:
-                //-   div.hike-elevation #{hike.elevationChange} ft
-                //- div
-                //-   div.hike-key-title Route type
-                //-  div.hike-key-detail #{hike.RouteType.name}
+                div.hike-level-rating
+                  div.hike-level #{hike.Difficulty.level}
+                  div.hike-rating-stars-container
+                    div.hike-rating-stars-gray
+                      span.hike-rating-stars-yellow(style=`width:${hike.avgReviewPtg}%`)
+                  div.hike-rating-count (#{hike.reviewCount})
+                    //- #{hike.avgReview}
+                div.hike-length-time
+                  div.hike-length Length: #{hike.length} mi &nbsp; • &nbsp;
+                  //- &#8729  - type of smaller dot  or • or  ∙  &nbsp; = space
+                  div.hike-time Est. #{hike.hr} hr #{hike.min} min
+                  //- div
+                  //-   div.hike-key-title Elevation gain:
+                  //-   div.hike-elevation #{hike.elevationChange} ft
+                  //- div
+                  //-   div.hike-key-title Route type
+                  //-  div.hike-key-detail #{hike.RouteType.name}
     else
       p No results found
