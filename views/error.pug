@@ -1,6 +1,10 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  link(rel="stylesheet" href="/stylesheets/errorpage.css")
+  div.errorpage
+    div.searchImg
+      img(src="/images/404.svg" alt="Searching" width="600px" height="100%")
+    h1= message
+    h2= error.status
+    pre #{error.stack}

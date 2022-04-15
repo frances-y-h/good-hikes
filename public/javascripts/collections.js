@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const wantToHikeSpan = document.querySelector(".checkMk");
         const checkBoxDivs = document.querySelectorAll(".dropdown-item");
         const wantToHikeCkBx = checkBoxDivs[0].children[0];
+        const dropdownModal = document.querySelector(".bg-modal-dropdown");
 
         //Quick add "Want To Hike"
         const wantToBtn = document.querySelector(".hike-coll-want");
@@ -58,8 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const dropdownMenu = document.querySelector(".dropdown-menu");
 
         menuBtn.addEventListener("click", (ev) => {
-            dropdownMenu.classList.toggle("hidden");
-            modal3.classList.toggle("hidden");
+            dropdownMenu.classList.remove("hidden");
+            dropdownModal.classList.remove("hidden");
         });
 
         // Click on div and will update checkbox, instead of having to click exactly on the box
@@ -89,8 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         addNewCollectionBtn.addEventListener("click", async (event) => {
             event.preventDefault();
-            const newCollectionName =
-                document.getElementById("add-new-coll").value;
+            const collectionInput = document.getElementById("add-new-coll");
+            const newCollectionName = collectionInput.value;
             // specific route for api
             const res = await fetch(`/collections`, {
                 method: "POST",
@@ -106,14 +107,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 const newDropdownDiv = checkBoxDivs[0].cloneNode(true);
 
                 // Set correct ID and value for input and label
-                newDropdownDiv.children[0].id = `collectionId-${collectionId}`;
-                newDropdownDiv.children[1].id = `collectionId-${collectionId}`;
-                newDropdownDiv.children[1].setAttribute(
-                    "for",
-                    `collectionId-${collectionId}`
-                );
-                newDropdownDiv.children[1].innerText = collectionName;
-                collectionDropdown.append(newDropdownDiv);
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("dropdown-item");
+
+                const newInput = document.createElement("input");
+                newInput.classList.add("coll-ckbx");
+                newInput.setAttribute("type", "checkbox");
+                newInput.setAttribute("id", `collectionId-${collectionId}`);
+
+                const newLabel = document.createElement("label");
+                newLabel.classList.add("coll-label");
+                newLabel.setAttribute("for", `collectionId-${collectionId}`);
+                newLabel.innerText = collectionName;
+
+                itemDiv.append(newInput);
+                itemDiv.append(newLabel);
+                collectionInput.value = "";
+                collectionDropdown.append(itemDiv);
             } else {
                 addNewCollectionTitle.innerText = data.message;
             }
@@ -153,11 +163,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // If we click outside the menu, will close the menu
-        const modal3 = document.querySelector(".bg-modal3");
+
         window.onclick = function (event) {
-            if (event.target == modal3) {
+            if (event.target == dropdownModal) {
                 dropdownMenu.classList.add("hidden");
-                modal3.classList.add("hidden");
+                dropdownModal.classList.add("hidden");
             }
         };
     }
