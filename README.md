@@ -1,6 +1,6 @@
 # Good Hikes
 
-[link] Good Hike https://good-hikes.herokuapp.com/
+Good Hike https://good-hikes.herokuapp.com/
 
 ![alt text](public/images/readme/homepage.png) **_Home Page_**
 
@@ -8,13 +8,13 @@
 
 ![alt text](public/images/readme/hikepage.png) **_Hike Page_** - with review function and dropdown for adding hikes to user's collections
 
-![alt text](public/images/readme/collection-page.png) **_My Hikes Page_** - organizing collections of hike
+![alt text](public/images/readme/collection-page.png) **_My Hikes Page_** - organizing collections of hikes
 
-[link] Git Wiki https://github.com/frances-y-h/good-hikes/wiki
+Git Wiki https://github.com/frances-y-h/good-hikes/wiki
 
 ## Good Hikes at a Glance
 
-Good Hikes is a full stack application that allows users to browse, manage, and review hikes. Users are not required to sign up for an account if they are just browsing and searching for hikes. Logged in users can add a hike to their collections, add reviews/comments to hikes, and edit/delete their own review/comments. Currently, Good Hikes is seeded with 60 trails all over United States. User `IfIJustLayHere` loves Good Hikes so much that they visited every trail on Good Hikes and left mutiple comments on it.
+Good Hikes is a full stack application that allows users to browse, manage, and review hikes. Users are not required to sign up for an account if they are just browsing and searching for hikes. Logged in users can add a hike to their collections, add reviews/comments to hikes, and edit/delete their own review/comments. Currently, Good Hikes is seeded with 60 trails all over the United States. User `IfIJustLayHere` loves Good Hikes so much that they visited every trail on Good Hikes and left mutiple comments on each.
 
 ## Application Architecture
 
@@ -36,13 +36,13 @@ Good Hikes uses CSS to style all of the HTML documents, including interactive bu
 
 #### Javacript
 
-To improve user experience, Good Hikes uses Javacript to create a resonsive experiance.
+To improve user experience, Good Hikes uses Javacript to create a responsive experiance.
 
 ### Backend Overview
 
-Good Hikes uses an Express server with PostgreSQL database. Good Hikes also implemented feature to protect user's password and information.
+Good Hikes uses an Express server with PostgreSQL database. Good Hikes also implemented features to protect user's password and information.
 
-#### ExpressJS
+#### Express.js
 
 The server of Good Hikes is set up with Express JS. It is minimal and flexible enough to carry out the desired functionality while maintining the code dry.
 
@@ -52,7 +52,7 @@ Good Hikes choose to use Express Sessions to create and manage session cookies o
 
 #### Express Validator
 
-Express Validator is powerful yet simple. Good Hikes makes sure when users are signing up, loggin in, and creating new reviews, proper values has been inserted.
+Express Validator is powerful yet simple. Good Hikes makes sure when users are signing up, logging in, and creating new reviews, proper values have been inserted.
 
 #### PostgreSQL
 
@@ -72,6 +72,6 @@ A secure random CSRF token is generated on all forms that users fill in to preve
 
 ## Conclusion and Next Steps
 
-The next step for Good Hikes is to build a social network, including "Friends" and "Hiking Communities". Registered users can join community, schedule hiking events, create posts on community page.
+The next step for Good Hikes is to build a social network, including "Friends" and "Hiking Communities". Registered users can join communities, schedule hiking events, create posts on community pages.
 
-Good Hikes also plans to implement "Likes" feature to comments. Helpful comments will be rated higher. Our goal is to boostt interactivities between users.
+Good Hikes also plans to implement a "Likes" feature to comments. Helpful comments will be rated higher. Our goal is to boost interactivity between users.
