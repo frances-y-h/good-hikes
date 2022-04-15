@@ -150,6 +150,7 @@
 .rating-table-add-review {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .rating-bar-table {
@@ -170,6 +171,11 @@
     background-color: var(--bar);
     height: 8px;
     border-radius: 4px;
+}
+
+.hike-average-rating span{
+    font-size: 48px;
+    color: var(--dark1);
 }
 
 .add-review-btn {

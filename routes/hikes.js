@@ -186,6 +186,7 @@ router.get(
             hike,
             reviews,
             reviewCount,
+            avgReview,
             avgReviewPtg,
             avgRatingPercentage,
             collections,

@@ -7,41 +7,50 @@ const { check, validationResult } = require("express-validator");
 const { loginUser, restoreUser, logoutUser, requireAuth } = require("../auth");
 
 const signupValidator = [
-    check("username")
-        .exists({ checkFalsy: true })
-        .withMessage("Please enter username")
-        .isLength({ max: 50 })
-        .withMessage("Username must not be longer than 50 characters")
-        .custom((value) => {
-            return db.User.findOne({ where: { username: value } }).then(
-                (user) => {
-                    if (user) {
-                        return Promise.reject("Username already exists");
-                    }
-                }
-            );
-        }),
-    check("email")
-        .exists({ checkFalsy: true })
-        .withMessage("Please enter email")
-        .isEmail()
-        .withMessage("Please enter a valid email address"),
-    check("password")
-        .exists({ checkFalsy: true })
-        .withMessage("Please enter password")
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, "g")
-        .withMessage(
-            'Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'
-        ),
-    check("confirmPassword")
-        .exists({ checkFalsy: true })
-        .withMessage("Please confirm password")
-        .custom((value, { req }) => {
-            if (value !== req.body.password) {
-                throw new Error("Confirm password and password does not match");
-            }
-            return true;
-        }),
+	check("username")
+		.exists({ checkFalsy: true })
+		.withMessage("Please enter username")
+		.isLength({ max: 50 })
+		.withMessage("Username must not be longer than 50 characters")
+		.custom((value) => {
+			return db.User.findOne({ where: { username: value } }).then(
+				(user) => {
+					if (user) {
+						return Promise.reject("Username already exists");
+					}
+				}
+			);
+		}),
+	check("email")
+		.exists({ checkFalsy: true })
+		.withMessage("Please enter email")
+		.isEmail()
+		.withMessage("Please enter a valid email address")
+		.custom((value) => {
+			return db.User.findOne({ where: { email: value } }).then(
+				(user) => {
+					if (user) {
+						return Promise.reject("Email already exists");
+					}
+				}
+			);
+		}),
+	check("password")
+		.exists({ checkFalsy: true })
+		.withMessage("Please enter password")
+		.matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, "g")
+		.withMessage(
+			'Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'
+		),
+	check("confirmPassword")
+		.exists({ checkFalsy: true })
+		.withMessage("Please confirm password")
+		.custom((value, { req }) => {
+			if (value !== req.body.password) {
+				throw new Error("Confirm password and password does not match");
+			}
+			return true;
+		}),
 ];
 
 router.get("/signup", csrfProtection, (req, res) => {

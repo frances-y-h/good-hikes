@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     //grab the buttons and input fields for the edit form
     const renameBtns = document.querySelectorAll('.btn-rename');
     const updateBtns = document.querySelectorAll(".btn-update");
-    const cancelBtns = document.querySelectorAll(".btn-cancel");
+    const cancelBtns = document.querySelectorAll(".btn-cancel.rename");
     const renameInputs = document.querySelectorAll(".input-rename");
     const pNames = document.querySelectorAll(".p-table");
 
+    console.log(updateBtns);
+    console.log(cancelBtns);
     //grab update error div to reset inner HTML upon button clicks
     const updateError = document.querySelector(".update-name-errors");
 
