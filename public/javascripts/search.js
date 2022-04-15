@@ -49,13 +49,81 @@ document.addEventListener("DOMContentLoaded", (event) => {
             event.preventDefault();
 
             /*
-            intercept the for data
-            parse it out
-            send a redirect to new search
-            window
+            intercept the form data, parse it out
+            send a redirect to new search with form data in link
+            backend:
+            if filter selected, need to re-render page with form filled out
             */
 
-            window.location.href = "/search?query=hike";
+            const forms = document.querySelectorAll("form.inner-popup");
+
+            const data = {};
+
+            for (let i = 0; i < forms.length; i++) {
+                let form = forms[i];
+                let formData = new FormData(form);
+
+                for (let pair of formData.entries()) {
+                    if ([...formData.entries()].length > 1) {
+                        if (typeof data[pair[0]] !== "object") {
+                            data[pair[0]] = {};
+                        }
+                        data[pair[0]][pair[1]] = pair[1];
+                    } else {
+                        data[pair[0]] = pair[1];
+                    }
+                }
+            }
+
+            // console.log(data);
+
+            const variables = ["", "", "", "", "", "", "", ""];
+            const properties = [
+                "sort",
+                "difficulty",
+                "length",
+                "elevationChange",
+                "routeType",
+                "rating",
+                "suitability",
+                "attractions",
+            ];
+
+            for (let i = 0; i < variables.length; i++) {
+                let prop = properties[i];
+                if (data[prop]) {
+                    if (typeof data[prop] === "object") {
+                        const values = Object.values(data[prop]);
+                        variables[i] = `&${prop}=${values.join("-")}`;
+                    } else {
+                        variables[i] = `&${prop}=${data[prop]}`;
+                    }
+                }
+            }
+
+            let sort = variables[0];
+            let difficulty = variables[1];
+            let length = variables[2];
+            let elevation = variables[3]; //elevationChange
+            let routeType = variables[4];
+            let rating = variables[5];
+            let suitability = variables[6];
+            let attractions = variables[7];
+
+            const searchBar = document.querySelector("#adv-search-input");
+            const url =
+                `/search?query=${searchBar.value}` +
+                sort +
+                difficulty +
+                length +
+                elevation +
+                routeType +
+                rating +
+                suitability +
+                attractions;
+
+            //send user to proper search query:
+            window.location.href = url;
         });
     });
 
