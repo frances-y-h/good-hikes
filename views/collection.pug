@@ -2,16 +2,24 @@ extends layout
 
 block content
     link(rel='stylesheet' href='/stylesheets/collection.css')
+    script(src='/javascripts/addCollection.js')
     #collection-grid
         #left-whitespace
-        #collection-list 
-            h3 Hike Collections 
+        #collection-list
+            h3 Hike Collections
                 a(href='/collections/edit') (Edit)
             if userCollections
-                ul 
-                    each coll in userCollections 
+                ul
+                    each coll in userCollections
                         li: a(href=`/collections/${coll.id}`) #{coll.name}   (#{coll.Hikes.length})
-            button.btn(id="collection-add") Add a Collection
+            div.new-collection-div.hidden
+              div.add-collection-title Add New Collection
+              div.add-collection-frm
+                input.add-collection-input(type="text" name="add-new-coll" id="add-new-coll")
+                button.btn.btn-sm#add-collection Add
+              div.add-collection-desc
+            div
+              button.btn(id="collection-add") Add a Collection
         #hikes-display
             h2.center Hike Collection: #{collectionName}
             if displayHikes
@@ -19,17 +27,17 @@ block content
                     table
                         thead
                             tr.hike-row
-                                th View 
-                                th Name 
+                                th View
+                                th Name
                                 th Review
                                 th City/Park
                                 th State
                                 th Length
                                 th Elevation Change
-                                th Difficulty 
+                                th Difficulty
                                 th Route Type
                         tbody
-                            each hike in displayHikes 
+                            each hike in displayHikes
                                 tr.hike-row
                                     td: a(href=`/hikes/${hike.id}`)
                                         img.table-img(src=`${hike.imgUrl}`)
@@ -38,16 +46,15 @@ block content
                                         span.star-sprite(style=`width:${hike.avgReviewPtg}%`)
                                     td.hike-text= hike.CityPark.dataValues.name
                                     td.hike-text.center= hike.State.dataValues.abbreviation
-                                    td.hike-text.center= hike.length 
+                                    td.hike-text.center= hike.length
                                     td.hike-text.center= hike.elevationChange
-                                    td.hike-text.center= hike.Difficulty.dataValues.level 
+                                    td.hike-text.center= hike.Difficulty.dataValues.level
                                     td.hike-text.center= hike.RouteType.dataValues.name
-                                
 
-                else 
-                    p No hikes in the collection! 
+
+                else
+                    p No hikes in the collection!
                     p Find some hikes and add them, get to exploring!
             else
                 p Something went wrong, add some collections, add some hikes, get exploring!
         #right-whitespace
-    

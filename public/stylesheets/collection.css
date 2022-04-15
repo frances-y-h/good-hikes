@@ -1,23 +1,22 @@
-#collection-grid{
+#collection-grid {
     display: grid;
     grid-template-columns: 1fr 2fr 9fr 1fr;
-    grid-template-areas:
-        "a b c d";
-        margin-top: 38px;
+    grid-template-areas: "a b c d";
+    margin-top: 38px;
 }
 
-#left-whitespace{
-grid-area: a;
+#left-whitespace {
+    grid-area: a;
 }
-#collection-list{
-grid-area: b;
-margin-top: 150px;
-} 
-#hikes-display{
-grid-area: c;
-margin-top: 38px;
+#collection-list {
+    grid-area: b;
+    margin-top: 150px;
 }
-#right-whitespace{
+#hikes-display {
+    grid-area: c;
+    margin-top: 38px;
+}
+#right-whitespace {
     grid-area: d;
 }
 
@@ -27,17 +26,17 @@ margin-top: 38px;
     margin-bottom: 12px;
 }
 
-.coll-link:hover{
+.coll-link:hover {
     color: var(--mid1);
 }
 
-#collection-list li,a {
+#collection-list li,
+a {
     text-decoration: none;
     color: var(--dark1);
     list-style-type: none;
     font-size: 12px;
 }
-
 
 .table-img {
     width: 35px;
@@ -51,58 +50,54 @@ margin-top: 38px;
     border-bottom: 1px solid var(--light5);
 }
 
-.hike-text{
+.hike-text {
     font-size: 13px;
     inline-size: min-content;
 }
-.center{
+.center {
     text-align: center;
 }
 
-table{
+table {
     border-collapse: collapse;
     border-spacing: 2px;
-    width:100%;
+    width: 100%;
 }
 th {
     font-size: 12px;
 }
-thead > tr.hike-row{
+thead > tr.hike-row {
     border-bottom: 2px solid var(--mid1);
 }
 
-h2{
- font-size: 34px;
- margin-bottom: 38px;
- color: var(--dark1);
+h2 {
+    font-size: 34px;
+    margin-bottom: 38px;
+    color: var(--dark1);
 }
 
-#collection-add{
+#collection-add {
     font-size: 12px;
     margin-top: 15px;
     padding: 5px;
-
 }
-
-
-
 
 #edit-content-div {
     width: 60%;
     margin: 0px auto;
     margin-top: 38px;
 }
-#delete-col{
+#delete-col {
     width: 15%;
 }
-#name-col{
+#name-col {
     width: 65%;
 }
-#rename-col{
+#rename-col {
     width: 20%;
 }
 
-#form-add-collection{
+#form-add-collection {
     background-color: var(--light5);
     height: 66px;
     margin: 30px;
@@ -112,7 +107,7 @@ h2{
     justify-content: space-around;
     align-items: center;
 }
-#new-collection-input{
+#new-collection-input {
     margin-left: 15px;
     width: 70%;
     height: 36px;
@@ -120,13 +115,13 @@ h2{
     border-radius: 25px;
     padding-left: 15px;
 }
-#add-collection-button, .btn-table {
+#add-collection-button,
+.btn-table {
     padding: 10px;
     font-size: smaller;
 }
 
-
-.btn-delete{
+.btn-delete {
     border: none;
     border-radius: 50px;
     color: var(--delete1);
@@ -136,23 +131,23 @@ h2{
     transition: all 0.5s;
 }
 
-.btn-delete:hover{
+.btn-delete:hover {
     background-color: var(--delete1);
     color: white;
 }
-.hike-count{
+.hike-count {
     color: var(--mid1);
     font-size: 12px;
-    padding-left:18px;
+    padding-left: 18px;
 }
 
 .div-errors {
-  border: 1px solid var(--error2);
-  border-radius: 10px;
-  background-color: var(--error1);
-  margin: 0 auto;
-  margin-bottom: 38px;
-  width: 60%;
+    border: 1px solid var(--error2);
+    border-radius: 10px;
+    background-color: var(--error1);
+    margin: 0 auto;
+    margin-bottom: 38px;
+    width: 60%;
 }
 .div-errors p {
     font-size: smaller;
@@ -169,51 +164,50 @@ h2{
     color: var(--error3);
 }
 
-.left{
+.left {
     text-align: left;
 }
 
-.table-coll-edit{
+.table-coll-edit {
     max-width: 1000px;
     margin: 0 auto;
 }
 
-#name-form{
+#name-form {
     display: flex;
     position: relative;
     height: 60px;
 }
 
 /* in delete fetch call as well */
-.hidden{
+.hidden {
     display: none;
 }
 
-#rename-button-div{
+#rename-button-div {
     position: absolute;
     right: -27%;
     top: 22%;
 }
 
-#rename-collection-input{
+#rename-collection-input {
     position: absolute;
     top: 15%;
     left: -2%;
 }
 
-#rename-collection-input{
+#rename-collection-input {
     width: 100%;
     margin: 0 auto;
     height: 50%;
     border: 1px solid var(--dark1);
-    border-radius:16px;
+    border-radius: 16px;
     padding: 15px;
 }
 
-.hike-row{
+.hike-row {
     line-height: 2em;
 }
-
 
 .hike-stars {
     background: url("/images/star-rating-sprite.png") repeat-x;
@@ -232,4 +226,40 @@ h2{
     float: left;
     height: 20px;
     display: block;
+}
+
+/* Mini add to collection form  */
+.new-collection-div {
+    padding: 10px;
+    border-top: 1px solid var(--light1);
+    border-bottom: 1px solid var(--light1);
+    width: 90%;
+}
+
+.add-collection-title {
+    font-size: 10px;
+    padding-bottom: 3px;
+}
+
+.add-collection-frm {
+    display: flex;
+}
+
+.add-collection-input {
+    width: 125px;
+    border-radius: 10px;
+    border: 1px solid var(--mid1);
+    background-color: var(--light6);
+    padding: 3px 5px;
+}
+
+.btn-sm {
+    margin: 0px 5px;
+    padding: 3px 3px;
+    font-size: 12px;
+    font-weight: regular;
+}
+.add-collection-desc {
+    font-size: 10px;
+    color: var(--error3);
 }
