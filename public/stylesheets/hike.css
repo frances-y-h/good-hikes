@@ -202,7 +202,7 @@
     color: var(--dark5);
 }
 
-.dateHike {
+.dateHike span {
     font-size: smaller;
     color: var(--dark5);
 }
