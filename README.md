@@ -1,5 +1,13 @@
 # Good Hikes
 
+[link] https://good-hikes.herokuapp.com/
+
+![alt text](public/images/readme/homepage.png) **_Home page_**
+
+![alt text](public/images/readme/hikepage.png) **_Hike page_** - with review function and dropdown for adding hikes to user's collections
+
+![alt text](public/images/readme/collection-page.png) **_My Hikes page_** - organizing collections of hike
+
 ## Good Hikes at a Glance
 
 Good Hikes is a full stack application that allows users to browse, manage, and review hikes. Users are not required to sign up for an account if they are just browsing and searching for hikes. Logged in users can add a hike to their collections, add reviews/comments to hikes, and edit/delete their own review/comments. Currently, Good Hikes is seeded with 60 trails all over United States. User `IfIJustLayHere` loves Good Hikes so much that they visited every trail on Good Hikes and left mutiple comments on it.
@@ -59,3 +67,7 @@ Good Hikes values the security of users' passwords, that is why all of the passw
 A secure random CSRF token is generated on all forms that users fill in to prevent CSRF attacks.
 
 ## Conclusion and Next Steps
+
+The next step for Good Hikes is to build a social network, including "Friends" and "Hiking Communities". Registered users can join community, schedule hiking events, create posts on community page.
+
+Good Hikes also plans to implement "Likes" feature to comments. Helpful comments will be rated higher. Our goal is to boostt interactivities between users.
