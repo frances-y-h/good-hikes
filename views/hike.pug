@@ -17,11 +17,11 @@ block content
         div.hike-review
           div.hike-stars
             span.star-sprite(style=`width:${avgReviewPtg}%`)
-          div.hike-avg-review  #{avgReview}
+          div.hike-avg-review  (#{reviewCount})
       div.hike-location #{hike.CityPark.name}, #{hike.State.state}
     div.hike-content
       div.hike-details
-        div.hike-description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        div.hike-description #{thisHikeDescription}
         div.hike-key
           div.hike-key-wrap
             div.hike-key-title Length
