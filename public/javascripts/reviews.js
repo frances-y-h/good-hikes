@@ -1,28 +1,35 @@
 document.addEventListener("DOMContentLoaded", (e) => {
-    //getting all the form elements(form, review, cancel, submit buttons)
-    const reviewForm = document.getElementById("review-form");
-    const reviewButton = document.querySelector(".review-btn");
-    const cancelReviewButton = document.querySelector("#review-cancel");
-    const submitReviewButton = document.querySelector("#review-submit");
-    //errors block
-    const errorMessage = document.querySelector(".errors");
 
-    //getting bg-modal for changing the background color
-    const bgModal = document.querySelector(".bg-modal");
+    // get add review button
+    const reviewButton = document.querySelector(".add-review-btn");
 
+    // check if user is logged in and can add review
     const ifLoggedIn = reviewButton.getAttribute("data-user");
+
     //event listener to the Write review button
     reviewButton.addEventListener("click", (event) => {
+
+        // after click if user is not logged in
+        //redirect to login page
         if (ifLoggedIn === "undefined") {
             window.location.href = '/users/login';
         } else {
 
+            //getting the add-review form
+            const addReviewForm = document.getElementById("add-review-form");
+            const bgModal = addReviewForm.parentNode;
+            const cancelReviewButton = addReviewForm.querySelector("#add-review-cancel");
+            const submitReviewButton = addReviewForm.querySelector("#add-review-submit");
+
+            //errors block
+            const errorMessage = addReviewForm.querySelector(".add-errors");
+
             //showing form
-            reviewForm.classList.remove("hidden");
+            addReviewForm.classList.remove("hidden");
             bgModal.classList.remove("hidden");
 
             //finding the hikeId for the review
-            const hikeId = event.target.id.split("-")[2];
+            const hikeId = document.querySelector(".hike-name").id.split("-")[1];
 
             // add event listener to the cancel button
             cancelReviewButton.addEventListener("click", (event) => {
@@ -32,13 +39,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 stars.forEach((star) => {
                     star.innerHTML = "&#9734";
                 });
-                comment.value = "";
-                dateHike.value = "";
+                addReviewForm.querySelector("textarea[name=comment]").value = "";
+                addReviewForm.querySelector("input[type=date]").value = "";
                 errorMessage.innerHTML = "";
 
-
                 //hiding the form
-                reviewForm.classList.add("hidden");
+                addReviewForm.classList.add("hidden");
                 bgModal.classList.add("hidden");
             });
 
@@ -50,11 +56,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     stars.forEach((star) => {
                         star.innerHTML = "&#9734";
                     });
-                    comment.value = "";
-                    dateHike.value = "";
+
+                    addReviewForm.querySelector("textarea[name=comment]").value = "";
+                    addReviewForm.querySelector("input[type=date]").value = "";
                     errorMessage.innerHTML = "";
 
-                    reviewForm.classList.add("hidden");
+                    //hide the add-review form
+                    addReviewForm.classList.add("hidden");
                     bgModal.classList.add("hidden");
                 }
             };
@@ -82,8 +90,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 event.preventDefault();
 
                 //grabbing comment and dateHike fields from the form
-                let comment = document.querySelector("textarea[name=comment]");
-                let dateHike = document.querySelector("input[name=dateHike]");
+                const addFormData = new FormData(addReviewForm);
+                const comment = addFormData.get("comment");
+                const dateHike = addFormData.get("dateHike");
 
                 //send request to the database
                 const res = await fetch(`/hikes/${hikeId}/reviews`, {
@@ -92,119 +101,132 @@ document.addEventListener("DOMContentLoaded", (e) => {
                     body: JSON.stringify({
                         hikeId,
                         rating,
-                        comment: comment.value,
-                        dateHike: dateHike.value,
+                        comment,
+                        dateHike
                     }),
                 });
 
                 //response from the database
                 const data = await res.json();
 
+                //data from response
+                const reviewsNew = data.reviews;
+
                 //if response was successful
                 if (data.message === "Success") {
 
-                    //grabbing all review cards
-                    const reviewCards = document.querySelectorAll(".reviews-container .review");
+                    //grabbing reviews container from the page
+                    const reviewsContainer = document.querySelector('.reviews-container');
 
-                    //creating new review card
-                    const newReviewCard = reviewCards[0].cloneNode(true);
+                    //deleting all the previous reviews on the page
+                    reviewsContainer.innerHTML = "";
 
-                    //adding id attribute to the new review card
-                    newReviewCard.setAttribute("id", `reviewId-${data.review.id}`);
+                    //adding the new reviews to the page
+                    //itereating through the reviews array
+                    reviewsNew.forEach((review) => {
 
-                    //find the edit button on the new review card
-                    const editButton = newReviewCard.querySelector(".edit-review");
-                    const deleteButton = newReviewCard.querySelector(".delete-review");
+                        // data from the database for each review
+                        const usernameNew = review.User.username;
+                        const ratingNew = review.rating;
+                        const commentNew = review.comment;
+                        const dateHikeNew = review.dateHike;
 
-                    //adding id attribute to the edit button on the new review card
-                    editButton.setAttribute("id", `edit-${data.review.id}`);
-                    deleteButton.setAttribute("id", `delete-${data.review.id}`);
+                        //grabbing template for reviews from the template
+                        const reviewTemplate = document.querySelector(".review-template");
 
-                    //finding edit form for the new review card
-                    const hiddenFormEdit = newReviewCard.querySelector(".edit-review-form");
-                    const hiddenFormDelete = newReviewCard.querySelector(".delete-review-form");
+                        //clonong the template
+                        const newReview = reviewTemplate.cloneNode(true);
 
-                    //adding id attribute to the edit form on the new review card
-                    hiddenFormEdit.setAttribute("id", `edit-review-form-${data.review.id}`);
-                    hiddenFormDelete.setAttribute("id", `delete-review-form-${data.review.id}`);
+                        //grabbing the review fields from the cloned template
+                        const username = newReview.querySelector(".username");
+                        const starsSprite = newReview.querySelector(".star-sprite");
+                        const rating = newReview.querySelector(".review-rating");
+                        const comment = newReview.querySelector(".comment");
+                        const dateHike = newReview.querySelector(".dateHike");
+                        const deleteReviewButton = newReview.querySelector(".delete-review");
+                        const editReviewButton = newReview.querySelector(".edit-review");
+                        const editReviewForm = newReview.querySelector(".edit-review-form");
+                        const deleteReviewForm = newReview.querySelector(".delete-review-form");
 
-                    //adding event listener to the edit button on the new review card
-                    addEditReviewEventHanlder(editButton);
-                    addDeleteReviewEventHandler(deleteButton);
+                        // adding necessary attributes and data to the review fields
+                        newReview.id = `reviewId-${review.id}`;
+                        newReview.classList.remove("hidden");
+                        newReview.classList.remove("review-template");
+                        newReview.classList.add("review");
 
-                    //adding new review card to the very top of the list on /hikes/:hikeId page
-                    const allReviews = document.querySelector(".reviews-container");
-                    allReviews.prepend(newReviewCard);
+                        username.setAttribute("id", `${review.userId}`);
+                        username.innerHTML = usernameNew;
 
-                    //grabbing updated review list
-                    const reviewCardsList = document.querySelectorAll(".reviews-container .review");
+                        starsSprite.style = `width:${review.rating / 5 * 100}%`;
 
-                    // //removing last review if there are more than 10 reviews on the page
-                    if (reviewCardsList.length + 1 > 10) {
-                        reviewCardsList[0].parentNode.removeChild(reviewCardsList[10]);
-                    };
+                        rating.innerHTML = ratingNew;
 
-                    // grab the review fields from review card
-                    const reviewRating = document.querySelector(
-                        ".rating-username #rating"
-                    );
-                    const reviewUsername = document.querySelector(
-                        ".rating-username .username"
-                    );
-                    const reviewComment =
-                        document.querySelector(".review .comment");
-                    const reviewDateHike =
-                        document.querySelector(".review .dateHike");
+                        if (commentNew) {
+                            comment.innerText = commentNew;
+                        } else {
+                            comment.value = "";
+                        }
 
-                    const starRating = document.querySelector(
-                        ".review .star-sprite"
-                    );
+                        if (dateHikeNew) {
+                            dateHike.innerHTML = `<span>Date hiked ${dateHikeNew}</span>`;
+                        } else {
+                            dateHike.innerHTML = "";
+                        }
 
-                    //populate them with the saved data from the database
-                    starRating.style = `width:${(data.review.rating / 5) * 100}%`;
-                    reviewUsername.innerHTML = data.user.username;
-                    reviewRating.innerHTML = data.review.rating;
+                        deleteReviewButton.id = `delete-${review.id}`;
+                        editReviewButton.id = `edit-${review.id}`;
 
-                    if (data.review.comment) {
-                        reviewComment.innerHTML = data.review.comment;
-                    } else {
-                        reviewComment.innerHTML = "";
-                    }
+                        // if user is logged in and is the owner of the review
+                        // then show the delete and edit buttons
+                        if (data.loggedInUserId !== review.userId) {
+                            editReviewButton.innerHTML = "";
+                            deleteReviewButton.innerHTML = "";
+                        } else {
+                            addEditReviewEventHanlder(editReviewButton);
+                            addDeleteReviewEventHandler(deleteReviewButton);
+                        }
 
+                        editReviewForm.id = `edit-review-form-${review.id}`;
+                        deleteReviewForm.id = `delete-review-form-${review.id}`;
 
-                    if (data.review.dateHike) {
-                        reviewDateHike.innerText = `Date hiked ${data.review.dateHike}`;
-                    } else {
-                        reviewDateHike.innerText = "";
-                    }
+                        //adding the new review to the reviews container
+                        reviewsContainer.append(newReview);
 
+                        //resetting review form fields
+                        stars.forEach((star) => {
+                            star.innerHTML = "&#9734";
+                        });
 
+                        errorMessage.innerHTML = "";
 
-                    //resetting review form fields
-                    stars.forEach((star) => {
-                        star.innerHTML = "&#9734";
                     });
-                    comment.value = "";
-                    dateHike.value = "";
 
-                        errorMessage.innerHTML ="";
-
+                    addReviewForm.querySelector("#comment").value = "";
+                    addReviewForm.querySelector("#dateHike").value = "";
+                    rating = 0;
+                    errorMessage.innerHTML = "";
 
                     //hiding the form
-                    reviewForm.classList.add("hidden");
+                    addReviewForm.classList.add("hidden");
                     bgModal.classList.add("hidden");
                 } else {
                     //if response was unsuccessful
                     //prepopulate the form and show error message
                     rating = data.review.rating;
                     if (data.review.comment) {
-                        comment = data.review.comment;
+                        addReviewForm.querySelector("#comment").value = data.review.comment;
                     }
                     if (data.review.dateHike) {
-                        dateHike = data.review.dateHike;
+                        addReviewForm.querySelector("#dateHike").value = data.review.dateHike;
                     }
                     //show error message
-                    errorMessage.innerHTML = data.errors;
+                    errorMessage.innerHTML = data.errors.map(
+                        message => `
+                                    <div style="margin-bottom: 5px">
+                                        ${message}
+                                    </div>
+                                `
+                    ).join("");
                 }
             });
 

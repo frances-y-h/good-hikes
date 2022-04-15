@@ -195,21 +195,6 @@ router.get(
     })
 );
 
-//validation for the review form
-const reviewValidators = [
-    check("rating")
-        .exists({ checkFalsy: true })
-        .withMessage("Please provide a value for Rating"),
-    check("dateHike").custom((dateHike) => {
-        let today = new Date();
-        let enteredDate = new Date(dateHike);
-        if (enteredDate > today) {
-            throw Error("Date of hike must be in the past");
-        }
-        return true;
-    }),
-];
-
 // API for adding hike to specific user's collections
 router.post(
     "/:hikeId(\\d+)/collections",
@@ -278,6 +263,22 @@ router.delete(
     })
 );
 
+//validation for the review form
+const reviewValidators = [
+    check("rating")
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a value for Rating"),
+    check("dateHike").custom((dateHike) => {
+        let today = new Date();
+        let enteredDate = new Date(dateHike);
+        if (enteredDate > today) {
+            throw Error("Date of hike must be in the past");
+        }
+        return true;
+    }),
+];
+
+//API route to create new review for the specific hike
 router.post(
     "/:hikeId(\\d+)/reviews",
     requireAuth,
@@ -310,19 +311,28 @@ router.post(
         //checking if the input for the review is valid
         const validationErrors = validationResult(req);
 
-        //find the owner of the review(the user)
-        const user = await db.User.findOne({ where: { id: userId } });
-
         //if the review is valid, save it to the database
         if (validationErrors.isEmpty()) {
-            const newReview = await review.save();
+            await review.save();
+
+            //query for populating reviews section on /hikes/:hikeId page
+            const reviews = await db.Review.findAll({
+                where: { hikeId },
+                include: [db.User],
+                limit: 10,
+                order: [["createdAt", "DESC"]],
+            });
+            // If user is logged in
+            let loggedInUserId;
+            if (req.session.auth) {
+                loggedInUserId = req.session.auth.userId;
+            }
 
             //response to the frontend page
             res.json({
                 message: "Success",
-                review,
-                user,
-                newReviewId: newReview.id,
+                reviews,
+                loggedInUserId,
             });
         } else {
             //if review is not valid, send the errors to the frontend
@@ -334,13 +344,10 @@ router.post(
             res.json({
                 message: "Error",
                 errors,
-                review,
-                user,
+                review
             });
         }
     })
 );
 
 module.exports = router;
-
-//Executing (default): INSERT INTO "Reviews" ("id","userId","hikeId","rating","comment","dateHike","createdAt","updatedAt") VALUES (DEFAULT,$1,$2,$3,$4,$5,$6,$7) RETURNING *;

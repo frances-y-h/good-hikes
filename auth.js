@@ -50,8 +50,9 @@ function logoutUser(req, res) {
 function requireAuth(req, res, next) {
     if (!res.locals.authenticated) {
         res.redirect("/users/login");
+    } else {
+        next();
     }
-    return next();
 }
 
 module.exports = { loginUser, restoreUser, logoutUser, requireAuth };
