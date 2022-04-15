@@ -269,7 +269,7 @@ router.post(
 
 
 //API route to delete a collection with hikes in it
-router.delete('/:collectionId(\\d+)', asyncHandler(async (req, res) => {
+router.delete('/:collectionId(\\d+)', requireAuth, asyncHandler(async (req, res) => {
 	
 	//pull the collectionId out of the URL
 	const collectionId = parseInt(req.params.collectionId, 10);
@@ -300,6 +300,7 @@ router.delete('/:collectionId(\\d+)', asyncHandler(async (req, res) => {
 router.post(
     "/",
     collectionValidator,
+    requireAuth,
     asyncHandler(async (req, res) => {
         const userId = req.session.auth.userId;
         const { collectionname } = req.body;
