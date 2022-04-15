@@ -98,7 +98,8 @@ main {
 }
 
 .btn-selected {
-    /* color: ; */
+    color: var(--mid1);
+    background-color: white;
 }
 
 .inner-popup {
@@ -323,7 +324,7 @@ a.hike-card {
     image is aligned with the right (or bottom) edge of the container */
     background-position: 0 100%;
     /* float: left; */
-    height: 14px;
+    height: 15px;
     display: block;
     /* overflow: hidden; */
     /* width set at render based on avg review % */

@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     //TOGGLE MODAL EVENT LISTENERS
     const toggles = document.querySelectorAll(".search-toggle");
-
     toggles.forEach((toggle) => {
         toggle.addEventListener("click", (event) => {
             //update the icon in the clicked button
@@ -11,10 +10,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             if (currentIcon.innerText === "expand_more") {
                 currentIcon.innerText = "expand_less";
-                toggle.setAttribute();
+                toggle.classList.toggle("btn-selected");
             } else {
                 currentIcon.innerText = "expand_more";
+                toggle.classList.toggle("btn-selected");
             }
+
+            //update all other toggles to normal
+            toggles.forEach((toggle) => {
+                if (toggle.id !== event.currentTarget.id) {
+                    toggle.classList.remove("btn-selected");
+                }
+            });
 
             //update the target modal class from hidden to visible
             const menuModalTarget = document.querySelector(
@@ -27,9 +34,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
             //update all other modals to hidden
             const menuModals = document.querySelectorAll(`.toggle-popup`);
             menuModals.forEach((menuModal) => {
-                if (menuModal.id !== menuModalTarget.id)
+                if (menuModal.id !== menuModalTarget.id) {
                     //adds class to list if not already present
                     menuModal.classList.add("hidden");
+                }
             });
         });
     });
@@ -39,6 +47,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
     filters.forEach((filter) => {
         filter.addEventListener("click", (event) => {
             event.preventDefault();
+
+            /*
+            intercept the for data
+            parse it out
+            send a redirect to new search
+            window
+            */
+
+            window.location.href = "/search?query=hike";
         });
     });
 
