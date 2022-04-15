@@ -172,7 +172,7 @@
     border-radius: 4px;
 }
 
-.review-btn {
+.add-review-btn {
     align-self: center;
 }
 
@@ -182,12 +182,17 @@
     flex-direction: column;
 }
 
-#rating {
+.review-rating {
     padding-top: 4px;
 }
 
 .stars {
     margin: 0;
+}
+
+.dateHike-edit-delete-block-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 .username {
@@ -197,9 +202,13 @@
     color: var(--dark5);
 }
 
-.dateHike {
+.dateHike span {
     font-size: smaller;
     color: var(--dark5);
+}
+
+.delete-edit-block {
+    margin-right: 25px;
 }
 
 .hike-add-collection {
