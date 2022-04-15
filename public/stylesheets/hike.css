@@ -364,7 +364,7 @@ input[type="checkbox"]:checked::before {
     visibility: hidden;
 }
 
-.bg-modal3 {
+.bg-modal-dropdown {
     position: fixed;
     top: 0px;
     left: 0px;
