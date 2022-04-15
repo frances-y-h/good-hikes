@@ -5,6 +5,9 @@ const db = require("../db/models");
 const { check, validationResult } = require("express-validator");
 const { requireAuth } = require("../auth");
 
+
+
+
 // Hikes page
 
 // Get 1 specific hikes
@@ -21,7 +24,7 @@ router.get(
                 db.RouteType,
             ],
         });
-
+        
         //query for populating reviews section on /hikes/:hikeId page
         const reviews = await db.Review.findAll({
             where: { hikeId },
@@ -29,10 +32,10 @@ router.get(
             limit: 10,
             order: [["createdAt", "DESC"]],
         });
-
+        
         //query for the bars on /hikes/:hikeId page
         const reviewsAll = await db.Review.findAll();
-
+        
         //finding each rating percentage from all the ratings (for the bars)
         const avgRatingPercentage = [];
         for (let i = 1; i < 6; i++) {
@@ -41,66 +44,89 @@ router.get(
             });
             let avg = ((ratingAmount.length / reviewsAll.length) * 100).toFixed(
                 1
-            );
-            avgRatingPercentage.push(avg);
-        }
-
-        let avgReview = 0;
-        for (let review of reviews) {
-            avgReview += review.rating;
-        }
-        avgReview = (avgReview / reviews.length).toFixed(1);
-        let avgReviewPtg = (avgReview / 5) * 100;
-
-        let collections;
-        let checkedCollections;
-        let loggedInUserId;
-
-        // If user is logged in
-        if (req.session.auth) {
-            const userId = req.session.auth.userId;
-            loggedInUserId = req.session.auth.userId;
-
-            // Grab all collections own by user
-            collections = await db.Collection.findAll({
-                where: { userId },
-            });
-
-            // Grab which collections has current hike id
-            checkedCollections = await db.Collection.findAll({
-                where: { userId },
-                include: [
-                    {
-                        model: db.Hike,
-                        where: {
-                            id: hikeId,
+                );
+                avgRatingPercentage.push(avg);
+            }
+            
+            let avgReview = 0;
+            for (let review of reviews) {
+                avgReview += review.rating;
+            }
+            avgReview = (avgReview / reviews.length).toFixed(1);
+            let avgReviewPtg = (avgReview / 5) * 100;
+            
+            let collections;
+            let checkedCollections;
+            let loggedInUserId;
+            
+            // If user is logged in
+            if (req.session.auth) {
+                const userId = req.session.auth.userId;
+                loggedInUserId = req.session.auth.userId;
+                
+                // Grab all collections own by user
+                collections = await db.Collection.findAll({
+                    where: { userId },
+                });
+                
+                // Grab which collections has current hike id
+                checkedCollections = await db.Collection.findAll({
+                    where: { userId },
+                    include: [
+                        {
+                            model: db.Hike,
+                            where: {
+                                id: hikeId,
+                            },
                         },
-                    },
-                ],
-            });
+                    ],
+                });
+                
+                // Turn collections with current hike id into set to save time complexity
+                checkedCollections = new Set(checkedCollections.map((el) => el.id));
+                
+                // Add new field under collections to see whether the current hike is in the collection
+                collections.forEach((el) => {
+                    if (checkedCollections.has(el.id)) {
+                        el.inCollection = true;
+                    } else {
+                        el.inCollection = false;
+                    }
+                });
+            }
+            
 
-            // Turn collections with current hike id into set to save time complexity
-            checkedCollections = new Set(checkedCollections.map((el) => el.id));
+            const hikeDescription = [
+                `Try this ${hike.length}-mile ${hike.RouteType.name.toLowerCase()}trail. It's considered to be ${hike.Difficulty.level.toLowerCase()} in difficulty. ${hike.name} is located in ${hike.CityPark.name}, ${hike.State.state}. Breathtaking views with ${hike.elevationChange} ft of elevation change. This is a popular trail for hiking, so expect to see fellow hikers out there with you.`,
+                `${hike.State.state} has got some beautiful trails, and ${hike.name} will not disappoint. With ${hike.elevationChange} ft of elevation change, this ${hike.Difficulty.level.toLowerCase()} trail will get your blood flowing. Expect to see a few people, but not too many, for complete solitude, explore on a weekend. Located inside ${hike.CityPark.name} this beautiful ${hike.RouteType.name.toLowerCase()} jaunt is only ${hike.length} miles long.`,
+                `What a complete joy ${hike.name} is. Not only is it in the wonderful state of ${hike.State.state}, but it's also considered ${hike.Difficulty.level.toLowerCase()} by most hikers. Take a ${hike.length} stroll on this ${hike.RouteType.name.toLowerCase()} trail in ${hike.CityPark.name}. At only ${hike.elevationChange} ft of elevation change, you can soak in the sun and breathe in some fresh air. Head out early to get all you can out of this trail.`,
+            
+                //remember difficulty and out and back 
 
-            // Add new field under collections to see whether the current hike is in the collection
-            collections.forEach((el) => {
-                if (checkedCollections.has(el.id)) {
-                    el.inCollection = true;
-                } else {
-                    el.inCollection = false;
-                }
-            });
-        }
+                //use this instead of A because of an
 
-        res.render("hike", {
-            title: hike.name,
-            hike,
-            reviews,
-            avgReview,
+                // ${hike.name}
+                // ${hike.Difficulty.level.toLowerCase()}
+                // ${hike.State.state}
+                // ${hike.CityPark.name}
+                // ${hike.length}
+                // ${hike.elevationChange} ft
+                // ${hike.RouteType.name.toLowerCase()}
+                
+            ];
+
+            thisHikeDescription = hikeDescription[(hike.id % (hikeDescription.length))];
+
+            res.render("hike", {
+                title: hike.name,
+                hike,
+                reviews,
+                avgReview,
             avgReviewPtg,
             avgRatingPercentage,
             collections,
             loggedInUserId,
+            thisHikeDescription
         });
     })
 );
