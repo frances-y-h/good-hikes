@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             if (currentIcon.innerText === "expand_more") {
                 currentIcon.innerText = "expand_less";
+                toggle.setAttribute();
             } else {
                 currentIcon.innerText = "expand_more";
             }
