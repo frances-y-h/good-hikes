@@ -1,0 +1,13 @@
+.errorpage {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.searchImg {
+    padding: 50px;
+}
