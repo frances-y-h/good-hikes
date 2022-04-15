@@ -198,10 +198,15 @@ router.get(
 // API for adding hike to specific user's collections
 router.post(
     "/:hikeId(\\d+)/collections",
+    requireAuth,
     asyncHandler(async (req, res) => {
         const hikeId = parseInt(req.params.hikeId, 10);
         // get the array with collectionId and whether checked or not
         const collectionsToUpdate = req.body;
+        let userId;
+        if (req.session.auth) {
+            userId = req.session.auth.userId;
+        }
 
         // Itterate through the array and update the JoinHikeCollection table according to value
         for (let i = 0; i < collectionsToUpdate.length; i++) {
@@ -209,13 +214,21 @@ router.post(
             let collectionId = parseInt(data[0], 10);
             let value = data[1];
 
+            const collection = await db.Collection.findByPk(collectionId);
+            const authorizedUserCollection = collection.userId === userId;
+
+            if (!authorizedUserCollection) {
+                return res.json({
+                    message: "Unauthorized User",
+                });
+            }
+
             const hikeCollection = await db.JoinHikeCollection.findOne({
                 where: {
                     hikeId,
                     collectionId,
                 },
             });
-
             // if value === true, make sure there is the record in table, else otherwize
             if (value) {
                 if (!hikeCollection) {
@@ -229,21 +242,36 @@ router.post(
                     await hikeCollection.destroy();
                 }
             }
-        }
 
-        res.json({
-            message: "Success",
-        });
+            res.json({
+                message: "Success",
+            });
+        }
     })
 );
 
 // API route for deleting specific hike from collections
 router.delete(
     "/:hikeId(\\d+)/collections",
+    requireAuth,
     asyncHandler(async (req, res) => {
         const hikeId = parseInt(req.params.hikeId, 10);
         const collectionId = req.body.collectionId;
-        console.log(req.body);
+
+        let userId;
+        if (req.session.auth) {
+            userId = req.session.auth.userId;
+        }
+
+        const collection = await db.Collection.findByPk(collectionId);
+        const authorizedUserCollection = collection.userId === userId;
+
+        if (!authorizedUserCollection) {
+            return res.json({
+                message: "Unauthorized User",
+            });
+        }
+
         const hikeCollection = await db.JoinHikeCollection.findOne({
             where: {
                 hikeId,
@@ -344,7 +372,7 @@ router.post(
             res.json({
                 message: "Error",
                 errors,
-                review
+                review,
             });
         }
     })
