@@ -25,7 +25,7 @@ mixin dropDown(keyword, buttonText)
           block
         div.menu-bottom
           button.btn.menu-btn.clear-filters(type="reset" name="clear" value="clear") Clear
-          button.btn.menu-btn.search-filters(type="submit") See Results
+          button.btn.menu-btn.search-filters(type="submit" id=`menu-submit-${keyword}`) See Results
 
 mixin radio(idName, groupName, value, radioText, conditional)
   if(conditional==="true")

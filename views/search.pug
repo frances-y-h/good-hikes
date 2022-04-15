@@ -28,10 +28,10 @@ block content
           +checkbox("hard","difficulty","hard","Hard",`${"q"}`)
         +dropDown("length", "Length")
           //- slider 0 --> 50+ mi
-          +range("length","0","50",`${"50"}`, "length", "0 mi", "50+ mi")
+          +range("length","0","50",`${"50"}`, "length", "0 mi", "Max: 50+ mi")
         +dropDown("elevation", "Elevation Gain")
           //- slider 0 --> 5000+ ft
-          +range("elevation","0","5000",`${"5000"}`, "elevationChange", "0 ft", "5000+ ft")
+          +range("elevation","0","5000",`${"5000"}`, "elevationChange", "0 ft", ",Max: 5000+ ft")
         +dropDown("routeType", "Route Type")
           +checkbox("loop","routeType","1","Loop",`${"q"}`)
           +checkbox("out-back","routeType","2","Out & back",`${"q"}`)

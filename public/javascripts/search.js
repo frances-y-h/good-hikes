@@ -57,6 +57,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             const forms = document.querySelectorAll("form.inner-popup");
 
+            //create a boolean to check whether slider was clicked or not
+            // const clickedId = event.currentTarget.id.split("menu-submit-")[1];
+            // const clicked = {
+            //     length: "false",
+            //     elevationChange: "false",
+            //     rating: "false",
+            // };
+
+            // if (clickedId === "length") {
+            //     clicked.length = "true";
+            // }
+            // if (clickedId === "elevation") {
+            //     clicked.elevationChange = "true";
+            // }
+            // if (clickedId === "rating") {
+            //     clicked.rating = "true";
+            // }
+
+            //Create data map of all 8 filter toggles
             const data = {};
 
             for (let i = 0; i < forms.length; i++) {
@@ -112,6 +131,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let attractions = variables[7];
 
             const searchBar = document.querySelector("#adv-search-input");
+
             const url =
                 `/search?query=${searchBar.value}` +
                 sort +
@@ -124,7 +144,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 attractions;
 
             //send user to proper search query:
-            window.location.href = url;
+            // window.location.href = url;
         });
     });
 
@@ -136,21 +156,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     );
 
     // Display the default slider value
-    elevationMaxLabel.innerHTML = `${elevationSlider.value}+ ft`;
+    elevationMaxLabel.innerHTML = `Max: ${elevationSlider.value}+ ft`;
 
     // Update the slider value (each time you drag the slider handle)
     elevationSlider.oninput = function () {
         //'this' will is the object that onclick was bound to aka event.currentTarget
         if (this.value === "5000") {
-            elevationMaxLabel.innerHTML = `${this.value}+ ft`;
+            elevationMaxLabel.innerHTML = `Max: ${this.value}+ ft`;
         } else {
-            elevationMaxLabel.innerHTML = `${this.value} ft`;
+            elevationMaxLabel.innerHTML = `Max: ${this.value} ft`;
         }
     };
 
     //Update Clear button functionality to reset to default value
     elevationSliderClear.addEventListener("click", (event) => {
-        elevationMaxLabel.innerHTML = `5000+ ft`;
+        elevationMaxLabel.innerHTML = `Max: 5000+ ft`;
     });
 
     //LENGTH RANGE MODAL
@@ -161,21 +181,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     );
 
     // Display the default slider value
-    lengthMaxLabel.innerHTML = `${lengthSlider.value}+ mi`;
+    lengthMaxLabel.innerHTML = `Max: ${lengthSlider.value}+ mi`;
 
     // Update the slider value (each time you drag the slider handle)
     lengthSlider.oninput = function () {
         //'this' will is the object that onclick was bound to aka event.currentTarget
         if (this.value === "50") {
-            lengthMaxLabel.innerHTML = `${this.value}+ mi`;
+            lengthMaxLabel.innerHTML = `Max: ${this.value}+ mi`;
         } else {
-            lengthMaxLabel.innerHTML = `${this.value} mi`;
+            lengthMaxLabel.innerHTML = `Max: ${this.value} mi`;
         }
     };
 
     // Update Clear button functionality to reset to default value
     lengthSliderClear.addEventListener("click", (event) => {
-        lengthMaxLabel.innerHTML = `50+ mi`;
+        lengthMaxLabel.innerHTML = `Max: 50+ mi`;
     });
 
     //RATING RANGE MODAL
