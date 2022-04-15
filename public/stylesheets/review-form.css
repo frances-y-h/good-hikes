@@ -13,7 +13,7 @@
     align-items: center;
 }
 
-#review-form,
+#add-review-form,
 .edit-review-form,
 .delete-review-form {
     z-index: 3;
@@ -23,7 +23,7 @@
     background-color: white;
 }
 
-#review-form.hidden,
+#add-review-form.hidden,
 .edit-review-form.hidden,
 .bg-modal.hidden,
 .bg-modal2.hidden,
@@ -31,7 +31,7 @@
     display: none;
 }
 
-#review-form label,
+#add-review-form label,
 .edit-review-form label {
     margin-bottom: 7px;
 }

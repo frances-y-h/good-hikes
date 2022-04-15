@@ -172,7 +172,7 @@
     border-radius: 4px;
 }
 
-.review-btn {
+.add-review-btn {
     align-self: center;
 }
 
@@ -182,7 +182,7 @@
     flex-direction: column;
 }
 
-#rating {
+.review-rating {
     padding-top: 4px;
 }
 

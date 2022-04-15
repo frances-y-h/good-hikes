@@ -61,21 +61,21 @@ block content
                   td.one-star-sprite
                   td
                     div.bar(style=`width:${avgRatingPercentage[0]}%`)
-            button(id=`review-for-${hike.id}` data-user=`${loggedInUserId}`).btn.review-btn Write a Review
+            button(id=`review-for-${hike.id}` data-user=`${loggedInUserId}`).btn.add-review-btn Write a Review
           div.bg-modal.hidden
-            form(id='review-form' class="hidden form-control")
+            form(id='add-review-form' class="hidden form-control")
                 div.form-star-rating
                   button.star &#9734
                   button.star &#9734
                   button.star &#9734
                   button.star &#9734
                   button.star &#9734
-                +field("Comment", "comment", null, false, "textarea")
-                +field("Date Hike", "dateHike", null, false, "date")
-                div.errors
+                +field("Comment (optional)", "comment", null, false, "textarea")
+                +field("Date Hike (optional)", "dateHike", null, false, "date")
+                div.add-errors
                 div.review-buttons
-                  button#review-cancel.btn Cancel
-                  button#review-submit.btn  Submit
+                  button#add-review-cancel.btn Cancel
+                  button#add-review-submit.btn  Submit
             include review-template.pug
           .reviews-container
             each review in reviews
@@ -85,7 +85,7 @@ block content
                     .stars-and-rating
                       div.stars
                         span.star-sprite(style=`width:${review.rating/5*100}%`)
-                      #rating #{review.rating}
+                      .review-rating #{review.rating}
                 .comment #{review.comment}
                 if (review.dateHike)
                   .dateHike Date hiked #{review.dateHike}

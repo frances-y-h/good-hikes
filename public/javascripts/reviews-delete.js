@@ -77,7 +77,7 @@ const addDeleteReviewEventHandler = (deleteReviewButton) => {
                     //grabbing the review fields from the cloned template
                     const username = newReview.querySelector(".username");
                     const starsSprite = newReview.querySelector(".star-sprite");
-                    const rating = newReview.querySelector("#rating");
+                    const rating = newReview.querySelector(".review-rating");
                     const comment = newReview.querySelector(".comment");
                     const dateHike = newReview.querySelector(".dateHike");
                     const deleteReviewButton = newReview.querySelector(".delete-review");
@@ -94,7 +94,7 @@ const addDeleteReviewEventHandler = (deleteReviewButton) => {
                     username.setAttribute("id", `${reviewToUpdate.userId}`);
                     username.innerHTML = reviewToUpdate.User.username;
 
-                    starsSprite.style = `width:${reviewToUpdate.rating / 5 * 100}%`
+                    starsSprite.style = `width:${reviewToUpdate.rating / 5 * 100}%`;
 
                     rating.innerHTML = reviewToUpdate.rating;
 
