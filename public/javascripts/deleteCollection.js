@@ -12,15 +12,11 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             const collectionId = deleteEvent.target.id.split('-')[0];
             const collectionHikeCount = parseInt(deleteEvent.target.id.split("-")[5], 10);
 
-            console.log(collectionId);
 
             //grab modal div for each delete button
             const deleteConfirmDiv = document.getElementById(
 				`delete-confirm-page-${collectionId}`
 			);
-
-
-            const deleteConfirmModal = document.querySelector('.delete-modal');
 
             //grab the submit and cancel buttons
             const deleteSubmitButton = document.getElementById(
