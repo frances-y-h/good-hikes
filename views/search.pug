@@ -17,7 +17,6 @@ block content
 
       div#search-toggles
         +dropDown("sort", "Sort")
-          //- (data.sort === "alphabetical")
           +radio("alphabetical","sort","alphabetical","Alphabetical",`${formData.sort.alphabetical}`)
           +radio("popular","sort","popular","Most popular",`${formData.sort.popular}`)
           +radio("shortest","sort","shortest","Shortest Length",`${formData.sort.shortest}`)
