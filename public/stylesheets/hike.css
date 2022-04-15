@@ -190,6 +190,11 @@
     margin: 0;
 }
 
+.dateHike-edit-delete-block-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .username {
     font-weight: bold;
     margin-right: 40px;
@@ -200,6 +205,10 @@
 .dateHike {
     font-size: smaller;
     color: var(--dark5);
+}
+
+.delete-edit-block {
+    margin-right: 25px;
 }
 
 .hike-add-collection {
