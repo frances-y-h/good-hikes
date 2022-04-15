@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .id.split("-")[1];
             try {
                 // if want to hike was not checked
-                if (!wantToHikeCkBx.checked) {
+                if (wantToHikeSpan.innerText !== "✓") {
                     const res = await fetch(`/hikes/${hikeId}/collections`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
