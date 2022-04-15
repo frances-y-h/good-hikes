@@ -61,6 +61,8 @@ block content
                   td.one-star-sprite
                   td
                     div.bar(style=`width:${avgRatingPercentage[0]}%`)
+            .hike-average-rating 
+              span #{avgReview}
             button(id=`review-for-${hike.id}` data-user=`${loggedInUserId}`).btn.add-review-btn Write a Review
           div.bg-modal.hidden
             form(id='add-review-form' class="hidden form-control")
