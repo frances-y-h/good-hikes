@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 attractions;
 
             //send user to proper search query:
-            // window.location.href = url;
+            window.location.href = url;
         });
     });
 

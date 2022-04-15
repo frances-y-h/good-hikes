@@ -16,7 +16,118 @@ router.get(
         //req.query automatically stores anything after a ?xx= parameter in the url as a non-encoded sting
         let searchQuery = req.query.query;
         let searchQueryArr = searchQuery.split(" ");
-        // console.log("QUERY:", searchQuery);
+
+        ////////////TO DO PARSE AND SANITIZE SEARCH QUERY/////////////
+
+        //PARSE OUT FILTER QUERIES
+        const filters = req.query;
+        // console.log(filters);
+
+        let sort = null; //default value
+        let difficulty = [];
+        let length = null; //default value
+        let elevationChange = null; //default value
+        let routeType = [];
+        let rating = null;
+        let tagsSuit = [];
+        let tagsAtt = [];
+
+        if (filters.sort) sort = filters.sort;
+        if (filters.difficulty) difficulty = filters.difficulty.split("-");
+        if (filters.length) length = filters.length;
+        if (filters.elevationChange) elevationChange = filters.elevationChange;
+        if (filters.rating) {
+            //4=any,3=3,2 = 4,1 = 4.5
+            if (filters.rating === "4") rating = 0;
+            if (filters.rating === "3") rating = 3;
+            if (filters.rating === "2") rating = 4;
+            if (filters.rating === "1") rating = 4.5;
+        }
+
+        if (filters.routeType) routeType = filters.routeType.split("-");
+        if (filters.suitability) tagsSuit = filters.suitability.split("-");
+        if (filters.attractions) tagsAtt = filters.attractions.split("-");
+
+        //CREATE DEFAULT FORMDATA OBJECT TO PASS TO SEARCH.PUG
+        const formData = {
+            sort: {
+                alphabetical: "true", //default
+                popular: "false",
+                shortest: "false",
+                difficulty: "false",
+            },
+            difficulty: {
+                easy: "false",
+                moderate: "false",
+                hard: "false",
+            },
+            length: "50", //default
+            elevationChange: "5000", //default
+            routeType: {
+                loop: "false",
+                outBack: "false",
+                point: "false",
+            },
+            rating: "4", //default
+            //- 2 Fee, 11 Parking, 13 Paved, 12	Restrooms, 14 No dogs, 15 Dogs Allowed
+            tagsSuit: {
+                fee: "false",
+                parking: "false",
+                paved: "false",
+                rest: "false",
+                noDogs: "false",
+                yesDogs: "false",
+            },
+
+            tagsAtt: {
+                backpacking: "false",
+                forest: "false",
+                lake: "false",
+                noShade: "false",
+                river: "false",
+                views: "false",
+                waterfall: "false",
+                wildlife: "false",
+                wildflowers: "false",
+            },
+        };
+
+        //update form data based on url received
+        formData.sort[sort] = "true";
+        difficulty.forEach((num) => {
+            if (num === "1") formData.difficulty.easy = "true";
+            if (num === "2") formData.difficulty.moderate = "true";
+            if (num === "3") formData.difficulty.hard = "true";
+        });
+        routeType.forEach((num) => {
+            if (num === "1") formData.routeType.loop = "true";
+            if (num === "2") formData.routeType.outBack = "true";
+            if (num === "3") formData.routeType.point = "true";
+        });
+        //- 2 Fee, 11 Parking, 13 Paved, 12	Restrooms, 14 No dogs, 15 Dogs Allowed
+        tagsSuit.forEach((num) => {
+            if (num === "2") formData.tagsSuit.fee = "true";
+            if (num === "11") formData.tagsSuit.parking = "true";
+            if (num === "13") formData.tagsSuit.paved = "true";
+            if (num === "12") formData.tagsSuit.rest = "true";
+            if (num === "14") formData.tagsSuit.noDogs = "true";
+            if (num === "15") formData.tagsSuit.yesDogs = "true";
+        });
+        //- 1	Backpacking, 3	Forest, 4	Lake, 5	No shade, 6	River,
+        //- 7	Views, 8	Waterfall, 10	Wildlife, 9	Wildflowers
+        tagsAtt.forEach((num) => {
+            if (num === "1") formData.tagsAtt.backpacking = "true";
+            if (num === "3") formData.tagsAtt.forest = "true";
+            if (num === "4") formData.tagsAtt.lake = "true";
+            if (num === "5") formData.tagsAtt.noShade = "true";
+            if (num === "6") formData.tagsAtt.river = "true";
+            if (num === "7") formData.tagsAtt.views = "true";
+            if (num === "8") formData.tagsAtt.waterfall = "true";
+            if (num === "10") formData.tagsAtt.wildlife = "true";
+            if (num === "9") formData.tagsAtt.wildflowers = "true";
+        });
+
+        //CREATE WHERE CLAUSES FOR MAIN DATABASE REQUEST:
 
         //for each word in the search query, create 3 or clauses for the where constraint
         //[Op.ilike] just resolves to a string, it is a form of destructuring a symbol
@@ -24,20 +135,61 @@ router.get(
             acc.push({ name: { [Op.iLike]: `%${searchQuery}%` } });
             acc.push({ "$CityPark.name$": { [Op.iLike]: `%${searchQuery}%` } });
             acc.push({ "$State.state$": { [Op.iLike]: `%${searchQuery}%` } });
+            acc.push({ "$Tags.name$": { [Op.iLike]: `%${searchQuery}%` } });
             return acc;
         }, []);
 
-        // fetch hikes based on the search query
-        const hikes = await db.Hike.findAll({
-            include: [
-                db.Tag,
-                db.CityPark,
-                db.State,
-                db.Difficulty,
-                db.RouteType,
-            ],
-            where: { [Op.or]: orClauses },
+        ///add filters as andClauses to main search
+        const andClauses = [];
+
+        andClauses.push({ "$Hike.difficultyId$": { [Op.or]: difficulty } });
+        andClauses.push({ "$Hike.length$": { [Op.lte]: parseInt(length) } });
+        andClauses.push({
+            "$Hike.elevationChange$": { [Op.lte]: elevationChange },
         });
+        andClauses.push({ "$Hike.routeTypeId$": { [Op.or]: routeType } });
+        // avgRating not available in first DB request, hikes will be filtered by ratings later
+        andClauses.push({ "$Tags.id$": { [Op.or]: tagsSuit } });
+        andClauses.push({ "$Tags.id$": { [Op.or]: tagsAtt } });
+
+        let orderClause = ["name", "ASC"]; //default is alphabetical
+        // if (sort === "alphabetical") orderClause = ["name", "ASC"];
+        // if (sort === "popular") orderClause = ["name", "DESC"];;  //sort at end
+        if (sort === "shortest") orderClause = ["length", "ASC"];
+        if (sort === "difficulty") orderClause = ["difficultyId", "ASC"];
+
+        console.log("ORDER:", orderClause);
+
+        // FETCH HIKES from DB BASED ON SEARCH QUERY AND FILTERS
+        let hikes;
+        //check if submitted via search bar or filter bar
+        ///////////TO DO UPDATE SEARCH BAR EVENT LISTENER TO SUBMIT PROPR URL////////
+        if (length === null) {
+            console.log("Search Bar");
+            hikes = await db.Hike.findAll({
+                include: [
+                    db.Tag,
+                    db.CityPark,
+                    db.State,
+                    db.Difficulty,
+                    db.RouteType,
+                ],
+                where: { [Op.or]: orClauses },
+            });
+        } else {
+            hikes = await db.Hike.findAll({
+                include: [
+                    db.Tag,
+                    db.CityPark,
+                    db.State,
+                    db.Difficulty,
+                    db.RouteType,
+                    db.Review,
+                ],
+                where: { [Op.and]: [{ [Op.or]: orClauses }, andClauses] },
+                order: [orderClause],
+            });
+        }
 
         //If hike search has a result...
         //grab average rating from each hike given a list of hikeIds
@@ -87,10 +239,25 @@ router.get(
             }
         }
 
-        //render search page
+        //FILTER HIKES BY RATING
+        const finalHikes = hikes
+            .filter((hike) => {
+                //4=any,3=3,2 = 4,1 = 4.5
+                return hike.avgReview >= rating;
+            })
+            .sort((a, b) => {
+                //if popular selected, SORT by avg rating
+                if (formData.sort.popular === "true") {
+                    return b.reviewCount - a.reviewCount;
+                }
+                return 0;
+            });
+
+        //RENDER SEARCH PAGE
         res.render("search", {
             searchQuery,
-            hikes,
+            finalHikes,
+            formData,
         });
     })
 );
