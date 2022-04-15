@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             // console.log(data);
 
+            //need default value of ""
             const variables = ["", "", "", "", "", "", "", ""];
             const properties = [
                 "sort",
