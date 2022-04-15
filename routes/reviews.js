@@ -3,6 +3,7 @@ const router = express.Router();
 const { asyncHandler } = require("./utils");
 const db = require("../db/models");
 const { check, validationResult } = require('express-validator');
+const { requireAuth } = require('../auth');
 
 
 //validation for the review form
@@ -21,7 +22,7 @@ const reviewValidators = [
         })
 ];
 
-router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) => {
+router.put('/:reviewId(\\d+)', requireAuth, reviewValidators, asyncHandler(async (req, res) => {
 
     // destructing the request body
     let { hikeId, rating, comment, dateHike } = req.body;
@@ -76,7 +77,6 @@ router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) =
     } else {
         //if review is not valid, send the errors to the frontend
         const errors = validationErrors.array().map(err => err.msg);
-        console.log(errors);
 
 
         //response to the frontend page,
@@ -88,7 +88,44 @@ router.put('/:reviewId(\\d+)', reviewValidators, asyncHandler(async (req, res) =
             reviewToUpdate
         });
     }
-}))
+}));
+
+router.delete('/:reviewId', requireAuth, asyncHandler(async (req, res) => {
+
+    //getting hikeId from the request
+    const { hikeId } = req.body;
+
+
+    // If user is logged in
+    let loggedInUserId;
+    if (req.session.auth) {
+        loggedInUserId = req.session.auth.userId;
+    }
+
+    //finding reviewId
+    const reviewId = parseInt(req.params.reviewId, 10);
+
+    //getting the review from the database
+    const reviewToDelete = await db.Review.findByPk(reviewId);
+
+    //delete the review from the database
+    await reviewToDelete.destroy();
+
+    //getting updated reviews from the database
+    const reviewsUpdated = await db.Review.findAll({
+        where: { hikeId },
+        include: [db.User],
+        limit: 10,
+        order: [["createdAt", "DESC"]]
+    });
+
+    //response to the frontend page
+    res.json({ message: 'Success',
+        reviewsUpdated,
+        loggedInUserId
+    });
+
+}));
 
 
 module.exports = router;

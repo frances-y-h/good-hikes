@@ -1,0 +1,33 @@
+.review-template.form-control.hidden
+  div.rating-username
+    div.username
+    .stars-and-rating
+      div.stars
+        span.star-sprite
+      #rating
+  .comment
+  .dateHike
+  .delete-edit-block
+    button.delete-review Delete
+    button.edit-review Edit
+  div.bg-modal2.hidden
+    form(class="hidden edit-review-form form-control")
+      div.edit-form-star-rating
+        button.star &#9734
+        button.star &#9734
+        button.star &#9734
+        button.star &#9734
+        button.star &#9734
+      +field("Comment", "comment", null, false, "textarea")
+      +field("Date Hike", "dateHike", null, false, "date")
+      div.errors
+      div.edit-review-buttons
+        button#edit-review-cancel.btn Cancel
+        button#edit-review-submit.btn  Submit
+  .bg-modal3.hidden
+    form(class="hidden delete-review-form form-control")
+      .text
+        p Are you sure you want to delete this review?
+      div.delete-review-buttons
+        button#delete-review-cancel.btn Cancel
+        button#delete-review-submit.btn  Delete
