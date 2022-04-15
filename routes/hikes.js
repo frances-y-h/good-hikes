@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { asyncHandler } = require("./utils");
+const { asyncHandler, csrfProtection } = require("./utils");
 const db = require("../db/models");
 const { check, validationResult } = require("express-validator");
 const { requireAuth } = require("../auth");
@@ -248,6 +248,76 @@ router.post(
                 user,
             });
         }
+    })
+);
+
+// Edit hike
+router.get(
+    "/:hikeId(\\d+)/edit",
+    csrfProtection,
+    asyncHandler(async (req, res) => {
+        const hikeId = parseInt(req.params.hikeId, 10);
+        const hike = await db.Hike.findByPk(hikeId, {
+            include: db.Tag,
+        });
+
+        const tags = await db.Tag.findAll();
+        const cityParks = await db.CityPark.findAll();
+        const states = await db.State.findAll();
+        const routeTypes = await db.RouteType.findAll();
+        const difficulties = await db.Difficulty.findAll();
+        res.render("hike-edit", {
+            hike,
+            tags,
+            cityParks,
+            states,
+            routeTypes,
+            difficulties,
+            csrfToken: req.csrfToken(),
+        });
+    })
+);
+
+//Post Hike
+router.post(
+    "/:hikeId(\\d+)/edit",
+    csrfProtection,
+    asyncHandler(async (req, res) => {
+        const hikeId = parseInt(req.params.hikeId, 10);
+        const hike = await db.Hike.findByPk(hikeId);
+        hike.cityParkId = req.body.cityParkId;
+        hike.stateId = req.body.stateId;
+        hike.name = req.body.name;
+        hike.length = req.body.length;
+        hike.elevationChange = req.body.elevationChange;
+        hike.difficultyId = req.body.difficultyId;
+        hike.routeTypeId = req.body.routeTypeId;
+        hike.imgUrl = req.body.imgUrl;
+        await hike.save();
+        res.send(hike);
+    })
+);
+
+// Get form for new hike
+router.get(
+    "/new",
+    csrfProtection,
+    asyncHandler(async (req, res) => {
+        const hike = db.Hike.build();
+        const tags = await db.Tag.findAll();
+        const cityParks = await db.CityPark.findAll();
+        const states = await db.State.findAll();
+        const routeTypes = await db.RouteType.findAll();
+        const difficulties = await db.Difficulty.findAll();
+        res.render("hike-new", {
+            hike,
+            tags,
+            cityParks,
+            states,
+            routeTypes,
+            difficulties,
+            csrfToken: req.csrfToken(),
+        });
     })
 );
 

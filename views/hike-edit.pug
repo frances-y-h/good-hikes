@@ -1,0 +1,39 @@
+include utils.pug
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Edit Hike
+  body
+    form(method="post" action=`/hikes/${hike.id}/edit`)
+      input(type="hidden" name="_csrf" value=csrfToken)
+      h1 Hike.id #{hike.id}
+      div
+        select(name="cityParkId" id="cityParkId")
+          each cityPark in cityParks
+            option(value=`${cityPark.id}` selected=(cityPark.id === hike.cityParkId)) #{cityPark.name}
+      div
+        select(name="stateId" id="stateId")
+          each state in states
+            option(value=`${state.id}` selected=(state.id === hike.stateId)) #{state.state}
+      +field("Hike Name", "name", hike.name, true)
+      +field("Length", "length", hike.length, true)
+      +field("Elevation Change", "elevationChange", hike.elevationChange, true)
+      div
+        select(name="difficultyId" id="difficultyId")
+          each difficulty in difficulties
+            option(value=`${difficulty.id}` selected=(difficulty.id === hike.difficultyId)) #{difficulty.level}
+      div
+        select(name="routeTypeId" id="routeTypeId")
+          each routeType in routeTypes
+            option(value=`${routeType.id}` selected=(routeType.id === hike.routeTypeId)) #{routeType.name}
+      div
+        ul
+          each tag in hike.Tags
+            li #{tag.name}
+      +field("Image URL", "imgUrl", hike.imgUrl, true, "textarea")
+      div
+        button(type="submit") Update
