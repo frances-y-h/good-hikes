@@ -205,3 +205,22 @@
         background-image: url("/images/home-bg.jpg");
     }
 }
+
+@media screen and (max-width: 480px) {
+    .home-banner {
+        background-image: url("/images/home-bg2.jpg");
+        background-position: center bottom;
+        background-size: cover;
+        height: 125px;
+    }
+    .home-banner > h1 {
+        font-size: 30px;
+    }
+    .home-page > h2 {
+        padding: 20px;
+        font-size: 24px;
+    }
+    .directory-list {
+        max-height: none;
+    }
+}
