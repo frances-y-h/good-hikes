@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             const collectionId = deleteEvent.target.id.split('-')[0];
             const collectionHikeCount = parseInt(deleteEvent.target.id.split("-")[5], 10);
 
-
             //grab modal div for each delete button
             const deleteConfirmDiv = document.getElementById(
 				`delete-confirm-page-${collectionId}`
@@ -25,10 +24,8 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             const deleteCancelButton = document.getElementById(
                 `delete-collection-cancel-${collectionId}`
                 );
-
-
             
-            //show modal
+            //show the delete confirmation modal
             deleteConfirmDiv.classList.remove("hide-delete");
 
             deleteSubmitButton.addEventListener("click", async (submitEvent) => {
@@ -58,11 +55,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                 if (event.target == deleteConfirmDiv) {
                     deleteConfirmDiv.classList.add("hide-delete");
                 }
-
             }
-
-
-
         });
     }
 });

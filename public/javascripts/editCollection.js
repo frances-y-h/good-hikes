@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         renameBtns[i].addEventListener("click", (renameEvent) => {
             //prevent form submission
             renameEvent.preventDefault();
-			
 
             //on rename button click show
                 //input form
@@ -50,7 +49,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 				pNames[i].classList.remove("hidden");
 			});
             
-
             updateBtns[i].addEventListener("click", async (upEvent) => {
                 upEvent.preventDefault();
 
@@ -84,11 +82,8 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                     renameBtns[i].classList.remove("hidden");
                     pNames[i].classList.remove("hidden");
 
-
                 } else {
                     //if response was unsuccessful
-                    
-                    // const updateError = document.querySelector(".update-name-errors");
 
                     //fill form back in
                     renameInputs[i].value = currentName;
@@ -100,11 +95,9 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                     </div>
                     `;
                 }
-
             });
 		})
     }
-
 });
 
 
