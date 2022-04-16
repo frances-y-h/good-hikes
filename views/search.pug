@@ -6,7 +6,7 @@ block content
   script(src="/javascripts/search.js")
   main
     div#search-header-container
-      h1#search-header Advanced Search
+      h1#search-header Hike Search
       div#adv-search-container
         div#adv-search-bar
           form(action='/search' method='get' id='adv-search-form')
@@ -72,11 +72,13 @@ block content
           +checkbox("wildlife","attractions","10","Wildlife",`${formData.tagsAtt.wildlife}`)
           +checkbox("wildflowers","attractions","9","Wildflowers",`${formData.tagsAtt.wildflowers}`)
 
-      h1.hike-header Hike Search Results
-      if finalHikes.length > 0
-        div#hike-count #{finalHikes.length} Results Found
-      else
-        div#hike-count No Results Found
+      //- h1.hike-header Hike Search Results
+      div#result-count-container
+        if finalHikes.length > 0
+          div#hike-count #{finalHikes.length} Results Found
+        else
+          div#hike-count No Results Found
+        a#clear-all-filters(href="#") (Clear Filters)
       div#hike-container-separator
     if finalHikes.length > 0
       div#hike-list-container

@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     //select all filter toggles
     const toggles = document.querySelectorAll(".search-toggle");
-    const search = window.location.search;
-    console.log(search);
+    const search = window.location.search; //returns everything after a "?" in url"
     const filterToggle = (toggle, buttonId, check, boolean) => {
         if (boolean) {
             if (toggle.id === buttonId) {
@@ -89,7 +88,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 const inputs = document.querySelectorAll(
                     `#options-${clickedId} input`
                 );
-                console.log(inputs);
                 inputs.forEach((input) => {
                     // input.checked = false; //doesn't work, not the property checked,checked is an attribute rendered in pug mixin
                     input.removeAttribute("checked");
@@ -116,13 +114,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const filters = document.querySelectorAll(
         ".search-filters, #adv-search-button"
     );
-    // console.log(filters);
 
     filters.forEach((filter) => {
         filter.addEventListener("click", (event) => {
             event.preventDefault();
-            // console.log("filter:", event.defaultPrevented);
-            // event.stopPropagation();
+            // console.log("filter:", event.defaultPrevented); //can check if preventDefault worked
 
             const forms = document.querySelectorAll("form.inner-popup");
 
@@ -168,7 +164,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 }
             }
 
-            // console.log(data);
             //need default value of ""
             const variables = ["", "", "", "", "", "", "", ""];
             const properties = [
@@ -341,8 +336,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //     //         },
     //     //         // body: JSON.stringify(searchQuery),
     //     //     });
-
-    //     //     console.log(res);
 
     //     //     if (!res.ok) {
     //     //         alert("Adv Search Unavailable");
