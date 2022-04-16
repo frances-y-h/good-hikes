@@ -211,10 +211,6 @@ footer {
         padding: 5px;
         gap: 3px;
     }
-    #div-center-search {
-        visibility: hidden;
-        opacity: 0;
-    }
     #header-image {
         width: 100px;
     }
