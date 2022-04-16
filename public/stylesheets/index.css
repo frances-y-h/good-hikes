@@ -199,7 +199,7 @@
 
 @media screen and (max-width: 1400px) {
     .home-banner {
-        height: 350px;
+        height: 250px;
     }
     .home-bg {
         background-image: url("/images/home-bg.jpg");

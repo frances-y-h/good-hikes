@@ -176,7 +176,6 @@ footer {
     #nav-top {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
         grid-template-areas:
             "logo login"
             "search search";
@@ -197,6 +196,9 @@ footer {
         grid-area: search;
         order: 2;
         max-width: 100%;
+    }
+    #div-right-buttons {
+        justify-self: flex-end;
     }
     #div-right-buttons .btn {
         margin: 0px 3px;

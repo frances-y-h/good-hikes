@@ -25,8 +25,6 @@ for (let hikeId = 1; hikeId <= numOfHikes; hikeId++) {
     }
 }
 
-// console.log(hikeTagSeed);
-
 let reviews = [
     "Awesome trail. Great waterfall at the end. ",
     "Good trail that’s not heavily populated. Great view at the end but be prepared for a little incline at the end. ",
@@ -84,8 +82,6 @@ for (let hikeId = 1; hikeId <= numOfHikes; hikeId++) {
         reviewSeed.push(obj);
     }
 }
-
-// console.log(reviewSeed);
 
 module.exports = {
     hikeTagSeed,

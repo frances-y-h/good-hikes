@@ -1,7 +1,5 @@
 //updated from window "load" event to document "DOMContentloaded"
 document.addEventListener("DOMContentloaded", (event) => {
-    console.log("hello from javascript!");
-
     //Demo login Event Listener
     const demoUser = document.querySelector("#user-demo");
     demoUser.addEventListener("click", async (event) => {
