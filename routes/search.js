@@ -4,26 +4,47 @@ const { asyncHandler } = require("./utils");
 const db = require("../db/models");
 const { Op } = require("sequelize");
 
-//TO DO: optimize Code so only one db request: add reviews to hikes table and
-// then could then use javascript (nested, nested for loop) to calculate avg
+//TO DO: optimize Code so only one db request:
+//add reviews table to Hikes table fetch and could hen use javascript to calculate avg (nested, nested for loop)
 
 //ONLY ONE ROUTE: GET SEARCH PAGE
 router.get(
     "/",
     asyncHandler(async (req, res) => {
-        // console.log(req.path);
-
-        //req.query automatically stores anything after a ?xx= parameter in the url as a non-encoded sting
-        //req.query also automatically stores key/value pairs &key=value
+        //Anything after a ?xx= parameter in the url stored as a non-encoded string in req.query.query
+        //req.query stores additional queries (&key=value) as key/value pairs
         let searchQuery = req.query.query;
-        let searchQueryArr = searchQuery.split(" ");
 
-        ////////////TO DO PARSE AND SANITIZE SEARCH QUERY/////////////
-        ////////////TO DO ADD CSS STYLING SO filters applied are colored upon refresh and removed when clear/////////////
+        //SEARCH QUERY OPTIMIZATION:
+        //lowerCase, remove all extra spaces, remove all special non-alpha characters, join key phrases with "-", remove beginning and trailing space(s)
+        //split on space, then replace - with " " for each word in array
+        let searchQueryArr = searchQuery
+            .toLowerCase()
+            .replace(/\s{2,}/, " ")
+            .replace(/[^a-zA-Z\s_]/, "") //[0-9] if want to include digits
+            .replace(/\d+/, "")
+            .replace(
+                /[\`\~\!\@\#\$\%\^\&\*\(\)\{\}\|\[\]\:\;\<\>\,\.\?\/\\]/,
+                ""
+            )
+            .replace(/_/, " ")
+            .replace(" and ", " ")
+            .replace("new h", "new-h") //new hampshire
+            .replace("new j", "new-j") //new jersey
+            .replace("new m", "new-m") //new mexico
+            .replace("new y", "new-y") //new york
+            .replace(" or ", " ")
+            .replace(/^\s+/, "")
+            .replace(/\s+$/, "")
+            .split(" ");
+
+        //add space back to key phrases
+        searchQueryArr = searchQueryArr.map((word) => {
+            return word.replace("-", " ");
+        });
 
         //PARSE OUT FILTER QUERIES
-        const filters = req.query;
-        // console.log(filters);
+        const filters = req.query; //object of query key/value pairs
 
         let sort = null;
         let difficulty = [];
@@ -50,10 +71,10 @@ router.get(
         if (filters.suitability) tagsSuit = filters.suitability.split("-");
         if (filters.attractions) tagsAtt = filters.attractions.split("-");
 
-        //CREATE DEFAULT FORM-DATA OBJECT TO PASS TO SEARCH.PUG
+        //CREATE DEFAULT FILTER-DATA OBJECT TO PASS TO FORMS IN SEARCH.PUG forms
         const filterData = {
             sort: {
-                alphabetical: "true", //default
+                alphabetical: "true", //default range value
                 popular: "false",
                 shortest: "false",
                 difficulty: "false",
@@ -63,14 +84,14 @@ router.get(
                 moderate: "false",
                 hard: "false",
             },
-            length: "50", //default
-            elevationChange: "5000", //default
+            length: "50", //default range value
+            elevationChange: "5000", //default range value
             routeType: {
                 loop: "false",
                 outBack: "false",
                 point: "false",
             },
-            rating: "4", //default
+            rating: "4", //default range value
             //- 2 Fee, 11 Parking, 13 Paved, 12	Restrooms, 14 No dogs, 15 Dogs Allowed
             tagsSuit: {
                 fee: "false",
@@ -80,7 +101,6 @@ router.get(
                 noDogs: "false",
                 yesDogs: "false",
             },
-
             tagsAtt: {
                 backpacking: "false",
                 forest: "false",
@@ -94,7 +114,7 @@ router.get(
             },
         };
 
-        //UPDATE FORM-DATA BASED ON FILTERS SELECTED
+        //UPDATE FILTER-DATA BASED ON FILTERS SELECTED
         filterData.sort[sort] = "true";
         if (length) filterData.length = length;
         if (elevationChange) filterData.elevationChange = elevationChange;
@@ -140,8 +160,8 @@ router.get(
         //CREATE WHERE CLAUSES FOR MAIN DATABASE REQUEST:
 
         //OR CLAUSES:
-        //for each word in the search query, create 3 OR clauses
-        //[Op.ilike] just resolves to a string, it is a form of destructuring a symbol
+        //for each word in the search query, create 4 OR clauses (4 columns to search)
+        //note: [Op.ilike] just resolves to a string, it is a form of destructuring a symbol
         const orClauses = searchQueryArr.reduce((acc, searchQuery) => {
             acc.push({ name: { [Op.iLike]: `%${searchQuery}%` } });
             acc.push({ "$CityPark.name$": { [Op.iLike]: `%${searchQuery}%` } });
@@ -152,7 +172,7 @@ router.get(
 
         //AND CLAUSES:
         const andClauses = [];
-        ///add each selected filters as a AND clause
+        ///add each selected filter as an AND clause
         andClauses.push({ "$Hike.difficultyId$": { [Op.or]: difficulty } });
         if (length === "50") {
             andClauses.push({
@@ -180,16 +200,15 @@ router.get(
         //ORDER BY CLAUSES:
         let orderClause = ["name", "ASC"]; //default is alphabetical
         // if (sort === "alphabetical") orderClause = ["name", "ASC"];
-        // Most popular sorted at end instead, depends on data on another DB request
+        // Most popular sorted at end instead, because depends on data on another DB request
         if (sort === "shortest") orderClause = ["length", "ASC"];
         if (sort === "difficulty") orderClause = ["difficultyId", "ASC"];
 
-        // FETCH HIKES FROM DATABASE BASED ON SEARCH QUERY AND FILTERS
+        // FETCH HIKES FROM DB BASED ON SEARCH QUERY, FILTERS (WHERE CLAUSES, ORDER CLAUSE)
         let hikes;
 
-        //check to see if submitted by navbar search Bar or advanced search page
+        //check to see if submitted by Navbar Search Bar or Advanced search page
         if (length === null) {
-            console.log("Search Bar");
             hikes = await db.Hike.findAll({
                 include: [
                     db.Tag,
@@ -225,7 +244,7 @@ router.get(
                         WHERE "hikeId" IN (:ids)
                         GROUP BY "hikeId"`;
 
-            //grab list of hikeIds from search result
+            //grab list of hikeIds from search result to optimize fetch
             const hikeIds = hikes.map((hike) => {
                 return hike.id;
             });
@@ -236,7 +255,7 @@ router.get(
                 type: db.sequelize.QueryTypes.SELECT, //tells sequel to only return the result, no metadata
             });
 
-            // console.log(avgReviews); //returns array of hike objects
+            // console.log(avgReviews); //returns array of hike-review objects
             // https://sequelize.org/docs/v6/core-concepts/raw-queries/
 
             //add avg property to each hike object
@@ -252,8 +271,6 @@ router.get(
                 return prev;
             }, {});
 
-            // console.log(avgReviewsMap,reviewCountMap);
-
             for (let hike of hikes) {
                 hike.avgReview = avgReviewsMap[hike.id];
                 hike.avgReviewPtg = avgReviewsMap[hike.id] * 20;
@@ -265,10 +282,10 @@ router.get(
             }
         }
 
-        //FILTER HIKES BY RATING
+        //FILTER HIKES SEARCH RESULTS BY RATING:
         const finalHikes = hikes
             .filter((hike) => {
-                //rating was transformed to proper value based on key
+                //rating form value was transformed to proper rating value based on key
                 //formValue 4 = any, formValue 3 = 3, formValue 2 = 4, formValue 1 = 4.5
                 return hike.avgReview >= rating;
             })
@@ -280,7 +297,7 @@ router.get(
                 return 0;
             });
 
-        //RENDER SEARCH PAGE
+        //RENDER SEARCH PAGE AND SEND TO FRONT END
         res.render("search", {
             searchQuery,
             finalHikes,
