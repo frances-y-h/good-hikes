@@ -23,11 +23,11 @@ router.get(
         //find default collection
         //per user stories, default display will be 'Completed' collection
         const collection = await db.Collection.findOne({
-            where: {
-                userId: userId,
-                name: "Completed",
-            },
-        });
+			where: {
+				userId: userId,
+				name: "Completed",
+			},
+		});
 
         //extract collection id to feed into redirect
         const defaultCollection = collection.dataValues.id;
@@ -50,11 +50,12 @@ router.get(
 
         //grab collections to display list on left column
         const userCollections = await db.Collection.findAll({
-            where: {
-                userId: userId,
-            },
-            include: db.Hike,
-        });
+			where: {
+				userId: userId,
+			},
+			order: [["id"]],
+			include: db.Hike,
+		});
 
         //extract the current collectionId from the url
         const collectionId = await parseInt(req.params.collectionId, 10);
@@ -124,6 +125,7 @@ router.get(
 			where: {
 				userId: userId,
 			},
+			order: [["id"]],
 			include: db.Hike,
 		});
 
@@ -140,8 +142,13 @@ const collectionValidator = [
         .withMessage("Please enter a name for the collection")
         .isLength({ max: 255 })
         .withMessage("Collection name must not be longer than 255 characters")
-        .custom((value) => {
-            return db.Collection.findOne({ where: { name: value } }).then(
+        .custom((value, {req }) => {
+            return db.Collection.findOne({
+                 where: {
+                      name: value,
+                      userId: req.session.auth.userId,
+                     } })
+            .then(
                 (collection) => {
                     if (collection) {
                         return Promise.reject(
@@ -170,6 +177,7 @@ router.post(
 			where: {
 				userId: userId,
 			},
+			order: [["id"]],
 			include: db.Hike,
 		});
 
@@ -200,17 +208,6 @@ router.post(
         }
     })
 );
-
-//default route from /collections/edit page to rename a collection
-//all events are prevented
-// router.post('/:id(\\d+)/edit',
-// 	requireAuth,
-// 	asyncHandler( async (req, res) =>{
-// 	const collectionId = await parseInt(req.params.id, 10);
-// 	console.log('-------hello from the name edit page for ', collectionId);
-// 	//take in user input
-// 	res.redirect('/collections/edit');
-// }));
 
 // route to patch the collection name
 router.patch(
