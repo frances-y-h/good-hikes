@@ -204,6 +204,7 @@ router.post(
         const hikeId = parseInt(req.params.hikeId, 10);
         // get the array with collectionId and whether checked or not
         const collectionsToUpdate = req.body;
+
         let userId;
         if (req.session.auth) {
             userId = req.session.auth.userId;
@@ -243,11 +244,10 @@ router.post(
                     await hikeCollection.destroy();
                 }
             }
-
-            res.json({
-                message: "Success",
-            });
         }
+        res.json({
+            message: "Success",
+        });
     })
 );
 

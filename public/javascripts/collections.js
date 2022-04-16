@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         addNewCollectionBtn.addEventListener("click", async (event) => {
             event.preventDefault();
+            event.stopPropagation();
             const collectionInput = document.getElementById("add-new-coll");
             const newCollectionName = collectionInput.value;
             // specific route for api
@@ -134,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         addToCollection.addEventListener("click", async (event) => {
             event.preventDefault();
+            event.stopPropagation();
             try {
                 let collections = document.querySelectorAll(".coll-ckbx");
                 collections = Array.from(collections).map((el) => {
