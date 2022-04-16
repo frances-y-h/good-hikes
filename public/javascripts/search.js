@@ -1,6 +1,37 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-    //TOGGLE MODAL EVENT LISTENERS
+    //select all filter toggles
     const toggles = document.querySelectorAll(".search-toggle");
+    const search = window.location.search;
+    console.log(search);
+    const filterToggle = (toggle, buttonId, check, boolean) => {
+        if (boolean) {
+            if (toggle.id === buttonId) {
+                if (search.includes(check))
+                    toggle.classList.add("filter-selected");
+            }
+        } else {
+            if (toggle.id === buttonId) {
+                if (!search.includes(check))
+                    toggle.classList.add("filter-selected");
+            }
+        }
+    };
+
+    // TOGGLE FILTER BUTTON STYLING if data
+    if (search.includes("&")) {
+        toggles.forEach((toggle) => {
+            filterToggle(toggle, "sort-button", "sort=alphabetical", false);
+            filterToggle(toggle, "difficulty-button", "difficulty", true);
+            filterToggle(toggle, "length-button", "length=50", false);
+            filterToggle(toggle, "elevation-button", "=5000", false);
+            filterToggle(toggle, "routeType-button", "routeType", true);
+            filterToggle(toggle, "rating-button", "rating=4", false);
+            filterToggle(toggle, "suitability-button", "suitability", true);
+            filterToggle(toggle, "attractions-button", "attractions", true);
+        });
+    }
+
+    // TOGGLE MODAL EVENT LISTENERS
     toggles.forEach((toggle) => {
         toggle.addEventListener("click", (event) => {
             //update the icon in the clicked button

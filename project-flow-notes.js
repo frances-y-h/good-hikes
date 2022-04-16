@@ -163,24 +163,4 @@ npx dotenv sequelize db:seed:all
     ~$ heroku run npx sequelize-cli db:migrate
     ~$ heroku run npx sequelize-cli db:seed:all
 
-TO DO LIST
--update debugging issues ran into:
-    -e.g. clear button
--fix css
--update about
--add sanitizer and searchQuery parser
-add search results count underneath header "xx results found", make it so line doesn't move
-
-At the bottom of your splash page in the directories, and in your search functionality, looking up "New Mexico" also retrieves records matching "New York", and would presumably match other "New X" queries.  I would flesh out the search query to include logic that checks if a user is just searching "New" or "New X" and treat "New X" as a single query term.  If I'm a user specifically looking in one of those states, I don't want/need results from other states clogging up my search results.
-Would be great to include a button to navigate to the advanced search page, so the user knows it exists.
-
-change to flex - wrap
-
-Presentation Flow
-    -database Schema
-    -home page
-    -hike page
-    -reviews
-    -collections
-    -search
 */
