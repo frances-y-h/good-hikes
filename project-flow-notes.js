@@ -157,4 +157,10 @@ npx dotenv sequelize db:seed:all
     "clean": "npx dotenv sequelize db:drop && npx dotenv sequelize db:create && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all"
 
 
+//DO NOT DROP HEROKU DATABASE
+    ~$ heroku run npx sequelize-cli db:seed:undo:all
+    ~$ heroku run npx sequelize-cli db:migrate:undo:all
+    ~$ heroku run npx sequelize-cli db:migrate
+    ~$ heroku run npx sequelize-cli db:seed:all
+
 */

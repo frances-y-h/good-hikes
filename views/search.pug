@@ -41,7 +41,7 @@ block content
               div.range-container
                 div#rating-label Any
                 div.input-range-container#input-range-container-rating
-                  input.range(type="range" min=1 max=4 step=1 value=4 id=`rating-range` name="rating")
+                  input.range(type="range" min=1 max=4 step=1 value=`${formData.rating}` id=`rating-range` name="rating")
                 div.range-labels#rating-range-labels
                   span 0+
                   span 3
@@ -73,6 +73,11 @@ block content
           +checkbox("wildflowers","attractions","9","Wildflowers",`${formData.tagsAtt.wildflowers}`)
 
       h1.hike-header Hike Search Results
+      if finalHikes.length > 0
+        div#hike-count #{finalHikes.length} Results Found
+      else
+        div#hike-count No Results Found
+      div#hike-container-separator
     if finalHikes.length > 0
       div#hike-list-container
         div#hike-list-inner-container
@@ -99,5 +104,3 @@ block content
                   //- div
                   //-   div.hike-key-title Route type
                   //-  div.hike-key-detail #{hike.RouteType.name}
-    else
-      p No results found
