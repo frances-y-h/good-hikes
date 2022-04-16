@@ -16,6 +16,14 @@ Git Wiki https://github.com/frances-y-h/good-hikes/wiki
 
 Good Hikes is a full stack application that allows users to browse, manage, and review hikes. Users are not required to sign up for an account if they are just browsing and searching for hikes. Logged in users can add a hike to their collections, add reviews/comments to hikes, and edit/delete their own review/comments. Currently, Good Hikes is seeded with 60 trails all over the United States. User `IfIJustLayHere` loves Good Hikes so much that they visited every trail on Good Hikes and left mutiple comments on each.
 
+## Getting Development Environment Up And Running
+- Git Clone the repo to your local machine
+- Install Dependencies:  run: 'npm install'
+- Create a '.env' file that mirrors the '.env.example' file
+- Create a user in your local postgreSQL database
+- Then use the 'npx dotenv sequelize [suffix]' command with each suffix in order: 'create:db', 'db:migrate', 'db:seed:all'
+- Start server: run: npm start
+
 ## Application Architecture
 
 Good Hikes is built on Pug frontend with an Express backend, using PostgreSQL as a database.
@@ -69,6 +77,37 @@ Good Hikes values the security of users' passwords, that is why all of the passw
 #### CSRF Token
 
 A secure random CSRF token is generated on all forms that users fill in to prevent CSRF attacks.
+
+##Challenges and Solutions
+BRAINSTORM TO BE EXANDED ON: 
+- Database setup 
+  - Missing associating in sequelize model - database setup 
+- USER Auth Feature
+  - Demo - form submission vs ajax and window refresh fetch stops the default refresh behavior
+  - csurf form submission issues
+  - requireAuth middleware
+- Home page Feature
+-   raw sequel queries + sequelize, missing association
+- Search Feature
+  - utilizing mixins to solve repetive html issues
+  - re-populate the data fields
+  - -clear button functionality
+- Collections Feature
+  - add to collection dropdown
+  - as added more dom manipulation, some buttons dissapeared, better organization on selectors
+  - deleting collections with associated data,
+- Reviews Feature
+  - adding event listeners to buttons created in front end post fetch request
+  - merge conflict doubled the router code
+  - updating the table after adding a review without rerendering. parent./child node (delete last and add first) vs fetch to datbase and refill entire table
+  - re-populate and clear the data field
+- Git and version contol
+  - learning curve about branches, and rebasing, and merging, and pull requests
+- Product
+  - new to heroku, and learning about production errors and heroku cli
+  - 
+
+
 
 ## Conclusion and Next Steps
 
