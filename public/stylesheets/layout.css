@@ -176,7 +176,6 @@ footer {
     #nav-top {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
         grid-template-areas:
             "logo login"
             "search search";
@@ -189,7 +188,7 @@ footer {
         grid-area: logo;
     }
 
-    #div-center-search {
+    #welcom-text {
         grid-area: login;
     }
 
@@ -198,7 +197,25 @@ footer {
         order: 2;
         max-width: 100%;
     }
+    #div-right-buttons {
+        justify-self: flex-end;
+    }
     #div-right-buttons .btn {
         margin: 0px 3px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #nav-top {
+        display: flex;
+        padding: 5px;
+        gap: 3px;
+    }
+    #div-center-search {
+        visibility: hidden;
+        opacity: 0;
+    }
+    #header-image {
+        width: 100px;
     }
 }
