@@ -207,11 +207,21 @@ main {
 
 /*
 
+wider search button
+make filters lighter color
+
+
 HIKE SEARCH RESULTS
 */
 .hike-header {
     text-align: center;
     margin-top: 25px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+#hike-count {
+    text-align: center;
     margin-bottom: 15px;
     box-sizing: border-box;
 }
@@ -348,4 +358,17 @@ a.hike-card {
 .hike-length,
 .hike-time {
     font-size: 12px;
+}
+
+@media screen and (max-width: 1000) {
+    #search-toggles {
+        display: flex;
+        flex-direction: row;
+        height: 200px;
+        /* grid-template-areas: "a b c d e f g h"; */
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 20px;
+        box-sizing: border-box;
+    }
 }

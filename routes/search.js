@@ -51,7 +51,7 @@ router.get(
         if (filters.attractions) tagsAtt = filters.attractions.split("-");
 
         //CREATE DEFAULT FORM-DATA OBJECT TO PASS TO SEARCH.PUG
-        const formData = {
+        const filterData = {
             sort: {
                 alphabetical: "true", //default
                 popular: "false",
@@ -95,45 +95,46 @@ router.get(
         };
 
         //UPDATE FORM-DATA BASED ON FILTERS SELECTED
-        formData.sort[sort] = "true";
-        if (length) formData.length = length;
-        if (elevationChange) formData.elevationChange = elevationChange;
-        if (rating) formData.rating = rating;
+        filterData.sort[sort] = "true";
+        if (length) filterData.length = length;
+        if (elevationChange) filterData.elevationChange = elevationChange;
+        if (filters.rating) filterData.rating = filters.rating;
+        else filterData.rating = "4";
 
         difficulty.forEach((num) => {
-            if (num === "1") formData.difficulty.easy = "true";
-            if (num === "2") formData.difficulty.moderate = "true";
-            if (num === "3") formData.difficulty.hard = "true";
+            if (num === "1") filterData.difficulty.easy = "true";
+            if (num === "2") filterData.difficulty.moderate = "true";
+            if (num === "3") filterData.difficulty.hard = "true";
         });
 
         routeType.forEach((num) => {
-            if (num === "1") formData.routeType.loop = "true";
-            if (num === "2") formData.routeType.outBack = "true";
-            if (num === "3") formData.routeType.point = "true";
+            if (num === "1") filterData.routeType.loop = "true";
+            if (num === "2") filterData.routeType.outBack = "true";
+            if (num === "3") filterData.routeType.point = "true";
         });
 
         //- 2 Fee, 11 Parking, 13 Paved, 12	Restrooms, 14 No dogs, 15 Dogs Allowed
         tagsSuit.forEach((num) => {
-            if (num === "2") formData.tagsSuit.fee = "true";
-            if (num === "11") formData.tagsSuit.parking = "true";
-            if (num === "13") formData.tagsSuit.paved = "true";
-            if (num === "12") formData.tagsSuit.rest = "true";
-            if (num === "14") formData.tagsSuit.noDogs = "true";
-            if (num === "15") formData.tagsSuit.yesDogs = "true";
+            if (num === "2") filterData.tagsSuit.fee = "true";
+            if (num === "11") filterData.tagsSuit.parking = "true";
+            if (num === "13") filterData.tagsSuit.paved = "true";
+            if (num === "12") filterData.tagsSuit.rest = "true";
+            if (num === "14") filterData.tagsSuit.noDogs = "true";
+            if (num === "15") filterData.tagsSuit.yesDogs = "true";
         });
 
         //- 1	Backpacking, 3	Forest, 4	Lake, 5	No shade, 6	River,
         //- 7	Views, 8	Waterfall, 10	Wildlife, 9	Wildflowers
         tagsAtt.forEach((num) => {
-            if (num === "1") formData.tagsAtt.backpacking = "true";
-            if (num === "3") formData.tagsAtt.forest = "true";
-            if (num === "4") formData.tagsAtt.lake = "true";
-            if (num === "5") formData.tagsAtt.noShade = "true";
-            if (num === "6") formData.tagsAtt.river = "true";
-            if (num === "7") formData.tagsAtt.views = "true";
-            if (num === "8") formData.tagsAtt.waterfall = "true";
-            if (num === "10") formData.tagsAtt.wildlife = "true";
-            if (num === "9") formData.tagsAtt.wildflowers = "true";
+            if (num === "1") filterData.tagsAtt.backpacking = "true";
+            if (num === "3") filterData.tagsAtt.forest = "true";
+            if (num === "4") filterData.tagsAtt.lake = "true";
+            if (num === "5") filterData.tagsAtt.noShade = "true";
+            if (num === "6") filterData.tagsAtt.river = "true";
+            if (num === "7") filterData.tagsAtt.views = "true";
+            if (num === "8") filterData.tagsAtt.waterfall = "true";
+            if (num === "10") filterData.tagsAtt.wildlife = "true";
+            if (num === "9") filterData.tagsAtt.wildflowers = "true";
         });
 
         //CREATE WHERE CLAUSES FOR MAIN DATABASE REQUEST:
@@ -153,10 +154,24 @@ router.get(
         const andClauses = [];
         ///add each selected filters as a AND clause
         andClauses.push({ "$Hike.difficultyId$": { [Op.or]: difficulty } });
-        andClauses.push({ "$Hike.length$": { [Op.lte]: parseInt(length) } });
-        andClauses.push({
-            "$Hike.elevationChange$": { [Op.lte]: elevationChange },
-        });
+        if (length === "50") {
+            andClauses.push({
+                "$Hike.length$": { [Op.gte]: 0 },
+            });
+        } else {
+            andClauses.push({
+                "$Hike.length$": { [Op.lte]: parseInt(length) },
+            });
+        }
+        if (elevationChange === "5000") {
+            andClauses.push({
+                "$Hike.elevationChange$": { [Op.gte]: 0 },
+            });
+        } else {
+            andClauses.push({
+                "$Hike.elevationChange$": { [Op.lte]: elevationChange },
+            });
+        }
         andClauses.push({ "$Hike.routeTypeId$": { [Op.or]: routeType } });
         // avgRating not available in first DB request, hikes will be filtered by ratings later
         andClauses.push({ "$Tags.id$": { [Op.or]: tagsSuit } });
@@ -259,7 +274,7 @@ router.get(
             })
             .sort((a, b) => {
                 //if popular selected, SORT by avg rating
-                if (formData.sort.popular === "true") {
+                if (filterData.sort.popular === "true") {
                     return b.reviewCount - a.reviewCount;
                 }
                 return 0;
@@ -269,7 +284,7 @@ router.get(
         res.render("search", {
             searchQuery,
             finalHikes,
-            formData,
+            formData: filterData,
         });
     })
 );

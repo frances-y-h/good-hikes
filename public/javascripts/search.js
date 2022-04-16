@@ -42,6 +42,37 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 
+    //CLEAR BUTTON EVENT LISTENER
+    //default behavior doesn't work when pre-populate check mark
+    const clearBtns = document.querySelectorAll(".clear-filters");
+    clearBtns.forEach((clearBtn) => {
+        const clearBtnId = clearBtn.id.split("menu-clear-")[1];
+        if (
+            clearBtnId !== "elevation" &&
+            clearBtnId !== "length" &&
+            clearBtnId !== "rating"
+        ) {
+            clearBtn.addEventListener("click", (event) => {
+                const clickedId =
+                    event.currentTarget.id.split("menu-clear-")[1];
+                const inputs = document.querySelectorAll(
+                    `#options-${clickedId} input`
+                );
+                console.log(inputs);
+                inputs.forEach((input) => {
+                    // input.checked = false; //doesn't work, not the property checked,checked is an attribute rendered in pug mixin
+                    input.removeAttribute("checked");
+                    if (
+                        clearBtnId === "sort" &&
+                        input.value === "alphabetical"
+                    ) {
+                        input.setAttribute("checked", "checked");
+                    }
+                });
+            });
+        }
+    });
+
     /*TOGGLE MODAL SUBMIT EVENT LISTENERS + ADVANCED SEARCH BAR SUBMIT
         GENERAL FLOW:
             1) Frontend: intercept the form data and parse it out into an object
@@ -59,6 +90,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     filters.forEach((filter) => {
         filter.addEventListener("click", (event) => {
             event.preventDefault();
+            // console.log("filter:", event.defaultPrevented);
             // event.stopPropagation();
 
             const forms = document.querySelectorAll("form.inner-popup");
@@ -174,7 +206,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // Update the slider value (each time you drag the slider handle)
     elevationSlider.oninput = function () {
-        //'this' will is the object that onclick was bound to aka event.currentTarget
+        //'this' is the object that onclick was bound to aka event.currentTarget
         if (this.value === "5000") {
             elevationMaxLabel.innerHTML = `Max: ${this.value}+ ft`;
         } else {
@@ -185,9 +217,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //Update Clear button functionality to reset to default value
     elevationSliderClear.addEventListener("click", (event) => {
         elevationMaxLabel.innerHTML = `Max: 5000+ ft`;
-        // console.log(elevationSlider);
-        // elevationSlider.value = 5000;
-        // console.log(elevationSlider);
+        elevationSlider.removeAttribute("checked");
+        elevationSlider.setAttribute("value", 5000);
+        // elevationSlider.value=5000:
     });
 
     //LENGTH RANGE MODAL EVENT LISTENER
@@ -213,6 +245,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // Update Clear button functionality to reset to default value
     lengthSliderClear.addEventListener("click", (event) => {
         lengthMaxLabel.innerHTML = `Max: 50+ mi`;
+        lengthSlider.removeAttribute("checked");
+        lengthSlider.setAttribute("value", 50);
+        // lengthSlider.value = 50;  //doesn't work, need to user setAttribute.
     });
 
     //RATING RANGE MODAL EVENT LISTENER
@@ -222,29 +257,35 @@ document.addEventListener("DOMContentLoaded", (event) => {
         "#rating-button + .toggle-popup .clear-filters"
     );
 
-    // Display the default slider value
-    ratingMaxLabel.innerHTML = `Any`;
+    //Set Rating Label Helper function
+    const getRatingLabel = (value) => {
+        switch (value) {
+            case "3":
+                return "Over 3";
+            case "2":
+                return "Over 4";
+            case "1":
+                return "Over 4.5";
+            default:
+                //if value is 4 or undefined
+                return "Any";
+        }
+    };
+    //update slider label when loading dom
+    ratingMaxLabel.innerHTML = getRatingLabel(ratingMaxLabel.value);
 
     // Update the slider value (each time you drag the slider handle)
     ratingSlider.oninput = function () {
         //'this' will is the object that onclick was bound to aka event.currentTarget
-        if (this.value === "4") {
-            ratingMaxLabel.innerHTML = `Any`;
-        }
-        if (this.value === "3") {
-            ratingMaxLabel.innerHTML = `Over 3`;
-        }
-        if (this.value === "2") {
-            ratingMaxLabel.innerHTML = `Over 4`;
-        }
-        if (this.value === "1") {
-            ratingMaxLabel.innerHTML = `Over 4.5`;
-        }
+        ratingMaxLabel.innerHTML = getRatingLabel(this.value);
     };
 
     // Update Clear button functionality to reset to default value
     ratingSliderClear.addEventListener("click", (event) => {
         ratingMaxLabel.innerHTML = `Any`;
+        ratingSlider.removeAttribute("checked");
+        ratingSlider.setAttribute("value", 4);
+        ratingSlider.value = 4;
     });
 
     //ADVANCED SEARCH BUTTON ORIGINAL EVENT LISTENER
