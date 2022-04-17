@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         addNewCollectionBtn.addEventListener("click", async (event) => {
             event.preventDefault();
+            event.stopPropagation();
             const collectionInput = document.getElementById("add-new-coll");
             const newCollectionName = collectionInput.value;
             // specific route for api
@@ -134,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         addToCollection.addEventListener("click", async (event) => {
             event.preventDefault();
+            event.stopPropagation();
             try {
                 let collections = document.querySelectorAll(".coll-ckbx");
                 collections = Array.from(collections).map((el) => {
@@ -146,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 const data = await res.json();
                 dropdownMenu.classList.add("hidden");
+                dropdownModal.classList.add("hidden");
                 if (data.message === "Success") {
                     if (collections[0][1] === true) {
                         wantToHikeSpan.innerText = "✓";
@@ -157,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     updateStatusDiv.innerText =
                         "Something went wrong. Please try again";
                 }
+                dropdownModal.classList.add("hidden");
             } catch (err) {
                 console.error(err);
             }
