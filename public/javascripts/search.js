@@ -317,57 +317,57 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //CLEAR ALL FILTERS AND REFRESH PAGE
     const clearAll = document.getElementById("clear-all-filters");
     clearAll.addEventListener("click", (event) => {
-        const clearBtns = document.querySelectorAll(".clear-filters");
-        clearBtns.forEach((clearBtn) => {
-            const clearBtnId = clearBtn.id.split("menu-clear-")[1];
-            const inputs = document.querySelectorAll(
-                `#options-${clearBtnId} input`
-            );
+        // const clearBtns = document.querySelectorAll(".clear-filters");
+        // clearBtns.forEach((clearBtn) => {
+        //     const clearBtnId = clearBtn.id.split("menu-clear-")[1];
+        //     const inputs = document.querySelectorAll(
+        //         `#options-${clearBtnId} input`
+        //     );
 
-            if (
-                clearBtnId === "difficulty" ||
-                clearBtnId == "suitability" ||
-                clearBtnId == "attractions" ||
-                clearBtnId == "routeType" ||
-                clearBtnId == "sort"
-            ) {
-                inputs.forEach((input) => {
-                    input.removeAttribute("checked");
-                    // input.checked = "false";
-                    if (
-                        clearBtnId === "sort" &&
-                        input.value === "alphabetical"
-                    ) {
-                        // input.setAttribute("checked", "checked"); //doesn't work in this case
-                        input.checked = "true"; //this one works in this case.
-                    }
-                });
-            }
+        //     if (
+        //         clearBtnId === "difficulty" ||
+        //         clearBtnId == "suitability" ||
+        //         clearBtnId == "attractions" ||
+        //         clearBtnId == "routeType" ||
+        //         clearBtnId == "sort"
+        //     ) {
+        //         inputs.forEach((input) => {
+        //             input.removeAttribute("checked");
+        //             // input.checked = "false";
+        //             if (
+        //                 clearBtnId === "sort" &&
+        //                 input.value === "alphabetical"
+        //             ) {
+        //                 // input.setAttribute("checked", "checked"); //doesn't work in this case
+        //                 input.checked = "true"; //this one works in this case.
+        //             }
+        //         });
+        //     }
 
-            if (clearBtnId === "elevation") {
-                elevationMaxLabel.innerHTML = `Max: 5000+ ft`;
-                elevationSlider.removeAttribute("checked");
-                // elevationSlider.setAttribute("value", 5000);
-                elevationSlider.value = 5000;
-            }
-            if (clearBtnId === "length") {
-                lengthMaxLabel.innerHTML = `Max: 50+ mi`;
-                lengthSlider.removeAttribute("checked");
-                // lengthSlider.setAttribute("value", 50);
-                lengthSlider.value = 50;
-            }
-            if (clearBtnId === "rating") {
-                ratingMaxLabel.innerHTML = `Any`;
-                ratingSlider.removeAttribute("checked");
-                // ratingSlider.setAttribute("value", 4);
-                ratingSlider.value = 4;
-            }
-        });
+        //     if (clearBtnId === "elevation") {
+        //         elevationMaxLabel.innerHTML = `Max: 5000+ ft`;
+        //         elevationSlider.removeAttribute("checked");
+        //         // elevationSlider.setAttribute("value", 5000);
+        //         elevationSlider.value = 5000;
+        //     }
+        //     if (clearBtnId === "length") {
+        //         lengthMaxLabel.innerHTML = `Max: 50+ mi`;
+        //         lengthSlider.removeAttribute("checked");
+        //         // lengthSlider.setAttribute("value", 50);
+        //         lengthSlider.value = 50;
+        //     }
+        //     if (clearBtnId === "rating") {
+        //         ratingMaxLabel.innerHTML = `Any`;
+        //         ratingSlider.removeAttribute("checked");
+        //         // ratingSlider.setAttribute("value", 4);
+        //         ratingSlider.value = 4;
+        //     }
+        // });
 
-        const toggles = document.querySelectorAll(".search-toggle");
-        toggles.forEach((toggle) => {
-            toggle.classList.remove("filter-selected");
-        });
+        // const toggles = document.querySelectorAll(".search-toggle");
+        // toggles.forEach((toggle) => {
+        //     toggle.classList.remove("filter-selected");
+        // });
 
         //grab the searchQuery url with no filter queries and refresh page
         const url = window.location.href.split("&")[0];
