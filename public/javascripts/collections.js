@@ -159,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     updateStatusDiv.innerText =
                         "Something went wrong. Please try again";
                 }
+                dropdownModal.classList.add("hidden");
             } catch (err) {
                 console.error(err);
             }
