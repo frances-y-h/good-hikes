@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
     if (search.includes("&")) {
         toggles.forEach((toggle) => {
             filterToggle(toggle, "sort-button", "sort=alphabetical", false);
-            filterToggle(toggle, "difficulty-button", "difficulty", true);
+            filterToggle(toggle, "difficulty-button", "difficulty=", true);
             filterToggle(toggle, "length-button", "length=50", false);
             filterToggle(toggle, "elevation-button", "=5000", false);
-            filterToggle(toggle, "routeType-button", "routeType", true);
+            filterToggle(toggle, "routeType-button", "routeType=", true);
             filterToggle(toggle, "rating-button", "rating=4", false);
-            filterToggle(toggle, "suitability-button", "suitability", true);
-            filterToggle(toggle, "attractions-button", "attractions", true);
+            filterToggle(toggle, "suitability-button", "suitability=", true);
+            filterToggle(toggle, "attractions-button", "attractions=", true);
         });
     }
 
@@ -312,6 +312,66 @@ document.addEventListener("DOMContentLoaded", (event) => {
         ratingSlider.removeAttribute("checked");
         ratingSlider.setAttribute("value", 4);
         ratingSlider.value = 4;
+    });
+
+    //CLEAR ALL FILTERS AND REFRESH PAGE
+    const clearAll = document.getElementById("clear-all-filters");
+    clearAll.addEventListener("click", (event) => {
+        const clearBtns = document.querySelectorAll(".clear-filters");
+        clearBtns.forEach((clearBtn) => {
+            const clearBtnId = clearBtn.id.split("menu-clear-")[1];
+            const inputs = document.querySelectorAll(
+                `#options-${clearBtnId} input`
+            );
+
+            if (
+                clearBtnId === "difficulty" ||
+                clearBtnId == "suitability" ||
+                clearBtnId == "attractions" ||
+                clearBtnId == "routeType" ||
+                clearBtnId == "sort"
+            ) {
+                inputs.forEach((input) => {
+                    input.removeAttribute("checked");
+                    // input.checked = "false";
+                    if (
+                        clearBtnId === "sort" &&
+                        input.value === "alphabetical"
+                    ) {
+                        // input.setAttribute("checked", "checked"); //doesn't work in this case
+                        input.checked = "true"; //this one works in this case.
+                    }
+                });
+            }
+
+            if (clearBtnId === "elevation") {
+                elevationMaxLabel.innerHTML = `Max: 5000+ ft`;
+                elevationSlider.removeAttribute("checked");
+                // elevationSlider.setAttribute("value", 5000);
+                elevationSlider.value = 5000;
+            }
+            if (clearBtnId === "length") {
+                lengthMaxLabel.innerHTML = `Max: 50+ mi`;
+                lengthSlider.removeAttribute("checked");
+                // lengthSlider.setAttribute("value", 50);
+                lengthSlider.value = 50;
+            }
+            if (clearBtnId === "rating") {
+                ratingMaxLabel.innerHTML = `Any`;
+                ratingSlider.removeAttribute("checked");
+                // ratingSlider.setAttribute("value", 4);
+                ratingSlider.value = 4;
+            }
+        });
+
+        const toggles = document.querySelectorAll(".search-toggle");
+        toggles.forEach((toggle) => {
+            toggle.classList.remove("filter-selected");
+        });
+
+        //grab the searchQuery url with no filter queries and refresh page
+        const url = window.location.href.split("&")[0];
+        window.location.href = url;
     });
 
     //ADVANCED SEARCH BUTTON ORIGINAL EVENT LISTENER

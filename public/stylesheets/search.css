@@ -306,6 +306,12 @@ HIKE SEARCH RESULTS
     text-decoration: none;
     font-size: 10px;
     color: rgb(185, 185, 185);
+    background-color: var(--bg1);
+    border: none;
+}
+
+#clear-all-filters:hover {
+    cursor: pointer;
 }
 
 #hike-list-container {
