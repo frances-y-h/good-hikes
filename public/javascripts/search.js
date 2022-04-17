@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     //select all filter toggles
     const toggles = document.querySelectorAll(".search-toggle");
-    const search = window.location.search;
-    console.log(search);
+    const search = window.location.search; //returns everything after a "?" in url"
     const filterToggle = (toggle, buttonId, check, boolean) => {
         if (boolean) {
             if (toggle.id === buttonId) {
@@ -21,13 +20,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
     if (search.includes("&")) {
         toggles.forEach((toggle) => {
             filterToggle(toggle, "sort-button", "sort=alphabetical", false);
-            filterToggle(toggle, "difficulty-button", "difficulty", true);
+            filterToggle(toggle, "difficulty-button", "difficulty=", true);
             filterToggle(toggle, "length-button", "length=50", false);
             filterToggle(toggle, "elevation-button", "=5000", false);
-            filterToggle(toggle, "routeType-button", "routeType", true);
+            filterToggle(toggle, "routeType-button", "routeType=", true);
             filterToggle(toggle, "rating-button", "rating=4", false);
-            filterToggle(toggle, "suitability-button", "suitability", true);
-            filterToggle(toggle, "attractions-button", "attractions", true);
+            filterToggle(toggle, "suitability-button", "suitability=", true);
+            filterToggle(toggle, "attractions-button", "attractions=", true);
         });
     }
 
@@ -89,7 +88,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 const inputs = document.querySelectorAll(
                     `#options-${clickedId} input`
                 );
-                console.log(inputs);
                 inputs.forEach((input) => {
                     // input.checked = false; //doesn't work, not the property checked,checked is an attribute rendered in pug mixin
                     input.removeAttribute("checked");
@@ -116,13 +114,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const filters = document.querySelectorAll(
         ".search-filters, #adv-search-button"
     );
-    // console.log(filters);
 
     filters.forEach((filter) => {
         filter.addEventListener("click", (event) => {
             event.preventDefault();
-            // console.log("filter:", event.defaultPrevented);
-            // event.stopPropagation();
+            // console.log("filter:", event.defaultPrevented); //can check if preventDefault worked
 
             const forms = document.querySelectorAll("form.inner-popup");
 
@@ -168,7 +164,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 }
             }
 
-            // console.log(data);
             //need default value of ""
             const variables = ["", "", "", "", "", "", "", ""];
             const properties = [
@@ -319,6 +314,66 @@ document.addEventListener("DOMContentLoaded", (event) => {
         ratingSlider.value = 4;
     });
 
+    //CLEAR ALL FILTERS AND REFRESH PAGE
+    const clearAll = document.getElementById("clear-all-filters");
+    clearAll.addEventListener("click", (event) => {
+        // const clearBtns = document.querySelectorAll(".clear-filters");
+        // clearBtns.forEach((clearBtn) => {
+        //     const clearBtnId = clearBtn.id.split("menu-clear-")[1];
+        //     const inputs = document.querySelectorAll(
+        //         `#options-${clearBtnId} input`
+        //     );
+
+        //     if (
+        //         clearBtnId === "difficulty" ||
+        //         clearBtnId == "suitability" ||
+        //         clearBtnId == "attractions" ||
+        //         clearBtnId == "routeType" ||
+        //         clearBtnId == "sort"
+        //     ) {
+        //         inputs.forEach((input) => {
+        //             input.removeAttribute("checked");
+        //             // input.checked = "false";
+        //             if (
+        //                 clearBtnId === "sort" &&
+        //                 input.value === "alphabetical"
+        //             ) {
+        //                 // input.setAttribute("checked", "checked"); //doesn't work in this case
+        //                 input.checked = "true"; //this one works in this case.
+        //             }
+        //         });
+        //     }
+
+        //     if (clearBtnId === "elevation") {
+        //         elevationMaxLabel.innerHTML = `Max: 5000+ ft`;
+        //         elevationSlider.removeAttribute("checked");
+        //         // elevationSlider.setAttribute("value", 5000);
+        //         elevationSlider.value = 5000;
+        //     }
+        //     if (clearBtnId === "length") {
+        //         lengthMaxLabel.innerHTML = `Max: 50+ mi`;
+        //         lengthSlider.removeAttribute("checked");
+        //         // lengthSlider.setAttribute("value", 50);
+        //         lengthSlider.value = 50;
+        //     }
+        //     if (clearBtnId === "rating") {
+        //         ratingMaxLabel.innerHTML = `Any`;
+        //         ratingSlider.removeAttribute("checked");
+        //         // ratingSlider.setAttribute("value", 4);
+        //         ratingSlider.value = 4;
+        //     }
+        // });
+
+        // const toggles = document.querySelectorAll(".search-toggle");
+        // toggles.forEach((toggle) => {
+        //     toggle.classList.remove("filter-selected");
+        // });
+
+        //grab the searchQuery url with no filter queries and refresh page
+        const url = window.location.href.split("&")[0];
+        window.location.href = url;
+    });
+
     //ADVANCED SEARCH BUTTON ORIGINAL EVENT LISTENER
     // const advSearch = document.querySelector("#adv-search-button");
 
@@ -341,8 +396,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //     //         },
     //     //         // body: JSON.stringify(searchQuery),
     //     //     });
-
-    //     //     console.log(res);
 
     //     //     if (!res.ok) {
     //     //         alert("Adv Search Unavailable");
