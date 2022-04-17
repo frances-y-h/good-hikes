@@ -101,6 +101,11 @@ main {
 
 .search-button-container {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 150px;
 }
 
 .search-toggle {
@@ -115,6 +120,7 @@ main {
     white-space: nowrap;
     height: 40px;
     width: 150px;
+    margin: 0px;
 }
 
 .search-toggle:hover {
@@ -294,6 +300,8 @@ HIKE SEARCH RESULTS
     align-items: center;
     margin-bottom: 20px;
     gap: 10px;
+    /* align-self: flex-start;
+    padding-left: 20px; */
 }
 
 #hike-count {
@@ -467,28 +475,41 @@ a.hike-card {
     font-size: 12px;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1010px) {
     #search-toggles {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-
-        justify-items: center;
-        align-items: center;
         width: 700px;
     }
-
-    .hike-header {
-        margin: 5px;
+    #adv-search-container {
+        width: 700px;
+        padding-left: 0px;
     }
-}
 
-@media screen and (max-width: 1010px) {
-    #adv-search-bar,
+    #adv-search-bar {
+        display: flex;
+        align-self: flex-start;
+    }
+
     #hike-list-inner-container {
         width: 700px;
     }
     #adv-search-input {
-        width: 480px;
+        width: 520px;
+        align-self: flex-start;
+    }
+    #adv-search-input-container {
+        align-self: flex-start;
+    }
+
+    #adv-search-form {
+        align-self: flex-end;
+        box-sizing: border-box;
+        justify-content: space-between;
+        width: 700px;
+    }
+
+    #adv-search-button {
+        /* padding-right: 0px; */
+        margin: 0px;
+        align-self: flex-end;
     }
 }
