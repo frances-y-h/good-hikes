@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", (event) => {
+    //update nav search input upon screen reload
+    const searchInput = document.querySelector("#search-input");
+    const advSearchInput = document.querySelector("#adv-search-input");
+
+    if (advSearchInput.value) {
+        searchInput.setAttribute("value", `${advSearchInput.value}`);
+    }
+
     //select all filter toggles
     const toggles = document.querySelectorAll(".search-toggle");
     const search = window.location.search; //returns everything after a "?" in url"
@@ -69,11 +77,36 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     menuModal.classList.add("hidden");
                 }
             });
+
+            //unhide bg-modal
+            const bgModal = document.querySelector(`#bg-modal-main`);
+            bgModal.classList.toggle("hidden");
         });
     });
 
-    //CLEAR BUTTON EVENT LISTENER
-    //default behavior doesn't work when pre-populate check mark
+    //Event listener for modal
+    const bgModal = document.querySelector(`#bg-modal-main`);
+    window.onclick = function (event) {
+        if (event.target == bgModal) {
+            bgModal.classList.toggle("hidden");
+
+            //remove all btn-selected filters
+            toggles.forEach((toggle) => {
+                if (toggle.id !== event.currentTarget.id) {
+                    toggle.classList.remove("btn-selected");
+                }
+            });
+
+            //hide all menuModals
+            const menuModals = document.querySelectorAll(`.toggle-popup`);
+            menuModals.forEach((menuModal) => {
+                menuModal.classList.add("hidden");
+            });
+        }
+    };
+
+    //MENU CLEAR BUTTON EVENT LISTENER
+    //default behavior doesn't work when pre-populate check mark upon page refresh
     const clearBtns = document.querySelectorAll(".clear-filters");
     clearBtns.forEach((clearBtn) => {
         const clearBtnId = clearBtn.id.split("menu-clear-")[1];
@@ -112,7 +145,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     */
 
     const filters = document.querySelectorAll(
-        ".search-filters, #adv-search-button"
+        ".search-filters, #adv-search-button, #search-button"
     );
 
     filters.forEach((filter) => {
@@ -370,8 +403,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // });
 
         //grab the searchQuery url with no filter queries and refresh page
-        const url = window.location.href.split("&")[0];
-        window.location.href = url;
+        const clearUrl = window.location.href.split("&")[0];
+        window.location.href = clearUrl;
     });
 
     //ADVANCED SEARCH BUTTON ORIGINAL EVENT LISTENER

@@ -21,6 +21,8 @@ html
             img#header-image(src='/images/logo2.png')
         div(id="my-hikes-link")
           a(id='hike-collection-link' href='/collections') My Hikes
+        div(id="explore-link-container")
+          a(id='explore-link' href='/search?query=') Explore
       div(id="div-center-search")
         form(action='/search' method='get' id='search-form')
           input(type="text" id="search-input" name="query" placeholder="Search Hikes")
