@@ -146,6 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 const data = await res.json();
                 dropdownMenu.classList.add("hidden");
+                dropdownModal.classList.add("hidden");
                 if (data.message === "Success") {
                     if (collections[0][1] === true) {
                         wantToHikeSpan.innerText = "✓";
