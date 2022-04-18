@@ -10,6 +10,7 @@ main {
     background-color: var(--bg1);
     /* margin: 20px; */
     box-sizing: border-box;
+    padding: 0px 50px;
     /* width: 80vw; */
 }
 
@@ -475,41 +476,102 @@ a.hike-card {
     font-size: 12px;
 }
 
-@media screen and (max-width: 1010px) {
-    #search-toggles {
-        width: 700px;
+@media screen and (max-width: 1080px) {
+    #hike-list-inner-container {
+        justify-content: center;
+        padding-left: 0px;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    main {
+        padding: 0px 50px;
+    }
+    #search-header-container {
+        width: 100%;
     }
     #adv-search-container {
-        width: 700px;
+        width: 100%;
         padding-left: 0px;
     }
 
     #adv-search-bar {
         display: flex;
-        align-self: flex-start;
-    }
-
-    #hike-list-inner-container {
-        width: 700px;
-    }
-    #adv-search-input {
-        width: 520px;
-        align-self: flex-start;
-    }
-    #adv-search-input-container {
-        align-self: flex-start;
+        justify-content: center;
+        width: 100%;
     }
 
     #adv-search-form {
-        align-self: flex-end;
         box-sizing: border-box;
-        justify-content: space-between;
-        width: 700px;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+        padding: 0px 75px;
+    }
+
+    #adv-search-input-container {
+        width: 70%;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    #adv-search-input {
+        width: 100%;
     }
 
     #adv-search-button {
         /* padding-right: 0px; */
         margin: 0px;
-        align-self: flex-end;
+        width: 30%;
+    }
+
+    #search-toggles {
+        justify-items: center;
+        /* align-items: center; */
+
+        gap: 10px;
+        width: 100%;
+        /* max-width: 500px; */
+        margin-bottom: 20px;
+        padding: 0px 75px;
+    }
+
+    #hike-list-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 20px;
+        box-sizing: border-box;
+    }
+
+    #hike-list-inner-container {
+        width: 80%;
+        height: 100%;
+        max-height: 600px;
+        justify-content: center;
+        padding: 0px;
+    }
+}
+
+@media screen and (max-width: 921px) {
+    #adv-search-form {
+        flex-direction: column;
+        width: 500px;
+        padding: 0px;
+    }
+    #search-toggles {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        justify-items: center;
+        /* align-items: center; */
+
+        gap: 10px;
+        width: 400px;
+        /* max-width: 500px; */
+        margin-bottom: 20px;
+        padding: 0px 50px;
     }
 }

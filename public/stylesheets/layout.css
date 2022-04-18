@@ -206,11 +206,11 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
-    #nav-top {
+    /* #nav-top {
         display: flex;
         padding: 5px;
         gap: 3px;
-    }
+    } */
     #header-image {
         width: 100px;
     }
