@@ -100,6 +100,13 @@ input:focus {
     gap: 5px;
 }
 
+#myHike-explore-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 #welcome-text {
     display: flex;
     align-items: center;
