@@ -1,12 +1,4 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-    //update nav search input upon screen reload
-    const searchInput = document.querySelector("#search-input");
-    const advSearchInput = document.querySelector("#adv-search-input");
-
-    if (advSearchInput.value) {
-        searchInput.setAttribute("value", `${advSearchInput.value}`);
-    }
-
     //select all filter toggles
     const toggles = document.querySelectorAll(".search-toggle");
     const search = window.location.search; //returns everything after a "?" in url"
@@ -233,12 +225,26 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let suitability = variables[6];
             let attractions = variables[7];
 
-            //grab advanced searchbar input element
-            const searchBar = document.querySelector("#adv-search-input");
+            //Update searchQuery based on where submit occurred
+            const searchButton = document.querySelector("#search-button");
+            const searchInput = document.querySelector("#search-input");
+            const advSearchButton =
+                document.querySelector("#adv-search-button");
+            const advSearchInput = document.querySelector("#adv-search-input");
+
+            let searchQuery;
+            if (event.target === searchButton) {
+                searchQuery = searchInput.value;
+            } else if (event.target === advSearchButton) {
+                searchQuery = advSearchInput.value;
+            } else {
+                //then filter search button was used and search and advanced search should be equal value
+                searchQuery = searchInput.value;
+            }
 
             //CREATE URL
             const url =
-                `/search?query=${searchBar.value}` +
+                `/search?query=${searchQuery}` +
                 sort +
                 difficulty +
                 length +

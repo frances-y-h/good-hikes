@@ -26,7 +26,7 @@ html
             a(id='explore-link' href='/search?query=') Explore
       div(id="div-center-search")
         form(action='/search' method='get' id='search-form')
-          input(type="text" id="search-input" name="query" placeholder="Search Hikes")
+          input(type="text" id="search-input" name="query" placeholder="Search Hikes" value=searchQuery)
           button#search-button.btn(type='submit')
             i(class='fa fa-search')
       div(id="div-right-buttons")
