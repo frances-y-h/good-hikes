@@ -1,55 +1,55 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener("DOMContentLoaded", (event) => {
     //select all filter toggles
-    const toggles = document.querySelectorAll('.search-toggle');
+    const toggles = document.querySelectorAll(".search-toggle");
     const search = window.location.search; //returns everything after a "?" in url"
     const filterToggle = (toggle, buttonId, check, boolean) => {
         if (boolean) {
             if (toggle.id === buttonId) {
                 if (search.includes(check))
-                    toggle.classList.add('filter-selected');
+                    toggle.classList.add("filter-selected");
             }
         } else {
             if (toggle.id === buttonId) {
                 if (!search.includes(check))
-                    toggle.classList.add('filter-selected');
+                    toggle.classList.add("filter-selected");
             }
         }
     };
 
     // TOGGLE FILTER BUTTON STYLING if data
-    if (search.includes('&')) {
+    if (search.includes("&")) {
         toggles.forEach((toggle) => {
-            filterToggle(toggle, 'sort-button', 'sort=alphabetical', false);
-            filterToggle(toggle, 'difficulty-button', 'difficulty=', true);
-            filterToggle(toggle, 'length-button', 'length=50', false);
-            filterToggle(toggle, 'elevation-button', '=5000', false);
-            filterToggle(toggle, 'routeType-button', 'routeType=', true);
-            filterToggle(toggle, 'rating-button', 'rating=4', false);
-            filterToggle(toggle, 'suitability-button', 'suitability=', true);
-            filterToggle(toggle, 'attractions-button', 'attractions=', true);
+            filterToggle(toggle, "sort-button", "sort=alphabetical", false);
+            filterToggle(toggle, "difficulty-button", "difficulty=", true);
+            filterToggle(toggle, "length-button", "length=50", false);
+            filterToggle(toggle, "elevation-button", "=5000", false);
+            filterToggle(toggle, "routeType-button", "routeType=", true);
+            filterToggle(toggle, "rating-button", "rating=4", false);
+            filterToggle(toggle, "suitability-button", "suitability=", true);
+            filterToggle(toggle, "attractions-button", "attractions=", true);
         });
     }
 
     // TOGGLE MODAL EVENT LISTENERS
     toggles.forEach((toggle) => {
-        toggle.addEventListener('click', (event) => {
+        toggle.addEventListener("click", (event) => {
             //update the icon in the clicked button
             const currentIcon = document.querySelector(
                 `button#${event.currentTarget.id} span`
             );
 
-            if (currentIcon.innerText === 'expand_more') {
-                currentIcon.innerText = 'expand_less';
-                toggle.classList.toggle('btn-selected');
+            if (currentIcon.innerText === "expand_more") {
+                currentIcon.innerText = "expand_less";
+                toggle.classList.toggle("btn-selected");
             } else {
-                currentIcon.innerText = 'expand_more';
-                toggle.classList.toggle('btn-selected');
+                currentIcon.innerText = "expand_more";
+                toggle.classList.toggle("btn-selected");
             }
 
             //update all other toggles to normal
             toggles.forEach((toggle) => {
                 if (toggle.id !== event.currentTarget.id) {
-                    toggle.classList.remove('btn-selected');
+                    toggle.classList.remove("btn-selected");
                 }
             });
 
@@ -59,20 +59,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
             );
 
             //if class is present remove it, if not present add it
-            menuModalTarget.classList.toggle('hidden');
+            menuModalTarget.classList.toggle("hidden");
 
             //update all other modals to hidden
             const menuModals = document.querySelectorAll(`.toggle-popup`);
             menuModals.forEach((menuModal) => {
                 if (menuModal.id !== menuModalTarget.id) {
                     //adds class to list if not already present
-                    menuModal.classList.add('hidden');
+                    menuModal.classList.add("hidden");
                 }
             });
 
             //unhide bg-modal
             const bgModal = document.querySelector(`#bg-modal-main`);
-            bgModal.classList.toggle('hidden');
+            bgModal.classList.toggle("hidden");
         });
     });
 
@@ -80,47 +80,47 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const bgModal = document.querySelector(`#bg-modal-main`);
     window.onclick = function (event) {
         if (event.target == bgModal) {
-            bgModal.classList.toggle('hidden');
+            bgModal.classList.toggle("hidden");
 
             //remove all btn-selected filters
             toggles.forEach((toggle) => {
                 if (toggle.id !== event.currentTarget.id) {
-                    toggle.classList.remove('btn-selected');
+                    toggle.classList.remove("btn-selected");
                 }
             });
 
             //hide all menuModals
             const menuModals = document.querySelectorAll(`.toggle-popup`);
             menuModals.forEach((menuModal) => {
-                menuModal.classList.add('hidden');
+                menuModal.classList.add("hidden");
             });
         }
     };
 
     //MENU CLEAR BUTTON EVENT LISTENER
     //default behavior doesn't work when pre-populate check mark upon page refresh
-    const clearBtns = document.querySelectorAll('.clear-filters');
+    const clearBtns = document.querySelectorAll(".clear-filters");
     clearBtns.forEach((clearBtn) => {
-        const clearBtnId = clearBtn.id.split('menu-clear-')[1];
+        const clearBtnId = clearBtn.id.split("menu-clear-")[1];
         if (
-            clearBtnId !== 'elevation' &&
-            clearBtnId !== 'length' &&
-            clearBtnId !== 'rating'
+            clearBtnId !== "elevation" &&
+            clearBtnId !== "length" &&
+            clearBtnId !== "rating"
         ) {
-            clearBtn.addEventListener('click', (event) => {
+            clearBtn.addEventListener("click", (event) => {
                 const clickedId =
-                    event.currentTarget.id.split('menu-clear-')[1];
+                    event.currentTarget.id.split("menu-clear-")[1];
                 const inputs = document.querySelectorAll(
                     `#options-${clickedId} input`
                 );
                 inputs.forEach((input) => {
                     // input.checked = false; //doesn't work, not the property checked,checked is an attribute rendered in pug mixin
-                    input.removeAttribute('checked');
+                    input.removeAttribute("checked");
                     if (
-                        clearBtnId === 'sort' &&
-                        input.value === 'alphabetical'
+                        clearBtnId === "sort" &&
+                        input.value === "alphabetical"
                     ) {
-                        input.setAttribute('checked', 'checked');
+                        input.setAttribute("checked", "checked");
                     }
                 });
             });
@@ -137,15 +137,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     */
 
     const filters = document.querySelectorAll(
-        '.search-filters, #adv-search-button, #search-button'
+        ".search-filters, #adv-search-button, #search-button"
     );
 
     filters.forEach((filter) => {
-        filter.addEventListener('click', (event) => {
+        filter.addEventListener("click", (event) => {
             event.preventDefault();
             // console.log("filter:", event.defaultPrevented); //can check if preventDefault worked
 
-            const forms = document.querySelectorAll('form.inner-popup');
+            const forms = document.querySelectorAll("form.inner-popup");
 
             //create a boolean to check whether slider submit button was clicked or not
             // const clickedId = event.currentTarget.id.split("menu-submit-")[1];
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 for (let pair of formData.entries()) {
                     if ([...formData.entries()].length > 1) {
                         //nest form data with same Name (groups of radio buttons or checkboxes)
-                        if (typeof data[pair[0]] !== 'object') {
+                        if (typeof data[pair[0]] !== "object") {
                             //create parent key if doesn't already exist
                             data[pair[0]] = {};
                         }
@@ -190,25 +190,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
 
             //need default value of ""
-            const variables = ['', '', '', '', '', '', '', ''];
+            const variables = ["", "", "", "", "", "", "", ""];
             const properties = [
-                'sort',
-                'difficulty',
-                'length',
-                'elevationChange',
-                'routeType',
-                'rating',
-                'suitability',
-                'attractions',
+                "sort",
+                "difficulty",
+                "length",
+                "elevationChange",
+                "routeType",
+                "rating",
+                "suitability",
+                "attractions",
             ];
 
             //Create url components based on whether parent key with child obj, or just a key/value pair
             for (let i = 0; i < variables.length; i++) {
                 let prop = properties[i];
                 if (data[prop]) {
-                    if (typeof data[prop] === 'object') {
+                    if (typeof data[prop] === "object") {
                         const values = Object.values(data[prop]);
-                        variables[i] = `&${prop}=${values.join('-')}`;
+                        variables[i] = `&${prop}=${values.join("-")}`;
                     } else {
                         variables[i] = `&${prop}=${data[prop]}`;
                     }
@@ -226,15 +226,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             let attractions = variables[7];
 
             //Update searchQuery based on where submit occurred
-            const searchButton = document.querySelector('#search-button');
-            const searchInput = document.querySelector('#search-input');
+            const searchButton = document.querySelector("#search-button");
+            const searchInput = document.querySelector("#search-input");
             const advSearchButton =
-                document.querySelector('#adv-search-button');
-            const advSearchInput = document.querySelector('#adv-search-input');
+                document.querySelector("#adv-search-button");
+            const advSearchInput = document.querySelector("#adv-search-input");
 
             let searchQuery;
-            console.log('TARGET:', event.target);
-
             if (event.target === searchButton) {
                 searchQuery = searchInput.value;
             } else if (event.target === advSearchButton) {
@@ -262,10 +260,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     //ELEVATION RANGE MODAL EVENT LISTENER
-    const elevationSlider = document.getElementById('elevation-range');
-    const elevationMaxLabel = document.getElementById('elevation-max');
+    const elevationSlider = document.getElementById("elevation-range");
+    const elevationMaxLabel = document.getElementById("elevation-max");
     const elevationSliderClear = document.querySelector(
-        '#elevation-button + .toggle-popup .clear-filters'
+        "#elevation-button + .toggle-popup .clear-filters"
     );
 
     // Display the default slider value
@@ -274,7 +272,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Update the slider value (each time you drag the slider handle)
     elevationSlider.oninput = function () {
         //'this' is the object that onclick was bound to aka event.currentTarget
-        if (this.value === '5000') {
+        if (this.value === "5000") {
             elevationMaxLabel.innerHTML = `Max: ${this.value}+ ft`;
         } else {
             elevationMaxLabel.innerHTML = `Max: ${this.value} ft`;
@@ -282,18 +280,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     //Update Clear button functionality to reset to default value
-    elevationSliderClear.addEventListener('click', (event) => {
+    elevationSliderClear.addEventListener("click", (event) => {
         elevationMaxLabel.innerHTML = `Max: 5000+ ft`;
-        elevationSlider.removeAttribute('checked');
-        elevationSlider.setAttribute('value', 5000);
+        elevationSlider.removeAttribute("checked");
+        elevationSlider.setAttribute("value", 5000);
         // elevationSlider.value=5000:
     });
 
     //LENGTH RANGE MODAL EVENT LISTENER
-    const lengthSlider = document.getElementById('length-range');
-    const lengthMaxLabel = document.getElementById('length-max');
+    const lengthSlider = document.getElementById("length-range");
+    const lengthMaxLabel = document.getElementById("length-max");
     const lengthSliderClear = document.querySelector(
-        '#length-button + .toggle-popup .clear-filters'
+        "#length-button + .toggle-popup .clear-filters"
     );
 
     // Display the default slider value
@@ -302,7 +300,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Update the slider value (each time you drag the slider handle)
     lengthSlider.oninput = function () {
         //'this' will is the object that onclick was bound to aka event.currentTarget
-        if (this.value === '50') {
+        if (this.value === "50") {
             lengthMaxLabel.innerHTML = `Max: ${this.value}+ mi`;
         } else {
             lengthMaxLabel.innerHTML = `Max: ${this.value} mi`;
@@ -310,32 +308,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     // Update Clear button functionality to reset to default value
-    lengthSliderClear.addEventListener('click', (event) => {
+    lengthSliderClear.addEventListener("click", (event) => {
         lengthMaxLabel.innerHTML = `Max: 50+ mi`;
-        lengthSlider.removeAttribute('checked');
-        lengthSlider.setAttribute('value', 50);
+        lengthSlider.removeAttribute("checked");
+        lengthSlider.setAttribute("value", 50);
         // lengthSlider.value = 50;  //doesn't work, need to user setAttribute.
     });
 
     //RATING RANGE MODAL EVENT LISTENER
-    const ratingSlider = document.getElementById('rating-range');
-    const ratingMaxLabel = document.getElementById('rating-label');
+    const ratingSlider = document.getElementById("rating-range");
+    const ratingMaxLabel = document.getElementById("rating-label");
     const ratingSliderClear = document.querySelector(
-        '#rating-button + .toggle-popup .clear-filters'
+        "#rating-button + .toggle-popup .clear-filters"
     );
 
     //Set Rating Label Helper function
     const getRatingLabel = (value) => {
         switch (value) {
-            case '3':
-                return 'Over 3';
-            case '2':
-                return 'Over 4';
-            case '1':
-                return 'Over 4.5';
+            case "3":
+                return "Over 3";
+            case "2":
+                return "Over 4";
+            case "1":
+                return "Over 4.5";
             default:
                 //if value is 4 or undefined
-                return 'Any';
+                return "Any";
         }
     };
     //update slider label when loading dom
@@ -348,16 +346,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     // Update Clear button functionality to reset to default value
-    ratingSliderClear.addEventListener('click', (event) => {
+    ratingSliderClear.addEventListener("click", (event) => {
         ratingMaxLabel.innerHTML = `Any`;
-        ratingSlider.removeAttribute('checked');
-        ratingSlider.setAttribute('value', 4);
+        ratingSlider.removeAttribute("checked");
+        ratingSlider.setAttribute("value", 4);
         ratingSlider.value = 4;
     });
 
     //CLEAR ALL FILTERS AND REFRESH PAGE
-    const clearAll = document.getElementById('clear-all-filters');
-    clearAll.addEventListener('click', (event) => {
+    const clearAll = document.getElementById("clear-all-filters");
+    clearAll.addEventListener("click", (event) => {
         // const clearBtns = document.querySelectorAll(".clear-filters");
         // clearBtns.forEach((clearBtn) => {
         //     const clearBtnId = clearBtn.id.split("menu-clear-")[1];
@@ -411,7 +409,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // });
 
         //grab the searchQuery url with no filter queries and refresh page
-        const clearUrl = window.location.href.split('&')[0];
+        const clearUrl = window.location.href.split("&")[0];
         window.location.href = clearUrl;
     });
 
