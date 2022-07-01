@@ -1,124 +1,124 @@
 @import url("./theme.css");
 
 body {
-    background-color: var(--bg1);
+	background-color: var(--bg1);
 }
 
 #nav-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    background-color: var(--light5);
-    padding: 0 50px;
-    gap: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	background-color: var(--light5);
+	padding: 0 50px;
+	gap: 20px;
+	position: sticky;
+	top: 0;
+	z-index: 1;
 }
 
 #div-center-search {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 600px;
-    flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 600px;
+	flex-grow: 1;
 }
 
 #search-form {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid var(--mid1);
-    border-radius: 86px;
-    box-shadow: 0.5px 0.5px 2px var(--mid1);
-    background-color: var(--light6);
-    width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 1px solid var(--mid1);
+	border-radius: 86px;
+	box-shadow: 0.5px 0.5px 2px var(--mid1);
+	background-color: var(--light6);
+	width: 100%;
 }
 
 #search-input {
-    border: none;
-    padding: 3px;
-    margin-left: 10px;
-    width: 95%;
-    background-color: transparent;
+	border: none;
+	padding: 3px;
+	margin-left: 10px;
+	width: 95%;
+	background-color: transparent;
 }
 
 #search-button {
-    margin: 5px;
-    padding: 5px 8px;
-    border: 1px solid rgba(0, 0, 0, 0);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: border 0.5s, background-color 0.5s, color 0.5s;
+	margin: 5px;
+	padding: 5px 8px;
+	border: 1px solid rgba(0, 0, 0, 0);
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: border 0.5s, background-color 0.5s, color 0.5s;
 }
 
 #search-button:hover {
-    border: 1px solid var(--mid1);
-    background-color: white;
-    color: var(--dark5);
+	border: 1px solid var(--mid1);
+	background-color: white;
+	color: var(--dark5);
 }
 #header-image {
-    width: 200px;
+	width: 200px;
 }
 
 input:focus {
-    outline: none;
+	outline: none;
 }
 
 #my-hikes-link > a,
 #explore-link-container > a {
-    padding: 10px 15px;
-    text-decoration: none;
-    border: 1px solid transparent;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 14px;
-    color: var(--dark1);
-    transition: all 0.5s;
-    display: flex;
-    justify-content: center;
+	padding: 10px 15px;
+	text-decoration: none;
+	border: 1px solid transparent;
+	border-radius: 50px;
+	font-weight: bold;
+	font-size: 14px;
+	color: var(--dark1);
+	transition: all 0.5s;
+	display: flex;
+	justify-content: center;
 }
 
 #my-hikes-link > a:hover,
 #explore-link-container > a:hover {
-    border: 1px solid var(--mid1);
-    color: white;
-    background-color: var(--mid1);
-    border-radius: 50px;
-    cursor: pointer;
-    transition: border 0.5s, background-color 0.5s, color 0.5s;
+	border: 1px solid var(--mid1);
+	color: white;
+	background-color: var(--mid1);
+	border-radius: 50px;
+	cursor: pointer;
+	transition: border 0.5s, background-color 0.5s, color 0.5s;
 }
 
 #div-left-links {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 5px;
 }
 
 #myHike-explore-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 
 #welcome-text {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 #welcome-text > p {
-    margin-right: 8px;
+	margin-right: 8px;
 }
 
 #div-right-buttons span {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
+	display: flex;
+	justify-content: flex-end;
+	flex-wrap: wrap;
 }
 
 /*
@@ -127,101 +127,161 @@ bringing them in a little bit closer
 layout.css imported after user-form in layout.pug
 */
 .btn.btn-nav {
-    margin: 0px 7px;
-    padding: 8px 8px;
+	margin: 0px 7px;
+	padding: 8px 8px;
+}
+
+.btn.btn-git {
+	margin: 0px 7px;
+	padding: 8px 8px;
+	background-color: black;
+	color: white;
+}
+
+.btn.btn-git:hover {
+	color: black;
+	background-color: white;
+	border-color: black;
 }
 
 footer {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 100%;
-    padding-top: 50px;
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	width: 100%;
+	padding-top: 50px;
+}
+
+.footer-good-hikes {
+	display: flex;
+	width: 100%;
+	padding: 10px;
+	justify-content: center;
+	font-size: 12px;
+	gap: 3px;
+	padding: 20px 0px 30px 0px;
+	background-color: var(--light3);
+}
+
+.footer-good-hikes div {
+	display: flex;
+	gap: 3px;
+}
+
+.footer-good-hikes a,
+.footer-gh {
+	font-size: 12px;
+}
+.footer-good-hikes a {
+	color: var(--mid4);
+}
+
+.footer-good-hikes a:hover {
+	color: var(--mid2);
 }
 
 .footer-techs {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
-    padding: 20px 20px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	padding: 20px 20px;
 }
 
 .footer-tech {
-    font-size: 12px;
-    color: var(--mid4);
+	font-size: 12px;
+	color: var(--mid4);
+}
+
+.footer-copy-about {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 0px 20px 0px 20px;
 }
 
 .footer-copyright {
-    padding: 20px 0px;
+	padding: 20px;
 }
 
 .footer-copyright,
 .footer-copyright > a {
-    font-size: 12px;
-    color: var(--dark1);
-    display: flex;
-    justify-content: center;
-    text-decoration: none;
+	font-size: 12px;
+	color: var(--dark1);
+	display: flex;
+	justify-content: center;
+	text-decoration: none;
 }
 
 .footer-copyright > a {
-    padding-left: 10px;
-    transition: all 0.5s;
+	padding-left: 10px;
+	transition: all 0.5s;
 }
 
 .footer-copyright > a:hover {
-    color: var(--mid2);
+	color: var(--mid2);
 }
 
 @media screen and (max-width: 950px) {
-    #nav-top {
-        padding: 0 10px;
-    }
+	#nav-top {
+		padding: 0 10px;
+	}
 }
 
 /* changed to 921 to sync up with search page */
 @media screen and (max-width: 921px) {
-    #nav-top {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-areas:
-            "logo login"
-            "search search";
-        height: 100%;
-        padding: 10px;
-        gap: 5px;
-    }
+	#nav-top {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-areas:
+			"logo login"
+			"search search";
+		height: 100%;
+		padding: 10px;
+		gap: 5px;
+	}
 
-    #div-left-links {
-        grid-area: logo;
-    }
+	#div-left-links {
+		grid-area: logo;
+	}
 
-    #welcome-text {
-        grid-area: login;
-    }
+	#welcome-text {
+		grid-area: login;
+	}
 
-    #div-center-search {
-        grid-area: search;
-        order: 2;
-        max-width: 100%;
-    }
-    #div-right-buttons {
-        justify-self: flex-end;
-    }
-    #div-right-buttons .btn {
-        margin: 0px 3px;
-    }
+	#div-center-search {
+		grid-area: search;
+		order: 2;
+		max-width: 100%;
+	}
+	#div-right-buttons {
+		justify-self: flex-end;
+	}
+	#div-right-buttons .btn {
+		margin: 0px 3px;
+	}
 }
 
-@media screen and (max-width: 480px) {
-    /* #nav-top {
+@media screen and (max-width: 760px) {
+	.footer-copy-about {
+		flex-direction: column;
+		padding-bottom: 20px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	/* #nav-top {
         display: flex;
         padding: 5px;
         gap: 3px;
     } */
-    #header-image {
-        width: 100px;
-    }
+	#header-image {
+		width: 100px;
+	}
+	.footer-good-hikes {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 }
