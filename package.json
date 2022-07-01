@@ -8,6 +8,10 @@
     "start:production": "node ./bin/www",
     "clean": "npx dotenv sequelize db:drop && npx dotenv sequelize db:create && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all"
   },
+  "engines": {
+    "node": "^16.13.2",
+    "npm": "8.1.2"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-session-sequelize": "^7.0.4",
