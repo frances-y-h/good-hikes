@@ -52,62 +52,62 @@ npx sequelize model:generate --name JoinHikeTag --attributes hikeId:integer,tagI
 //1) MANY-MANY Join Hikes Tags
 
 const columnMapping = {
-    through: "JoinHikeTag", //  model name referencing join table
-    otherKey: "hikeId",
-    foreignKey: "tagId",
+  through: 'JoinHikeTag', //  model name referencing join table
+  otherKey: 'hikeId',
+  foreignKey: 'tagId',
 };
 
 Tag.belongsToMany(models.Hike, columnMapping);
 
 const columnMapping2 = {
-    through: "JoinHikeTag",
-    otherKey: "tagId",
-    foreignKey: "hikeId",
+  through: 'JoinHikeTag',
+  otherKey: 'tagId',
+  foreignKey: 'hikeId',
 };
 Hike.belongsToMany(models.Tag, columnMapping2);
 
 //2) ONE cityPark has many Hikes
-Hike.belongsTo(models.CityPark, { foreignKey: "cityParkId" });
-CityPark.hasMany(models.Hike, { foreignKey: "cityParkId" });
+Hike.belongsTo(models.CityPark, { foreignKey: 'cityParkId' });
+CityPark.hasMany(models.Hike, { foreignKey: 'cityParkId' });
 
 //3) ONE state has many Hikes
-Hike.belongsTo(models.State, { foreignKey: "stateId" });
-State.hasMany(models.Hike, { foreignKey: "stateId" });
+Hike.belongsTo(models.State, { foreignKey: 'stateId' });
+State.hasMany(models.Hike, { foreignKey: 'stateId' });
 
 //4) ONE routeType has many Hikes
-Hike.belongsTo(models.RouteType, { foreignKey: "routeTypeId" });
-RouteType.hasMany(models.Hike, { foreignKey: "routeTypeId" });
+Hike.belongsTo(models.RouteType, { foreignKey: 'routeTypeId' });
+RouteType.hasMany(models.Hike, { foreignKey: 'routeTypeId' });
 
 //5) ONE difficulty has many Hikes
-Hike.belongsTo(models.Difficulty, { foreignKey: "difficultyId" });
-Difficulty.hasMany(models.Hike, { foreignKey: "difficultyId" });
+Hike.belongsTo(models.Difficulty, { foreignKey: 'difficultyId' });
+Difficulty.hasMany(models.Hike, { foreignKey: 'difficultyId' });
 
 //6) One user has many reviews
-Review.belongsTo(models.User, { foreignKey: "userId" });
-User.hasMany(models.Review, { foreignKey: "userId" });
+Review.belongsTo(models.User, { foreignKey: 'userId' });
+User.hasMany(models.Review, { foreignKey: 'userId' });
 
 //7) One hike has many reviews
-Review.belongsTo(models.Hike, { foreignKey: "hikeId" });
-Hike.hasMany(models.Review, { foreignKey: "hikeId" });
+Review.belongsTo(models.Hike, { foreignKey: 'hikeId' });
+Hike.hasMany(models.Review, { foreignKey: 'hikeId' });
 
 //8) One user has many collections
-Collection.belongsTo(models.User, { foreignKey: "userId" });
-User.hasMany(models.Collection, { foreignKey: "userId" });
+Collection.belongsTo(models.User, { foreignKey: 'userId' });
+User.hasMany(models.Collection, { foreignKey: 'userId' });
 
 //9) MANY-MANY - Join collection hikes
 
 const columnMapping3 = {
-    through: "JoinHikeCollection", //  model name referencing join table
-    otherKey: "hikeId",
-    foreignKey: "collectionId",
+  through: 'JoinHikeCollection', //  model name referencing join table
+  otherKey: 'hikeId',
+  foreignKey: 'collectionId',
 };
 
 Collection.belongsToMany(models.Hike, columnMapping3);
 
 const columnMapping4 = {
-    through: "JoinHikeCollection",
-    otherKey: "collectionId",
-    foreignKey: "hikeId",
+  through: 'JoinHikeCollection',
+  otherKey: 'collectionId',
+  foreignKey: 'hikeId',
 };
 Hike.belongsToMany(models.Collection, columnMapping4);
 
@@ -162,5 +162,49 @@ npx dotenv sequelize db:seed:all
     ~$ heroku run npx sequelize-cli db:migrate:undo:all
     ~$ heroku run npx sequelize-cli db:migrate
     ~$ heroku run npx sequelize-cli db:seed:all
+
+
+TO DO:
+    -mobile optimize the nav bar - EK
+    About page: - Francis
+        -make the about page links more obvious on splash (maybe a button)
+        -add angel list links
+    -update all pages so footer is on bottom - Lana
+    -Search: clear filter - hover underline - too hidden - Elan
+    -Delete Collection: hover button - Brian
+    -add a gif to the readme - chrome capture
+        -find a better way to make the movie to a gif
+    -bonus: -mobile optimize collections table - Brian
+    -bonus: dynamically update search list
+
+
+
+Challenges and Solutions BRAINSTORM TO BE EXPANDED ON:
+
+Database setup
+Missing associating in sequelize model - database setup
+USER Auth Feature
+Demo - form submission vs ajax and window refresh fetch stops the default refresh behavior
+csurf form submission issues
+requireAuth middleware
+Home page Feature
+raw sequel queries + sequelize, missing association
+Search Feature
+utilizing mixins to solve repetitive html issues
+re-populate the data fields
+-clear button functionality
+Collections Feature
+add to collection dropdown
+as added more dom manipulation, some buttons disappeared, better organization on selectors
+deleting collections with associated data,
+Reviews Feature
+adding event listeners to buttons created in front end post fetch request
+merge conflict doubled the router code
+updating the table after adding a review without rerendering. parent./child node (delete last and add first) vs fetch to datbase and refill entire table
+re-populate and clear the data field
+Git and version control
+learning curve about branches, and rebasing, and merging, and pull requests
+Product
+new to heroku, and learning about production errors and heroku cli
 
 */
