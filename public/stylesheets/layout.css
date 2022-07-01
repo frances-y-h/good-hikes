@@ -163,6 +163,11 @@ footer {
 	background-color: var(--light3);
 }
 
+.footer-good-hikes div {
+	display: flex;
+	gap: 3px;
+}
+
 .footer-good-hikes a,
 .footer-gh {
 	font-size: 12px;
@@ -258,6 +263,13 @@ footer {
 	}
 }
 
+@media screen and (max-width: 760px) {
+	.footer-copy-about {
+		flex-direction: column;
+		padding-bottom: 20px;
+	}
+}
+
 @media screen and (max-width: 500px) {
 	/* #nav-top {
         display: flex;
@@ -267,8 +279,9 @@ footer {
 	#header-image {
 		width: 100px;
 	}
-
-	.footer-copy-about {
+	.footer-good-hikes {
 		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 }
