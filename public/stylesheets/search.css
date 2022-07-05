@@ -327,15 +327,33 @@ HIKE SEARCH RESULTS
 }
 
 #clear-all-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
-  font-size: 10px;
-  color: rgb(185, 185, 185);
+  font-size: 14px;
+  font-weight: 700;
+
   background-color: var(--bg1);
+  color: rgba(96, 108, 56, 0.8);
+
+  padding: 10px 15px;
+
   border: none;
+  border: 1px solid rgba(96, 108, 56, 0.2);
+  border-radius: 38px;
+
+  box-sizing: border-box;
+  white-space: nowrap;
+  height: 40px;
+  margin: 0px;
 }
 
 #clear-all-filters:hover {
   cursor: pointer;
+  border-color: var(--mid1);
+  color: var(--mid1);
+  background-color: var(--bg1);
 }
 
 #hike-list-container {
@@ -603,10 +621,6 @@ a.hike-card {
 
   #adv-search-container {
     display: none;
-  }
-
-  .main-container-search {
-    padding-top: 50px;
   }
 
   #difficulty-menu,

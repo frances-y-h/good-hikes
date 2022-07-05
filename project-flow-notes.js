@@ -165,12 +165,6 @@ npx dotenv sequelize db:seed:all
 
 
 TO DO:
-    -mobile optimize the nav bar - EK
-    About page: - Francis
-        -make the about page links more obvious on splash (maybe a button)
-        -add angel list links
-    -update all pages so footer is on bottom - Lana
-    -Search: clear filter - hover underline - too hidden - Elan
     -Delete Collection: hover button - Brian
     -add a gif to the readme - chrome capture
         -find a better way to make the movie to a gif
