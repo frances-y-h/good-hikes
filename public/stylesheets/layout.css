@@ -252,7 +252,7 @@ footer {
     grid-template-areas:
       'logo login'
       'search search';
-    height: 100%;
+    height: auto;
     padding: 10px;
     gap: 5px;
   }
