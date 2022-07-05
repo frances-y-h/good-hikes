@@ -168,6 +168,7 @@ h2 {
 .btn-delete:hover {
     background-color: var(--delete1);
     color: white;
+    cursor: pointer;
 }
 .hike-count {
     color: var(--mid1);
