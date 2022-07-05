@@ -245,7 +245,7 @@ footer {
 }
 
 /* changed to 921 to sync up with search page */
-@media screen and (max-width: 921px) {
+@media screen and (max-width: 950px) {
   #nav-top {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
