@@ -147,7 +147,7 @@ footer {
   flex-direction: column;
   margin: 0 auto;
   width: 100%;
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 .footer-good-hikes {
@@ -306,10 +306,19 @@ footer {
   }
 
   .footer-techs {
-    height: 84px;
+    min-height: 84px;
   }
 
   .footer-tech {
     padding: 0px 20px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .footer-good-hikes {
+    font-size: 11px;
+  }
+  .footer-good-hikes div a {
+    font-size: 11px;
   }
 }
