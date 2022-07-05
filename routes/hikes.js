@@ -39,6 +39,7 @@ router.get(
             const ratingAmount = await db.Review.findAll({
                 where: { rating: i },
             });
+
             let avg = ((ratingAmount.length / reviewsAll.length) * 100).toFixed(
                 1
             );
@@ -49,10 +50,12 @@ router.get(
         const allReviews = await db.Review.findAll({ where: { hikeId } });
         const reviewCount = allReviews.length;
         let avgReview = 0;
-        for (let review of allReviews) {
-            avgReview += review.rating;
+        if (allReviews.length) {
+            for (let review of allReviews) {
+                avgReview += review.rating;
+            }
+            avgReview = (avgReview / allReviews.length).toFixed(1);
         }
-        avgReview = (avgReview / allReviews.length).toFixed(1);
         let avgReviewPtg = (avgReview / 5) * 100;
 
         let collections;

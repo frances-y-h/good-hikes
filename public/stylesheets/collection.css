@@ -1,4 +1,10 @@
+.main-container-hikes {
+    height: 74%;
+}
+
 #collection-grid {
+    height: 100%;
+    overflow-y: auto;
     display: grid;
     grid-template-columns: 1fr 2fr 9fr 1fr;
     grid-template-areas: "a b c d";
