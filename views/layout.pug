@@ -16,7 +16,7 @@ html
   body
     nav(id='nav-top')
       div(id="div-left-links")
-        div
+        div(id="div-logo-wrapper")
           a(href='/')
             img#header-image(src='/images/logo2.png')
         div#myHike-explore-container
@@ -36,10 +36,9 @@ html
             form(action='/users/logout' method='post')
               button.btn.btn-nav(id="user-logout" type='submit') Logout
         else
-          span
-            button.btn.btn-nav(type="submit" id="user-demo" href='/') Demo Login
-            a.btn.btn-nav(id="user-login" href='/users/login') Login
-            a.btn.btn-nav(id="user-signup" href='/users/signup') Sign Up
+          button.btn.btn-nav(type="submit" id="user-demo" href='/') Demo Login
+          a.btn.btn-nav(id="user-login" href='/users/login') Login
+          a.btn.btn-nav(id="user-signup" href='/users/signup') Sign Up
     block content
     footer
       div.footer-techs

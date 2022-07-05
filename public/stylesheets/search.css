@@ -1,91 +1,89 @@
 .hidden {
-    display: none;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--bg1);
-    /* margin: 20px; */
-    box-sizing: border-box;
-    padding: 0px 50px;
-    /* width: 80vw; */
+  display: none;
 }
 
 .main-container-search {
-    height: 77%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+
+  background-color: var(--bg1);
+  box-sizing: border-box;
+  padding: 30px 50px;
+  height: 1050px;
+
+  flex-grow: 1;
 }
 
 #bg-modal-main {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    /* background-color: grey; */
-    /* display: block; */
-    /* visibility: hidden; */
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  /* background-color: grey; */
+  /* display: block; */
+  /* visibility: hidden; */
 }
 
 #search-header-container {
-    /* position: sticky; */
-    /* top: 60px; */
-    background-color: var(--bg1);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    max-width: 1000px;
+  /* position: sticky; */
+  /* top: 60px; */
+  background-color: var(--bg1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 1000px;
 }
 
 #div-center-search {
-    /* visibility: hidden; */
-    display: none;
+  /* visibility: hidden; */
+  display: none;
 }
 
 #search-header {
-    text-align: center;
-    margin: 20px;
+  text-align: center;
+  margin: 20px;
 }
 
 #adv-search-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-left: 20px;
-    max-width: 1000px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  max-width: 1000px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 #adv-search-bar {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #adv-search-form {
-    display: flex;
-    /* gap: 10px; */
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+  display: flex;
+  /* gap: 10px; */
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 #adv-search-input {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid var(--mid1);
-    border-radius: 86px;
-    box-shadow: 0.5px 0.5px 2px var(--mid1);
-    background-color: var(--light6);
-    width: 800px;
-    padding: 10px 15px;
-    box-sizing: border-box;
-    height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--mid1);
+  border-radius: 86px;
+  box-shadow: 0.5px 0.5px 2px var(--mid1);
+  background-color: var(--light6);
+  width: 800px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  height: 40px;
 }
 
 /* #adv-search-input {
@@ -94,141 +92,141 @@ main {
 } */
 
 #adv-search-button {
-    width: 150px;
-    height: 40px;
+  width: 150px;
+  height: 40px;
 }
 
 #search-toggles {
-    /* display: flex;
+  /* display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between; */
 
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 
-    justify-items: center;
-    /* align-items: center; */
+  justify-items: center;
+  /* align-items: center; */
 
-    gap: 10px;
+  gap: 10px;
 
-    width: 1000px;
-    margin-bottom: 20px;
+  width: 1000px;
+  margin-bottom: 20px;
 }
 
 .search-button-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 150px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 150px;
 }
 
 .search-toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    background-color: var(--bg1);
-    color: rgba(96, 108, 56, 0.8);
-    border-color: rgba(96, 108, 56, 0.2);
-    box-sizing: border-box;
-    white-space: nowrap;
-    height: 40px;
-    width: 150px;
-    margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  background-color: var(--bg1);
+  color: rgba(96, 108, 56, 0.8);
+  border-color: rgba(96, 108, 56, 0.2);
+  box-sizing: border-box;
+  white-space: nowrap;
+  height: 40px;
+  width: 150px;
+  margin: 0px;
 }
 
 .search-toggle:hover {
-    border-color: var(--mid1);
-    color: var(--mid1);
-    background-color: var(--bg1);
+  border-color: var(--mid1);
+  color: var(--mid1);
+  background-color: var(--bg1);
 }
 
 .btn-selected {
-    color: var(--mid1);
-    background-color: var(--bg1);
-    border-color: var(--mid1);
+  color: var(--mid1);
+  background-color: var(--bg1);
+  border-color: var(--mid1);
 }
 
 .filter-selected {
-    color: var(--mid1);
-    background-color: var(--bg1);
-    border: 2px solid var(--mid1);
-    background-color: rgba(214, 223, 180, 0.2);
-    /* pointer-events: none; */
+  color: var(--mid1);
+  background-color: var(--bg1);
+  border: 2px solid var(--mid1);
+  background-color: rgba(214, 223, 180, 0.2);
+  /* pointer-events: none; */
 }
 
 .filter-selected:hover {
-    color: var(--mid1);
-    background-color: var(--bg1);
-    border: 2px solid var(--mid1);
+  color: var(--mid1);
+  background-color: var(--bg1);
+  border: 2px solid var(--mid1);
 }
 
 .toggle-popup {
-    position: absolute;
-    top: 48px;
-    left: 20px;
-    border: 0.5px solid rgba(96, 108, 56, 0.2);
-    border-radius: 10px;
-    /* transform: translate(412px, 105px); */
-    /* offset-x | offset-y | blur-radius | spread-radius | color */
-    box-shadow: 5px 5px 15px 0px rgba(211, 211, 211, 0.2);
-    background-color: var(--bg1);
-    z-index: 2;
+  position: absolute;
+  top: 48px;
+  left: 20px;
+  border: 0.5px solid rgba(96, 108, 56, 0.2);
+  border-radius: 10px;
+  /* transform: translate(412px, 105px); */
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 5px 5px 15px 0px rgba(211, 211, 211, 0.2);
+  background-color: var(--bg1);
+  z-index: 2;
 }
 
 .inner-popup {
-    background-color: var(--bg1);
-    border-radius: 10px;
-    width: 300px;
-    box-sizing: border-box;
+  background-color: var(--bg1);
+  border-radius: 10px;
+  width: 300px;
+  box-sizing: border-box;
 }
 
 .options-container {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    max-height: 200px;
-    min-height: 100px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    box-sizing: border-box;
-    overflow-y: auto;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  max-height: 200px;
+  min-height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .radio-container,
 .check-container {
-    display: flex;
-    box-sizing: border-box;
-    margin: 10px 10px;
-    gap: 4px;
-    width: auto;
+  display: flex;
+  box-sizing: border-box;
+  margin: 10px 10px;
+  gap: 4px;
+  width: auto;
 }
 
 .range-container {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    margin: 10px 10px;
-    gap: 4px;
-    width: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 10px 10px;
+  gap: 4px;
+  width: auto;
 }
 
 .range-labels {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .range {
-    width: 100%;
+  width: 100%;
 }
 
 .input-range-container {
-    /* width: 100%; */
-    padding: 10px;
-    /* box-sizing: border-box; */
+  /* width: 100%; */
+  padding: 10px;
+  /* box-sizing: border-box; */
 }
 
 /* update slider */
@@ -239,60 +237,60 @@ main {
 #elevation-range:hover,
 #length-range:hover,
 #rating-range:hover {
-    opacity: 1; /* Fully shown on mouse-over */
+  opacity: 1; /* Fully shown on mouse-over */
 }
 
 #rating-range {
-    direction: rtl;
+  direction: rtl;
 }
 
 #rating-range-labels {
-    padding-left: 10px;
-    padding-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #rating-label {
-    text-align: center;
-    padding-right: 10px;
+  text-align: center;
+  padding-right: 10px;
 }
 
 .rating-dd-star {
-    color: var(--bar);
-    padding-left: 2px;
-    box-sizing: border-box;
+  color: var(--bar);
+  padding-left: 2px;
+  box-sizing: border-box;
 }
 
 #input-range-container-rating {
-    padding-right: 20px;
+  padding-right: 20px;
 }
 
 .menu-bottom {
-    display: flex;
-    box-sizing: border-box;
-    border-top: 0.5px solid rgba(96, 108, 56, 0.2);
-    padding: 12px 16px;
-    justify-content: end;
-    align-items: space-between;
-    height: 60px;
-    width: auto;
-    background-color: var(--bg1);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+  display: flex;
+  box-sizing: border-box;
+  border-top: 0.5px solid rgba(96, 108, 56, 0.2);
+  padding: 12px 16px;
+  justify-content: end;
+  align-items: space-between;
+  height: 60px;
+  width: auto;
+  background-color: var(--bg1);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .menu-btn {
-    font-size: 12px;
-    /* position: absolute; */
-    /* bottom: 10px;
+  font-size: 12px;
+  /* position: absolute; */
+  /* bottom: 10px;
     right: 0px; */
-    border-color: rgba(96, 108, 56, 0.2);
-    background-color: var(--bg1);
-    color: var(--mid1);
+  border-color: rgba(96, 108, 56, 0.2);
+  background-color: var(--bg1);
+  color: var(--mid1);
 }
 
 .menu-btn:hover {
-    border-color: var(--mid1);
-    background-color: var(--bg1);
+  border-color: var(--mid1);
+  background-color: var(--bg1);
 }
 
 /*
@@ -312,69 +310,101 @@ HIKE SEARCH RESULTS
 } */
 
 #result-count-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 10px;
-    /* align-self: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+  /* align-self: flex-start;
     padding-left: 20px; */
 }
 
 #hike-count {
-    text-align: center;
-    box-sizing: border-box;
-    color: rgb(185, 185, 185);
+  text-align: center;
+  box-sizing: border-box;
+  color: rgb(185, 185, 185);
 }
 
 #clear-all-filters {
-    text-decoration: none;
-    font-size: 10px;
-    color: rgb(185, 185, 185);
-    background-color: var(--bg1);
-    border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+
+  background-color: var(--bg1);
+  color: rgba(96, 108, 56, 0.8);
+
+  padding: 10px 15px;
+
+  border: none;
+  border: 1px solid rgba(96, 108, 56, 0.2);
+  border-radius: 38px;
+
+  box-sizing: border-box;
+  white-space: nowrap;
+  height: 40px;
+  margin: 0px;
 }
 
 #clear-all-filters:hover {
-    cursor: pointer;
+  cursor: pointer;
+  border-color: var(--mid1);
+  color: var(--mid1);
+  background-color: var(--bg1);
 }
 
 #hike-list-container {
-    /* border-top: 1px solid gray; */
-    display: flex;
-    flex-direction: column;
-    /* padding-left: 20px; */
-    box-sizing: border-box;
+  /* border-top: 1px solid gray; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* flex-grow: 1; */
+  /* padding-left: 20px; */
+  box-sizing: border-box;
+  height: 700px;
+  width: 100%;
 }
 
 #hike-container-separator {
-    /* border-bottom: 1px solid gray; */
-    width: 1000px;
-    /* height: 2px; */
-    /* margin: 10px; */
+  /* border-bottom: 1px solid gray; */
+  width: 1000px;
+  /* height: 2px; */
+  /* margin: 10px; */
 }
 
 #hike-list-inner-container {
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 25px;
-    padding-left: 25px;
+  /* display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 15px;
+  */
 
-    box-sizing: border-box;
-    max-width: 1000px;
-    max-height: 500px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  grid-gap: 15px;
+  justify-content: center;
 
-    overflow-y: scroll;
-    /* Firefox */
-    /* scrollbar-width: none;  */
-    /* Internet Explorer 10+ */
-    /* -ms-overflow-style: none; */
+  box-sizing: border-box;
+  max-width: 1000px;
+  height: 700px;
 
-    margin-bottom: 30px;
-    padding-bottom: 20px;
+  overflow-y: scroll;
+  /* Firefox */
+  /* scrollbar-width: none;  */
+  /* Internet Explorer 10+ */
+  /* -ms-overflow-style: none; */
+
+  padding-left: 25px;
+  padding-right: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  margin-bottom: 30px;
 }
 
 /* Safari and Chrome */
@@ -385,233 +415,229 @@ HIKE SEARCH RESULTS
 
 /* HIKE CARD */
 a.hike-card {
-    width: 300px;
-    height: 250px;
-    border-radius: 10px;
-    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-    background-color: var(--bg1);
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
+  width: 300px;
+  height: 250px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+  background-color: var(--bg1);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .hike-card-img {
-    height: 150px;
-    width: auto;
-    display: flex;
-    align-items: flex-end;
-    padding: 10px;
+  height: 150px;
+  width: auto;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
 }
 
 .hike-name {
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0px 0px 3px rgb(0 0 0 / 30%);
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0px 0px 3px rgb(0 0 0 / 30%);
 }
 
 /* HIKE TEXT CONTAINER */
 .hike-card-text {
-    height: 80px;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 10px 10px;
-    box-sizing: border-box;
-    background-color: var(--bg1);
+  height: 80px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 10px;
+  box-sizing: border-box;
+  background-color: var(--bg1);
 }
 
 .hike-location {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-between; */
-    box-sizing: border-box;
-    font-size: 12px;
-    color: gray;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  box-sizing: border-box;
+  font-size: 12px;
+  color: gray;
+  text-align: left;
 }
 
 .hike-level-rating {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    box-sizing: border-box;
-    font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  font-size: 12px;
 }
 
 .hike-level {
-    padding: 5px 10px;
-    border-radius: 10px;
-    background-color: var(--mid1);
-    font-size: 10px;
-    color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: var(--mid1);
+  font-size: 10px;
+  color: white;
 }
 
 .hike-rating-stars-gray {
-    background: url("/images/star-rating-sprite-sm.png") repeat-x;
-    height: 15px;
-    width: 75px;
-    overflow: hidden;
-    /* text-indent: -999em; */
-    /* font-size: 0; */
-    /* line-height: 0; */
+  background: url('/images/star-rating-sprite-sm.png') repeat-x;
+  height: 15px;
+  width: 75px;
+  overflow: hidden;
+  /* text-indent: -999em; */
+  /* font-size: 0; */
+  /* line-height: 0; */
 }
 
 .hike-rating-stars-yellow {
-    background: url("/images/star-rating-sprite-sm.png") repeat-x;
-    /*background-position: X Y;  */
-    /* 0% means that the left (or top) edge of the background image is aligned
+  background: url('/images/star-rating-sprite-sm.png') repeat-x;
+  /*background-position: X Y;  */
+  /* 0% means that the left (or top) edge of the background image is aligned
     with the corresponding left (or top) edge of the container */
-    /* A value of 100% means that the right (or bottom) edge of the background
+  /* A value of 100% means that the right (or bottom) edge of the background
     image is aligned with the right (or bottom) edge of the container */
-    background-position: 0 100%;
-    /* float: left; */
-    height: 15px;
-    display: block;
-    /* overflow: hidden; */
-    /* width set at render based on avg review % */
+  background-position: 0 100%;
+  /* float: left; */
+  height: 15px;
+  display: block;
+  /* overflow: hidden; */
+  /* width set at render based on avg review % */
 }
 
 .hike-rating-count {
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    color: gray;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  color: gray;
 }
 
 .hike-length-time {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    box-sizing: border-box;
-    font-size: 12px;
-    color: gray;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: gray;
 }
 
 .hike-length,
 .hike-time {
-    font-size: 12px;
+  font-size: 12px;
 }
 
-@media screen and (max-width: 1080px) {
-    #hike-list-inner-container {
-        justify-content: center;
-        padding-left: 0px;
-    }
+@media screen and (max-width: 1100px) {
+  main {
+    padding: 0px 50px;
+  }
+  #search-header-container {
+    width: 100%;
+  }
+  #adv-search-container {
+    width: 100%;
+    padding-left: 0px;
+  }
+
+  #adv-search-bar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  #adv-search-form {
+    box-sizing: border-box;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 0px 75px;
+  }
+
+  #adv-search-input-container {
+    width: 70%;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  #adv-search-input {
+    width: 100%;
+  }
+
+  #adv-search-button {
+    /* padding-right: 0px; */
+    margin: 0px;
+    width: 30%;
+  }
+
+  #search-toggles {
+    justify-items: center;
+    /* align-items: center; */
+
+    gap: 10px;
+    width: 100%;
+    /* max-width: 500px; */
+    margin-bottom: 20px;
+    padding: 0px 75px;
+  }
+
+  #hike-list-container {
+    padding: 0px 75px;
+    /* margin-right: 75px; */
+  }
+
+  #hike-list-inner-container {
+    width: 100%;
+    justify-content: space-around;
+  }
 }
 
-@media screen and (max-width: 1050px) {
-    main {
-        padding: 0px 50px;
-    }
-    #search-header-container {
-        width: 100%;
-    }
-    #adv-search-container {
-        width: 100%;
-        padding-left: 0px;
-    }
+@media screen and (max-width: 950px) {
+  #adv-search-form {
+    flex-direction: column;
+    width: 500px;
+    padding: 0px;
+  }
+  #search-toggles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    /* align-items: center; */
 
-    #adv-search-bar {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
+    gap: 10px;
+    width: 400px;
+    /* max-width: 500px; */
+    margin-bottom: 20px;
+    padding: 0px 50px;
+  }
 
-    #adv-search-form {
-        box-sizing: border-box;
-        justify-content: center;
-        gap: 20px;
-        width: 100%;
-        padding: 0px 75px;
-    }
-
-    #adv-search-input-container {
-        width: 70%;
-        padding: 0px;
-        margin: 0px;
-    }
-
-    #adv-search-input {
-        width: 100%;
-    }
-
-    #adv-search-button {
-        /* padding-right: 0px; */
-        margin: 0px;
-        width: 30%;
-    }
-
-    #search-toggles {
-        justify-items: center;
-        /* align-items: center; */
-
-        gap: 10px;
-        width: 100%;
-        /* max-width: 500px; */
-        margin-bottom: 20px;
-        padding: 0px 75px;
-    }
-
-    #hike-list-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        padding: 0px 20px;
-        box-sizing: border-box;
-    }
-
-    #hike-list-inner-container {
-        width: 80%;
-        height: 100%;
-        max-height: 600px;
-        justify-content: center;
-        padding: 0px;
-    }
-}
-
-@media screen and (max-width: 921px) {
-    #adv-search-form {
-        flex-direction: column;
-        width: 500px;
-        padding: 0px;
-    }
-    #search-toggles {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
-        justify-items: center;
-        /* align-items: center; */
-
-        gap: 10px;
-        width: 400px;
-        /* max-width: 500px; */
-        margin-bottom: 20px;
-        padding: 0px 50px;
-    }
-}
-
-@media screen and (max-width: 921px) {
-    /* #div-center-search {
+  /* #div-center-search {
         display: none;
     } */
-    #div-center-search {
-        /* visibility: visible; */
-        display: block;
-    }
-    #adv-search-container {
-        display: none;
-    }
 
-    #difficulty-menu,
-    #elevation-menu,
-    #rating-menu,
-    #attractions-menu {
-        left: -140px;
-    }
+  #div-center-search {
+    /* visibility: visible; */
+    display: block;
+  }
+
+  #adv-search-container {
+    display: none;
+  }
+
+  #difficulty-menu,
+  #elevation-menu,
+  #rating-menu,
+  #attractions-menu {
+    left: -140px;
+  }
+
+  #hike-list-inner-container {
+    width: 400px;
+    justify-content: center;
+  }
 }
+
+/* @media screen and (max-width: 575px) {
+  #hike-list-inner-container {
+    width: 350px;
+  }
+} */
