@@ -14,6 +14,10 @@ main {
     /* width: 80vw; */
 }
 
+.main-container-search {
+    height: 77%;
+}
+
 #bg-modal-main {
     position: fixed;
     top: 0px;

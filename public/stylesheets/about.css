@@ -1,3 +1,7 @@
+.main-container-about {
+	height: 74.5%;
+}
+
 .card-warp {
 	display: flex;
 	flex-direction: row;
