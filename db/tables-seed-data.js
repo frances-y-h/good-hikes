@@ -86,7 +86,11 @@ for (let hikeId = 1; hikeId <= numOfHikes; hikeId++) {
         oneMonth *
           Math.floor(Math.random() * (maxMonth - minMonth + 1) + minMonth)
     );
-    obj.createdAt = new Date();
+    obj.createdAt = new Date(
+      newDate +
+        oneMonth *
+          Math.floor(Math.random() * (maxMonth - minMonth + 1) + minMonth)
+    );
     obj.updatedAt = new Date();
     reviewSeed.push(obj);
   }
