@@ -152,31 +152,31 @@ FUTURE TODOs:
 -make collections table mobile friendly
 -make explore page hike list update dynamically without page refresh
 
-Project Challenges Notes:
-
-Database setup
-  - Missed association in sequelize model
-USER Auth Feature
+PROJECT CHALLENGES NOTES:
+- Git and Version Control
+  - First team project, learning curve about proper use of feature branches, rebasing, merging, and pull requests
+  - Reviewed online guides about proper git flow and worked together online in the beginning when submitting and reviewing PRs
+- Search Feature
+  - implement a custom search with both free text and multiple filters as well as a clear all filters functionality
+  - utilized Pug template engine mixins to create dynamic DRYer html code across 8 filter types
+  - utilized url query parameters, regex, raw sequel and sequelize to create custom search algorithm to query database
+  - repopulating filters and search input
+- Database setup
+  - Missing associating in sequelize model
+- USER Auth Feature
   - Demo - form submission vs ajax and window refresh fetch stops the default refresh behavior
   - csurf form submission issues
   - requireAuth middleware
-Home page Feature
-Search Feature
-  -raw sequel queries + sequelize, missing association
-  - utilizing mixins to solve repetitive html issues
-  - re-populate the data fields
-  - clear button functionality
-Collections Feature
+- Splash page Feature
+- Collections Feature
   - add to collection dropdown
   - as added more dom manipulation, some buttons disappeared, better organization on selectors
   - deleting collections with associated data,
-Reviews Feature
-  -adding event listeners to buttons created in front end post fetch request
-  -merge conflict doubled the router code
-  -updating the table after adding a review without rerendering. parent./child node (delete last and add first) vs fetch to datbase and refill entire table
-  -re-populate and clear the data field
-Git and version control
-  -team learning curve about branches, and rebasing, and merging, and pull requests
-Production
+- Reviews Feature
+  - adding event listeners to buttons created in front end post fetch request
+  - merge conflict doubled the router code
+  - updating the table after adding a review without rerendering. parent./child node (delete last and add first) vs fetch to database and refill entire table
+  - re-populate and clear the data field
+- Production
   - new to heroku, and learning about production errors and heroku cli
-*/
+  */
