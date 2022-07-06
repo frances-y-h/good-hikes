@@ -37,8 +37,10 @@ https://good-hikes.herokuapp.com/
 ## Good Hikes in Action:
 
 **_<h4 align="center"> Splash Page, Login and Hike Page </h4>_**
+![Splash](https://user-images.githubusercontent.com/97005157/177658455-687787b2-bea1-4c6c-b9ce-d1935dfbf54c.gif)
 
-![alt text](public/images/readme/homepage.png)
+
+
 
 **_<h4 align="center">Reviewing a Hike </h4>_**
 
