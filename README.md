@@ -47,18 +47,15 @@ https://good-hikes.herokuapp.com/
 **_<h4 align="center"> Splash Page, Login and Hike Page </h4>_**
 ![Splash](https://user-images.githubusercontent.com/97005157/177658455-687787b2-bea1-4c6c-b9ce-d1935dfbf54c.gif)
 
-
-
-
 **_<h4 align="center">Reviewing a Hike </h4>_**
 
-![alt text](public/images/readme/reviews.gif)
+![reviews](public/images/readme/reviews.gif)
 
 **_<h4 align="center">My Hikes / Collections </h4>_**
 ![alt text](public/images/readme/collection-page.png)
 
 **_<h4 align="center"> Advanced Search </h4>_**
-![alt text](public/images/readme/search-page.png)
+![search](public/images/readme/search.gif)
 
 ## Application Architecture Overview
 
