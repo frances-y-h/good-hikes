@@ -1,303 +1,303 @@
 .main-container-hikes {
-  height: 74%;
-  padding: 0px 50px;
+	height: 74%;
+	padding: 0px 50px;
 }
 
 #collection-grid {
-  height: 100%;
-  overflow-y: auto;
-  display: grid;
-  grid-template-columns: 1fr 2fr 9fr 1fr;
-  grid-template-areas: 'a b c d';
-  margin-top: 38px;
+	height: 100%;
+	overflow-y: auto;
+	display: grid;
+	grid-template-columns: 1fr 2fr 9fr 1fr;
+	grid-template-areas: "a b c d";
+	margin-top: 38px;
 }
 
 #left-whitespace {
-  grid-area: a;
+	grid-area: a;
 }
 #collection-list {
-  grid-area: b;
-  margin-top: 150px;
+	grid-area: b;
+	margin-top: 150px;
 }
 #hikes-display {
-  grid-area: c;
-  margin-top: 38px;
-  min-width: 800px;
+	grid-area: c;
+	margin-top: 38px;
+	min-width: 800px;
 }
 #right-whitespace {
-  grid-area: d;
+	grid-area: d;
 }
 
 .hide-delete {
-  visibility: hidden;
+	visibility: hidden;
 }
 .delete-confirm-page {
-  z-index: 2;
-  width: 520px;
-  height: fit-content;
-  opacity: 1;
-  background-color: white;
+	z-index: 2;
+	width: 520px;
+	height: fit-content;
+	opacity: 1;
+	background-color: white;
 }
 
 .delete-modal {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  top: 0;
-  left: 0;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	top: 0;
+	left: 0;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 #delete-collection-button-div {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 #collection-list > h3 {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 12px;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 12px;
 }
 
 .coll-link:hover {
-  color: var(--mid1);
+	color: var(--mid1);
 }
 
 #collection-list li,
 a {
-  text-decoration: none;
-  color: var(--dark1);
-  list-style-type: none;
-  font-size: 12px;
+	text-decoration: none;
+	color: var(--dark1);
+	list-style-type: none;
+	font-size: 12px;
 }
 
 .table-img {
-  width: 35px;
-  height: 40px;
-  border-radius: 5px;
-  margin-top: 10px;
-  margin-right: 10px;
+	width: 35px;
+	height: 40px;
+	border-radius: 5px;
+	margin-top: 10px;
+	margin-right: 10px;
 }
 
 .hike-row {
-  border-bottom: 1px solid var(--light5);
+	border-bottom: 1px solid var(--light5);
 }
 
 .hike-text {
-  font-size: 13px;
-  inline-size: min-content;
+	font-size: 13px;
+	inline-size: min-content;
 }
 .center {
-  text-align: center;
+	text-align: center;
 }
 
 table {
-  border-collapse: collapse;
-  border-spacing: 2px;
-  width: 100%;
+	border-collapse: collapse;
+	border-spacing: 2px;
+	width: 100%;
 }
 th {
-  font-size: 12px;
+	font-size: 12px;
 }
 thead > tr.hike-row {
-  border-bottom: 2px solid var(--mid1);
+	border-bottom: 2px solid var(--mid1);
 }
 
 h2 {
-  font-size: 34px;
-  margin-bottom: 38px;
-  color: var(--dark1);
+	font-size: 34px;
+	margin-bottom: 38px;
+	color: var(--dark1);
 }
 
 #collection-add {
-  font-size: 12px;
-  margin-top: 15px;
-  padding: 5px;
+	font-size: 12px;
+	margin-top: 15px;
+	padding: 5px;
 }
 
 #edit-content-div {
-  width: 60%;
-  margin: 0px auto;
-  margin-top: 38px;
+	width: 60%;
+	margin: 0px auto;
+	margin-top: 38px;
 }
 #delete-col {
-  width: 15%;
+	width: 15%;
 }
 #name-col {
-  width: 65%;
+	width: 65%;
 }
 #rename-col {
-  width: 20%;
+	width: 20%;
 }
 
 #form-add-collection {
-  background-color: var(--light5);
-  height: 66px;
-  margin: 30px;
-  border-radius: 38px;
-  box-shadow: 2px 2px 3px var(--light6);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+	background-color: var(--light5);
+	height: 66px;
+	margin: 30px;
+	border-radius: 38px;
+	box-shadow: 2px 2px 3px var(--light6);
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 #new-collection-input {
-  margin-left: 15px;
-  width: 70%;
-  height: 36px;
-  border: 1px solid var(--mid1);
-  border-radius: 25px;
-  padding-left: 15px;
+	margin-left: 15px;
+	width: 70%;
+	height: 36px;
+	border: 1px solid var(--mid1);
+	border-radius: 25px;
+	padding-left: 15px;
 }
 #add-collection-button,
 .btn-table {
-  padding: 10px;
-  font-size: smaller;
+	padding: 10px;
+	font-size: smaller;
 }
 
 .btn-delete {
-  border: none;
-  border-radius: 50px;
-  color: var(--delete1);
-  background-color: transparent;
-  padding: 5px 8px;
-  margin: 3px;
-  transition: all 0.5s;
+	border: none;
+	border-radius: 50px;
+	color: var(--delete1);
+	background-color: transparent;
+	padding: 5px 8px;
+	margin: 3px;
+	transition: all 0.5s;
 }
 
 .btn-delete:hover {
-  background-color: var(--delete1);
-  color: white;
-  cursor: pointer;
+	background-color: var(--delete1);
+	color: white;
+	cursor: pointer;
 }
 .hike-count {
-  color: var(--mid1);
-  font-size: 12px;
-  padding-left: 18px;
+	color: var(--mid1);
+	font-size: 12px;
+	padding-left: 18px;
 }
 
 .div-errors {
-  border: 1px solid var(--error2);
-  border-radius: 10px;
-  background-color: var(--error1);
-  margin: 0 auto;
-  margin-bottom: 38px;
-  width: 60%;
+	border: 1px solid var(--error2);
+	border-radius: 10px;
+	background-color: var(--error1);
+	margin: 0 auto;
+	margin-bottom: 38px;
+	width: 60%;
 }
 .div-errors p {
-  font-size: smaller;
-  margin-left: 30px;
+	font-size: smaller;
+	margin-left: 30px;
 }
 /* .div-errors ul {
   padding: 0px 20px;
 } */
 
 .div-errors li {
-  margin-left: 30px;
-  margin-bottom: 7px;
-  font-size: smaller;
-  color: var(--error3);
+	margin-left: 30px;
+	margin-bottom: 7px;
+	font-size: smaller;
+	color: var(--error3);
 }
 
 .left {
-  text-align: left;
+	text-align: left;
 }
 
 .table-coll-edit {
-  max-width: 1000px;
-  margin: 0 auto;
+	max-width: 1000px;
+	margin: 0 auto;
 }
 
 #name-form {
-  display: flex;
-  position: relative;
-  height: 60px;
+	display: flex;
+	position: relative;
+	height: 60px;
 }
 
 /* in delete fetch call as well */
 .hidden {
-  display: none;
+	display: none;
 }
 
 #rename-button-div {
-  position: absolute;
-  right: -27%;
-  top: 22%;
+	position: absolute;
+	right: -27%;
+	top: 22%;
 }
 
 #rename-collection-input {
-  position: absolute;
-  top: 15%;
-  left: -2%;
+	position: absolute;
+	top: 15%;
+	left: -2%;
 }
 
 #rename-collection-input {
-  width: 100%;
-  margin: 0 auto;
-  height: 50%;
-  border: 1px solid var(--dark1);
-  border-radius: 16px;
-  padding: 15px;
+	width: 100%;
+	margin: 0 auto;
+	height: 50%;
+	border: 1px solid var(--dark1);
+	border-radius: 16px;
+	padding: 15px;
 }
 
 .hike-row {
-  line-height: 2em;
+	line-height: 2em;
 }
 
 .hike-stars {
-  background: url('/images/star-rating-sprite.png') repeat-x;
-  font-size: 0;
-  height: 20px;
-  line-height: 0;
-  overflow: hidden;
-  text-indent: -999em;
-  width: 100px;
-  margin: 0 auto;
+	background: url("/images/star-rating-sprite.png") repeat-x;
+	font-size: 0;
+	height: 20px;
+	line-height: 0;
+	overflow: hidden;
+	text-indent: -999em;
+	width: 100px;
+	margin: 0 auto;
 }
 
 .star-sprite {
-  background: url('/images/star-rating-sprite.png') repeat-x;
-  background-position: 0 100%;
-  float: left;
-  height: 20px;
-  display: block;
+	background: url("/images/star-rating-sprite.png") repeat-x;
+	background-position: 0 100%;
+	float: left;
+	height: 20px;
+	display: block;
 }
 
 /* Mini add to collection form  */
 .new-collection-div {
-  padding: 10px;
-  border-top: 1px solid var(--light1);
-  border-bottom: 1px solid var(--light1);
-  width: 90%;
+	padding: 10px;
+	border-top: 1px solid var(--light1);
+	border-bottom: 1px solid var(--light1);
+	width: 90%;
 }
 
 .add-collection-title {
-  font-size: 10px;
-  padding-bottom: 3px;
+	font-size: 10px;
+	padding-bottom: 3px;
 }
 
 .add-collection-frm {
-  display: flex;
+	display: flex;
 }
 
 .add-collection-input {
-  width: 125px;
-  border-radius: 10px;
-  border: 1px solid var(--mid1);
-  background-color: var(--light6);
-  padding: 3px 5px;
+	width: 125px;
+	border-radius: 10px;
+	border: 1px solid var(--mid1);
+	background-color: var(--light6);
+	padding: 3px 5px;
 }
 
 .btn-sm {
-  margin: 0px 5px;
-  padding: 3px 3px;
-  font-size: 12px;
-  font-weight: regular;
+	margin: 0px 5px;
+	padding: 3px 3px;
+	font-size: 12px;
+	font-weight: regular;
 }
 .add-collection-desc {
-  font-size: 10px;
-  color: var(--error3);
-  padding-top: 5px;
+	font-size: 10px;
+	color: var(--error3);
+	padding-top: 5px;
 }
