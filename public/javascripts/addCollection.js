@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const addCollectionFrmBtn = document.getElementById("collection-add");
+    // const addCollectionFrmBtn = document.getElementById("collection-add");
     const ulCollection = document.getElementById("collection-list").children[1];
     const addCollectionFrm = document.querySelector(".new-collection-div");
     const addCollectionBtn = document.getElementById("add-collection");
     const addCollectionDesc = document.querySelector(".add-collection-desc");
 
     // Click to open mini form
-    addCollectionFrmBtn.addEventListener("click", (event) => {
-        addCollectionFrm.classList.remove("hidden");
-        addCollectionFrmBtn.classList.add("hidden");
-    });
+    // addCollectionFrmBtn.addEventListener("click", (event) => {
+    //     addCollectionFrm.classList.remove("hidden");
+    //     addCollectionFrmBtn.classList.add("hidden");
+    // });
 
     // Add new collection
     addCollectionBtn.addEventListener("click", async (event) => {

@@ -301,3 +301,24 @@ h2 {
 	color: var(--error3);
 	padding-top: 5px;
 }
+
+.hike-collections {
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--mid1);
+    margin-right: 45px;
+    margin-left: 5px;
+    margin-bottom: 18px;
+}
+
+#edit-link {
+    padding-left: 10px;
+}
+
+.hike-collections li {
+    line-height: 20px;
+}
+
+.hike-collections a:hover {
+    text-decoration: underline;
+}
+

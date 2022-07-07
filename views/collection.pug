@@ -8,9 +8,9 @@ block content
             //- #left-whitespace
             #collection-list
                 h3 Hike Collections
-                    a(href='/collections/edit') (Edit)
+                    a#edit-link(href='/collections/edit') (Edit)
                 if userCollections
-                    ul
+                    ul.hike-collections
                         each coll in userCollections
                             li: a(href=`/collections/${coll.id}`) #{coll.name}   (#{coll.Hikes.length})
                 div.new-collection-div.hidden
@@ -20,7 +20,7 @@ block content
                     button.btn.btn-sm#add-collection Add
                 div.add-collection-desc
                 div
-                button.btn(id="collection-add") Add a Collection
+                //- button.btn(id="collection-add") Add a Collection
             #hikes-display
                 h2.center Hike Collection: #{collectionName}
                 if displayHikes
