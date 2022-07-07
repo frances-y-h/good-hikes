@@ -8,9 +8,9 @@ block content
             //- #left-whitespace
             #collection-list
                 h3 Hike Collections
-                    a(href='/collections/edit') (Edit)
-                if userCollections
-                    ul
+                a#edit-link(href='/collections/edit') (Edit)
+            if userCollections
+                ul.hike-collections
                         each coll in userCollections
                             li: a(href=`/collections/${coll.id}`) #{coll.name}   (#{coll.Hikes.length})
                 div.new-collection-div.hidden
