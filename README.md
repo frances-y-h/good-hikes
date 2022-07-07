@@ -52,7 +52,7 @@ https://good-hikes.herokuapp.com/
 ![reviews](public/images/readme/reviews.gif)
 
 **_<h4 align="center">My Hikes / Collections </h4>_**
-![alt text](public/images/readme/collection-page.png)
+![collections](public/images/readme/hikecollection.gif)
 
 **_<h4 align="center"> Advanced Search </h4>_**
 ![search](public/images/readme/search.gif)
