@@ -10,7 +10,15 @@ https://good-hikes.herokuapp.com/
 
 ## Main Stack Technologies:
 
-- Javascript, Pug, Plain old vanilla CSS3, Express, Sequelize, PostgreSQL
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![Pug](https://img.shields.io/badge/pug-f7e2c8.svg?style=for-the-badge&logo=pug&logoColor=#A86454)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+</br>
+![Express](https://img.shields.io/badge/express-000000.svg?style=for-the-badge&logo=express&logoColor=white)
+![Sequelize](https://img.shields.io/badge/sequelize-grey.svg?style=for-the-badge&logo=sequelize&logoColor=52B0E7)
+![PostgeSQL](https://img.shields.io/badge/postgresql-Eaeaea.svg?style=for-the-badge&logo=postgresql&logoColor=#4169E1)
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
 ## Features:
 
@@ -44,7 +52,7 @@ https://good-hikes.herokuapp.com/
 
 **_<h4 align="center">Reviewing a Hike </h4>_**
 
-![alt text](public/images/readme/hikepage.png)
+![alt text](public/images/readme/reviews.gif)
 
 **_<h4 align="center">My Hikes / Collections </h4>_**
 ![alt text](public/images/readme/collection-page.png)
