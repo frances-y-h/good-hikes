@@ -58,7 +58,8 @@ https://good-hikes.herokuapp.com/
 ![alt text](public/images/readme/collection-page.png)
 
 **_<h4 align="center"> Advanced Search </h4>_**
-![alt text](public/images/readme/search-page.png)
+![good-hikes-search](https://user-images.githubusercontent.com/8154112/177675643-6bc1fbff-b893-44e1-ad8a-a8a1e9ce6e9a.gif)
+
 
 ## Application Architecture Overview
 
