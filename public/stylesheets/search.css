@@ -178,6 +178,12 @@
   z-index: 2;
 }
 
+/* left most popup menus always display inwards */
+#elevation-menu,
+#attractions-menu {
+  left: -140px;
+}
+
 .inner-popup {
   background-color: var(--bg1);
   border-radius: 10px;
@@ -393,7 +399,7 @@ HIKE SEARCH RESULTS
   max-width: 1000px;
   height: 700px;
 
-  overflow-y: scroll;
+  overflow-y: auto;
   /* Firefox */
   /* scrollbar-width: none;  */
   /* Internet Explorer 10+ */

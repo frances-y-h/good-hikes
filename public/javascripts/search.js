@@ -295,7 +295,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     );
 
     // Display the default slider value
-    lengthMaxLabel.innerHTML = `Max: ${lengthSlider.value}+ mi`;
+    lengthMaxLabel.innerHTML = `Max: ${lengthSlider.value}${
+        lengthSlider.value === "50" ? "+" : ""
+    } mi`;
 
     // Update the slider value (each time you drag the slider handle)
     lengthSlider.oninput = function () {
