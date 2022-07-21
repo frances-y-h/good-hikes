@@ -58,14 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
 		const menuBtn = document.querySelector(".hike-coll-arrow");
 		const dropdownMenu = document.querySelector(".dropdown-menu");
 
+		// Open menu function
 		const openMenu = (e) => {
 			dropdownMenu.classList.remove("hidden");
 			dropdownModal.classList.remove("hidden");
+			// need setTimeout or else it will cancel itself
 			setTimeout(() => {
 				document.addEventListener("click", closeMenu);
 			}, 1);
 		};
 
+		// Add event listener to menu button
 		menuBtn.addEventListener("click", openMenu);
 
 		// Click on div and will update checkbox, instead of having to click exactly on the box
@@ -163,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					updateStatusDiv.innerText = "Something went wrong. Please try again";
 				}
 				dropdownModal.classList.add("hidden");
+				// If menu closed through updating collection, make sure to remove and add the necessary event listeners back
 				document.removeEventListener("click", closeMenu);
 				menuBtn.addEventListener("click", openMenu);
 			} catch (err) {
@@ -171,19 +175,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		// If we click outside the menu, will close the menu
-
-		// window.onclick = function (event) {
-		//     if (event.target == dropdownModal) {
-		//         dropdownMenu.classList.add("hidden");
-		//         dropdownModal.classList.add("hidden");
-		//     }
-		// };
-
+		// create close menu function so can refer to it when remove event listener
 		const closeMenu = (e) => {
 			if (!dropdownMenu.contains(e.target)) {
 				dropdownMenu.classList.add("hidden");
 				dropdownModal.classList.add("hidden");
+				// remove once event fired
 				document.removeEventListener("click", closeMenu);
+				// need to make sure adding back event listener to menu button
 				menuBtn.addEventListener("click", openMenu);
 			}
 		};
